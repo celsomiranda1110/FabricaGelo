@@ -3,12 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controle.FabricaGelo.Maquina;
+package Controle.FabricaGelo.Insumo;
 
-import Bean.Colaborador;
-import Bean.Maquina;
+import Bean.Produto;
 import Bean.MaquinaProducao;
-import Bean.Producao;
 import Controle.FabricaGelo.Gerais.Acao;
 import java.sql.Connection;
 import javax.servlet.http.HttpServletRequest;
@@ -28,25 +26,24 @@ public class AcaoRetornaPagina extends Acao
         HttpSession sessao = req.getSession(false);
         
         String pagRetorno = (String)sessao.getAttribute("pagRetorno");
-        Maquina maquina = (Maquina)sessao.getAttribute("maquina");
-        Producao producao = (Producao)sessao.getAttribute("producao");
+        Produto insumo = (Produto)sessao.getAttribute("insumo");
         
         if (pagRetorno != null)
         {
             if (pagRetorno.equals("FabricaGelo.Producao.AcaoAbreProducao"))
             {
                 MaquinaProducao maquinaProducao = (MaquinaProducao)sessao.getAttribute("maquinaProducao");
-                maquinaProducao.setMaquina(maquina);
+                maquinaProducao.setEmbalagem(insumo);
                 sessao.setAttribute("maquinaProducao", maquinaProducao);
                 
             }
-           
         }
         else
         {
-            sessao.setAttribute("maquina", null);
-            pagRetorno = "FabricaGelo.Maquina.AcaoListarMaquina";
-        }
+            sessao.setAttribute("produto", null);
+            pagRetorno = "FabricaGelo.Insumo.AcaoListarInsumo";
+        }        
+        
         return pagRetorno;
     }
 }

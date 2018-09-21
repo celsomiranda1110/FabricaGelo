@@ -14,6 +14,7 @@ public class Produto implements Bean{
     private String descricao;
     private double saldo;
     private double vlUnitario;
+    private String tipo;
 
     public Produto() {
         this.saldo = 0;
@@ -45,11 +46,16 @@ public class Produto implements Bean{
     public void setSaldo(double saldo) {
         this.saldo = saldo;
     }
-    
-    public String toString()
-    {
-        return this.descricao;
+
+    public String getTipo() {
+        return tipo;
     }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+    
+
 
     public double getVlUnitario() {
         return vlUnitario;
@@ -60,6 +66,10 @@ public class Produto implements Bean{
     }
     
     
+    public String toString()
+    {
+        return this.descricao;
+    }
     
     public void replicar(Produto _produto)
     {

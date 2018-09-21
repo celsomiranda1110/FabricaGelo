@@ -13,7 +13,7 @@ public class AvariaProducao implements Bean{
     
     private int idAvariaProducao;
     private int idAvaria;
-    private int idProducao;
+    private int idMaquinaProducao;
     private double quantidade;
 
     private Avaria avaria;
@@ -34,13 +34,15 @@ public class AvariaProducao implements Bean{
         this.idAvaria = idAvaria;
     }
 
-    public int getIdProducao() {
-        return idProducao;
+    public int getIdMaquinaProducao() {
+        return idMaquinaProducao;
     }
 
-    public void setIdProducao(int idProducao) {
-        this.idProducao = idProducao;
+    public void setIdMaquinaProducao(int idMaquinaProducao) {
+        this.idMaquinaProducao = idMaquinaProducao;
     }
+
+
 
     public double getQuantidade() {
         return quantidade;
@@ -68,7 +70,7 @@ public class AvariaProducao implements Bean{
     {
         _avariaProducao.setIdAvariaProducao(this.idAvariaProducao);
         _avariaProducao.setIdAvaria(this.idAvaria);
-        _avariaProducao.setIdProducao(this.idProducao);
+        _avariaProducao.setIdMaquinaProducao(this.idMaquinaProducao);
         _avariaProducao.setQuantidade(this.quantidade);
         
         _avariaProducao.setAvaria(this.avaria);

@@ -114,7 +114,31 @@
         <url-pattern>/FabricaGelo.Produto.AcaoSelecionaProduto</url-pattern>
     </servlet-mapping>
 
-
+    <!--Eventos do móduo Insumo -->
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.Insumo.AcaoAbreInsumo</url-pattern>
+    </servlet-mapping>    
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.Insumo.AcaoGravaInsumo</url-pattern>
+    </servlet-mapping>     
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.Insumo.AcaoListarInsumo</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.Insumo.AcaoPesquisaInsumo</url-pattern>
+    </servlet-mapping>  
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.Insumo.AcaoRetornaPagina</url-pattern>
+    </servlet-mapping>   
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.Insumo.AcaoSelecionaInsumo</url-pattern>
+    </servlet-mapping>
     
     <!--Eventos do móduo Bairro -->
     <servlet-mapping>
@@ -599,6 +623,10 @@
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
         <url-pattern>/FabricaGelo.Producao.AcaoBuscarAvaria</url-pattern>
+    </servlet-mapping> 
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.Producao.AcaoBuscarEmbalagem</url-pattern>
     </servlet-mapping>     
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
@@ -607,6 +635,10 @@
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
         <url-pattern>/FabricaGelo.Producao.AcaoBuscarProduto</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.Producao.AcaoDeletarAvariaProducao</url-pattern>
     </servlet-mapping>  
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
@@ -619,7 +651,19 @@
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
         <url-pattern>/FabricaGelo.Producao.AcaoNovaProducao</url-pattern>
-    </servlet-mapping>   
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.Producao.AcaoPesquisaProducao</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.Producao.AcaoSelecionaAvariaProducao</url-pattern>
+    </servlet-mapping> 
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.Producao.AcaoSelecionaMaquinaProducao</url-pattern>
+    </servlet-mapping>    
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
         <url-pattern>/FabricaGelo.Producao.AcaoSelecionaProducao</url-pattern>

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controle.FabricaGelo.Produto;
+package Controle.FabricaGelo.Insumo;
 
 import Bean.Produto;
 import Controle.FabricaGelo.Gerais.Acao;
@@ -19,20 +19,21 @@ import javax.servlet.http.HttpSession;
  *
  * @author celso
  */
-public class AcaoListarProduto extends Acao{
+public class AcaoListarInsumo extends Acao{
     public String executa(HttpServletRequest req, HttpServletResponse res) throws Exception
     {
         Connection conexao = (Connection)req.getAttribute("connection");
         HttpSession sessao = req.getSession(false);
 
-        List<Produto> lstProduto = new ArrayList<Produto>();
-        ProdutoDAO produtoDAO = new ProdutoDAO(conexao);
-        Produto produto = new Produto();
-        produto.setTipo("PR");
+        List<Produto> lstInsumo = new ArrayList<Produto>();
+        ProdutoDAO insumoDAO = new ProdutoDAO(conexao);
+        Produto insumo = new Produto();
+        insumo.setTipo("IN");
         
-        lstProduto = produtoDAO.listaTodos(produto);
-        sessao.setAttribute("lstProduto",lstProduto);
+        lstInsumo = insumoDAO.listaTodos(insumo);
+        sessao.setAttribute("lstInsumo",lstInsumo);
         
-        return "visao/listarProduto.jsp"; 
+        return "visao/listarInsumo.jsp"; 
     }
 }
+

@@ -3,14 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controle.FabricaGelo.Produto;
+package Controle.FabricaGelo.Insumo;
 
+import Bean.Colaborador;
 import Bean.Produto;
 import Controle.FabricaGelo.Gerais.Acao;
 import DAO.ProdutoDAO;
 import java.sql.Connection;
-import java.util.ArrayList;
-import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -19,20 +18,25 @@ import javax.servlet.http.HttpSession;
  *
  * @author celso
  */
-public class AcaoListarProduto extends Acao{
+public class AcaoSelecionaInsumo extends Acao{
     public String executa(HttpServletRequest req, HttpServletResponse res) throws Exception
     {
         Connection conexao = (Connection)req.getAttribute("connection");
         HttpSession sessao = req.getSession(false);
 
-        List<Produto> lstProduto = new ArrayList<Produto>();
-        ProdutoDAO produtoDAO = new ProdutoDAO(conexao);
-        Produto produto = new Produto();
-        produto.setTipo("PR");
+        ProdutoDAO insumoDAO = new ProdutoDAO(conexao);
+        Produto insumo = new Produto();
         
-        lstProduto = produtoDAO.listaTodos(produto);
-        sessao.setAttribute("lstProduto",lstProduto);
+        String idInsumo = req.getParameter("idInsumo");
+        insumo.setIdProduto(Integer.parseInt(idInsumo));
+        insumo = insumoDAO.listaUm(insumo);
         
-        return "visao/listarProduto.jsp"; 
+        String pagRetorno = (String)sessao.getAttribute("pagRetorno");
+        
+        sessao.setAttribute("insumo",insumo);
+        sessao.setAttribute("pagRetorno",pagRetorno);
+        
+        return "visao/insumo.jsp";
     }
+    
 }

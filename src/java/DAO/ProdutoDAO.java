@@ -13,7 +13,7 @@ public class ProdutoDAO extends DAO
         super(conexao);
     }
 
-    public List<Produto> listaTodos()
+    public List<Produto> listaTodos(Produto _produto)
     {
         List<Produto> lstTabela = new ArrayList();
         
@@ -22,8 +22,11 @@ public class ProdutoDAO extends DAO
         comSql += " 	`tblProduto`.`intProdutoId`,";
         comSql += "     `tblProduto`.`strDescricao`,";
         comSql += "     `tblProduto`.`dblSaldo`,";
-        comSql += "     `tblProduto`.`dblVlUnitario`";
-        comSql += " FROM `bdGelo`.`tblProduto`;";
+        comSql += "     `tblProduto`.`dblVlUnitario`,";
+        comSql += "     `tblProduto`.`chrTipo`";
+        comSql += " FROM `bdGelo`.`tblProduto`";
+        comSql += " WHERE";
+        comSql += "     `tblProduto`.`chrTipo` = '" + _produto.getTipo() + "'";
         
         List tabela = super.listaTodos();
         
@@ -36,6 +39,7 @@ public class ProdutoDAO extends DAO
             produto.setDescricao((String)bkp.get(1));
             produto.setSaldo((Double)bkp.get(2));
             produto.setVlUnitario((Double)bkp.get(3));
+            produto.setTipo((String)bkp.get(4));
 
             lstTabela.add(produto);
         }
@@ -52,7 +56,8 @@ public class ProdutoDAO extends DAO
         comSql += " 	`tblProduto`.`intProdutoId`,";
         comSql += "     `tblProduto`.`strDescricao`,";
         comSql += "     `tblProduto`.`dblSaldo`,";
-        comSql += "     `tblProduto`.`dblVlUnitario`";
+        comSql += "     `tblProduto`.`dblVlUnitario`,";
+        comSql += "     `tblProduto`.`chrTipo`";
         comSql += " FROM `bdGelo`.`tblProduto`";
         comSql += " WHERE ";
         comSql += "     `tblProduto`.`intProdutoId` = " + produto.getIdProduto()+ ";";
@@ -69,7 +74,7 @@ public class ProdutoDAO extends DAO
                 produto.setDescricao((String)bkp.get(1));
                 produto.setSaldo((Double)bkp.get(2));
                 produto.setVlUnitario((Double)bkp.get(3));
-            
+                produto.setTipo((String)bkp.get(4));
                 
             }  
             return produto;
@@ -92,11 +97,13 @@ public class ProdutoDAO extends DAO
             comSql += " INSERT INTO `bdGelo`.`tblProduto`";
             comSql += " 	(`strDescricao`,";
             comSql += " 	`dblSaldo`,";
-            comSql += "         `dblVlUnitario`)";
+            comSql += "         `dblVlUnitario`,";
+            comSql += "         `chrTipo`)";
             comSql += " VALUES";
             comSql += " 	('" + _produto.getDescricao() + "'";
             comSql += " 	," + _produto.getSaldo() ;
-            comSql += " 	," + _produto.getVlUnitario() + ");";
+            comSql += " 	," + _produto.getVlUnitario();
+            comSql += " 	,'" + _produto.getTipo() + "');";
             
             retorno = atualizar();
             if(retorno)
@@ -119,7 +126,8 @@ public class ProdutoDAO extends DAO
             comSql += " UPDATE `bdGelo`.`tblProduto` SET";
             comSql += " 	`strDescricao` = '" + _produto.getDescricao() + "',";
             comSql += " 	`dblSaldo` = " + _produto.getSaldo() + ",";
-            comSql += " 	`dblVlUnitario` = " + _produto.getVlUnitario();
+            comSql += " 	`dblVlUnitario` = " + _produto.getVlUnitario() + ",";
+            comSql += " 	`chrTipo` = " + _produto.getVlUnitario();
             comSql += " WHERE ";
             comSql += " 	`intProdutoId` = " + _produto.getIdProduto() + ";";
 

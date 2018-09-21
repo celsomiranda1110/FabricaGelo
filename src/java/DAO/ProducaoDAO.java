@@ -9,8 +9,8 @@ package DAO;
  *
  * @author Miranda
  */
-import Bean.AvariaProducao;
-import Bean.Maquina;
+
+import Bean.MaquinaProducao;
 import Bean.Producao;
 import Bean.Produto;
 import java.sql.Connection;
@@ -30,16 +30,9 @@ public class ProducaoDAO extends DAO{
         comSql += " SELECT ";
         comSql += " 	`tblProducao`.`intProducaoId`,";
         comSql += "     `tblProducao`.`intProdutoId`,";
-        comSql += "     `tblProducao`.`intMaquinaId`,";
         comSql += "     `tblProducao`.`strTurno`,";
         comSql += "     `tblProducao`.`datData`,";
-        comSql += "     `tblProducao`.`dblQuantidade`,";
-        comSql += "     `tblProducao`.`dblQuantidadeAnterior`,";
-        comSql += "     `tblProducao`.`dblSobra`,";
-        comSql += "     `tblProducao`.`dblAvaria`,";
-        comSql += "     `tblProducao`.`strHoraInicial`,";
-        comSql += "     `tblProducao`.`strHoraFinal`,";
-        comSql += "     `tblProducao`.`dblRendimento`";
+        comSql += "     `tblProducao`.`dblQuantidade`";
         comSql += " FROM `bdGelo`.`tblProducao`;";
         
         List tabela = super.listaTodos();
@@ -51,29 +44,16 @@ public class ProducaoDAO extends DAO{
             
             producao.setIdProducao(((Integer)bkp.get(0)).intValue());
             producao.setIdProduto(((Integer)bkp.get(1)).intValue());
-            producao.setIdMaquina(((Integer)bkp.get(2)).intValue());
-            producao.setTurno((String)bkp.get(3));
-            producao.setData((Date)bkp.get(4));
-            producao.setQuantidade((Double)bkp.get(5));
-            producao.setQuantidadeAnterior((Double)bkp.get(6));
-            producao.setSobra((Double)bkp.get(7));
-            producao.setQtAvaria((Double)bkp.get(8));
-            producao.setHoraInicial((String)bkp.get(9));
-            producao.setHoraFinal((String)bkp.get(10));
-            producao.setRendimento((Double)bkp.get(11));
-            
+            producao.setTurno((String)bkp.get(2));
+            producao.setData((Date)bkp.get(3));
+            producao.setQuantidade((Double)bkp.get(4));
+           
             ProdutoDAO produtoDAO = new ProdutoDAO(conexao);
             Produto produto = new Produto();
             produto.setIdProduto(producao.getIdProduto());
             produto = produtoDAO.listaUm(produto);
             producao.setProduto(produto);
-            
-            MaquinaDAO maquinaDAO = new MaquinaDAO(conexao);
-            Maquina maquina = new Maquina();
-            maquina.setIdMaquina(producao.getIdMaquina());
-            maquina = maquinaDAO.listaUm(maquina);
-            producao.setMaquina(maquina);
-
+        
             lstTabela.add(producao);
         }
         
@@ -88,19 +68,12 @@ public class ProducaoDAO extends DAO{
         comSql += " SELECT ";
         comSql += " 	`tblProducao`.`intProducaoId`,";
         comSql += "     `tblProducao`.`intProdutoId`,";
-        comSql += "     `tblProducao`.`intMaquinaId`,";
         comSql += "     `tblProducao`.`strTurno`,";
         comSql += "     `tblProducao`.`datData`,";
-        comSql += "     `tblProducao`.`dblQuantidade`,";
-        comSql += "     `tblProducao`.`dblQuantidadeAnterior`,";
-        comSql += "     `tblProducao`.`dblSobra`,";
-        comSql += "     `tblProducao`.`dblAvaria`,";
-        comSql += "     `tblProducao`.`strHoraInicial`,";
-        comSql += "     `tblProducao`.`strHoraFinal`,";
-        comSql += "     `tblProducao`.`dblRendimento`";        
+        comSql += "     `tblProducao`.`dblQuantidade`";        
         comSql += " FROM `bdGelo`.`tblProducao`";
         comSql += " WHERE ";
-        comSql += "     `tblProducao`.`intProducaoId` = " + producao.getIdProducao()+ ";";
+        comSql += "     `tblProducao`.`intProducaoId` = " + producao.getIdProducao() + ";";
         List tabela = super.listaUm();
         
         if(!tabela.isEmpty())
@@ -112,33 +85,20 @@ public class ProducaoDAO extends DAO{
 
                 producao.setIdProducao(((Integer)bkp.get(0)).intValue());
                 producao.setIdProduto(((Integer)bkp.get(1)).intValue());
-                producao.setIdMaquina(((Integer)bkp.get(2)).intValue());
-                producao.setTurno((String)bkp.get(3));
-                producao.setData((Date)bkp.get(4));
-                producao.setQuantidade((Double)bkp.get(5));
-                producao.setQuantidadeAnterior((Double)bkp.get(6));
-                producao.setSobra((Double)bkp.get(7));
-                producao.setQtAvaria((Double)bkp.get(8));
-                producao.setHoraInicial((String)bkp.get(9));
-                producao.setHoraFinal((String)bkp.get(10));
-                producao.setRendimento((Double)bkp.get(11));               
+                producao.setTurno((String)bkp.get(2));
+                producao.setData((Date)bkp.get(3));
+                producao.setQuantidade((Double)bkp.get(4));
 
                 ProdutoDAO produtoDAO = new ProdutoDAO(conexao);
                 Produto produto = new Produto();
                 produto.setIdProduto(producao.getIdProduto());
                 produto = produtoDAO.listaUm(produto);
-                producao.setProduto(produto);            
-                
-                MaquinaDAO maquinaDAO = new MaquinaDAO(conexao);
-                Maquina maquina = new Maquina();
-                maquina.setIdMaquina(producao.getIdMaquina());
-                maquina = maquinaDAO.listaUm(maquina);
-                producao.setMaquina(maquina); 
-                
-                AvariaProducaoDAO avariaProducaoDAO= new AvariaProducaoDAO(conexao);
-                List<AvariaProducao> lstAvariaProducao = new ArrayList<AvariaProducao>();
-                lstAvariaProducao = avariaProducaoDAO.listaTodos(producao);
-                producao.setLstAvariaProducao(lstAvariaProducao);
+                producao.setProduto(produto);
+
+                List<MaquinaProducao> lstMaquinaProducao = new ArrayList<MaquinaProducao>();
+                MaquinaProducaoDAO maquinaProducaoDAO = new MaquinaProducaoDAO(conexao);
+                lstMaquinaProducao = maquinaProducaoDAO.listaTodos(producao);
+                producao.setLstMaquinaProducao(lstMaquinaProducao);
             }  
             return producao;
         }
@@ -159,29 +119,14 @@ public class ProducaoDAO extends DAO{
             comSql = "";
             comSql += " INSERT INTO `bdGelo`.`tblProducao`";
             comSql += " 	(`intProdutoId`,";
-            comSql += " 	`intMaquinaId`,";
             comSql += " 	`strTurno`,";
             comSql += " 	`datData`,";
-            comSql += " 	`dblQuantidade`,";
-            comSql += " 	`dblQuantidadeAnterior`,";
-            comSql += "         `dblSobra`,";
-            comSql += "         `dblAvaria`,";
-            comSql += "         `strHoraInicial`,";
-            comSql += "         `strHoraFinal`,";
-            comSql += "         `dblRendimento`)";
+            comSql += " 	`dblQuantidade`)";
             comSql += " VALUES";
             comSql += " 	(" + _producao.getIdProduto();
-            comSql += " 	," + _producao.getIdMaquina();
             comSql += " 	,'" + _producao.getTurno() + "'";
             comSql += " 	,'" + _producao.getDataFormatada() + "'";
-            comSql += " 	," + _producao.getQuantidade();
-            comSql += " 	," + _producao.getQuantidadeAnterior() ;
-            comSql += " 	," + _producao.getSobra();
-            comSql += " 	," + _producao.getQtAvaria();
-            comSql += " 	,'" + _producao.getHoraInicial() + "'";
-            comSql += " 	,'" + _producao.getHoraFinal() + "'";
-            comSql += " 	," + _producao.getRendimento() + ");";
-            
+            comSql += " 	," + _producao.getQuantidade() + ");";
             
             retorno = atualizar();
             if(retorno)
@@ -203,16 +148,9 @@ public class ProducaoDAO extends DAO{
             comSql = "";
             comSql += " UPDATE `bdGelo`.`tblProducao` SET ";
             comSql += " 	`intProdutoId` = " + _producao.getIdProduto();
-            comSql += " 	,`intMaquinaId` = " + _producao.getIdMaquina();
             comSql += " 	,`strTurno` = '" + _producao.getTurno() + "'";
             comSql += " 	,`datData` = '" + _producao.getDataFormatada() + "'";
             comSql += " 	,`dblQuantidade` = " + _producao.getQuantidade();
-            comSql += " 	,`dblQuantidadeAnterior` = " + _producao.getQuantidadeAnterior();
-            comSql += " 	,`dblSobra` = " + _producao.getSobra();
-            comSql += " 	,`dblAvaria` = " + _producao.getQtAvaria();
-            comSql += " 	,`strHoraInicial` = '" + _producao.getHoraInicial() + "'";
-            comSql += " 	,`strHoraFinal` = '" + _producao.getHoraFinal() + "'";
-            comSql += " 	,`dblRendimento` = " + _producao.getRendimento();
             comSql += " WHERE ";
             comSql += " 	`intProducaoId` =  " + _producao.getIdProducao() + ";";
 
@@ -220,16 +158,16 @@ public class ProducaoDAO extends DAO{
         }
         if (retorno)
         {
-            if (_producao.getLstAvariaProducao() != null)
+            if (_producao.getLstMaquinaProducao() != null)
             {
-                AvariaProducaoDAO avariaProducaoDAO = new AvariaProducaoDAO(conexao);
-                Iterator itAvariaProducao = _producao.getLstAvariaProducao().iterator();
-                while (itAvariaProducao.hasNext())
+                MaquinaProducaoDAO maquinaProducaoDAO = new MaquinaProducaoDAO(conexao);
+                Iterator itMaquinaProducao = _producao.getLstMaquinaProducao().iterator();
+                while (itMaquinaProducao.hasNext())
                 {
                     
-                    AvariaProducao _avariaProducao = (AvariaProducao)itAvariaProducao.next();
-                    _avariaProducao.setIdProducao(_producao.getIdProducao());
-                    avariaProducaoDAO.atualizar(_avariaProducao);
+                    MaquinaProducao _maquinaProducao = (MaquinaProducao)itMaquinaProducao.next();
+                    _maquinaProducao.setIdProducao(_producao.getIdProducao());
+                    maquinaProducaoDAO.atualizar(_maquinaProducao);
                 }
             }
         }

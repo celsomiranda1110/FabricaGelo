@@ -1,6 +1,6 @@
 <%-- 
-    Document   : listarProducao
-    Created on : 28/08/2018, 05:13:55
+    Document   : listarInsumo
+    Created on : 09/09/2018, 21:25:36
     Author     : celso
 --%>
 
@@ -10,20 +10,20 @@
 <html>
     <c:import url="CabRod/cabecalho.jsp"/>
     <head>
-        <title>Lista de Produções</title>
+        <title>Produto</title>
     </head>
     <body>
-        <form name="formProducao" method="post">
+        <form name="formProduto" method="post">
             <div class="container">
                 <div class="panel panel-default">
-                    <div class="panel-heading"><h3 class="panel-title text-center"><b>Lista de Produção</b></h3></div>
+                    <div class="panel-heading"><h3 class="panel-title text-center"><b>Lista de Insumos</b></h3></div>
                     <div class="panel-body">
                         
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="row">
                                     <div class="col-sm-4">
-                                        <button type="button" class="btn btn-primary right" onClick="novo()">Nova Produção</button>
+                                        <button type="button" class="btn btn-primary right" onClick="novo()">Novo Insumo</button>
                                     </div>
                                     <div class="col-sm-8">
                                         <div class="input-group">
@@ -43,20 +43,14 @@
                                 <tbody>
                                     <tr>
                                         <th><div align="left"></div></th>
-                                        <th><div align="left">Data</div></th>
-                                        <th><div align="left">Turno</div></th>
-                                        <th><div align="left">Produto</div></th>
-                                        <th><div align="left">Qt Produção</div></th>
-                                        
+                                        <th><div align="left">Descrição</div></th>
+                                        <th><div align="left">Saldo</div></th>
                                     </tr> 
-                                    <c:forEach var="lstProd" items="${lstProducao}" varStatus="s">
+                                    <c:forEach var="lstInsum" items="${lstInsumo}" varStatus="s">
                                         <tr>
-                                            <td> <input type="image" src="visao/css/bootstrap/img/Text.png" onclick="seleciona('FabricaGelo.Producao.AcaoSelecionaProducao?idProducao=${lstProd.idProducao}')"> </td>
-                                            <td> ${lstProd.data} </td>
-                                            <td> ${lstProd.turno} </td>
-                                            <td> ${lstProd.produto} </td>
-                                            <td> ${lstProd.quantidade} </td>
-                                            
+                                            <td> <input type="image" src="visao/css/bootstrap/img/Text.png" onclick="seleciona('FabricaGelo.Insumo.AcaoSelecionaInsumo?idInsumo=${lstInsum.idProduto}')"> </td>
+                                            <td> ${lstInsum.descricao} </td>
+                                            <td> ${lstInsum.saldo} </td>
                                         </tr>
                                     </c:forEach>
                                 </tbody>
@@ -64,7 +58,7 @@
                         </div>
                     </div>
                 </div>
-            </div>                        
+            </div>            
         </form>
         <script type="text/javascript">
 
@@ -72,14 +66,13 @@
 
             function novo()
             {
- 
-                document.forms[0].action="FabricaGelo.Producao.AcaoNovaProducao";
+                document.forms[0].action="FabricaGelo.Insumo.AcaoAbreInsumo";
                 document.forms[0].submit();
             }
             function pesquisa()
             {
  
-                document.forms[0].action="FabricaGelo.Veiculo.AcaoPesquisaVeiculo";
+                document.forms[0].action="FabricaGelo.Insumo.AcaoPesquisaInsumo";
                 document.forms[0].submit();
             } 
             function seleciona(caminho)
@@ -89,6 +82,6 @@
                 document.forms[0].submit();
             } 
 
-        </script>        
+        </script>         
     </body>
 </html>

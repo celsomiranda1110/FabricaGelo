@@ -38,10 +38,10 @@ public class AcaoSelecionaProducao extends Acao{
         
         sessao.setAttribute("producao",producao);
         if (producao != null)
-            sessao.setAttribute("lstAvariaProducao", producao.getLstAvariaProducao());
+            sessao.setAttribute("lstMaquinaProducao", producao.getLstMaquinaProducao());
         else
             sessao.setAttribute("lstAvariaProducao", null);
-        sessao.setAttribute("avariaProducao", null);
+        sessao.setAttribute("maquinaProducao", null);
         
         return "visao/producao.jsp";
     }

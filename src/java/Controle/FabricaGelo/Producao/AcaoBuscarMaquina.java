@@ -6,6 +6,7 @@
 package Controle.FabricaGelo.Producao;
 
 import Bean.Maquina;
+import Bean.MaquinaProducao;
 import Bean.Producao;
 import Bean.Produto;
 import Bean.Profissional;
@@ -33,40 +34,39 @@ public class AcaoBuscarMaquina extends Acao
         
         Profissional usuario = (Profissional)sessao.getAttribute("usuario");
         
-        List<Maquina> lstMaquina = new ArrayList<Maquina>();
-        MaquinaDAO maquinaDAO = new MaquinaDAO(conexao);
-        
-
-        // campos de producao
+        // objeto produção
         String dataProducao = (req.getParameter("txtData").equals("") || req.getParameter("txtData") == null) ? dataAtual() : req.getParameter("txtData");
         String turno = (req.getParameter("cmbTurno").equals("") || req.getParameter("cmbTurno") == null) ? "" : req.getParameter("cmbTurno");
-        String quantidade = (req.getParameter("txtQuantidade").equals("") || req.getParameter("txtQuantidade") == null) ? "0" : req.getParameter("txtQuantidade");
-        String quantidadeAnterior = (req.getParameter("txtQuantidadeAnterior").equals("") || req.getParameter("txtQuantidadeAnterior") == null) ? "0" : req.getParameter("txtQuantidadeAnterior");
-        String qtAvariaP = (req.getParameter("txtAvaria").equals("") || req.getParameter("txtAvaria") == null) ? "0" : req.getParameter("txtAvaria");
-        String sobra = (req.getParameter("txtSobra").equals("") || req.getParameter("txtSobra") == null) ? "0" : req.getParameter("txtSobra");     
-        String hrInicial = (req.getParameter("txtHrInicial").equals("") || req.getParameter("txtHrInicial") == null) ? "00:00" : req.getParameter("txtHrInicial");
-        String hrFinal = (req.getParameter("txtHrFinal").equals("") || req.getParameter("txtHrFinal") == null) ? "00:00" : req.getParameter("txtHrFinal");
-        String rendimento = (req.getParameter("txtRendimento").equals("") || req.getParameter("txtRendimento") == null) ? "0" : req.getParameter("txtRendimento");
-      
-        // objeto producao
+        String quantidade = (req.getParameter("txtQuantidade").equals("") || req.getParameter("txtQuantidade") == null) ? "0" : req.getParameter("txtQuantidade");                
         Producao producao = (Producao)sessao.getAttribute("producao");
         if (producao == null)
             producao = new Producao();
-        
-        
         producao.setDataFormatada(dataProducao);
-        producao.setQtAvaria(Double.parseDouble(qtAvariaP));
-        producao.setQuantidade(Double.parseDouble(quantidade));
-        producao.setQuantidadeAnterior(Double.parseDouble(quantidadeAnterior));
-        producao.setSobra(Double.parseDouble(sobra));
         producao.setTurno(turno);
-        producao.setHoraInicial(hrInicial);
-        producao.setHoraFinal(hrFinal);
-        producao.setRendimento(Double.parseDouble(rendimento));
+        producao.setQuantidade(Double.parseDouble(quantidade));
         
+        // maquina produção
+        String hrInicial = (req.getParameter("txtHrInicial").equals("") || req.getParameter("txtHrInicial") == null) ? "00:00" : req.getParameter("txtHrInicial");
+        String hrFinal = (req.getParameter("txtHrFinal").equals("") || req.getParameter("txtHrFinal") == null) ? "00:00" : req.getParameter("txtHrFinal");            
+        String quantidadeAnterior = (req.getParameter("txtSlAnterior").equals("") || req.getParameter("txtSlAnterior") == null) ? "0" : req.getParameter("txtSlAnterior");
+        String qtReposicao = (req.getParameter("txtReposicao").equals("") || req.getParameter("txtReposicao") == null) ? "0" : req.getParameter("txtReposicao");
+        String qtProducao = (req.getParameter("txtProducao").equals("") || req.getParameter("txtProducao") == null) ? "0" : req.getParameter("txtProducao");
+        MaquinaProducao maquinaProducao = (MaquinaProducao)sessao.getAttribute("maquinaProducao");
+        if (maquinaProducao == null)
+            maquinaProducao = new MaquinaProducao();
+        maquinaProducao.setHrInicial(hrInicial);
+        maquinaProducao.setHrFinal(hrFinal);
+        maquinaProducao.setQtSaldoAnterior(Double.parseDouble(quantidadeAnterior));
+        maquinaProducao.setQtReposicao(Double.parseDouble(qtReposicao));
+        maquinaProducao.setQtProducao(Double.parseDouble(qtProducao));
+        
+        
+        List<Maquina> lstMaquina = new ArrayList<Maquina>();
+        MaquinaDAO maquinaDAO = new MaquinaDAO(conexao);        
         lstMaquina = maquinaDAO.listaTodos();
 
         sessao.setAttribute("producao",producao);
+        sessao.setAttribute("maquinaProducao", maquinaProducao);
         sessao.setAttribute("lstMaquina",lstMaquina);
         sessao.setAttribute("pagRetorno","FabricaGelo.Producao.AcaoAbreProducao");
         
