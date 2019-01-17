@@ -55,16 +55,16 @@
                                             <th><div align="left">Ação</div></th>
                                             <th><div align="left">Ordem</div></th>
                                             <th><div align="left">Dt Compra</div></th>
-                                            <th><div align="left">Profissional</div></th>
                                             <th><div align="left">Empresa cliente</div></th>
+                                            <th><div align="left">Situação</div></th>
                                         </tr>
-                                        <c:forEach var="lstVend" items="${lstCompra}" varStatus="s">
+                                        <c:forEach var="lstComp" items="${lstCompra}" varStatus="s">
                                         <tr>
-                                          <td> <input type="image" src="visao/css/bootstrap/img/Text.png" onClick="SelecionaCompra('FabricaGelo.Compra.AcaoSelecionaCompra?idMovimento=${lstVend.idMovimento}')">  </td>
-                                          <td> ${lstVend.numero} </td>
-                                          <td> ${lstVend.dataLancamento} </td>
-                                          <td> ${lstVend.profissional} </td>
-                                          <td> ${lstVend.colaborador} </td>
+                                          <td> <input type="image" src="visao/css/bootstrap/img/Text.png" onClick="SelecionaCompra('FabricaGelo.Compra.AcaoSelecionaCompra?idMovimento=${lstComp.idMovimento}')">  </td>
+                                          <td> ${lstComp.numero} </td>
+                                          <td> ${lstComp.dataLancamento} </td>
+                                          <td> ${lstComp.colaborador} </td>
+                                          <td> ${lstComp.descSituacao} </td>
                                         </tr>
                                         </c:forEach>
                                     </tbody>

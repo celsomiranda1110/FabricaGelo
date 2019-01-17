@@ -44,7 +44,6 @@ public class AcaoBuscarEmpresa extends Acao
         if (compra == null)
             compra = new Movimento();
         
-        compra.setProfissional(usuario);
         compra.setNumero(numero);
         compra.setNotaFiscal(notaFiscal);
         compra.setDataLancamento(dtLancamento);

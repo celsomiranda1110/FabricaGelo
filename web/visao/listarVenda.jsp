@@ -55,16 +55,16 @@
                                             <th><div align="left">Ação</div></th>
                                             <th><div align="left">Ordem</div></th>
                                             <th><div align="left">Dt Venda</div></th>
-                                            <th><div align="left">Profissional</div></th>
                                             <th><div align="left">Empresa cliente</div></th>
+                                            <th><div align="left">Situação</div></th>
                                         </tr>
                                         <c:forEach var="lstVend" items="${lstVenda}" varStatus="s">
                                         <tr>
                                           <td> <input type="image" src="visao/css/bootstrap/img/Text.png" onClick="SelecionaVenda('FabricaGelo.Venda.AcaoSelecionaVenda?idMovimento=${lstVend.idMovimento}')">  </td>
                                           <td> ${lstVend.numero} </td>
                                           <td> ${lstVend.dataLancamento} </td>
-                                          <td> ${lstVend.profissional} </td>
                                           <td> ${lstVend.colaborador} </td>
+                                          <td> ${lstVend.descSituacao} </td>
                                         </tr>
                                         </c:forEach>
                                     </tbody>

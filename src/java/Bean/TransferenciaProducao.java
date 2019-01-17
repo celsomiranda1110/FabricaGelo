@@ -5,6 +5,10 @@
  */
 package Bean;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 /**
  *
  * @author celso
@@ -14,6 +18,10 @@ public class TransferenciaProducao implements Bean{
     private int IdProducao;
     private int IdProdutoCamara;
     private double quantidade;
+    private Date data;
+    private String dataFormatada;
+    
+    private ProdutoCamara produtoCamara;
 
     public int getIdTransferenciaProducao() {
         return IdTransferenciaProducao;
@@ -47,11 +55,49 @@ public class TransferenciaProducao implements Bean{
         this.quantidade = quantidade;
     }
 
+    public Date getData() {
+        return data;
+    }
+
+    public void setData(Date data) {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        this.data = data;
+        this.dataFormatada = formatter.format(this.data);
+    }
+
+    public String getDataFormatada() {
+        return dataFormatada;
+    }
+
+    public void setDataFormatada(String dataFormatada) {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        this.dataFormatada = dataFormatada;
+        try{
+            this.data = (Date)formatter.parse(dataFormatada);
+        }catch(ParseException pe)
+        {}
+    }
+
+    public ProdutoCamara getProdutoCamara() {
+        return produtoCamara;
+    }
+
+    public void setProdutoCamara(ProdutoCamara produtoCamara) {
+        this.produtoCamara = produtoCamara;
+        this.IdProdutoCamara = produtoCamara.getIdProdutoCamara();
+    }
+    
+    
+
     public void replicar(TransferenciaProducao _transferenciaProducao)
     {
         _transferenciaProducao.setIdTransferenciaProducao(this.IdTransferenciaProducao);
         _transferenciaProducao.setIdProducao(this.IdProducao);
         _transferenciaProducao.setIdProdutoCamara(this.IdProdutoCamara);
         _transferenciaProducao.setQuantidade(this.quantidade);
+        _transferenciaProducao.setData(this.data);
+        
+        if (this.produtoCamara != null)
+            _transferenciaProducao.setProdutoCamara(this.produtoCamara);
     }
 }

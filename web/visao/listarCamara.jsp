@@ -22,17 +22,20 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="row">
-                                    <div class="col-sm-4">
-                                        <button type="button" class="btn btn-primary right" onClick="novo()">Novo Camara</button>
-                                    </div>
-                                    <div class="col-sm-8">
-                                        <div class="input-group">
-                                            <input class="form-control" type="text" placeholder="Pesquisar" />
-                                            <div class="input-group-btn">
-                                                <button type="button" class="btn btn-default" onClick="pesquisa()" >Pesquisa</button>
-                                            </div>                                            
+                                    <div class="col-sm-12">
+                                        <div class="navbar navbar-default">
+                                            <div class="container-fluid">
+                                                <ul class="nav navbar-nav">
+                                                    <li class="btn bottom-right"><button type="button" class="btn btn-default" onClick="novo()">Nova Câmara</button></li>
+                                                    
+                                                </ul>
+                                                <ul class="nav navbar-nav navbar-right">
+                                                    <li class="btn"><input type="text" class="form-control" name="txtPesquisa" id="txtPesquisa"></li>
+                                                    <li class="btn"><button type="button" class="btn btn-default" onClick="pesquisar()">Pesquisa</button></li>
+                                                    
+                                                </ul>
+                                            </div>
                                         </div>
-                                        
                                     </div>
                                 </div>
                             </div>
@@ -49,7 +52,7 @@
                                     </tr> 
                                     <c:forEach var="lstCam" items="${lstCamara}" varStatus="s">
                                         <tr>
-                                            <td> <input type="image" src="visao/css/bootstrap/img/Text.png" onclick="seleciona('FabricaGelo.Camara.AcaoSelecionaCamara?idCamara=${lstCam.idCamara}')"> </td>
+                                            <td> <input type="image" src="visao/css/bootstrap/img/Text.png" onclick="seleciona('FabricaGelo.Camara.AcaoSelecionaCamara?idEquipamento=${lstCam.idEquipamento}')"> </td>
                                             <td> ${lstCam.descricao} </td>
                                             <td> ${lstCam.capacidade} </td>
                                             <td> ${lstCam.descSituacao} </td>
@@ -72,7 +75,7 @@
                 document.forms[0].action="FabricaGelo.Camara.AcaoAbreCamara";
                 document.forms[0].submit();
             }
-            function pesquisa()
+            function pesquisar()
             {
  
                 document.forms[0].action="FabricaGelo.Camara.AcaoPesquisaCamara";

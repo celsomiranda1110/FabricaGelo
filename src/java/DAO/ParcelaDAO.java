@@ -35,7 +35,7 @@ public class ParcelaDAO extends DAO{
         comSql += "     `tblParcela`.`dblValor`,";
         comSql += "     `tblParcela`.`dblValorPago`,";
         comSql += "     `tblParcela`.`chrSituacao`";
-        comSql += " FROM `bdGelo`.`tblParcela`";
+        comSql += " FROM `smmdaa_bdGelo`.`tblParcela`";
         comSql += " WHERE ";
         comSql += "     `tblParcela`.`intPagamentoId` = " + pagamento.getIdPagamento() + ";";
         
@@ -55,6 +55,7 @@ public class ParcelaDAO extends DAO{
             parcela.setValor((Double)bkp.get(6));
             parcela.setValorPago((Double)bkp.get(7));
             parcela.setSituacao((String)bkp.get(8));
+            
 
             lstTabela.add(parcela);
         }
@@ -77,7 +78,7 @@ public class ParcelaDAO extends DAO{
         comSql += "     `tblParcela`.`dblValor`,";
         comSql += "     `tblParcela`.`dblValorPago`,";
         comSql += "     `tblParcela`.`chrSituacao`";
-        comSql += " FROM `bdGelo`.`tblParcela`";
+        comSql += " FROM `smmdaa_bdGelo`.`tblParcela`";
         comSql += " WHERE ";
         comSql += "     `tblParcela`.`intParcelaId` = " + parcela.getIdParcela() + ";";
         List tabela = super.listaUm();
@@ -118,7 +119,7 @@ public class ParcelaDAO extends DAO{
         if (listaUm(parcela) == null)
         {
             comSql = "";
-            comSql += " INSERT INTO `bdGelo`.`tblParcela`";
+            comSql += " INSERT INTO `smmdaa_bdGelo`.`tblParcela`";
             comSql += " 	(`intPagamentoId`,";
             comSql += " 	`intNumParcela`,";
             comSql += " 	`chrFormaPagamento`,";
@@ -156,7 +157,7 @@ public class ParcelaDAO extends DAO{
         else
         {
             comSql = "";
-            comSql += " UPDATE `bdGelo`.`tblParcela` SET";
+            comSql += " UPDATE `smmdaa_bdGelo`.`tblParcela` SET";
             comSql += " 	`intPagamentoId` = " + _parcela.getIdPagamento();
             comSql += " 	,`intNumParcela` = " + _parcela.getNumParcela();
             comSql += " 	,`chrFormaPagamento` = '" + _parcela.getFormaPagamento() + "'";
@@ -171,8 +172,69 @@ public class ParcelaDAO extends DAO{
             retorno = atualizar();
         }
         
+        // verifica se pagamento foi pago
+        if (retorno)
+            setEncerraPagamento(_parcela);
+        
         return retorno;
         
     }  
+    
+    private void setEncerraPagamento(Parcela parcela)
+    {
+        
+        boolean encerraPagamento = true;
+        
+       
+        
+        comSql = "";      
+        comSql += " SELECT ";
+        comSql += " 	`tblParcela`.`intParcelaId`,";
+        comSql += "     `tblParcela`.`intPagamentoId`,";
+        comSql += "     `tblParcela`.`intNumParcela`,";
+        comSql += "     `tblParcela`.`chrFormaPagamento`,";
+        comSql += "     `tblParcela`.`datDtPagamento`,";
+        comSql += "     `tblParcela`.`datDtVencimento`,";
+        comSql += "     `tblParcela`.`dblValor`,";
+        comSql += "     `tblParcela`.`dblValorPago`,";
+        comSql += "     `tblParcela`.`chrSituacao`";
+        comSql += " FROM `smmdaa_bdGelo`.`tblParcela`";
+        comSql += " WHERE ";
+        comSql += "     `tblParcela`.`intPagamentoId` = " + parcela.getIdPagamento() + ";";
+        
+        List tabela = super.listaTodos();
+        
+        for(int i = 0; i < tabela.size(); i++)
+        {
+            Parcela _parcela = new Parcela();
+            List bkp = (ArrayList)tabela.get(i);
+            
+            _parcela.setIdParcela(((Integer)bkp.get(0)).intValue());
+            _parcela.setIdPagamento(((Integer)bkp.get(1)).intValue());
+            _parcela.setNumParcela(((Integer)bkp.get(2)).intValue());
+            _parcela.setFormaPagamento((String)bkp.get(3));
+            _parcela.setDtPagamento((Date)bkp.get(4));
+            _parcela.setDtVencimento((Date)bkp.get(5));
+            _parcela.setValor((Double)bkp.get(6));
+            _parcela.setValorPago((Double)bkp.get(7));
+            _parcela.setSituacao((String)bkp.get(8));
+            
+            if (!_parcela.getSituacao().equals("G"))
+                encerraPagamento = false;
+            
+        }        
+        
+       
+        if(encerraPagamento)
+        {
+            PagamentoDAO pagamentoDAO = new PagamentoDAO(conexao);
+            Pagamento pagamento = new Pagamento();
+            pagamento.setIdPagamento(tipoPagamento);
+            pagamento = pagamentoDAO.listaUm(pagamento);
+            pagamento.setSituacao("PG");
+            pagamentoDAO.atualizar(pagamento);
+        }
+        
+    }
     
 }

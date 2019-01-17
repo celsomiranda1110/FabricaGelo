@@ -34,7 +34,7 @@ public class AcaoGravaCompra extends Acao
         Connection conexao = (Connection)req.getAttribute("connection");
         HttpSession sessao = req.getSession(false);
         
-        Profissional usuario = (Profissional)sessao.getAttribute("usuario");
+        Profissional usuario = (Profissional)sessao.getAttribute("usuario");    
         
         String mensagemErro = "";
         String pagRetorno = "";
@@ -53,7 +53,8 @@ public class AcaoGravaCompra extends Acao
             List<ProdutoMovimento> lstProdutos = new ArrayList<ProdutoMovimento>();
             if (compra.getLstProdutoMovimento() != null)
                 lstProdutos = compra.getLstProdutoMovimento();
-
+            
+            
 
             // Dados do compra
             String numero = (req.getParameter("txtNumero").equals("") || req.getParameter("txtNumero") == null) ? "" : req.getParameter("txtNumero");
@@ -66,13 +67,12 @@ public class AcaoGravaCompra extends Acao
             String vlUnitario = (req.getParameter("txtVlUnitario").equals("") || req.getParameter("txtVlUnitario") == null) ? "0" : req.getParameter("txtVlUnitario");        
             String vlIcms = (req.getParameter("txtIcms").equals("") || req.getParameter("txtIcms") == null) ? "0" : req.getParameter("txtIcms");        
             String vlDesconto = (req.getParameter("txtVlDesconto").equals("") || req.getParameter("txtVlDesconto") == null) ? "0" : req.getParameter("txtVlDesconto");        
-            String qtAvaria = (req.getParameter("txtQtAvaria").equals("") || req.getParameter("txtQtAvaria") == null) ? "0" : req.getParameter("txtQtAvaria");        
+            
             double dbQuantidade = Double.parseDouble(quantidade);
             double dbVlUnitario = Double.parseDouble(vlUnitario);
             double dbIcms = Double.parseDouble(vlIcms);
             double dbDesconto = Double.parseDouble(vlDesconto);
             double dbVlTotal = 0;
-            double dbQtAvaria = Double.parseDouble(qtAvaria);
             dbVlTotal = ((dbQuantidade * dbVlUnitario)  + ((dbQuantidade * dbVlUnitario) * (dbIcms/100)) - dbDesconto);
             
             if (produtoCompra != null)
@@ -82,7 +82,6 @@ public class AcaoGravaCompra extends Acao
                 produtoCompra.setIcms(Double.parseDouble(vlIcms));
                 produtoCompra.setDesconto(Double.parseDouble(vlDesconto));
                 produtoCompra.setValorTotal(dbVlTotal);
-                produtoCompra.setQtAvaria(dbQtAvaria); 
                 produtoCompra.setOperacao("");
                 Iterator itProduto = lstProdutos.iterator();
                 while (itProduto.hasNext())
@@ -127,7 +126,6 @@ public class AcaoGravaCompra extends Acao
             else
             {
                 // montagem do movimento de compra
-                compra.setProfissional(usuario);
                 compra.setNumero(numero);
                 compra.setNotaFiscal(notaFiscal);
                 compra.setDataLancamento(dtLancamento);

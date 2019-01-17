@@ -1,6 +1,8 @@
 package DAO;
 
+import Bean.Equipamento;
 import Bean.Produto;
+import Bean.ProdutoCamara;
 import java.sql.Connection;
 import java.util.*;
 
@@ -24,9 +26,13 @@ public class ProdutoDAO extends DAO
         comSql += "     `tblProduto`.`dblSaldo`,";
         comSql += "     `tblProduto`.`dblVlUnitario`,";
         comSql += "     `tblProduto`.`chrTipo`";
-        comSql += " FROM `bdGelo`.`tblProduto`";
-        comSql += " WHERE";
-        comSql += "     `tblProduto`.`chrTipo` = '" + _produto.getTipo() + "'";
+        comSql += " FROM `smmdaa_bdGelo`.`tblProduto`";
+        if (_produto != null)
+        {
+            comSql += " WHERE";
+            comSql += "     `tblProduto`.`chrTipo` = '" + _produto.getTipo() + "'";
+        }
+        comSql += ";";
         
         List tabela = super.listaTodos();
         
@@ -58,9 +64,9 @@ public class ProdutoDAO extends DAO
         comSql += "     `tblProduto`.`dblSaldo`,";
         comSql += "     `tblProduto`.`dblVlUnitario`,";
         comSql += "     `tblProduto`.`chrTipo`";
-        comSql += " FROM `bdGelo`.`tblProduto`";
+        comSql += " FROM `smmdaa_bdGelo`.`tblProduto`";
         comSql += " WHERE ";
-        comSql += "     `tblProduto`.`intProdutoId` = " + produto.getIdProduto()+ ";";
+        comSql += "     `tblProduto`.`intProdutoId` = " + produto.getIdProduto() + ";";
         List tabela = super.listaUm();
         
         if(!tabela.isEmpty())
@@ -75,6 +81,8 @@ public class ProdutoDAO extends DAO
                 produto.setSaldo((Double)bkp.get(2));
                 produto.setVlUnitario((Double)bkp.get(3));
                 produto.setTipo((String)bkp.get(4));
+                
+
                 
             }  
             return produto;
@@ -94,7 +102,7 @@ public class ProdutoDAO extends DAO
         if (listaUm(produto) == null)
         {
             comSql = "";
-            comSql += " INSERT INTO `bdGelo`.`tblProduto`";
+            comSql += " INSERT INTO `smmdaa_bdGelo`.`tblProduto`";
             comSql += " 	(`strDescricao`,";
             comSql += " 	`dblSaldo`,";
             comSql += "         `dblVlUnitario`,";
@@ -123,18 +131,48 @@ public class ProdutoDAO extends DAO
         else
         {
             comSql = "";
-            comSql += " UPDATE `bdGelo`.`tblProduto` SET";
+            comSql += " UPDATE `smmdaa_bdGelo`.`tblProduto` SET";
             comSql += " 	`strDescricao` = '" + _produto.getDescricao() + "',";
             comSql += " 	`dblSaldo` = " + _produto.getSaldo() + ",";
             comSql += " 	`dblVlUnitario` = " + _produto.getVlUnitario() + ",";
-            comSql += " 	`chrTipo` = " + _produto.getVlUnitario();
+            comSql += " 	`chrTipo` = '" + _produto.getTipo() + "'";
             comSql += " WHERE ";
             comSql += " 	`intProdutoId` = " + _produto.getIdProduto() + ";";
 
             retorno = atualizar();
         }
         
+        if (retorno)
+        {
+            
+            
+            // vinculando produtos a câmara
+            ProdutoCamaraDAO produtoCamaraDAO = new ProdutoCamaraDAO(conexao);
+            EquipamentoDAO equipamentoDAO = new EquipamentoDAO(conexao);
+            Equipamento equipamento = new Equipamento();
+            equipamento.setTipo("CA");
+            List<Equipamento> lstCamara = new ArrayList<Equipamento>();
+            lstCamara = equipamentoDAO.listaTodos(equipamento);
+            Iterator itCamara = lstCamara.iterator();
+            while (itCamara.hasNext())
+            {
+                Equipamento camara = (Equipamento)itCamara.next();
+                ProdutoCamara produtoCamara = new ProdutoCamara();
+                produtoCamara.setIdEquipamento(camara.getIdEquipamento());
+                produtoCamara.setIdProduto(_produto.getIdProduto());
+                produtoCamara = produtoCamaraDAO.listaUm(produtoCamara);
+                if (produtoCamara == null)
+                {
+                    produtoCamara = new ProdutoCamara();
+                    produtoCamara.setIdEquipamento(camara.getIdEquipamento());
+                    produtoCamara.setIdProduto(_produto.getIdProduto());
+                    produtoCamara.setDataFormatada("1900-01-01");
+                    produtoCamara.setSaldo(0);
+                    produtoCamara.setSaldoAnterior(0);
+                    produtoCamaraDAO.atualizar(produtoCamara);
+                }
+            }
+        }
         return retorno;
-        
     }   
 }

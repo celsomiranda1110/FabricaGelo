@@ -5,9 +5,11 @@
  */
 package Controle.FabricaGelo.Colaborador;
 
+import Bean.Abastecimento;
 import Bean.Bairro;
 import Bean.Colaborador;
 import Bean.ColaboradorProduto;
+import Bean.Manutencao;
 import Bean.Movimento;
 import Bean.ProdutoMovimento;
 import Controle.FabricaGelo.Gerais.Acao;
@@ -62,7 +64,11 @@ public class AcaoRetornaPagina extends Acao
         }
         if (pagRetorno != null)
         {
-            if (pagRetorno.equals("FabricaGelo.Venda.AcaoAbreVenda"))
+            if (pagRetorno.equals("FabricaGelo.Movimento.AcaoAbreMovimento"))
+            {
+                sessao.setAttribute("movimento", movimento);
+            }
+            else if (pagRetorno.equals("FabricaGelo.Venda.AcaoAbreVenda"))
             {
                 sessao.setAttribute("venda", movimento);
             }
@@ -81,24 +87,42 @@ public class AcaoRetornaPagina extends Acao
             else if (pagRetorno.equals("FabricaGelo.Bonificacao.AcaoAbreBonificacao"))
             {
                 sessao.setAttribute("bonificacao", movimento);
-            }             
-        }
+            } 
+            else if (pagRetorno.equals("FabricaGelo.Veiculo.AcaoAbreVeiculo"))
+            {
+                Manutencao manutencao = new Manutencao();
+                manutencao.setColaborador(cliente);
+                
+                sessao.setAttribute("manutencao", manutencao);
+                
+            }
+            else if (pagRetorno.equals("FabricaGelo.Maquina.AcaoAbreMaquina"))
+            {
+                Manutencao manutencao = new Manutencao();
+                manutencao.setColaborador(cliente);
+                
+                sessao.setAttribute("manutencao", manutencao);                
+            }
+            else if (pagRetorno.equals("FabricaGelo.Camara.AcaoAbreCamara"))
+            {
+                Manutencao manutencao = new Manutencao();
+                manutencao.setColaborador(cliente);
+                
+                sessao.setAttribute("manutencao", manutencao);                
+            }
+            else if (pagRetorno.equals("FabricaGelo.Entrega.AcaoAbreEntrega"))
+            {
+                Abastecimento abastecimento = new Abastecimento();
+                abastecimento.setColaborador(cliente);
+                sessao.setAttribute("abastecimento", abastecimento);
+            }
+        }        
         else
         {
             sessao.setAttribute("movimento", null);
             pagRetorno =  "FabricaGelo.Colaborador.AcaoListarColaborador";
         } 
-//        if (pagRetorno != null)
-//        {
-//            sessao.setAttribute("venda", movimento);
-//            sessao.setAttribute("lstProdutoVenda", movimento.getLstProdutoMovimento());
-//        }
-//        else
-//        {        
-//            sessao.setAttribute("venda", null);
-//            sessao.setAttribute("lstProdutoVenda", null);
-//            pagRetorno = "FabricaGelo.Colaborador.AcaoListarColaborador";
-//        }
+
         return pagRetorno;
     }
 }

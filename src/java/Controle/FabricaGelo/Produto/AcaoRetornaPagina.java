@@ -8,6 +8,7 @@ package Controle.FabricaGelo.Produto;
 import Bean.Colaborador;
 import Bean.Producao;
 import Bean.Produto;
+import Bean.ProdutoEntrega;
 import Bean.ProdutoMovimento;
 import Controle.FabricaGelo.Gerais.Acao;
 import java.sql.Connection;
@@ -37,6 +38,13 @@ public class AcaoRetornaPagina extends Acao
             {
                 sessao.setAttribute("produto", produto);
                 sessao.setAttribute("colaborador", colaborador);
+            }
+            else if (pagRetorno.equals("FabricaGelo.Movimento.AcaoAbreMovimento"))
+            {
+                ProdutoMovimento produtoMovimento = new ProdutoMovimento();
+                produtoMovimento.setProduto(produto);
+                produtoMovimento.setValor(produto.getVlUnitario());
+                sessao.setAttribute("produtoMovimento", produtoMovimento);
             }
             else if (pagRetorno.equals("FabricaGelo.Venda.AcaoAbreVenda"))
             {
@@ -78,6 +86,13 @@ public class AcaoRetornaPagina extends Acao
                 Producao producao = (Producao)sessao.getAttribute("producao");
                 producao.setProduto(produto);
                 sessao.setAttribute("producao", producao);
+                
+            }
+            else if (pagRetorno.equals("FabricaGelo.Entrega.AcaoAbreEntrega"))
+            {
+                ProdutoEntrega produtoEntrega = new ProdutoEntrega();
+                produtoEntrega.setProduto(produto);
+                sessao.setAttribute("produtoEntrega", produtoEntrega);
                 
             }
             

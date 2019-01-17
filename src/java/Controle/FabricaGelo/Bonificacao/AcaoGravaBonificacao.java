@@ -126,7 +126,7 @@ public class AcaoGravaBonificacao extends Acao
             else
             {
                 // montagem do movimento de bonificacao
-                bonificacao.setProfissional(usuario);
+
                 bonificacao.setNumero(numero);
                 bonificacao.setNotaFiscal(notaFiscal);
                 bonificacao.setDataLancamento(dtLancamento);

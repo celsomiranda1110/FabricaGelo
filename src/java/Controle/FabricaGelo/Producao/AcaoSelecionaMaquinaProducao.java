@@ -9,6 +9,7 @@ import Bean.MaquinaProducao;
 import Bean.Producao;
 import Controle.FabricaGelo.Gerais.Acao;
 import DAO.MaquinaProducaoDAO;
+import DAO.ProducaoDAO;
 import java.sql.Connection;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,6 +28,10 @@ public class AcaoSelecionaMaquinaProducao extends Acao{
         Producao producao = (Producao)sessao.getAttribute("producao");
         if (producao != null)
         {
+            
+            ProducaoDAO producaoDAO = new ProducaoDAO(conexao);
+            producao = producaoDAO.listaUm(producao);
+            
             MaquinaProducaoDAO maquinaProducaoDAO = new MaquinaProducaoDAO(conexao);
             MaquinaProducao maquinaProducao = new MaquinaProducao();
             
@@ -39,14 +44,9 @@ public class AcaoSelecionaMaquinaProducao extends Acao{
             sessao.setAttribute("lstMaquinaProducao",producao.getLstMaquinaProducao());
             sessao.setAttribute("maquinaProducao",maquinaProducao);
             sessao.setAttribute("lstAvariaProducao",maquinaProducao.getLstAvariaProducao());
-
+            sessao.setAttribute("avariaProducao", null);
         }
-        else
-        {
-            sessao.setAttribute("producao",producao);
-            sessao.setAttribute("lstMaquinaProducao",producao.getLstMaquinaProducao());
-            sessao.setAttribute("lstAvariaProducao",null);
-        }      
+             
         return "visao/producao.jsp";
         
     }

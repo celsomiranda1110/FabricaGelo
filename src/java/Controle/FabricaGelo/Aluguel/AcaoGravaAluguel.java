@@ -56,7 +56,7 @@ public class AcaoGravaAluguel extends Acao
 
             // Dados do aluguel
             String numero = (req.getParameter("txtNumero").equals("") || req.getParameter("txtNumero") == null) ? "" : req.getParameter("txtNumero");
-            String notaFiscal = (req.getParameter("txtNotaFiscal").equals("") || req.getParameter("txtNotaFiscal") == null) ? "" : req.getParameter("txtNotaFiscal");
+            String dtDevolucao = (req.getParameter("txtDevolucao").equals("") || req.getParameter("txtDevolucao") == null) ? "" : req.getParameter("txtDevolucao");
             String dtLancamento = (req.getParameter("txtLancamento").equals("") || req.getParameter("txtLancamento") == null) ? "" : req.getParameter("txtLancamento");        
             String situacaoAluguel = (req.getParameter("cmbSituacao").equals("") || req.getParameter("cmbSituacao") == null) ? "" : req.getParameter("cmbSituacao").toUpperCase();        
 
@@ -126,11 +126,10 @@ public class AcaoGravaAluguel extends Acao
             else
             {
                 // montagem do movimento de aluguel
-                aluguel.setProfissional(usuario);
                 aluguel.setNumero(numero);
-                aluguel.setNotaFiscal(notaFiscal);
+                aluguel.setNotaFiscal(numero);
                 aluguel.setDataLancamento(dtLancamento);
-                aluguel.setDataEntrega(dtLancamento);
+                aluguel.setDataEntrega(dtDevolucao);
                 aluguel.setSituacao(situacaoAluguel);
                 aluguel.setTipo("AL"); // indica aluguel
                 aluguel.setLstProdutoMovimento(lstProdutosAux);

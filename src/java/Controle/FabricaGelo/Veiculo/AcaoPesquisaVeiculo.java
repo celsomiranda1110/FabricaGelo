@@ -5,9 +5,9 @@
  */
 package Controle.FabricaGelo.Veiculo;
 
-import Bean.Veiculo;
+import Bean.Equipamento;
 import Controle.FabricaGelo.Gerais.Acao;
-import DAO.VeiculoDAO;
+import DAO.EquipamentoDAO;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -26,11 +26,13 @@ public class AcaoPesquisaVeiculo extends Acao{
         Connection conexao = (Connection)req.getAttribute("connection");
         HttpSession sessao = req.getSession(false);
 
-        List<Veiculo> lstVeiculo = new ArrayList<Veiculo>();
-        List<Veiculo> lstRetorno = new ArrayList<Veiculo>();
+        List<Equipamento> lstVeiculo = new ArrayList<Equipamento>();
+        List<Equipamento> lstRetorno = new ArrayList<Equipamento>();
         
-        VeiculoDAO veiculoDAO = new VeiculoDAO(conexao);
-        lstVeiculo = veiculoDAO.listaTodos();
+        EquipamentoDAO veiculoDAO = new EquipamentoDAO(conexao);
+        Equipamento equipamento = new Equipamento();
+        equipamento.setTipo("VE");
+        lstVeiculo = veiculoDAO.listaTodos(equipamento);
         
         String pesquisa = req.getParameter("txtPesquisa");
         if (pesquisa != "")
@@ -38,7 +40,7 @@ public class AcaoPesquisaVeiculo extends Acao{
             Iterator it = lstVeiculo.iterator();
             while (it.hasNext())
             {
-                Veiculo _veiculo = (Veiculo)it.next();
+                Equipamento _veiculo = (Equipamento)it.next();
 
                 if (_veiculo.getPlaca().contains(pesquisa.toUpperCase()))
                     lstRetorno.add(_veiculo);

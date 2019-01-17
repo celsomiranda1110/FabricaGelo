@@ -5,9 +5,9 @@
  */
 package Controle.FabricaGelo.Camara;
 
-import Bean.Camara;
+import Bean.Equipamento;
 import Controle.FabricaGelo.Gerais.Acao;
-import DAO.CamaraDAO;
+import DAO.EquipamentoDAO;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,10 +25,12 @@ public class AcaoListarCamara extends Acao{
         Connection conexao = (Connection)req.getAttribute("connection");
         HttpSession sessao = req.getSession(false);
 
-        List<Camara> lstCamara = new ArrayList<Camara>();
-        CamaraDAO camaraDAO = new CamaraDAO(conexao);
+        List<Equipamento> lstCamara = new ArrayList<Equipamento>();
+        Equipamento camara = new Equipamento();
+        camara.setTipo("CA");
+        EquipamentoDAO camaraDAO = new EquipamentoDAO(conexao);
         
-        lstCamara = camaraDAO.listaTodos();
+        lstCamara = camaraDAO.listaTodos(camara);
         sessao.setAttribute("lstCamara",lstCamara);
         
         return "visao/listarCamara.jsp"; 

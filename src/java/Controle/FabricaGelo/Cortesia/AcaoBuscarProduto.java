@@ -44,7 +44,7 @@ public class AcaoBuscarProduto extends Acao
         if (cortesia == null)
             cortesia = new Movimento();
         
-        cortesia.setProfissional(usuario);
+        
         cortesia.setNumero(numero);
         cortesia.setNotaFiscal(notaFiscal);
         cortesia.setDataLancamento(dtLancamento);

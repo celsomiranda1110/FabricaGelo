@@ -39,23 +39,19 @@ public class AcaoGravaVenda extends Acao
         String mensagemErro = "";
         String pagRetorno = "";
         
-        Profissional usuario = (Profissional)sessao.getAttribute("usuario");
+        List<ProdutoMovimento> lstProdutos = null;
+        
+        ProdutoMovimento produtoVenda = (ProdutoMovimento)sessao.getAttribute("vendaProduto");
+        Pagamento pagamento = (Pagamento)sessao.getAttribute("pagamento");
+        Movimento venda = (Movimento)sessao.getAttribute("venda");
         
         MovimentoDAO vendaDAO = new MovimentoDAO(conexao);
-        Movimento venda = (Movimento)sessao.getAttribute("venda");
+        
         if (venda == null)
             venda = new Movimento();
             
         if (!venda.getSituacao().equals("FE"))
         {
-            
-            ProdutoMovimento produtoVenda = (ProdutoMovimento)sessao.getAttribute("vendaProduto");
-            Pagamento pagamento = (Pagamento)sessao.getAttribute("pagamento");
-
-            List<ProdutoMovimento> lstProdutos = new ArrayList<ProdutoMovimento>();
-            if (venda.getLstProdutoMovimento() != null)
-                lstProdutos = venda.getLstProdutoMovimento();
-
 
             // Dados do venda
             String numero = (req.getParameter("txtNumero").equals("") || req.getParameter("txtNumero") == null) ? "" : req.getParameter("txtNumero");
@@ -65,10 +61,14 @@ public class AcaoGravaVenda extends Acao
 
             // Dados de produto
             String quantidade = (req.getParameter("txtQuantidade").equals("") || req.getParameter("txtQuantidade") == null) ? "0" : req.getParameter("txtQuantidade"); 
+            String qtAvaria = (req.getParameter("txtQtAvaria").equals("") || req.getParameter("txtQtAvaria") == null) ? "0" : req.getParameter("txtQtAvaria");        
+            String quantidadeBonus = (req.getParameter("txtQtBonus").equals("") || req.getParameter("txtQtBonus") == null) ? "0" : req.getParameter("txtQtBonus"); 
+            String quantidadeCortesia = (req.getParameter("txtQtCortesia").equals("") || req.getParameter("txtQtCortesia") == null) ? "0" : req.getParameter("txtQtCortesia"); 
+            String quantidadeReposicao = (req.getParameter("txtQtReposicao").equals("") || req.getParameter("txtQtReposicao") == null) ? "0" : req.getParameter("txtQtReposicao"); 
             String vlUnitario = (req.getParameter("txtVlUnitario").equals("") || req.getParameter("txtVlUnitario") == null) ? "0" : req.getParameter("txtVlUnitario");        
             String vlIcms = (req.getParameter("txtIcms").equals("") || req.getParameter("txtIcms") == null) ? "0" : req.getParameter("txtIcms");        
             String vlDesconto = (req.getParameter("txtVlDesconto").equals("") || req.getParameter("txtVlDesconto") == null) ? "0" : req.getParameter("txtVlDesconto");        
-            String qtAvaria = (req.getParameter("txtQtAvaria").equals("") || req.getParameter("txtQtAvaria") == null) ? "0" : req.getParameter("txtQtAvaria");        
+            
             double dbQuantidade = Double.parseDouble(quantidade);
             double dbVlUnitario = Double.parseDouble(vlUnitario);
             double dbIcms = Double.parseDouble(vlIcms);
@@ -79,12 +79,17 @@ public class AcaoGravaVenda extends Acao
             
             if (produtoVenda != null)
             {
+                lstProdutos = new ArrayList<ProdutoMovimento>();
+                
                 produtoVenda.setQuantidade(Double.parseDouble(quantidade));
+                produtoVenda.setQtAvaria(dbQtAvaria); 
+                produtoVenda.setQtBonus(Double.parseDouble(quantidadeBonus));
+                produtoVenda.setQtCortesia(Double.parseDouble(quantidadeCortesia));
+                produtoVenda.setQtReposicao(Double.parseDouble(quantidadeReposicao));
                 produtoVenda.setValor(Double.parseDouble(vlUnitario));
                 produtoVenda.setIcms(Double.parseDouble(vlIcms));
                 produtoVenda.setDesconto(Double.parseDouble(vlDesconto));
                 produtoVenda.setValorTotal(dbVlTotal);
-                produtoVenda.setQtAvaria(dbQtAvaria); 
                 produtoVenda.setOperacao("");
                 Iterator itProduto = lstProdutos.iterator();
                 while (itProduto.hasNext())
@@ -129,7 +134,6 @@ public class AcaoGravaVenda extends Acao
             else
             {
                 // montagem do movimento de venda
-                venda.setProfissional(usuario);
                 venda.setNumero(numero);
                 venda.setNotaFiscal(notaFiscal);
                 venda.setDataLancamento(dtLancamento);

@@ -35,7 +35,9 @@ public class ProfissionalDAO extends DAO{
         comSql += "     `tblProfissional`.`strCelular`,";
         comSql += "     `tblProfissional`.`strSenha`,";
         comSql += "     `tblProfissional`.`strUsuario`";
-        comSql += " FROM `bdGelo`.`tblProfissional`;";
+        comSql += " FROM `smmdaa_bdGelo`.`tblProfissional`";
+        comSql += " ORDER BY ";
+        comSql += " `tblProfissional`.`strNome`;";
         
         List tabela = super.listaTodos();
         
@@ -52,6 +54,12 @@ public class ProfissionalDAO extends DAO{
             profissional.setCelular((String)bkp.get(5));
             profissional.setSenha((String)bkp.get(6));
             profissional.setUsuario((String)bkp.get(7));
+            
+            FuncaoDAO funcaoDAO = new FuncaoDAO(conexao);
+            Funcao funcao = new Funcao();
+            funcao.setIdFuncao(profissional.getIdFuncao());
+            funcao = funcaoDAO.listaUm(funcao);
+            profissional.setFuncao(funcao);
 
             lstTabela.add(profissional);
         }
@@ -73,7 +81,7 @@ public class ProfissionalDAO extends DAO{
         comSql += "     `tblProfissional`.`strCelular`,";
         comSql += "     `tblProfissional`.`strSenha`,";
         comSql += "     `tblProfissional`.`strUsuario`";
-        comSql += " FROM `bdGelo`.`tblProfissional`";
+        comSql += " FROM `smmdaa_bdGelo`.`tblProfissional`";
         comSql += " WHERE ";
         comSql += "     `tblProfissional`.`intProfissionalId` = " + profissional.getIdProfissional()+ ";";
         List tabela = super.listaUm();
@@ -118,7 +126,7 @@ public class ProfissionalDAO extends DAO{
         if (listaUm(profissional) == null)
         {
             comSql = "";
-            comSql += " INSERT INTO `bdGelo`.`tblProfissional`";
+            comSql += " INSERT INTO `smmdaa_bdGelo`.`tblProfissional`";
             comSql += " 	(`intFuncaoId`,";
             comSql += " 	`strCTPS`,";
             comSql += " 	`strCpf`,";
@@ -153,7 +161,7 @@ public class ProfissionalDAO extends DAO{
         else
         {
             comSql = "";
-            comSql += " UPDATE `bdGelo`.`tblProfissional` SET";
+            comSql += " UPDATE `smmdaa_bdGelo`.`tblProfissional` SET";
             comSql += " 	`intFuncaoId` = " + _profissional.getIdFuncao();
             comSql += " 	,`strCTPS` = <'" + _profissional.getCtps() + "'";
             comSql += " 	,`strCpf` = '" + _profissional.getCpf() + "'";

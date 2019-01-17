@@ -13,7 +13,7 @@ import java.util.List;
 public class MaquinaProducao implements Bean{
     
     private int idMaquinaProducao;
-    private int idMaquina;
+    private int idEquipamento;
     private int idProducao;
     private int idProduto;
     private double qtReposicao;
@@ -24,7 +24,7 @@ public class MaquinaProducao implements Bean{
     private String hrInicial;
     private String hrFinal;
     
-    private Maquina maquina;
+    private Equipamento maquina;
     private Produto embalagem;
     
     private List<AvariaProducao> lstAvariaProducao;
@@ -37,12 +37,12 @@ public class MaquinaProducao implements Bean{
         this.idMaquinaProducao = idMaquinaProducao;
     }
 
-    public int getIdMaquina() {
-        return idMaquina;
+    public int getIdEquipamento() {
+        return idEquipamento;
     }
 
-    public void setIdMaquina(int idMaquina) {
-        this.idMaquina = idMaquina;
+    public void setIdEquipamento(int idEquipamento) {
+        this.idEquipamento = idEquipamento;
     }
 
     public int getIdProducao() {
@@ -117,13 +117,13 @@ public class MaquinaProducao implements Bean{
         this.hrFinal = hrFinal;
     }
 
-    public Maquina getMaquina() {
+    public Equipamento getMaquina() {
         return maquina;
     }
 
-    public void setMaquina(Maquina maquina) {
+    public void setMaquina(Equipamento maquina) {
         this.maquina = maquina;
-        this.idMaquina = maquina.getIdMaquina();
+        this.idEquipamento = maquina.getIdEquipamento();
     }
 
     public Produto getEmbalagem() {
@@ -142,11 +142,13 @@ public class MaquinaProducao implements Bean{
     public void setLstAvariaProducao(List<AvariaProducao> lstAvariaProducao) {
         this.lstAvariaProducao = lstAvariaProducao;
     }
+    
+    
    
     public void replicar(MaquinaProducao _maquinaProducao)
     {
         _maquinaProducao.setIdMaquinaProducao(this.idMaquinaProducao);
-        _maquinaProducao.setIdMaquina(this.idMaquina);
+        _maquinaProducao.setIdEquipamento(this.idEquipamento);
         _maquinaProducao.setIdProducao(this.idProducao);
         _maquinaProducao.setIdProduto(this.idProduto);
         _maquinaProducao.setQtReposicao(this.qtReposicao);

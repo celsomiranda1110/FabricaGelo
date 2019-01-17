@@ -6,7 +6,7 @@
 package DAO;
 
 import Bean.AvariaProducao;
-import Bean.Maquina;
+import Bean.Equipamento;
 import Bean.MaquinaProducao;
 import Bean.Producao;
 import Bean.Produto;
@@ -33,7 +33,7 @@ public class MaquinaProducaoDAO extends DAO{
         comSql += " SELECT ";
         comSql += " 	`tblMaquinaProducao`.`intMaquinaProducaoId`,";
         comSql += "     `tblMaquinaProducao`.`intProducaoId`,";
-        comSql += "     `tblMaquinaProducao`.`intMaquinaId`,";
+        comSql += "     `tblMaquinaProducao`.`intEquipamentoId`,";
         comSql += "     `tblMaquinaProducao`.`intProdutoId`,";
         comSql += "     `tblMaquinaProducao`.`dblQtReposicao`,";
         comSql += "     `tblMaquinaProducao`.`dblSaldoAnterior`,";
@@ -42,7 +42,7 @@ public class MaquinaProducaoDAO extends DAO{
         comSql += "     `tblMaquinaProducao`.`strHoraInicial`,";
         comSql += "     `tblMaquinaProducao`.`strHoraFinal`,";
         comSql += "     `tblMaquinaProducao`.`dblRendimento`";
-        comSql += " FROM `bdGelo`.`tblMaquinaProducao`";
+        comSql += " FROM `smmdaa_bdGelo`.`tblMaquinaProducao`";
         comSql += " WHERE ";
         comSql += "     `tblMaquinaProducao`.`intProducaoId` = " + producao.getIdProducao() + ";";
          
@@ -56,7 +56,7 @@ public class MaquinaProducaoDAO extends DAO{
             
             maquinaProducao.setIdMaquinaProducao(((Integer)bkp.get(0)).intValue());
             maquinaProducao.setIdProducao(((Integer)bkp.get(1)).intValue());
-            maquinaProducao.setIdMaquina(((Integer)bkp.get(2)).intValue());
+            maquinaProducao.setIdEquipamento(((Integer)bkp.get(2)).intValue());
             maquinaProducao.setIdProduto(((Integer)bkp.get(3)).intValue());
             maquinaProducao.setQtReposicao((Double)bkp.get(4));
             maquinaProducao.setQtSaldoAnterior((Double)bkp.get(5));
@@ -74,9 +74,9 @@ public class MaquinaProducaoDAO extends DAO{
             maquinaProducao.setEmbalagem(produto);
 
             // Maquina
-            MaquinaDAO maquinaDAO = new MaquinaDAO(conexao);
-            Maquina maquina = new Maquina();
-            maquina.setIdMaquina(maquinaProducao.getIdMaquina());
+            EquipamentoDAO maquinaDAO = new EquipamentoDAO(conexao);
+            Equipamento maquina = new Equipamento();
+            maquina.setIdEquipamento(maquinaProducao.getIdEquipamento());
             maquina = maquinaDAO.listaUm(maquina);
             maquinaProducao.setMaquina(maquina);
                 
@@ -95,7 +95,7 @@ public class MaquinaProducaoDAO extends DAO{
         comSql += " SELECT ";
         comSql += " 	`tblMaquinaProducao`.`intMaquinaProducaoId`,";
         comSql += "     `tblMaquinaProducao`.`intProducaoId`,";
-        comSql += "     `tblMaquinaProducao`.`intMaquinaId`,";
+        comSql += "     `tblMaquinaProducao`.`intEquipamentoId`,";
         comSql += "     `tblMaquinaProducao`.`intProdutoId`,";
         comSql += "     `tblMaquinaProducao`.`dblQtReposicao`,";
         comSql += "     `tblMaquinaProducao`.`dblSaldoAnterior`,";
@@ -104,12 +104,12 @@ public class MaquinaProducaoDAO extends DAO{
         comSql += "     `tblMaquinaProducao`.`strHoraInicial`,";
         comSql += "     `tblMaquinaProducao`.`strHoraFinal`,";
         comSql += "     `tblMaquinaProducao`.`dblRendimento`";
-        comSql += " FROM `bdGelo`.`tblMaquinaProducao`";
+        comSql += " FROM `smmdaa_bdGelo`.`tblMaquinaProducao`";
         comSql += " WHERE ";
-        if ((maquinaProducao.getIdProducao() != 0) && (maquinaProducao.getIdMaquina() != 0))
+        if ((maquinaProducao.getIdProducao() != 0) && (maquinaProducao.getIdEquipamento() != 0))
         {
             comSql += "     `tblMaquinaProducao`.`intProducaoId` = " + maquinaProducao.getIdProducao();
-            comSql += "     and `tblMaquinaProducao`.`intMaquinaId` = " + maquinaProducao.getIdMaquina() + ";";
+            comSql += "     and `tblMaquinaProducao`.`intEquipamentoId` = " + maquinaProducao.getIdEquipamento() + ";";
             
         } 
         else
@@ -125,7 +125,7 @@ public class MaquinaProducaoDAO extends DAO{
 
                 maquinaProducao.setIdMaquinaProducao(((Integer)bkp.get(0)).intValue());
                 maquinaProducao.setIdProducao(((Integer)bkp.get(1)).intValue());
-                maquinaProducao.setIdMaquina(((Integer)bkp.get(2)).intValue());
+                maquinaProducao.setIdEquipamento(((Integer)bkp.get(2)).intValue());
                 maquinaProducao.setIdProduto(((Integer)bkp.get(3)).intValue());
                 maquinaProducao.setQtReposicao((Double)bkp.get(4));
                 maquinaProducao.setQtSaldoAnterior((Double)bkp.get(5));
@@ -143,9 +143,9 @@ public class MaquinaProducaoDAO extends DAO{
                 maquinaProducao.setEmbalagem(produto);
                 
                 // Maquina
-                MaquinaDAO maquinaDAO = new MaquinaDAO(conexao);
-                Maquina maquina = new Maquina();
-                maquina.setIdMaquina(maquinaProducao.getIdMaquina());
+                EquipamentoDAO maquinaDAO = new EquipamentoDAO(conexao);
+                Equipamento maquina = new Equipamento();
+                maquina.setIdEquipamento(maquinaProducao.getIdEquipamento());
                 maquina = maquinaDAO.listaUm(maquina);
                 maquinaProducao.setMaquina(maquina);
                 
@@ -153,6 +153,16 @@ public class MaquinaProducaoDAO extends DAO{
                 AvariaProducaoDAO avariaProducaoDAO = new AvariaProducaoDAO(conexao);
                 lstAvariaProducao = avariaProducaoDAO.listaTodos(maquinaProducao);
                 maquinaProducao.setLstAvariaProducao(lstAvariaProducao);
+                
+                //descobrindo a qtAvarias
+                Iterator itAvaria = lstAvariaProducao.iterator();
+                double qtAvaria = 0;
+                while (itAvaria.hasNext())
+                {
+                    AvariaProducao _avariaProducao = (AvariaProducao)itAvaria.next();
+                    qtAvaria += _avariaProducao.getQuantidade();
+                }
+                maquinaProducao.setQtAvaria(qtAvaria);
                 
             }  
             return maquinaProducao;
@@ -165,6 +175,7 @@ public class MaquinaProducaoDAO extends DAO{
     public boolean atualizar(MaquinaProducao maquinaProducao) 
     {
         boolean retorno;
+        double qtAvaria = 0;
         
         MaquinaProducao _maquinaProducao = new MaquinaProducao();
         maquinaProducao.replicar(_maquinaProducao);
@@ -172,9 +183,9 @@ public class MaquinaProducaoDAO extends DAO{
         if (listaUm(maquinaProducao) == null)
         {
             comSql = "";
-            comSql += " INSERT INTO `bdGelo`.`tblMaquinaProducao`";
+            comSql += " INSERT INTO `smmdaa_bdGelo`.`tblMaquinaProducao`";
             comSql += " 	(`intProducaoId`,";
-            comSql += " 	`intMaquinaId`,";
+            comSql += " 	`intEquipamentoId`,";
             comSql += " 	`intProdutoId`,";
             comSql += " 	`dblQtReposicao`,";
             comSql += " 	`dblSaldoAnterior`,";
@@ -185,7 +196,7 @@ public class MaquinaProducaoDAO extends DAO{
             comSql += " 	`dblRendimento`)";
             comSql += " VALUES";
             comSql += " 	(" + _maquinaProducao.getIdProducao();
-            comSql += " 	," + _maquinaProducao.getIdMaquina();
+            comSql += " 	," + _maquinaProducao.getIdEquipamento();
             comSql += " 	," + _maquinaProducao.getIdProduto();
             comSql += " 	," + _maquinaProducao.getQtReposicao();
             comSql += " 	," + _maquinaProducao.getQtSaldoAnterior();
@@ -214,9 +225,9 @@ public class MaquinaProducaoDAO extends DAO{
         else
         {
             comSql = "";
-            comSql += " UPDATE `bdGelo`.`tblMaquinaProducao` SET";
+            comSql += " UPDATE `smmdaa_bdGelo`.`tblMaquinaProducao` SET";
             comSql += " 	`intProducaoId` = " + _maquinaProducao.getIdProducao();
-            comSql += " 	,`intMaquinaId` = " + _maquinaProducao.getIdMaquina();
+            comSql += " 	,`intEquipamentoId` = " + _maquinaProducao.getIdEquipamento();
             comSql += " 	,`intProdutoId` = " + _maquinaProducao.getIdProduto();
             comSql += " 	,`dblQtReposicao` = " + _maquinaProducao.getQtReposicao();
             comSql += " 	,`dblSaldoAnterior` = " + _maquinaProducao.getQtSaldoAnterior();
@@ -231,6 +242,9 @@ public class MaquinaProducaoDAO extends DAO{
         }
         if (retorno)
         {
+            
+            _maquinaProducao = listaUm(_maquinaProducao);
+            
             if (_maquinaProducao.getLstAvariaProducao() != null)
             {
                 AvariaProducaoDAO avariaProducaoDAO = new AvariaProducaoDAO(conexao);
@@ -239,7 +253,20 @@ public class MaquinaProducaoDAO extends DAO{
                 {
                     AvariaProducao avariaProducao = (AvariaProducao)itAvariaProducao.next();
                     avariaProducao.setIdMaquinaProducao(_maquinaProducao.getIdMaquinaProducao());
-                    avariaProducaoDAO.atualizar(avariaProducao);
+                    if(avariaProducaoDAO.atualizar(avariaProducao))
+                        qtAvaria += avariaProducao.getQuantidade();
+                }
+                
+                // atualizando quantidade real produzida pela máquina
+                if (qtAvaria != _maquinaProducao.getQtAvaria())
+                {
+                    comSql = "";
+                    comSql += " UPDATE `smmdaa_bdGelo`.`tblMaquinaProducao` SET";
+                    comSql += " 	`dblQtAvaria` = " + qtAvaria;
+                    comSql += " 	,`dblQtProducao` = " + (_maquinaProducao.getQtProducao() - qtAvaria);
+                    comSql += " WHERE ";
+                    comSql += " 	`intMaquinaProducaoId` = " + _maquinaProducao.getIdMaquinaProducao() + ";";                
+                    atualizar();
                 }
             }
         }

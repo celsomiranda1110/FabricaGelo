@@ -7,68 +7,65 @@ package Bean;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 /**
  *
  * @author celso
  */
 public class Entrega implements Bean{
+
+    
+    
     private  int idEntrega;
-    private int idMovimento;
-    private int idVeiculo;
-    private int idProfissional;
+    private int idEquipamento;
     private Date data;
     private String dataFormatada;
+    private String dataApresentacao;
     private double kmInicial;
     private double kmFinal;
     private String hrSaida;
     private String hrChegada;
-    private double litros;
-    private String situacao; // EN - Entregue | PE - Pendente
+    private String situacao; // AB - ABERTA | FE - FECHADA | PE - PENDENTE
+    private String descSituacao;
 
-    private Profissional profissional;
-    private Veiculo veiculo;
+    private Equipamento veiculo;
     
     private List<CustoEntrega> lstCustoEntrega;
-
+    private List<ProdutoEntrega> lstProdutoEntrega;
+    private List<Abastecimento> lstAbastecimento;
+    private List<ColaboradorEntrega> lstColaboradorEntrega;
+    private List<ProfissionalEntrega> lstProfissionalEntrega;
+    
     public Entrega() {
-        this.situacao = "PE"; // Iniciando objeto como Pendente
-        // PE - pendente | EN - Entregue
+        this.situacao = "CD"; // Iniciando objeto como Pendente
+        this.idEquipamento = 0;
+        this.hrSaida = "";
+        this.hrChegada = "";
+        
+        
+        Calendar cal = new GregorianCalendar();
+        this.data = cal.getTime();
+           
+    }
+
+    public int getIdEquipamento() {
+        return idEquipamento;
+    }
+
+    public void setIdEquipamento(int idEquipamento) {
+        this.idEquipamento = idEquipamento;
     }
     
-    
-    
+
     public int getIdEntrega() {
         return idEntrega;
     }
 
     public void setIdEntrega(int idEntrega) {
         this.idEntrega = idEntrega;
-    }
-
-    public int getIdMovimento() {
-        return idMovimento;
-    }
-
-    public void setIdMovimento(int idMovimento) {
-        this.idMovimento = idMovimento;
-    }
-
-    public int getIdVeiculo() {
-        return idVeiculo;
-    }
-
-    public void setIdVeiculo(int idVeiculo) {
-        this.idVeiculo = idVeiculo;
-    }
-
-    public int getIdProfissional() {
-        return idProfissional;
-    }
-
-    public void setIdProfissional(int idProfissional) {
-        this.idProfissional = idProfissional;
     }
 
     public Date getData() {
@@ -93,6 +90,18 @@ public class Entrega implements Bean{
         }catch(ParseException pe)
         {}        
     }
+
+    public String getDataApresentacao() {
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+        this.data = data;
+        this.dataApresentacao = formatter.format(this.data);
+        
+        return dataApresentacao;
+    }
+
+    
+    
+    
 
     public double getKmInicial() {
         return kmInicial;
@@ -126,30 +135,13 @@ public class Entrega implements Bean{
         this.hrChegada = hrChegada;
     }
 
-    public double getLitros() {
-        return litros;
-    }
-
-    public void setLitros(double litros) {
-        this.litros = litros;
-    }
-
-    public Profissional getProfissional() {
-        return profissional;
-    }
-
-    public void setProfissional(Profissional profissional) {
-        this.profissional = profissional;
-        this.idProfissional = profissional.getIdProfissional();
-    }
-
-    public Veiculo getVeiculo() {
+    public Equipamento getVeiculo() {
         return veiculo;
     }
 
-    public void setVeiculo(Veiculo veiculo) {
+    public void setVeiculo(Equipamento veiculo) {
         this.veiculo = veiculo;
-        this.idVeiculo = veiculo.getIdVeiculo();
+        this.idEquipamento = veiculo.getIdEquipamento();
     }
 
     public List<CustoEntrega> getLstCustoEntrega() {
@@ -160,12 +152,61 @@ public class Entrega implements Bean{
         this.lstCustoEntrega = lstCustoEntrega;
     }
 
+    
+
     public String getSituacao() {
         return situacao;
     }
 
     public void setSituacao(String situacao) {
         this.situacao = situacao;
+        if (this.situacao.equals("ET"))
+            this.descSituacao = "EM TRANSITO";
+        else if (this.situacao.equals("CH"))
+            this.descSituacao = "CHEGADA";
+        else if (this.situacao.equals("CD"))
+            this.descSituacao = "CADASTRADA";
+        else if (this.situacao.equals("FI"))
+            this.descSituacao = "FINALIZADA";
+    }
+
+    public String getDescSituacao() {
+        return descSituacao;
+    }
+
+    
+    
+    
+    public List<ProdutoEntrega> getLstProdutoEntrega() {
+        return lstProdutoEntrega;
+    }
+
+    public void setLstProdutoEntrega(List<ProdutoEntrega> lstProdutoEntrega) {
+        this.lstProdutoEntrega = lstProdutoEntrega;
+    }
+
+    public List<Abastecimento> getLstAbastecimento() {
+        return lstAbastecimento;
+    }
+
+    public void setLstAbastecimento(List<Abastecimento> lstAbastecimento) {
+        this.lstAbastecimento = lstAbastecimento;
+    }
+
+    public List<ColaboradorEntrega> getLstColaboradorEntrega() {
+        return lstColaboradorEntrega;
+    }
+
+    public void setLstColaboradorEntrega(List<ColaboradorEntrega> lstColaboradorEntrega) {
+        this.lstColaboradorEntrega = lstColaboradorEntrega;
+    }
+
+    public List<ProfissionalEntrega> getLstProfissionalEntrega() {
+        return lstProfissionalEntrega;
+    }
+
+    public void setLstProfissionalEntrega(List<ProfissionalEntrega> lstProfissionalEntrega) {
+        this.lstProfissionalEntrega = lstProfissionalEntrega;
     }
     
     
@@ -173,21 +214,21 @@ public class Entrega implements Bean{
     public void replicar(Entrega _entrega)
     {
         _entrega.setIdEntrega(this.idEntrega);
-        _entrega.setIdMovimento(this.idMovimento);
-        _entrega.setIdVeiculo(this.idVeiculo);
-        _entrega.setIdProfissional(this.idProfissional);
+        _entrega.setIdEquipamento(this.idEquipamento);
         _entrega.setData(this.data);
         _entrega.setKmInicial(this.kmInicial);
         _entrega.setKmFinal(this.kmFinal);
         _entrega.setHrSaida(this.hrSaida);
         _entrega.setHrChegada(this.hrChegada);
-        _entrega.setLitros(this.litros);
         _entrega.setSituacao(this.situacao);
         
-        _entrega.setProfissional(this.profissional);
         _entrega.setVeiculo(this.veiculo);
         
         _entrega.setLstCustoEntrega(this.lstCustoEntrega);
+        _entrega.setLstProdutoEntrega(lstProdutoEntrega);
+        _entrega.setLstAbastecimento(this.lstAbastecimento);
+        _entrega.setLstColaboradorEntrega(this.lstColaboradorEntrega);
+        _entrega.setLstProfissionalEntrega(this.lstProfissionalEntrega);
         
     }
 }

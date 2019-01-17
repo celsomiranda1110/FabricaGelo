@@ -5,6 +5,10 @@
  */
 package Bean;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  *
  * @author celso
@@ -12,10 +16,15 @@ package Bean;
 public class ProdutoCamara implements Bean{
     private int IdProdutoCamara;
     private int IdProduto;
-    private int IdCamara;
-    private String data;
+    private int idEquipamento;
+    private Date data;
+    private String dataFormatada;
     private double saldoAnterior;
     private double saldo;
+    
+    private Equipamento equipamento;
+    private Produto produto;
+    
 
     public int getIdProdutoCamara() {
         return IdProdutoCamara;
@@ -33,22 +42,37 @@ public class ProdutoCamara implements Bean{
         this.IdProduto = IdProduto;
     }
 
-    public int getIdCamara() {
-        return IdCamara;
+    public int getIdEquipamento() {
+        return idEquipamento;
     }
 
-    public void setIdCamara(int IdCamara) {
-        this.IdCamara = IdCamara;
+    public void setIdEquipamento(int idEquipamento) {
+        this.idEquipamento = idEquipamento;
     }
 
-    public String getData() {
+    public Date getData() {
         return data;
     }
 
-    public void setData(String data) {
+    public void setData(Date data) {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         this.data = data;
+        this.dataFormatada = formatter.format(this.data);
     }
 
+    public String getDataFormatada() {
+        return dataFormatada;
+    }
+
+    public void setDataFormatada(String dataFormatada) {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        this.dataFormatada = dataFormatada;
+        try{
+            this.data = (Date)formatter.parse(dataFormatada);
+        }catch(ParseException pe)
+        {}
+    }    
+    
     public double getSaldoAnterior() {
         return saldoAnterior;
     }
@@ -64,14 +88,43 @@ public class ProdutoCamara implements Bean{
     public void setSaldo(double saldo) {
         this.saldo = saldo;
     }
+
+    public Equipamento getEquipamento() {
+        return equipamento;
+    }
+
+    public void setEquipamento(Equipamento equipamento) {
+        this.equipamento = equipamento;
+        this.idEquipamento = equipamento.getIdEquipamento();
+    }
+
+    public Produto getProduto() {
+        return produto;
+    }
+
+    public void setProduto(Produto produto) {
+        this.produto = produto;
+        this.IdProduto = produto.getIdProduto();
+    }
+    
+    public String toString()
+    {
+        return this.produto + " - " + this.equipamento;
+    }
     
     public void replicar(ProdutoCamara _produtoCamara)
     {
         _produtoCamara.setIdProdutoCamara(this.IdProdutoCamara);
         _produtoCamara.setIdProduto(this.IdProduto);
-        _produtoCamara.setIdCamara(this.IdCamara);
+        _produtoCamara.setIdEquipamento(this.idEquipamento);
         _produtoCamara.setData(this.data);
         _produtoCamara.setSaldo(this.saldo);
         _produtoCamara.setSaldoAnterior(this.saldoAnterior);
+        
+        if (this.equipamento != null)
+            _produtoCamara.setEquipamento(this.equipamento);
+        
+        if (this.produto != null)
+            _produtoCamara.setProduto(this.produto);
     }
 }

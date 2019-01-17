@@ -31,7 +31,7 @@ public class AcaoBuscarEmpresa extends Acao
         Connection conexao = (Connection)req.getAttribute("connection");
         HttpSession sessao = req.getSession(false);
         
-        Profissional usuario = (Profissional)sessao.getAttribute("usuario");
+
         
         List<Colaborador> lstColaborador = new ArrayList<Colaborador>();
         ColaboradorDAO colaboradorDAO = new ColaboradorDAO(conexao);
@@ -46,7 +46,6 @@ public class AcaoBuscarEmpresa extends Acao
         if (venda == null)
             venda = new Movimento();
         
-        venda.setProfissional(usuario);
         venda.setNumero(numero);
         venda.setNotaFiscal(notaFiscal);
         venda.setDataLancamento(dtLancamento);

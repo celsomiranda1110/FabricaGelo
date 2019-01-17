@@ -39,7 +39,7 @@ public class AcaoRetornaPagina extends Acao
         {
             if (pagRetorno.equals("FabricaGelo.Entrega.AcaoAbreEntrega"))
             {
-                entrega.setProfissional(profissional);
+                
                 
                 sessao.setAttribute("entrega", entrega);
             }            

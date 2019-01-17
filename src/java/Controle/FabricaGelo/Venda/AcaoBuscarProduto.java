@@ -31,8 +31,7 @@ public class AcaoBuscarProduto extends Acao
         
         Profissional usuario = (Profissional)sessao.getAttribute("usuario");
         
-        List<Produto> lstProduto = new ArrayList<Produto>();
-        ProdutoDAO produtoDAO = new ProdutoDAO(conexao);
+
         
         // Dados do venda
         String numero = (req.getParameter("txtNumero") == "" || req.getParameter("txtNumero") == null) ? "" : req.getParameter("txtNumero");
@@ -44,14 +43,17 @@ public class AcaoBuscarProduto extends Acao
         if (venda == null)
             venda = new Movimento();
         
-        venda.setProfissional(usuario);
         venda.setNumero(numero);
         venda.setNotaFiscal(notaFiscal);
         venda.setDataLancamento(dtLancamento);
         venda.setSituacao(situacao);
         venda.setTipo("VE");
 
-        lstProduto = produtoDAO.listaTodos();
+        List<Produto> lstProduto = new ArrayList<Produto>();
+        ProdutoDAO produtoDAO = new ProdutoDAO(conexao);
+        Produto produto = new Produto();
+        produto.setTipo("PR");
+        lstProduto = produtoDAO.listaTodos(produto);
 
         sessao.setAttribute("venda",venda);
         sessao.setAttribute("lstProduto",lstProduto);

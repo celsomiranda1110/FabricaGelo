@@ -5,9 +5,9 @@
  */
 package Controle.FabricaGelo.Maquina;
 
-import Bean.Maquina;
+import Bean.Equipamento;
 import Controle.FabricaGelo.Gerais.Acao;
-import DAO.MaquinaDAO;
+import DAO.EquipamentoDAO;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,10 +25,12 @@ public class AcaoListarMaquina extends Acao{
         Connection conexao = (Connection)req.getAttribute("connection");
         HttpSession sessao = req.getSession(false);
 
-        List<Maquina> lstMaquina = new ArrayList<Maquina>();
-        MaquinaDAO maquinaDAO = new MaquinaDAO(conexao);
+        List<Equipamento> lstMaquina = new ArrayList<Equipamento>();
+        EquipamentoDAO maquinaDAO = new EquipamentoDAO(conexao);
+        Equipamento equipamento = new Equipamento();
+        equipamento.setTipo("MA");
         
-        lstMaquina = maquinaDAO.listaTodos();
+        lstMaquina = maquinaDAO.listaTodos(equipamento);
         sessao.setAttribute("lstMaquina",lstMaquina);
         
         return "visao/listarMaquina.jsp"; 

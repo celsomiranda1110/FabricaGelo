@@ -12,6 +12,9 @@ import Bean.Produto;
 
 import DAO.FuncaoDAO;
 import Controle.FabricaGelo.Gerais.Acao;
+import DAO.BairroDAO;
+import Bean.Bairro;
+import DAO.ProdutoDAO;
 import java.sql.Connection;
 import java.util.*;
 import javax.servlet.http.HttpServletRequest;
@@ -51,8 +54,21 @@ public String executa(HttpServletRequest req, HttpServletResponse res) throws Ex
             }
         }
         
+        // lstando bairros
+        BairroDAO bairroDAO = new BairroDAO(conexao);
+        List<Bairro> lstBairro = new ArrayList<Bairro>();
+        lstBairro = bairroDAO.listaTodos();
+        sessao.setAttribute("lstBairro",lstBairro);
+        
+        ProdutoDAO produtoDAO = new ProdutoDAO(conexao);
+        Produto produto = new Produto();
+        List<Produto> lstProduto = new ArrayList<Produto>();
+        produto.setTipo("PR");
+        lstProduto = produtoDAO.listaTodos(produto);        
+        
         // Lista de funcionários da empresa
         sessao.setAttribute("colaborador",colaborador);
+        sessao.setAttribute("lstProduto", lstProduto);
         if (colaborador != null)
         {
             sessao.setAttribute("lstColaboradorProduto",colaborador.getLstColaboradorProduto());

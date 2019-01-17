@@ -18,7 +18,6 @@ import java.util.List;
 public class Movimento implements Bean{
     private int idMovimento;
     private int idColaborador;
-    private int idProfissional;
     private String notaFiscal;
     private Date dtEntrega;
     private String dataEntrega;
@@ -26,15 +25,16 @@ public class Movimento implements Bean{
     private String dataLancamento;
     private Date dtLancamento;
     private String tipo;
+    private String descTipo;
     private String situacao;
+    private String descSituacao;
     
     String formato = "dd/MM/yyyy";
     
     private Colaborador colaborador;
-    private Profissional profissional;
-    
+        
     private Pagamento pagamento;
-    private Entrega entrega;
+    
 
     private List<ProdutoMovimento> lstProdutoMovimento;
 
@@ -125,14 +125,57 @@ public class Movimento implements Bean{
 
     public void setTipo(String tipo) {
         this.tipo = tipo;
+        if (this.tipo.equals("CP"))
+        {
+            this.descTipo = "COMPRA";
+            //this.pagamento.setProcessar(true);
+        }
+        else if (this.tipo.equals("CO"))
+        {
+            this.descTipo = "CORTESIA";
+            //this.pagamento.setProcessar(false);
+        }
+        else if (this.tipo.equals("BO"))
+        {
+            this.descTipo = "BONIFICAÇÃO";
+            //this.pagamento.setProcessar(false);
+        }
+        else if (this.tipo.equals("VE"))
+        {
+            this.descTipo = "VENDA";
+            //this.pagamento.setProcessar(true);
+        }
     }
 
+    public String getDescTipo() {
+        return descTipo;
+    }
+    
+    
+
     public String getSituacao() {
+        
         return situacao;
     }
 
     public void setSituacao(String situacao) {
         this.situacao = situacao;
+        
+        if (situacao.equals("AB"))
+            this.descSituacao = "ABERTA";
+        else if (situacao.equals("FE"))
+            this.descSituacao = "FECHADA";
+        else if (situacao.equals("EP"))
+            this.descSituacao = "EM PAGAMENTO";
+        
+    }
+
+    public String getDescSituacao() {
+        return descSituacao;
+    }
+
+    public void setDescSituacao(String descSituacao) {
+        this.descSituacao = descSituacao;
     }
 
     
@@ -143,23 +186,6 @@ public class Movimento implements Bean{
     public void setColaborador(Colaborador colaborador) {
         this.colaborador = colaborador;
         this.idColaborador = colaborador.getIdColaborador();
-    }
-
-    public int getIdProfissional() {
-        return idProfissional;
-    }
-
-    public void setIdProfissionalId(int idProfissional) {
-        this.idProfissional = idProfissional;
-    }
-
-    public Profissional getProfissional() {
-        return profissional;
-    }
-
-    public void setProfissional(Profissional profissional) {
-        this.profissional = profissional;
-        this.idProfissional = profissional.getIdProfissional();
     }
 
     public List<ProdutoMovimento> getLstProdutoMovimento() {
@@ -178,21 +204,11 @@ public class Movimento implements Bean{
         this.pagamento = pagamento;
     }
 
-    public Entrega getEntrega() {
-        return entrega;
-    }
 
-    public void setEntrega(Entrega entrega) {
-        this.entrega = entrega;
-    }
-    
-    
-    
     public void replicar(Movimento _movimento)
     {
         _movimento.setIdMovimento(this.idMovimento);
         _movimento.setIdColaborador(this.idColaborador);
-        _movimento.setIdProfissionalId(this.idProfissional);
         _movimento.setDataEntrega(this.dataEntrega);
         _movimento.setDtEntrega(this.dtEntrega);
         _movimento.setDataLancamento(this.dataLancamento);
@@ -202,11 +218,11 @@ public class Movimento implements Bean{
         _movimento.setSituacao(this.situacao);
         _movimento.setNotaFiscal(this.notaFiscal);
         
-        _movimento.setColaborador(this.colaborador);
-        _movimento.setProfissional(this.profissional);
+        if (this.colaborador != null)
+            _movimento.setColaborador(this.colaborador);
+        if (this.pagamento != null)
+            _movimento.setPagamento(this.pagamento);
         
-        _movimento.setPagamento(this.pagamento);
-        _movimento.setEntrega(this.entrega);
         
         _movimento.setLstProdutoMovimento(this.lstProdutoMovimento);
     }

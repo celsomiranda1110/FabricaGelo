@@ -29,7 +29,7 @@ public class AcaoAbreEntrega extends Acao
         if (cortesia.getTipo().equals("CO"))
         {
             sessao.setAttribute("movimento",cortesia);
-            sessao.setAttribute("entrega",cortesia.getEntrega());
+            
             sessao.setAttribute("pagRetorno","FabricaGelo.Cortesia.AcaoAbreCortesia");
         }
         return "visao/entrega.jsp";

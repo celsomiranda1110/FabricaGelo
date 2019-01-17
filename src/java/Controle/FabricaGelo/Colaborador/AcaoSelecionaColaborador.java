@@ -6,10 +6,14 @@
 package Controle.FabricaGelo.Colaborador;
 
 
+import Bean.Bairro;
 import Bean.Colaborador;
 import Bean.Movimento;
+import Bean.Produto;
 import Controle.FabricaGelo.Gerais.Acao;
+import DAO.BairroDAO;
 import DAO.ColaboradorDAO;
+import DAO.ProdutoDAO;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,11 +45,24 @@ public class AcaoSelecionaColaborador extends Acao{
         colaborador.setIdColaborador(Integer.parseInt(idColaborador));
         colaborador = colaboradorDAO.listaUm(colaborador);
         
+        // lstando bairros
+        BairroDAO bairroDAO = new BairroDAO(conexao);
+        List<Bairro> lstBairro = new ArrayList<Bairro>();
+        lstBairro = bairroDAO.listaTodos();
+        sessao.setAttribute("lstBairro",lstBairro);
+        
+        ProdutoDAO produtoDAO = new ProdutoDAO(conexao);
+        Produto produto = new Produto();
+        List<Produto> lstProduto = new ArrayList<Produto>();
+        produto.setTipo("PR");
+        lstProduto = produtoDAO.listaTodos(produto);        
+        
         // Lista de funcionários da empresa
         sessao.setAttribute("venda",venda);
         sessao.setAttribute("pagRetorno",pagRetorno);
         
         sessao.setAttribute("colaborador",colaborador);
+        sessao.setAttribute("lstProduto", lstProduto);
         sessao.setAttribute("lstColaboradorProduto",colaborador.getLstColaboradorProduto());
         sessao.setAttribute("lstVisitaColaborador",colaborador.getLstVisitaColaborador());
               

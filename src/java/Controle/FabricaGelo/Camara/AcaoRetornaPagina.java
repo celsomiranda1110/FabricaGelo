@@ -6,7 +6,7 @@
 package Controle.FabricaGelo.Camara;
 
 import Bean.Colaborador;
-import Bean.Camara;
+import Bean.Equipamento;
 import Controle.FabricaGelo.Gerais.Acao;
 import java.sql.Connection;
 import javax.servlet.http.HttpServletRequest;
@@ -26,7 +26,7 @@ public class AcaoRetornaPagina extends Acao
         HttpSession sessao = req.getSession(false);
         
         String pagRetorno = (String)sessao.getAttribute("pagRetorno");
-        Camara camara = (Camara)sessao.getAttribute("camara");
+        Equipamento camara = (Equipamento)sessao.getAttribute("camara");
         Colaborador colaborador = (Colaborador)sessao.getAttribute("colaborador");
         
         if (pagRetorno != null)

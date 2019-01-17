@@ -30,7 +30,7 @@ public class CustoEntregaDAO extends DAO{
         comSql += "     `tblCustoEntrega`.`intEntregaId`,";
         comSql += "     `tblCustoEntrega`.`strDescricao`,";
         comSql += "     `tblCustoEntrega`.`dblValor`";
-        comSql += " FROM `bdGelo`.`tblCustoEntrega`";
+        comSql += " FROM `smmdaa_bdGelo`.`tblCustoEntrega`";
         comSql += " WHERE ";
         comSql += "     `tblCustoEntrega`.`intEntregaId` = " + entrega.getIdEntrega() + ";";
         
@@ -62,7 +62,7 @@ public class CustoEntregaDAO extends DAO{
         comSql += "     `tblCustoEntrega`.`intEntregaId`,";
         comSql += "     `tblCustoEntrega`.`strDescricao`,";
         comSql += "     `tblCustoEntrega`.`dblValor`";
-        comSql += " FROM `bdGelo`.`tblCustoEntrega`";
+        comSql += " FROM `smmdaa_bdGelo`.`tblCustoEntrega`";
         comSql += " WHERE ";
         comSql += "     `tblCustoEntrega`.`intCustoEntregaId` = " + custoEntrega.getIdCustoEntrega()+ ";";
         List tabela = super.listaUm();
@@ -98,7 +98,7 @@ public class CustoEntregaDAO extends DAO{
         if (listaUm(custoEntrega) == null)
         {
             comSql = "";
-            comSql += " INSERT INTO `bdGelo`.`tblCustoEntrega`";
+            comSql += " INSERT INTO `smmdaa_bdGelo`.`tblCustoEntrega`";
             comSql += " 	(`intEntregaId`,";
             comSql += " 	`strDescricao`,";
             comSql += " 	`dblValor`)";
@@ -126,7 +126,7 @@ public class CustoEntregaDAO extends DAO{
         else
         {
             comSql = "";
-            comSql += " UPDATE `bdGelo`.`tblCustoEntrega` SET ";
+            comSql += " UPDATE `smmdaa_bdGelo`.`tblCustoEntrega` SET ";
             comSql += " 	`intEntregaId` = " + _custoEntrega.getIdEntrega();
             comSql += " 	,`strDescricao` = '" + _custoEntrega.getDescricao() + "'";
             comSql += " 	,`dblValor` = " + _custoEntrega.getValor();
@@ -143,7 +143,7 @@ public class CustoEntregaDAO extends DAO{
     {
         comSql = "";
         comSql += " Delete from";
-        comSql += " `bdGelo`.`tblCustoEntrega` ";
+        comSql += " `smmdaa_bdGelo`.`tblCustoEntrega` ";
         comSql += " where ";
         comSql += " `tblCustoEntrega`.`intCustoEntregaId` = " + custoEntrega.getIdCustoEntrega() + ";";
         

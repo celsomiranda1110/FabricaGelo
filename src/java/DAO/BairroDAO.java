@@ -29,7 +29,9 @@ public class BairroDAO extends DAO{
         comSql += "     `tblBairro`.`intBairroId`,";
         comSql += "     `tblBairro`.`strDescricao`";
         comSql += " FROM ";
-        comSql += "     `bdGelo`.`tblBairro`;";
+        comSql += "     `smmdaa_bdGelo`.`tblBairro`";
+        comSql += " ORDER BY ";
+        comSql += "     `tblBairro`.`strDescricao`;";
         List tabela = super.listaTodos();
         
         for(int i = 0; i < tabela.size(); i++)
@@ -55,9 +57,10 @@ public class BairroDAO extends DAO{
         comSql += "     `tblBairro`.`intBairroId`,";
         comSql += "     `tblBairro`.`strDescricao`";
         comSql += " FROM ";
-        comSql += "     `bdGelo`.`tblBairro`";
+        comSql += "     `smmdaa_bdGelo`.`tblBairro`";
         comSql += " WHERE ";
         comSql += "     `tblBairro`.`intBairroId` = " + bairro.getIdBairro() + ";";
+        
         List tabela = super.listaUm();
         
         if(!tabela.isEmpty())
@@ -88,7 +91,7 @@ public class BairroDAO extends DAO{
         if (listaUm(bairro) == null)
         {
             comSql = "";
-            comSql += " INSERT INTO `bdGelo`.`tblBairro` ";
+            comSql += " INSERT INTO `smmdaa_bdGelo`.`tblBairro` ";
             comSql += " (`strDescricao`)";
             comSql += " VALUES";
             comSql += " ('" + _bairro.getDescricao() + "');";
@@ -111,7 +114,7 @@ public class BairroDAO extends DAO{
         else
         {
             comSql = "";
-            comSql += " UPDATE `bdGelo`.`tblBairro` SET";
+            comSql += " UPDATE `smmdaa_bdGelo`.`tblBairro` SET";
             comSql += "	`strDescricao` = '" + _bairro.getDescricao() + "'";
             comSql += " WHERE ";
             comSql += "	`intBairroId` = " + _bairro.getIdBairro()+ ";  ";   

@@ -69,7 +69,11 @@
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
         <url-pattern>/FabricaGelo.Colaborador.AcaoPesquisaColaborador</url-pattern>
-    </servlet-mapping>    
+    </servlet-mapping> 
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.Colaborador.AcaoPesquisaColaboradorPendente</url-pattern>
+    </servlet-mapping>   
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
         <url-pattern>/FabricaGelo.Colaborador.AcaoSelecionaColaborador</url-pattern>
@@ -198,7 +202,11 @@
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
         <url-pattern>/FabricaGelo.Veiculo.AcaoAbreVeiculo</url-pattern>
-    </servlet-mapping>    
+    </servlet-mapping> 
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.Veiculo.AcaoBuscarColaborador</url-pattern>
+    </servlet-mapping>       
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
         <url-pattern>/FabricaGelo.Veiculo.AcaoGravaVeiculo</url-pattern>
@@ -214,7 +222,11 @@
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
         <url-pattern>/FabricaGelo.Veiculo.AcaoRetornaPagina</url-pattern>
-    </servlet-mapping>   
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.Veiculo.AcaoSelecionaManutencao</url-pattern>
+    </servlet-mapping>       
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
         <url-pattern>/FabricaGelo.Veiculo.AcaoSelecionaVeiculo</url-pattern>
@@ -224,7 +236,11 @@
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
         <url-pattern>/FabricaGelo.Maquina.AcaoAbreMaquina</url-pattern>
-    </servlet-mapping>    
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.Maquina.AcaoBuscarColaborador</url-pattern>
+    </servlet-mapping>         
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
         <url-pattern>/FabricaGelo.Maquina.AcaoGravaMaquina</url-pattern>
@@ -250,7 +266,11 @@
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
         <url-pattern>/FabricaGelo.Camara.AcaoAbreCamara</url-pattern>
-    </servlet-mapping>    
+    </servlet-mapping>  
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.Camara.AcaoBuscarColaborador</url-pattern>
+    </servlet-mapping>      
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
         <url-pattern>/FabricaGelo.Camara.AcaoGravaCamara</url-pattern>
@@ -270,7 +290,11 @@
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
         <url-pattern>/FabricaGelo.Camara.AcaoSelecionaCamara</url-pattern>
-    </servlet-mapping>                                                                                 
+    </servlet-mapping>   
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.Camara.AcaoSelecionaManutencao</url-pattern>
+    </servlet-mapping>                                                                                    
                                                                                                    
    <!--Eventos do móduo Profissional -->
     <servlet-mapping>
@@ -305,8 +329,66 @@
    <!--Eventos do móduo Venda -->
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
-        <url-pattern>/FabricaGelo.Venda.AcaoAbreEntrega</url-pattern>
+        <url-pattern>/FabricaGelo.Movimento.AcaoAbreMovimento</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.Movimento.AcaoAbrePagamento</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.Movimento.AcaoBuscaPreco</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.Movimento.AcaoBuscarColaborador</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.Movimento.AcaoBuscarProduto</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.Movimento.AcaoCancelarMovimento</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.Movimento.AcaoDeletaProduto</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.Movimento.AcaoFechaMovimento</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.Movimento.AcaoGravaMovimento</url-pattern>
+    </servlet-mapping> 
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.Movimento.AcaoListarMovimentoGeral</url-pattern>
     </servlet-mapping>   
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.Movimento.AcaoNovoMovimento</url-pattern>
+    </servlet-mapping>  
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.Movimento.AcaoPesquisaMovimento</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.Movimento.AcaoPesquisaMovimentoGeral</url-pattern>
+    </servlet-mapping>       
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.Movimento.AcaoSelecionaMovimento</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.Movimento.AcaoSelecionaProduto</url-pattern>
+    </servlet-mapping>       
+   <!--Eventos do móduo Venda -->
+    
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
         <url-pattern>/FabricaGelo.Venda.AcaoAbrePagamento</url-pattern>
@@ -409,10 +491,6 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
-        <url-pattern>/FabricaGelo.Cortesia.AcaoAbreEntrega</url-pattern>
-    </servlet-mapping>     
-    <servlet-mapping>
-        <servlet-name>SGeral</servlet-name>
         <url-pattern>/FabricaGelo.Cortesia.AcaoDeletaProduto</url-pattern>
     </servlet-mapping>      
     <servlet-mapping>
@@ -448,11 +526,7 @@
         <url-pattern>/FabricaGelo.Cortesia.AcaoBuscarProduto</url-pattern>
     </servlet-mapping>        
     
-         <!--Eventos do móduo Aluguel -->
-    <servlet-mapping>
-        <servlet-name>SGeral</servlet-name>
-        <url-pattern>/FabricaGelo.Aluguel.AcaoAbreEntrega</url-pattern>
-    </servlet-mapping>          
+    <!--Eventos do móduo Aluguel -->
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
         <url-pattern>/FabricaGelo.Aluguel.AcaoAbrePagamento</url-pattern>
@@ -498,11 +572,7 @@
         <url-pattern>/FabricaGelo.Aluguel.AcaoBuscarProduto</url-pattern>
     </servlet-mapping>                    
           
-         <!--Eventos do móduo Bonificacao -->
-    <servlet-mapping>
-        <servlet-name>SGeral</servlet-name>
-        <url-pattern>/FabricaGelo.Bonificacao.AcaoAbreEntrega</url-pattern>
-    </servlet-mapping>          
+    <!--Eventos do móduo Bonificacao -->
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
         <url-pattern>/FabricaGelo.Bonificacao.AcaoAbrePagamento</url-pattern>
@@ -567,7 +637,35 @@
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
         <url-pattern>/FabricaGelo.Entrega.AcaoAbreEntrega</url-pattern>
-    </servlet-mapping>   
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.Entrega.AcaoAdicionaColaborador</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.Entrega.AcaoAdicionaProfissional</url-pattern>
+    </servlet-mapping> 
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.Entrega.AcaoBuscaCarregamento</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.Entrega.AcaoBuscarAvaria</url-pattern>
+    </servlet-mapping> 
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.Entrega.AcaoBuscarColaborador</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.Entrega.AcaoBuscarColaboradorPendente</url-pattern>
+    </servlet-mapping>         
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.Entrega.AcaoBuscarProduto</url-pattern>
+    </servlet-mapping>         
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
         <url-pattern>/FabricaGelo.Entrega.AcaoBuscarProfissional</url-pattern>
@@ -579,15 +677,75 @@
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
         <url-pattern>/FabricaGelo.Entrega.AcaoCancelaCustoEntrega</url-pattern>
-    </servlet-mapping>                                                                                                                                                                                                                                                                                                                                                                            
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.Entrega.AcaoExcluirAbastecimento</url-pattern>
+    </servlet-mapping>    
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.Entrega.AcaoExcluirAvaria</url-pattern>
+    </servlet-mapping> 
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.Entrega.AcaoExcluirColaborador</url-pattern>
+    </servlet-mapping> 
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.Entrega.AcaoExcluirProduto</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.Entrega.AcaoExcluirProfissional</url-pattern>
+    </servlet-mapping>                                                                                                                                                                                                                                                                                                                                                                                 
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
         <url-pattern>/FabricaGelo.Entrega.AcaoGravaEntrega</url-pattern>
-    </servlet-mapping>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+    </servlet-mapping>  
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.Entrega.AcaoListarEntrega</url-pattern>
+    </servlet-mapping> 
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.Entrega.AcaoMarcaColaboradorVisita</url-pattern>
+    </servlet-mapping> 
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.Entrega.AcaoPesquisaColaboradorPendente</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.Entrega.AcaoNovaRota</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.Entrega.AcaoPesquisaEntrega</url-pattern>
+    </servlet-mapping>    
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.Entrega.AcaoSelecionaAbastecimento</url-pattern>
+    </servlet-mapping>    
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.Entrega.AcaoSelecionaAvaria</url-pattern>
+    </servlet-mapping> 
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.Entrega.AcaoSelecionaClienteVisita</url-pattern>
+    </servlet-mapping>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
         <url-pattern>/FabricaGelo.Entrega.AcaoSelecionaCustoEntrega</url-pattern>
-    </servlet-mapping>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+    </servlet-mapping> 
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.Entrega.AcaoSelecionaEntrega</url-pattern>
+    </servlet-mapping> 
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.Entrega.AcaoSelecionaProduto</url-pattern>
+    </servlet-mapping>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
 
     <!--Eventos do móduo Avaria -->
     <servlet-mapping>
@@ -638,7 +796,15 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.Producao.AcaoDeletaTransferencia</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
         <url-pattern>/FabricaGelo.Producao.AcaoDeletarAvariaProducao</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.Producao.AcaoFechaProducao</url-pattern>
     </servlet-mapping>  
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
@@ -667,8 +833,53 @@
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
         <url-pattern>/FabricaGelo.Producao.AcaoSelecionaProducao</url-pattern>
-    </servlet-mapping>         
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+    </servlet-mapping> 
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.Producao.AcaoSelecionaTransferencia</url-pattern>
+    </servlet-mapping>        
+                
+    <!--Eventos do móduo Carregamento -->
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.Carregamento.AcaoAbreCarregamento</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.Carregamento.AcaoBuscaProdutoCamara</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.Carregamento.AcaoDevolverCarregamento</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.Carregamento.AcaoFecharCarregamento</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.Carregamento.AcaoGravaCarregamento</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.Carregamento.AcaoListarCarregamento</url-pattern>
+    </servlet-mapping> 
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.Carregamento.AcaoNovoCarregamento</url-pattern>
+    </servlet-mapping> 
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.Carregamento.AcaoPesquisaCarregamento</url-pattern>
+    </servlet-mapping> 
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.Carregamento.AcaoSelecionaCarregamento</url-pattern>
+    </servlet-mapping>   
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.Carregamento.AcaoSelecionaProdutoCamara</url-pattern>
+    </servlet-mapping>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
     <!--Eventos do módulo relatório -->
     <!--
     <servlet-mapping>

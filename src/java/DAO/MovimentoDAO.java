@@ -32,18 +32,17 @@ public class MovimentoDAO extends DAO{
         comSql += " SELECT ";
         comSql += " 	`tblMovimento`.`intMovimentoId`,";
         comSql += "     `tblMovimento`.`intColaboradorId`,";
-        comSql += "     `tblMovimento`.`intProfissionalId`,";
         comSql += "     `tblMovimento`.`strNotaFiscal`,";
         comSql += "     `tblMovimento`.`datDataEntrega`,";
         comSql += "     `tblMovimento`.`strNumero`,";
         comSql += "     `tblMovimento`.`datDataLancamento`,";
         comSql += "     `tblMovimento`.`chrTipo`,";
         comSql += "     `tblMovimento`.`chrSituacao`";
-        comSql += " FROM `bdGelo`.`tblMovimento`";
-        comSql += " WHERE ";
-        comSql += "     `tblMovimento`.`chrTipo` = '" + _movimento.getTipo() + "'";
-        if (_movimento.getDataLancamento() != null)
-            comSql += "      and `tblMovimento`.`datDataLancamento` = '" + _movimento.getDataLancamento() + "'";
+        comSql += " FROM `smmdaa_bdGelo`.`tblMovimento`";
+//        comSql += " WHERE ";
+//        comSql += "     `tblMovimento`.`chrTipo` = '" + _movimento.getTipo() + "'";
+//        if (!_movimento.getDataLancamento().equals(""))
+//            comSql += "      and `tblMovimento`.`datDataLancamento` = '" + _movimento.getDataLancamento() + "'";
         comSql += ";";
         
         List tabela = super.listaTodos();
@@ -55,13 +54,12 @@ public class MovimentoDAO extends DAO{
             
             movimento.setIdMovimento(((Integer)bkp.get(0)).intValue());
             movimento.setIdColaborador(((Integer)bkp.get(1)).intValue());
-            movimento.setIdProfissionalId(((Integer)bkp.get(2)).intValue());
-            movimento.setNotaFiscal((String)bkp.get(3));
-            movimento.setDtEntrega((Date)bkp.get(4));
-            movimento.setNumero((String)bkp.get(5));
-            movimento.setDtLancamento((Date)bkp.get(6));
-            movimento.setTipo((String)bkp.get(7));
-            movimento.setSituacao((String)bkp.get(8));
+            movimento.setNotaFiscal((String)bkp.get(2));
+            movimento.setDtEntrega((Date)bkp.get(3));
+            movimento.setNumero((String)bkp.get(4));
+            movimento.setDtLancamento((Date)bkp.get(5));
+            movimento.setTipo((String)bkp.get(6));
+            movimento.setSituacao((String)bkp.get(7));
             
             
             ColaboradorDAO colaboradorDAO = new ColaboradorDAO(conexao);
@@ -70,14 +68,6 @@ public class MovimentoDAO extends DAO{
             colaborador = colaboradorDAO.listaUm(colaborador);
             movimento.setColaborador(colaborador);
             
-            ProfissionalDAO profissionalDAO = new ProfissionalDAO(conexao);
-            Profissional profissional = new Profissional();
-            profissional.setIdProfissional(movimento.getIdProfissional());
-            profissional = profissionalDAO.listaUm(profissional);
-            movimento.setProfissional(profissional);
-            
-
-
             lstTabela.add(movimento);
         }
         
@@ -92,14 +82,13 @@ public class MovimentoDAO extends DAO{
         comSql += " SELECT ";
         comSql += " 	`tblMovimento`.`intMovimentoId`,";
         comSql += "     `tblMovimento`.`intColaboradorId`,";
-        comSql += "     `tblMovimento`.`intProfissionalId`,";
         comSql += "     `tblMovimento`.`strNotaFiscal`,";
         comSql += "     `tblMovimento`.`datDataEntrega`,";
         comSql += "     `tblMovimento`.`strNumero`,";
         comSql += "     `tblMovimento`.`datDataLancamento`,";
         comSql += "     `tblMovimento`.`chrTipo`,";
         comSql += "     `tblMovimento`.`chrSituacao`";
-        comSql += " FROM `bdGelo`.`tblMovimento`";
+        comSql += " FROM `smmdaa_bdGelo`.`tblMovimento`";
         comSql += " WHERE ";
         comSql += "     `tblMovimento`.`intMovimentoId` = " + movimento.getIdMovimento() + ";";
         List tabela = super.listaUm();
@@ -113,13 +102,12 @@ public class MovimentoDAO extends DAO{
 
                 movimento.setIdMovimento(((Integer)bkp.get(0)).intValue());
                 movimento.setIdColaborador(((Integer)bkp.get(1)).intValue());
-                movimento.setIdProfissionalId(((Integer)bkp.get(2)).intValue());
-                movimento.setNotaFiscal((String)bkp.get(3));
-                movimento.setDtEntrega((Date)bkp.get(4));
-                movimento.setNumero((String)bkp.get(5));
-                movimento.setDtLancamento((Date)bkp.get(6));
-                movimento.setTipo((String)bkp.get(7));
-                movimento.setSituacao((String)bkp.get(8));
+                movimento.setNotaFiscal((String)bkp.get(2));
+                movimento.setDtEntrega((Date)bkp.get(3));
+                movimento.setNumero((String)bkp.get(4));
+                movimento.setDtLancamento((Date)bkp.get(5));
+                movimento.setTipo((String)bkp.get(6));
+                movimento.setSituacao((String)bkp.get(7));
                 
 
                 ColaboradorDAO colaboradorDAO = new ColaboradorDAO(conexao);
@@ -128,24 +116,11 @@ public class MovimentoDAO extends DAO{
                 colaborador = colaboradorDAO.listaUm(colaborador);
                 movimento.setColaborador(colaborador);
 
-                ProfissionalDAO profissionalDAO = new ProfissionalDAO(conexao);
-                Profissional profissional = new Profissional();
-                profissional.setIdProfissional(movimento.getIdProfissional());
-                profissional = profissionalDAO.listaUm(profissional);
-                movimento.setProfissional(profissional);
-
                 PagamentoDAO pagamentoDAO = new PagamentoDAO(conexao);
                 Pagamento pagamento = new Pagamento();
                 pagamento.setIdMovimento(movimento.getIdMovimento());
                 pagamento = pagamentoDAO.listaUm(pagamento);
                 movimento.setPagamento(pagamento);  
-                
-                EntregaDAO entregaDAO = new EntregaDAO(conexao);
-                Entrega entrega = new Entrega();
-                entrega.setIdMovimento(movimento.getIdMovimento());
-                entrega = entregaDAO.listaUm(entrega);
-                movimento.setEntrega(entrega);
-              
                 
                 ProdutoMovimentoDAO produtoMovimentoDAO = new ProdutoMovimentoDAO(conexao);
                 List<ProdutoMovimento> lstProdutoMovimento = new ArrayList<ProdutoMovimento>();
@@ -176,9 +151,8 @@ public class MovimentoDAO extends DAO{
         if (listaUm(movimento) == null)
         {
             comSql = "";
-            comSql += " INSERT INTO `bdGelo`.`tblMovimento`";
+            comSql += " INSERT INTO `smmdaa_bdGelo`.`tblMovimento`";
             comSql += " 	(`intColaboradorId`,";
-            comSql += " 	`intProfissionalId`,";
             comSql += " 	`strNotaFiscal`,";
             comSql += " 	`datDataEntrega`,";
             comSql += " 	`strNumero`,";
@@ -187,7 +161,6 @@ public class MovimentoDAO extends DAO{
             comSql += " 	`chrSituacao`)";
             comSql += " VALUES";
             comSql += " 	(" + _movimento.getIdColaborador();
-            comSql += " 	," + _movimento.getIdProfissional();
             comSql += " 	,'" + _movimento.getNotaFiscal() + "'";
             comSql += " 	,'" + _movimento.getDataEntrega() + "'";
             comSql += " 	,'" + _movimento.getNumero() + "'";
@@ -200,7 +173,7 @@ public class MovimentoDAO extends DAO{
             if(retorno)
             {
                 comSql = "";
-                comSql += " Select max(intMovimentoId) as idMovimento from `tblMovimento`;";
+                comSql += " Select max(intMovimentoId) as idMovimento from `smmdaa_bdGelo`.`tblMovimento`;";
                 List lstConsulta = listaUm();
                 for(int i = 0; i < lstConsulta.size(); i++)
                 {
@@ -213,10 +186,12 @@ public class MovimentoDAO extends DAO{
         }
         else
         {
+            
+            identity = _movimento.getIdMovimento();
+            
             comSql = "";
-            comSql += " UPDATE `bdGelo`.`tblMovimento` SET ";
+            comSql += " UPDATE `smmdaa_bdGelo`.`tblMovimento` SET ";
             comSql += " 	`intColaboradorId` = " + _movimento.getIdColaborador();
-            comSql += " 	,`intProfissionalId` = " + _movimento.getIdProfissional();
             comSql += " 	,`strNotaFiscal` = '" + _movimento.getNotaFiscal() + "'";
             comSql += " 	,`datDataEntrega` = '" + _movimento.getDataEntrega() + "'";
             comSql += " 	,`strNumero` = '" + _movimento.getNumero() + "'";
@@ -225,32 +200,50 @@ public class MovimentoDAO extends DAO{
             comSql += " 	,`chrSituacao` = '" + _movimento.getSituacao() + "'";
             comSql += " WHERE ";
             comSql += " 	`intMovimentoId` = " + _movimento.getIdMovimento() + ";";
-
+            
+            
+            
             retorno = atualizar();
         }
         
         if (retorno)
         {
             // atualização de produtos do movimento
-            
+            ProdutoMovimentoDAO _produtoMovimentoDAO = new ProdutoMovimentoDAO(conexao);
             if(_movimento.getLstProdutoMovimento() != null)
             {
-                ProdutoMovimentoDAO _produtoMovimentoDAO = new ProdutoMovimentoDAO(conexao);
                 Iterator it = _movimento.getLstProdutoMovimento().iterator();
                 while (it.hasNext())
                 {
                     ProdutoMovimento _produtoMovimento = (ProdutoMovimento)it.next();
                     _produtoMovimento.setIdMovimento(_movimento.getIdMovimento());
-                    if(_produtoMovimentoDAO.atualizar(_produtoMovimento))
+                    
+                    // EM CASO DE MOVIMENTO FECHAR
+                    // ATUALIZA O SALDO EM ESTOQUE DO PRODUTO
+                    if (_movimento.getSituacao().equals("FE"))
                     {
-                        // reseta os novos valores do produto movimento
-                        _produtoMovimento = _produtoMovimentoDAO.listaUm(_produtoMovimento);
-                        
-                        vlProduto += _produtoMovimento.getValorTotal();
-                        vlDesconto += _produtoMovimento.getDesconto();
+                        if (_movimento.getTipo().equals("CP"))
+                            _produtoMovimento.setOperacao("AD"); // ADICIONA AO ESTOQUE
+                        else
+                            _produtoMovimento.setOperacao("SU"); // SUBTRAI DO ESTOQUE
                     }
-                }
-            }
+                    
+                    
+                    
+                    _produtoMovimentoDAO.atualizar(_produtoMovimento);
+                 }
+             }
+            
+            // atualizando valores do movimento
+            List<ProdutoMovimento> lstProdutoMovimento = new ArrayList<ProdutoMovimento>();
+            lstProdutoMovimento = _produtoMovimentoDAO.listaTodos(_movimento);
+            Iterator itProdutoMovimento = lstProdutoMovimento.iterator();
+            while (itProdutoMovimento.hasNext())
+            {
+                ProdutoMovimento _produtoMovimento = (ProdutoMovimento)itProdutoMovimento.next();
+                vlProduto += _produtoMovimento.getValorTotal();
+                vlDesconto += _produtoMovimento.getDesconto();
+            }              
             
             // atualização sobre pagamento baseado nos valores dos ítens
             Pagamento pagamento = movimento.getPagamento();
@@ -266,7 +259,10 @@ public class MovimentoDAO extends DAO{
                 pagamento.setValorTotal(vlProduto - vlDesconto);
                 pagamento.setNumParcela(1);
                 pagamento.setCobranca("0");
-                pagamento.setSituacao("PP");
+                pagamento.setSituacao("PC"); // PERMITE ALTERAR NÚMERO DE PARCELAS
+                // PAGAMENTO PROCESSÁVEL FINANCEIRAMENTE SENDO VENDA OU COMPRA
+                // OUTROS MOVIMENTOS, SOMENTE A TÍTULO DE INFORMAÇÃO
+                pagamento.setProcessar( _movimento.getTipo().equals("VE") || _movimento.getTipo().equals("CP"));
 
                 
                 pagamentoDAO.atualizar(pagamento);
@@ -278,7 +274,7 @@ public class MovimentoDAO extends DAO{
                 pagamentoDAO.atualizar(pagamento);
             }
             
-            // observar a possibilidade de existência de entrega
+            
         }
 
         

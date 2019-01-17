@@ -31,12 +31,14 @@
     <!-- implementação com bootstrap -->
     
     <nav class="navbar navbar-inverse">
-        <div class="container-fluid">
+        <div class="container-fluid" >
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#"> Fábrica de Gelo </a>
+                
+                <a class="navbar-brand" href="#"> Fábrica de Gelo Esquimó </a>
+                
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav">

@@ -30,7 +30,7 @@ public class VisitaColaboradorDAO extends DAO{
         comSql += "     `tblVisitaColaborador`.`intColaboradorId`,";
         comSql += "     `tblVisitaColaborador`.`intDia`,";
         comSql += "     `tblVisitaColaborador`.`strAtivo`";
-        comSql += " FROM `bdGelo`.`tblVisitaColaborador`";
+        comSql += " FROM `smmdaa_bdGelo`.`tblVisitaColaborador`";
         comSql += " WHERE ";
         comSql += "     `tblVisitaColaborador`.`intColaboradorId` = " + colaborador.getIdColaborador() + ";";
         
@@ -62,7 +62,7 @@ public class VisitaColaboradorDAO extends DAO{
         comSql += "     `tblVisitaColaborador`.`intColaboradorId`,";
         comSql += "     `tblVisitaColaborador`.`intDia`,";
         comSql += "     `tblVisitaColaborador`.`strAtivo`";
-        comSql += " FROM `bdGelo`.`tblVisitaColaborador`";
+        comSql += " FROM `smmdaa_bdGelo`.`tblVisitaColaborador`";
         comSql += " WHERE ";
         comSql += "     `tblVisitaColaborador`.`intVisitaColaboradorId` = " + visitaColaborador.getIdVisitaColaborador()+ ";";
         List tabela = super.listaUm();
@@ -97,7 +97,7 @@ public class VisitaColaboradorDAO extends DAO{
         if (listaUm(visitaColaborador) == null)
         {
             comSql = "";
-            comSql += " INSERT INTO `bdGelo`.`tblVisitaColaborador`";
+            comSql += " INSERT INTO `smmdaa_bdGelo`.`tblVisitaColaborador`";
             comSql += " 	(`intColaboradorId`,";
             comSql += " 	`intDia`,";
             comSql += " 	`strAtivo`)";
@@ -124,7 +124,7 @@ public class VisitaColaboradorDAO extends DAO{
         else
         {
             comSql = "";
-            comSql += " UPDATE `bdGelo`.`tblVisitaColaborador` SET";
+            comSql += " UPDATE `smmdaa_bdGelo`.`tblVisitaColaborador` SET";
             comSql += " 	`intColaboradorId` = " + _visitaColaborador.getIdColaborador();
             comSql += " 	,`intDia` = " + _visitaColaborador.getDia() ;
             comSql += " 	,`strAtivo` = '" + _visitaColaborador.getAtivo() + "'";

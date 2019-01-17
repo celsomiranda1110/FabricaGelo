@@ -42,7 +42,7 @@ public class ColaboradorDAO extends DAO{
         comSql += "     `tblColaborador`.`strContato`,";
         comSql += "     `tblColaborador`.`strFone`,";
         comSql += "     `tblColaborador`.`strEmail`";
-        comSql += " FROM `bdGelo`.`tblColaborador`;";
+        comSql += " FROM `smmdaa_bdGelo`.`tblColaborador`;";
         
         List tabela = super.listaTodos();
         
@@ -65,6 +65,17 @@ public class ColaboradorDAO extends DAO{
             colaborador.setContato((String)bkp.get(11));
             colaborador.setFone((String)bkp.get(12));
             colaborador.setEmail((String)bkp.get(13));
+            
+            BairroDAO _bairroDAO = new BairroDAO(conexao);
+            Bairro _bairro = new Bairro();
+            _bairro.setIdBairro(colaborador.getIdBairro());
+            _bairro = _bairroDAO.listaUm(_bairro);
+            colaborador.setBairro(_bairro); 
+            
+            List<VisitaColaborador> lstVisitaColaborador = new ArrayList<VisitaColaborador>();
+            VisitaColaboradorDAO _visitaColaboradorDAO = new VisitaColaboradorDAO(conexao);
+            lstVisitaColaborador = _visitaColaboradorDAO.listaTodos(colaborador);
+            colaborador.setLstVisitaColaborador(lstVisitaColaborador);            
             
             lstTabela.add(colaborador);
         }
@@ -92,7 +103,7 @@ public class ColaboradorDAO extends DAO{
         comSql += "     `tblColaborador`.`strContato`,";
         comSql += "     `tblColaborador`.`strFone`,";
         comSql += "     `tblColaborador`.`strEmail`";
-        comSql += " FROM `bdGelo`.`tblColaborador`";
+        comSql += " FROM `smmdaa_bdGelo`.`tblColaborador`";
         comSql += " WHERE ";
         comSql += "     `tblColaborador`.`intColaboradorId` = " + colaborador.getIdColaborador() + ";";
         List tabela = super.listaUm();
@@ -159,7 +170,7 @@ public class ColaboradorDAO extends DAO{
         if (listaUm(colaborador) == null)
         {
             comSql = "";
-            comSql += " INSERT INTO `bdGelo`.`tblColaborador`";
+            comSql += " INSERT INTO `smmdaa_bdGelo`.`tblColaborador`";
             comSql += "     (`strCNPJ`,";
             comSql += "     `strInscricaoEstadual`,";
             comSql += "     `strInscricaoMunicipal`,";
@@ -192,7 +203,7 @@ public class ColaboradorDAO extends DAO{
             if(retorno)
             {
                 comSql = "";
-                comSql += " Select max(intColaboradorId) as idColaborador from `tblColaborador`;";
+                comSql += " Select max(intColaboradorId) as idColaborador from `smmdaa_bdGelo`.`tblColaborador`;";
                 List lstConsulta = listaUm();
                 for(int i = 0; i < lstConsulta.size(); i++)
                 {
@@ -206,7 +217,7 @@ public class ColaboradorDAO extends DAO{
         else
         {
             comSql = "";
-            comSql += "     UPDATE `bdGelo`.`tblColaborador` SET ";
+            comSql += "     UPDATE `smmdaa_bdGelo`.`tblColaborador` SET ";
             comSql += "     	`strCNPJ` = '" + _colaborador.getCnpj() + "'";
             comSql += "     	,`strInscricaoEstadual` = '" + _colaborador.getInscricaoEstadual() + "'";
             comSql += "     	,`strInscricaoMunicipal` = '" + _colaborador.getInscricaoMunicipal() + "'";
@@ -223,6 +234,9 @@ public class ColaboradorDAO extends DAO{
             comSql += "     WHERE ";
             comSql += "     	`intColaboradorId` = " + _colaborador.getIdColaborador();
             retorno = atualizar();
+            if (retorno)
+                identity = _colaborador.getIdColaborador();
+            
         }
         
         if (retorno)

@@ -7,6 +7,7 @@ package Controle.FabricaGelo.Avaria;
 
 import Bean.Avaria;
 import Bean.AvariaProducao;
+import Bean.AvariaEntrega;
 import Controle.FabricaGelo.Gerais.Acao;
 import java.sql.Connection;
 import javax.servlet.http.HttpServletRequest;
@@ -37,6 +38,12 @@ public class AcaoRetornaPagina extends Acao
                 AvariaProducao avariaProducao = new AvariaProducao();
                 avariaProducao.setAvaria(avaria);
                 sessao.setAttribute("avariaProducao", avariaProducao);
+            }
+            else if (pagRetorno.equals("FabricaGelo.Entrega.AcaoAbreEntrega"))
+            {
+                AvariaEntrega avariaEntrega = new AvariaEntrega();
+                avariaEntrega.setAvaria(avaria);
+                sessao.setAttribute("avariaEntrega", avariaEntrega);
             }
         }
         else

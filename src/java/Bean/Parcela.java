@@ -24,6 +24,7 @@ public class Parcela implements Bean{
     private double valor;
     private double valorPago;
     private String situacao;
+    private String descSituacao;
     private String formaPagamento;
     
     private String descFormaPagamento;
@@ -115,8 +116,20 @@ public class Parcela implements Bean{
 
     public void setSituacao(String situacao) {
         this.situacao = situacao;
-        // P(pendente) G(pago)
+        
+        if (situacao.equals("P"))
+            this.descSituacao = "PARCELA PENDENTE";
+        else if(situacao.equals("G"))
+            this.descSituacao = "PARCELA PAGA";
+        else if(situacao.equals("C"))
+            this.descSituacao = "PARCELA CADASTRADA";
     }
+
+    public String getDescSituacao() {
+        return descSituacao;
+    }
+    
+
 
     public String getFormaPagamento() {
         return formaPagamento;

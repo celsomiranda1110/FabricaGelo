@@ -6,9 +6,9 @@
 package Controle.FabricaGelo.Maquina;
 
 import Bean.Colaborador;
-import Bean.Maquina;
+import Bean.Equipamento;
 import Controle.FabricaGelo.Gerais.Acao;
-import DAO.MaquinaDAO;
+import DAO.EquipamentoDAO;
 import java.sql.Connection;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,11 +24,12 @@ public class AcaoSelecionaMaquina extends Acao{
         Connection conexao = (Connection)req.getAttribute("connection");
         HttpSession sessao = req.getSession(false);
 
-        MaquinaDAO maquinaDAO = new MaquinaDAO(conexao);
-        Maquina maquina = new Maquina();
+        EquipamentoDAO maquinaDAO = new EquipamentoDAO(conexao);
+        Equipamento maquina = new Equipamento();
         
-        String idMaquina = req.getParameter("idMaquina");
-        maquina.setIdMaquina(Integer.parseInt(idMaquina));
+        String idMaquina = req.getParameter("idEquipamento");
+        maquina.setIdEquipamento(Integer.parseInt(idMaquina));
+        maquina.setTipo("MA");
         maquina = maquinaDAO.listaUm(maquina);
         
         String pagRetorno = (String)sessao.getAttribute("pagRetorno");
@@ -37,6 +38,7 @@ public class AcaoSelecionaMaquina extends Acao{
         
         sessao.setAttribute("colaborador",colaborador);
         sessao.setAttribute("maquina",maquina);
+        sessao.setAttribute("lstManutencao", maquina.getLstManutencao());
         sessao.setAttribute("pagRetorno",pagRetorno);
         
         return "visao/maquina.jsp";

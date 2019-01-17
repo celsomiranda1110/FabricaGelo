@@ -35,20 +35,20 @@ public class AcaoBuscarEmpresa extends Acao
         ColaboradorDAO colaboradorDAO = new ColaboradorDAO(conexao);
         
         // Dados do aluguel
-        String numero = (req.getParameter("txtNumero") == "" || req.getParameter("txtNumero") == null) ? "" : req.getParameter("txtNumero");
-        String notaFiscal = (req.getParameter("txtNotaFiscal").equals("") || req.getParameter("txtNotaFiscal") == null) ? "" : req.getParameter("txtNotaFiscal");
-        String dtLancamento = (req.getParameter("txtLancamento") == "" || req.getParameter("txtLancamento") == null) ? "" : req.getParameter("txtLancamento");        
-        String situacao = (req.getParameter("cmbSituacao") == "" || req.getParameter("cmbSituacao") == null) ? "" : req.getParameter("cmbSituacao").toUpperCase();        
-      
+        String numero = (req.getParameter("txtNumero").equals("") || req.getParameter("txtNumero") == null) ? "" : req.getParameter("txtNumero");
+        String dtDevolucao = (req.getParameter("txtDevolucao").equals("") || req.getParameter("txtDevolucao") == null) ? "" : req.getParameter("txtDevolucao");
+        String dtLancamento = (req.getParameter("txtLancamento").equals("") || req.getParameter("txtLancamento") == null) ? "" : req.getParameter("txtLancamento");        
+        String situacaoAluguel = (req.getParameter("cmbSituacao").equals("") || req.getParameter("cmbSituacao") == null) ? "" : req.getParameter("cmbSituacao").toUpperCase();              
+
         Movimento aluguel = (Movimento)sessao.getAttribute("aluguel");
         if (aluguel == null)
             aluguel = new Movimento();
         
-        aluguel.setProfissional(usuario);
         aluguel.setNumero(numero);
-        aluguel.setNotaFiscal(notaFiscal);
+        aluguel.setNotaFiscal(numero);
         aluguel.setDataLancamento(dtLancamento);
-        aluguel.setSituacao(situacao);
+        aluguel.setDataEntrega(dtDevolucao);
+        aluguel.setSituacao(situacaoAluguel);
         aluguel.setTipo("AL");        
         
         lstColaborador = colaboradorDAO.listaTodos();

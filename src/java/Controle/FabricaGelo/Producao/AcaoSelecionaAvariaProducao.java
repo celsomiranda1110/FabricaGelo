@@ -10,6 +10,8 @@ import Bean.MaquinaProducao;
 import Bean.Producao;
 import Controle.FabricaGelo.Gerais.Acao;
 import DAO.AvariaProducaoDAO;
+import DAO.MaquinaProducaoDAO;
+import DAO.ProducaoDAO;
 import java.sql.Connection;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -28,9 +30,15 @@ public class AcaoSelecionaAvariaProducao extends Acao{
         Producao producao = (Producao)sessao.getAttribute("producao");
         if (producao != null)
         {
+            ProducaoDAO producaoDAO = new ProducaoDAO(conexao);
+            producao = producaoDAO.listaUm(producao);
+            
             MaquinaProducao maquinaProducao = (MaquinaProducao)sessao.getAttribute("maquinaProducao");
             if (maquinaProducao != null)
             {
+                MaquinaProducaoDAO maquinaProducaoDAO = new MaquinaProducaoDAO(conexao);
+                maquinaProducao = maquinaProducaoDAO.listaUm(maquinaProducao);
+                
                 AvariaProducaoDAO avariaProducaoDAO = new AvariaProducaoDAO(conexao);
                 AvariaProducao avariaProducao = new AvariaProducao();
                 
@@ -38,7 +46,11 @@ public class AcaoSelecionaAvariaProducao extends Acao{
                 avariaProducao.setIdAvariaProducao(Integer.parseInt(idAvariaProducao));
                 
                 avariaProducao = avariaProducaoDAO.listaUm(avariaProducao);
-                
+
+                sessao.setAttribute("producao",producao);
+                sessao.setAttribute("lstMaquinaProducao", producao.getLstMaquinaProducao());
+                sessao.setAttribute("maquinaProducao", maquinaProducao); 
+                sessao.setAttribute("lstAvariaProducao", maquinaProducao.getLstAvariaProducao());
                 sessao.setAttribute("avariaProducao", avariaProducao);
                 
                 

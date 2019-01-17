@@ -26,6 +26,8 @@ public class AcaoGravaProduto extends Acao
         Connection conexao = (Connection)req.getAttribute("connection");
         HttpSession sessao = req.getSession(false);
 
+        String pagRetorno = "";
+        
         ProdutoDAO produtoDAO = new ProdutoDAO(conexao);
         Produto produto = (Produto)sessao.getAttribute("produto");
         if (produto == null)
@@ -36,13 +38,22 @@ public class AcaoGravaProduto extends Acao
         
         produto.setDescricao(descricao);
         produto.setVlUnitario(Double.parseDouble(vlUnitario));
+        produto.setTipo("PR");
+                
         
         if (produtoDAO.atualizar(produto))
+        {
+            produto.setIdProduto(produtoDAO.getIdentity());
+            produto = produtoDAO.listaUm(produto);
             sessao.setAttribute("produto", produto);
-
+            
+            sessao.setAttribute("avisoErro", "Produto atualizado");
+            sessao.setAttribute("pagOrigemErro", "FabricaGelo.Produto.AcaoAbreProduto");
+            pagRetorno = "visao/erro.jsp";            
+        }
         
-        //return "visao/produto.jsp";
-        return "FabricaGelo.Produto.AcaoListarProduto";
+        return pagRetorno;
+        
     }
     
 }

@@ -5,17 +5,22 @@
  */
 package Bean;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author celso
  */
 public class Produto implements Bean{
-    private int IdProduto;
+    private int idProduto;
     private String descricao;
     private double saldo;
     private double vlUnitario;
     private String tipo;
 
+
+    
     public Produto() {
         this.saldo = 0;
         this.vlUnitario = 0;
@@ -24,11 +29,11 @@ public class Produto implements Bean{
     
 
     public int getIdProduto() {
-        return IdProduto;
+        return idProduto;
     }
 
-    public void setIdProduto(int IdProduto) {
-        this.IdProduto = IdProduto;
+    public void setIdProduto(int idProduto) {
+        this.idProduto = idProduto;
     }
 
     public String getDescricao() {
@@ -70,12 +75,19 @@ public class Produto implements Bean{
     {
         return this.descricao;
     }
+
+ 
+    
+    
     
     public void replicar(Produto _produto)
     {
-        _produto.setIdProduto(this.IdProduto);
+        _produto.setIdProduto(this.idProduto);
         _produto.setDescricao(this.descricao);
         _produto.setSaldo(this.saldo);
         _produto.setVlUnitario(this.vlUnitario);
+        _produto.setTipo(this.tipo);
+        
+    
     }
 }

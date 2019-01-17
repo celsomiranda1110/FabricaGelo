@@ -26,24 +26,29 @@ public class AcaoGravaBairro extends Acao
         Connection conexao = (Connection)req.getAttribute("connection");
         HttpSession sessao = req.getSession(false);
         
+        String pagRetorno = "";
+        
         BairroDAO bairroDAO = new BairroDAO(conexao);
         Bairro bairro = (Bairro)sessao.getAttribute("bairro");
         if (bairro == null)
             bairro = new Bairro();
-        
-        String pagRetorno = (String)sessao.getAttribute("pagRetorno");
-        
+      
         String descricao = (req.getParameter("txtBairro") == "" || req.getParameter("txtBairro") == null) ? "" : req.getParameter("txtBairro");
-        
         bairro.setDescricao(descricao);
         
         
         if (bairroDAO.atualizar(bairro))
-        
+        {
+            bairro.setIdBairro(bairroDAO.getIdentity());
+            bairro = bairroDAO.listaUm(bairro);
             sessao.setAttribute("bairro", bairro);
+            
+            sessao.setAttribute("avisoErro", "Bairro atualizado");
+            sessao.setAttribute("pagOrigemErro", "FabricaGelo.Bairro.AcaoAbreBairro");
+            pagRetorno = "visao/erro.jsp";              
+        }
         
-        sessao.setAttribute("pagRetorno",pagRetorno);
         
-        return "FabricaGelo.Bairro.AcaoListarBairro";
+        return pagRetorno;
     }
 }

@@ -10,6 +10,8 @@ package DAO;
  * @author celso
  */
 
+import Bean.Equipamento;
+import Bean.ProdutoCamara;
 import Bean.SaidaCamara;
 import java.sql.Connection;
 import java.util.*;
@@ -20,18 +22,29 @@ public class SaidaCamaraDAO extends DAO{
         super(conexao);
     }
     
-    public List<SaidaCamara> listaTodos()
+    public List<SaidaCamara> listaTodos(Equipamento veiculo)
     {
         List<SaidaCamara> lstTabela = new ArrayList();
         
         comSql = "";      
         comSql += " SELECT ";
         comSql += " 	`tblSaidaCamara`.`intSaidaCamaraId`,";
-        comSql += "     `tblSaidaCamara`.`intProdutoMovimentoId`,";
+        comSql += "     `tblSaidaCamara`.`intEquipamentoId`,";
         comSql += "     `tblSaidaCamara`.`intProdutoCamaraId`,";
         comSql += "     `tblSaidaCamara`.`dblSaida`,";
-        comSql += "     `tblSaidaCamara`.`dblDevolucao`";
-        comSql += " FROM `bdGelo`.`tblSaidaCamara`;";
+        comSql += "     `tblSaidaCamara`.`dblDevolucao`,";
+        comSql += "     `tblSaidaCamara`.`datData`,";
+        comSql += "     `tblSaidaCamara`.`chrSituacao`";
+        comSql += " FROM `smmdaa_bdGelo`.`tblSaidaCamara`";
+        if (veiculo != null)
+        {
+            comSql += " WHERE ";
+            comSql += "     `tblSaidaCamara`.`intEquipamentoId` = " + veiculo.getIdEquipamento();
+        }
+        comSql += " ORDER BY ";
+        comSql += "     `tblSaidaCamara`.`intSaidaCamaraId` DESC ";
+        comSql += " LIMIT 100;";
+        
         
         List tabela = super.listaTodos();
         
@@ -41,10 +54,24 @@ public class SaidaCamaraDAO extends DAO{
             List bkp = (ArrayList)tabela.get(i);
             
             saidaCamara.setIdSaidaCamara(((Integer)bkp.get(0)).intValue());
-            saidaCamara.setidProdutoMovimento(((Integer)bkp.get(1)).intValue());
-            saidaCamara.setidProdutoCamara(((Integer)bkp.get(2)).intValue());
+            saidaCamara.setIdEquipamento(((Integer)bkp.get(1)).intValue());
+            saidaCamara.setIdProdutoCamara(((Integer)bkp.get(2)).intValue());
             saidaCamara.setSaida((Double)bkp.get(3));
             saidaCamara.setDevolucao((Double)bkp.get(4));
+            saidaCamara.setData((Date)bkp.get(5));
+            saidaCamara.setSituacao((String)bkp.get(6));
+            
+            EquipamentoDAO equipamentoDAO = new EquipamentoDAO(conexao);
+            Equipamento equipamento = new Equipamento();
+            equipamento.setIdEquipamento(saidaCamara.getIdEquipamento());
+            equipamento = equipamentoDAO.listaUm(equipamento);
+            saidaCamara.setEquipamento(equipamento);
+            
+            ProdutoCamaraDAO produtoCamaraDAO = new ProdutoCamaraDAO(conexao);
+            ProdutoCamara produtoCamara = new ProdutoCamara();
+            produtoCamara.setIdProdutoCamara(saidaCamara.getIdProdutoCamara());
+            produtoCamara = produtoCamaraDAO.listaUm(produtoCamara);
+            saidaCamara.setProdutoCamara(produtoCamara);
             
             lstTabela.add(saidaCamara);
         }
@@ -59,11 +86,13 @@ public class SaidaCamaraDAO extends DAO{
         comSql = "";      
         comSql += " SELECT ";
         comSql += " 	`tblSaidaCamara`.`intSaidaCamaraId`,";
-        comSql += "     `tblSaidaCamara`.`intProdutoMovimentoId`,";
+        comSql += "     `tblSaidaCamara`.`intEquipamentoId`,";
         comSql += "     `tblSaidaCamara`.`intProdutoCamaraId`,";
         comSql += "     `tblSaidaCamara`.`dblSaida`,";
-        comSql += "     `tblSaidaCamara`.`dblDevolucao`";
-        comSql += " FROM `bdGelo`.`tblSaidaCamara`";
+        comSql += "     `tblSaidaCamara`.`dblDevolucao`,";
+        comSql += "     `tblSaidaCamara`.`datData`,";
+        comSql += "     `tblSaidaCamara`.`chrSituacao`";
+        comSql += " FROM `smmdaa_bdGelo`.`tblSaidaCamara`";
         comSql += " WHERE ";
         comSql += "     `tblSaidaCamara`.`intSaidaCamaraId` = " + saidaCamara.getIdSaidaCamara()+ ";";
         List tabela = super.listaUm();
@@ -76,12 +105,24 @@ public class SaidaCamaraDAO extends DAO{
                 List bkp = (ArrayList)tabela.get(i);
 
                 saidaCamara.setIdSaidaCamara(((Integer)bkp.get(0)).intValue());
-                saidaCamara.setidProdutoMovimento(((Integer)bkp.get(1)).intValue());
-                saidaCamara.setidProdutoCamara(((Integer)bkp.get(2)).intValue());
+                saidaCamara.setIdEquipamento(((Integer)bkp.get(1)).intValue());
+                saidaCamara.setIdProdutoCamara(((Integer)bkp.get(2)).intValue());
                 saidaCamara.setSaida((Double)bkp.get(3));
                 saidaCamara.setDevolucao((Double)bkp.get(4));
+                saidaCamara.setData((Date)bkp.get(5));
+                saidaCamara.setSituacao((String)bkp.get(6));
 
-            
+                EquipamentoDAO equipamentoDAO = new EquipamentoDAO(conexao);
+                Equipamento equipamento = new Equipamento();
+                equipamento.setIdEquipamento(saidaCamara.getIdEquipamento());
+                equipamento = equipamentoDAO.listaUm(equipamento);
+                saidaCamara.setEquipamento(equipamento);
+
+                ProdutoCamaraDAO produtoCamaraDAO = new ProdutoCamaraDAO(conexao);
+                ProdutoCamara produtoCamara = new ProdutoCamara();
+                produtoCamara.setIdProdutoCamara(saidaCamara.getIdProdutoCamara());
+                produtoCamara = produtoCamaraDAO.listaUm(produtoCamara);
+                saidaCamara.setProdutoCamara(produtoCamara);
                 
             }  
             return saidaCamara;
@@ -101,16 +142,20 @@ public class SaidaCamaraDAO extends DAO{
         if (listaUm(saidaCamara) == null)
         {
             comSql = "";
-            comSql += " INSERT INTO `bdGelo`.`tblSaidaCamara`";
-            comSql += " 	(`intProdutoMovimentoId`,";
+            comSql += " INSERT INTO `smmdaa_bdGelo`.`tblSaidaCamara`";
+            comSql += " 	(`intEquipamentoId`,";
             comSql += " 	`intProdutoCamaraId`,";
             comSql += " 	`dblSaida`,";
-            comSql += " 	`dblDevolucao`)";
+            comSql += "         `dblDevolucao`,";
+            comSql += "         `datData`,";
+            comSql += "         `chrSituacao`)";
             comSql += " VALUES";
-            comSql += " 	(" + _saidaCamara.getidProdutoMovimento();
-            comSql += " 	," + _saidaCamara.getidProdutoCamara();
+            comSql += " 	(" + _saidaCamara.getIdEquipamento();
+            comSql += " 	," + _saidaCamara.getIdProdutoCamara();
             comSql += " 	," + _saidaCamara.getSaida();
-            comSql += " 	," + _saidaCamara.getDevolucao() + ");";
+            comSql += " 	," + _saidaCamara.getDevolucao() ;
+            comSql += " 	,'" + _saidaCamara.getDataFormatada() + "'";
+            comSql += " 	,'" + _saidaCamara.getSituacao() + "');";
 
 
             retorno = atualizar();
@@ -131,10 +176,12 @@ public class SaidaCamaraDAO extends DAO{
         else
         {
             comSql = "";
-            comSql += " UPDATE `bdGelo`.`tblSaidaCamara` SET";
-            comSql += " 	`intProdutoMovimentoId` = " + _saidaCamara.getidProdutoMovimento();
-            comSql += " 	,`intProdutoCamaraId` = " + _saidaCamara.getidProdutoCamara();
+            comSql += " UPDATE `smmdaa_bdGelo`.`tblSaidaCamara` SET";
+            comSql += " 	`intEquipamentoId` = " + _saidaCamara.getIdEquipamento();
+            comSql += " 	,`intProdutoCamaraId` = " + _saidaCamara.getIdProdutoCamara();
             comSql += " 	,`dblSaida` = " + _saidaCamara.getSaida();
+            comSql += " 	,`datData` = '" + _saidaCamara.getDataFormatada() + "'";
+            comSql += " 	,`chrSituacao` = '" + _saidaCamara.getSituacao() + "'";
             comSql += " 	,`dblDevolucao` = " + _saidaCamara.getDevolucao();
             comSql += " WHERE ";
             comSql += " 	`intSaidaCamaraId` = " + _saidaCamara.getIdSaidaCamara() + ";";

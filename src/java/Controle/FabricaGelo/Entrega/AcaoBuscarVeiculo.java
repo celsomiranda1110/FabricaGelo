@@ -7,14 +7,22 @@ package Controle.FabricaGelo.Entrega;
 
 
 import Bean.Entrega;
-import Bean.Veiculo;
+import Bean.Equipamento;
+import Bean.Produto;
+import Bean.ProdutoCamara;
+import Bean.ProdutoEntrega;
+import Bean.SaidaCamara;
 import Controle.FabricaGelo.Gerais.Acao;
-import DAO.VeiculoDAO;
+import DAO.EntregaDAO;
+import DAO.EquipamentoDAO;
+import DAO.ProdutoDAO;
+import DAO.SaidaCamaraDAO;
 import java.sql.Connection;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
+import java.util.Iterator;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -29,41 +37,88 @@ public class AcaoBuscarVeiculo extends Acao{
         Connection conexao = (Connection)req.getAttribute("connection");
         HttpSession sessao = req.getSession(false);
         
+        String pagRetorno = "FabricaGelo.Entrega.AcaoNovaRota";  
+        boolean temRotaAtiva = false;
         
-        
-        List<Veiculo> lstVeiculo = new ArrayList<Veiculo>();
-        VeiculoDAO veiculoDAO = new VeiculoDAO(conexao);
-        
-        // campos da entrega
-        String dtEntrega = (req.getParameter("txtDtEntrega").equals("") || req.getParameter("txtDtEntrega") == null) ? dataAtual() : req.getParameter("txtDtEntrega");
-        String kmInicial = (req.getParameter("txtKmInicial").equals("") || req.getParameter("txtKmInicial") == null) ? "0" : req.getParameter("txtKmInicial");
-        String kmFinal = (req.getParameter("txtKmFinal").equals("") || req.getParameter("txtKmFinal") == null) ? "0" : req.getParameter("txtKmFinal");
-        String hrSaida = (req.getParameter("txtHrSaida").equals("") || req.getParameter("txtHrSaida") == null) ? "00:00" : req.getParameter("txtHrSaida");
-        String hrChegada = (req.getParameter("txtHrChegada").equals("") || req.getParameter("txtHrChegada") == null) ? "00:00" : req.getParameter("txtHrChegada");
-        String qtLitros = (req.getParameter("txtLitros").equals("") || req.getParameter("txtLitros") == null) ? "0" : req.getParameter("txtLitros");
-        String situacao = (req.getParameter("cmbSituacao").equals("") || req.getParameter("cmbSituacao") == null) ? "EN" : req.getParameter("cmbSituacao");
-      
+        EntregaDAO entregaDAO = new EntregaDAO(conexao);
         Entrega entrega = (Entrega)sessao.getAttribute("entrega");
-        if (entrega == null)
-            entrega = new Entrega();
+
+        List<ProdutoEntrega> lstProdutoEntrega = null;
         
-        //montagem do objeto Entrega
-        entrega.setDataFormatada(dtEntrega);
-        entrega.setKmInicial(Double.parseDouble(kmInicial));
-        entrega.setKmFinal((Double.parseDouble(kmFinal)));
-        entrega.setHrSaida(hrSaida);
-        entrega.setHrChegada(hrChegada);
-        entrega.setLitros(Double.parseDouble(qtLitros));
-        entrega.setSituacao(situacao);
-        //entrega.setLstCustoEntrega(lstCustoEntrega);        
+        String idVeiculo = (req.getParameter("cmbVeiculo").equals("") || req.getParameter("cmbVeiculo") == null) ? "0" : req.getParameter("cmbVeiculo");
+        Equipamento equipamento = new Equipamento();
+        EquipamentoDAO equipamentoDAO = new EquipamentoDAO(conexao);
+        equipamento.setIdEquipamento(Integer.parseInt(idVeiculo));
+        equipamento = equipamentoDAO.listaUm(equipamento);
         
-        lstVeiculo = veiculoDAO.listaTodos();
+        // verificando se há rota iniciada ou cadastrada para este veículo
+        List<Entrega> lstEntrega = new ArrayList<Entrega>();
+        lstEntrega = entregaDAO.listaTodos(null);
+        Iterator itEntrega = lstEntrega.iterator();
+        while (itEntrega.hasNext())
+        {
+            Entrega rota = (Entrega)itEntrega.next();
+            if ((rota.getSituacao().equals("CD")) || (rota.getSituacao().equals("ET")))
+                if (rota.getIdEquipamento() == equipamento.getIdEquipamento())
+                    temRotaAtiva = true;
+        }
         
-        sessao.setAttribute("entrega",entrega);
-        sessao.setAttribute("lstVeiculo",lstVeiculo);
-        sessao.setAttribute("pagRetorno","FabricaGelo.Entrega.AcaoAbreEntrega");
+        if (temRotaAtiva)
+        {
+            sessao.setAttribute("avisoErro", "Há rota ativa para o veículo selecionado");
+            sessao.setAttribute("pagOrigemErro", "FabricaGelo.Entrega.AcaoListarEntrega");
+            pagRetorno = "visao/erro.jsp";               
+        }
+        else
+        {
+            // completando rota
+            entrega.setVeiculo(equipamento);
+            entrega.setKmInicial(equipamento.getQuilometragem());
+
+            SaidaCamaraDAO saidaCamaraDAO = new SaidaCamaraDAO(conexao);
+            List<SaidaCamara> lstSaidaCamara = new ArrayList<SaidaCamara>();
+            lstSaidaCamara = saidaCamaraDAO.listaTodos(equipamento);
+            lstProdutoEntrega = new ArrayList<ProdutoEntrega>();
+
+             Iterator itSaidaCamara = lstSaidaCamara.iterator();
+             while (itSaidaCamara.hasNext())
+             {
+
+                 SaidaCamara saidaCamara = (SaidaCamara)itSaidaCamara.next();
+
+                 if (saidaCamara.getSituacao().equals("CA"))
+                 {
+                     ProdutoCamara produtoCamara = (ProdutoCamara)saidaCamara.getProdutoCamara();
+                     ProdutoEntrega produtoEntrega = new ProdutoEntrega();
+                     produtoEntrega.setIdProduto(produtoCamara.getIdProduto());
+                     produtoEntrega.setDblQuantidade(saidaCamara.getSaida());
+
+                     ProdutoDAO produtoDAO = new ProdutoDAO(conexao);
+                     Produto produto = new Produto();
+                     produto.setIdProduto(produtoEntrega.getIdProduto());
+                     produto = produtoDAO.listaUm(produto);
+                     produtoEntrega.setProduto(produto);
+
+                     lstProdutoEntrega.add(produtoEntrega);
+                 }
+             }
+          
+             if(entregaDAO.atualizar(entrega))
+                 entrega = entregaDAO.listaUm(entrega);
+             
+             // produtos para entrega ainda não vinculada no banco
+             // necessário confirmar início da entrega
+             entrega.setLstProdutoEntrega(lstProdutoEntrega);
+             
+             sessao.setAttribute("entrega", entrega);
+             //sessao.setAttribute("lstProdutoEntrega", lstProdutoEntrega);  
+             
+           
+        }
         
-        return "visao/listarVeiculo.jsp";
+
+        
+        return pagRetorno;
     }
 }
 

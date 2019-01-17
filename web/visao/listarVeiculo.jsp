@@ -22,17 +22,20 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="row">
-                                    <div class="col-sm-4">
-                                        <button type="button" class="btn btn-primary right" onClick="novo()">Novo Veiculo</button>
-                                    </div>
-                                    <div class="col-sm-8">
-                                        <div class="input-group">
-                                            <input class="form-control" type="text" placeholder="Pesquisar" />
-                                            <div class="input-group-btn">
-                                                <button type="button" class="btn btn-default" onClick="pesquisa()" >Pesquisa</button>
-                                            </div>                                            
+                                    <div class="col-sm-12">
+                                        <div class="navbar navbar-default">
+                                            <div class="container-fluid">
+                                                <ul class="nav navbar-nav">
+                                                    <li class="btn bottom-right"><button type="button" class="btn btn-default" onClick="novo()">Novo Veículo</button></li>
+                                                    
+                                                </ul>
+                                                <ul class="nav navbar-nav navbar-right">
+                                                    <li class="btn"><input type="text" class="form-control" name="txtPesquisa" id="txtPesquisa"></li>
+                                                    <li class="btn"><button type="button" class="btn btn-default" onClick="pesquisar()">Pesquisa</button></li>
+                                                    
+                                                </ul>
+                                            </div>
                                         </div>
-                                        
                                     </div>
                                 </div>
                             </div>
@@ -43,18 +46,22 @@
                                 <tbody>
                                     <tr>
                                         <th><div align="left"></div></th>
+                                        <th><div align="left">Descrição</div></th>
                                         <th><div align="left">Placa</div></th>
                                         <th><div align="left">Marca</div></th>
                                         <th><div align="left">Modelo</div></th>
                                         <th><div align="left">Ano</div></th>
+                                        <th><div align="left">Capacidade</div></th>
                                     </tr> 
                                     <c:forEach var="lstVeic" items="${lstVeiculo}" varStatus="s">
                                         <tr>
-                                            <td> <input type="image" src="visao/css/bootstrap/img/Text.png" onclick="seleciona('FabricaGelo.Veiculo.AcaoSelecionaVeiculo?idVeiculo=${lstVeic.idVeiculo}')"> </td>
+                                            <td> <input type="image" src="visao/css/bootstrap/img/Text.png" onclick="seleciona('FabricaGelo.Veiculo.AcaoSelecionaVeiculo?idEquipamento=${lstVeic.idEquipamento}')"> </td>
+                                            <td> ${lstVeic.descricao} </td>
                                             <td> ${lstVeic.placa} </td>
                                             <td> ${lstVeic.marca} </td>
                                             <td> ${lstVeic.modelo} </td>
                                             <td> ${lstVeic.ano} </td>
+                                            <td> ${lstVeic.capacidade} </td>
                                         </tr>
                                     </c:forEach>
                                 </tbody>
@@ -74,7 +81,7 @@
                 document.forms[0].action="FabricaGelo.Veiculo.AcaoAbreVeiculo";
                 document.forms[0].submit();
             }
-            function pesquisa()
+            function pesquisar()
             {
  
                 document.forms[0].action="FabricaGelo.Veiculo.AcaoPesquisaVeiculo";

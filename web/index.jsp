@@ -12,6 +12,8 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         
         <!-- bootstrap -->
+        
+        
         <link rel="stylesheet" href="visao/css/bootstrap/css/bootstrap.css" />
         <link rel="stylesheet" href="visao/css/bootstrap/css/bootstrap-theme.css" />
         <!--<link rel="stylesheet" href="visao/css/bootstrap/css/bootstrap.min.css" />-->
@@ -21,69 +23,95 @@
         <!--<script src="visao/css/bootstrap/js/bootstrap.min.js"></script> -->
         
         
+        
         <title>Acesso</title>
         
     </head>
     <body>
-        <form name="formAcesso" method="post">
-            
-            <div class="container">
-                
+        
+           
+        <div class="container" >
+            <form name="formAcesso" method="post">
                 <div class="panel panel-default panel">
                     <div class="panel-heading"><h3 class="panel-title text-center"><b>Acesso ao sistema</b></h3></div>
                     <div class="row"> <!-- div segunda linha -->
 
-                        
-                        <div class="col-lg-6">
+<%-- 
+                        <div class="col-lg-4">
                             <div class="row">
-                                <div class="col-lg-12">
+                                <div class="col-sm-12">
                                     <label class="col-sm-4 control-label">Usuario</label>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="col-sm-12">
-                                        <input type="text" class="form-control" name="txtLogin">
-                                    </div>
+                                <div class="col-sm-12">
+                                    <input type="text" class="form-control" name="txtLogin">
                                 </div>
                             </div>
-                            
-                        </div>
-
-                        <div class="col-lg-6">
                             <div class="row">
-                                <div class="col-lg-12">
+                                <div class="col-sm-12">
                                     <label class="col-sm-4 control-label">Senha</label>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="col-sm-12">
-                                        <input type="password" class="form-control" name="txtSenha">
-                                    </div>
+                                <div class="col-sm-12">
+                                    <input type="password" class="form-control" name="txtSenha">
+                                </div>
+                            </div>
+                            <div class="row" >
+                                <div class="col-sm-12 text-center">
+                                    <button type="button" class="btn btn-primary" onClick="validaLogin()">Acessar</button>
+
+                                </div>
+                            </div>                            
+                            
+                        </div>
+--%>
+                        <div class="col-lg-4">
+                            <div class="jumbotron">
+                                <div class="container-fluid">
+                                    <ul class="panel-body">
+                                        <li class="btn"><label class="control-label">Usuario</label></li>
+                                        <li class="btn"><input type="text" class="form-control" name="txtLogin"></li>
+                                        <li class="btn"><label class="control-label">Senha</label></li>
+                                        <li class="btn"><input type="password" class="form-control" name="txtSenha"></li>
+                                    </ul>
+                                    <ul class="panel-footer text-center">
+                                        <button type="button" class="btn btn-primary" onClick="validaLogin()">Acessar</button>    
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-8">
+                            <div class="container-fluid">
+                                <ul class="panel-body text-center">
+                                    <li class="btn">
+                                        <input type="image" width="340" height="300" src="visao/utils/logoIce.jpg">
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+<%--                         
+                        <div class="col-lg-8">
+                            <div class="row">
+                                <div class="col-sm-12 text-center">
+                                    <input type="image" width="320" height="250" src="visao/utils/logoIce.jpg">
                                 </div>
                             </div>
                             
-                        </div>
 
-                        
-                    </div>
-                    
-                    <div class="row"> <!-- div dos botoes -->
-                        
-                        <div class="col-lg-12 text-right">
-                            <div class="col-sm-12">
-                                <button type="button" class="btn btn-primary" onClick="validaLogin()">Acessar</button>
-                            </div>
                         </div>
-                        
-                    </div> <!-- div dos botoes -->                    
-                    
+--%>                        
+                    </div> 
+
                 </div>
-                
-            </div>
+            </form>
+
+        </div>
             
-        </form>
+   
+       
         <script type="text/javascript">
 
             // chamada a eventos

@@ -26,6 +26,8 @@ public class AcaoGravaProfissional extends Acao
         Connection conexao = (Connection)req.getAttribute("connection");
         HttpSession sessao = req.getSession(false);
 
+        String pagRetorno = "";
+        
         ProfissionalDAO profissionalDAO = new ProfissionalDAO(conexao);
         Profissional profissional = (Profissional)sessao.getAttribute("profissional");
         if (profissional == null)
@@ -45,10 +47,18 @@ public class AcaoGravaProfissional extends Acao
         profissional.setUsuario(usuario);
         profissional.setSenha(senha);
        
-        profissionalDAO.atualizar(profissional);
+        if (profissionalDAO.atualizar(profissional))
+        {
+            profissional.setIdProfissional(profissionalDAO.getIdentity());
+            profissional = profissionalDAO.listaUm(profissional);
+            sessao.setAttribute("profissional", profissional);
+            
+            sessao.setAttribute("avisoErro", "Dados do Profissional atualizados");
+            sessao.setAttribute("pagOrigemErro", "FabricaGelo.Profissional.AcaoAbreProfissional");
+            pagRetorno = "visao/erro.jsp";                
+        }
         
-        
-        return "FabricaGelo.Profissional.AcaoListarProfissional";
+        return pagRetorno;
         
         
     }

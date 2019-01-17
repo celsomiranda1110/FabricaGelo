@@ -29,7 +29,7 @@ public class MenuDAO extends DAO{
         comSql += "     `tblMenu`.`intSubMenuId`,"; 
         comSql += "     `tblMenu`.`strDescricao`,"; 
         comSql += "     `tblMenu`.`strCaminhoWeb`"; 
-        comSql += " FROM `bdGelo`.`tblMenu` ; "; 
+        comSql += " FROM `smmdaa_bdGelo`.`tblMenu` ; "; 
         
         
         List tabela = super.listaUm();
@@ -62,7 +62,7 @@ public class MenuDAO extends DAO{
         comSql += "     `tblMenu`.`intSubMenuId`,"; 
         comSql += "     `tblMenu`.`strDescricao`,"; 
         comSql += "     `tblMenu`.`strCaminhoWeb`"; 
-        comSql += " FROM `bdGelo`.`tblMenu`  "; 
+        comSql += " FROM `smmdaa_bdGelo`.`tblMenu`  "; 
         comSql += " ORDER BY ";
         comSql += "     `tblMenu`.`intMenuId`;"; 
         

@@ -5,9 +5,9 @@
  */
 package Controle.FabricaGelo.Maquina;
 
-import Bean.Maquina;
+import Bean.Equipamento;
 import Controle.FabricaGelo.Gerais.Acao;
-import DAO.MaquinaDAO;
+import DAO.EquipamentoDAO;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -26,11 +26,13 @@ public class AcaoPesquisaMaquina extends Acao{
         Connection conexao = (Connection)req.getAttribute("connection");
         HttpSession sessao = req.getSession(false);
 
-        List<Maquina> lstMaquina = new ArrayList<Maquina>();
-        List<Maquina> lstRetorno = new ArrayList<Maquina>();
+        List<Equipamento> lstMaquina = new ArrayList<Equipamento>();
+        List<Equipamento> lstRetorno = new ArrayList<Equipamento>();
         
-        MaquinaDAO maquinaDAO = new MaquinaDAO(conexao);
-        lstMaquina = maquinaDAO.listaTodos();
+        EquipamentoDAO maquinaDAO = new EquipamentoDAO(conexao);
+        Equipamento maquina = new Equipamento();
+        maquina.setTipo("MA");
+        lstMaquina = maquinaDAO.listaTodos(maquina);
         
         String pesquisa = req.getParameter("txtPesquisa");
         if (pesquisa != "")
@@ -38,7 +40,7 @@ public class AcaoPesquisaMaquina extends Acao{
             Iterator it = lstMaquina.iterator();
             while (it.hasNext())
             {
-                Maquina _maquina = (Maquina)it.next();
+                Equipamento _maquina = (Equipamento)it.next();
 
                 if (_maquina.getDescricao().contains(pesquisa.toUpperCase()))
                     lstRetorno.add(_maquina);

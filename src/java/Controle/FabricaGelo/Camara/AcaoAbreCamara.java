@@ -5,6 +5,8 @@
  */
 package Controle.FabricaGelo.Camara;
 
+import Bean.Equipamento;
+import Bean.Manutencao;
 import Controle.FabricaGelo.Gerais.Acao;
 import java.sql.Connection;
 import javax.servlet.http.HttpServletRequest;
@@ -23,7 +25,11 @@ public class AcaoAbreCamara extends Acao
         Connection conexao = (Connection)req.getAttribute("connection");
         HttpSession sessao = req.getSession(false);
 
-        sessao.setAttribute("camara",null);
+        Equipamento camara = (Equipamento)sessao.getAttribute("camara");
+        Manutencao manutencao = (Manutencao)sessao.getAttribute("manutencao");
+
+        sessao.setAttribute("camara",camara);
+        sessao.setAttribute("manutencao",manutencao);
         
         return "visao/camara.jsp";
     }

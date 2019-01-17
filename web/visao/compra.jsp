@@ -142,12 +142,15 @@
                                    
                                     
                                     <div class="row">
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-3">
+                                            <label class="control-label">Tipo</label>
+                                        </div>                                        
+                                        <div class="col-sm-4">
                                             <label class="control-label">Produto/Serviço</label>
                                         </div>
                                         <div class="col-sm-1">
                                             <label class="control-label">Qt</label>
-                                        </div>                                        
+                                        </div>  
                                         <div class="col-sm-1">
                                             <label class="control-label">Vl Unit</label>
                                         </div>                                        
@@ -160,24 +163,28 @@
                                         <div class="col-sm-1">
                                             <label class="control-label">Vl Total</label>
                                         </div> 
-                                        <div class="col-sm-1">
-                                            <label class="control-label">Avarias</label>
-                                        </div>
+                                        
                                     </div>
                                     <div class="row">
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-3">
+                                            <select name="cmbTipoProduto" class="form-control">
+                                                <option value="">  </option>
+                                                <option value="PR" > PRODUTO </option>
+                                                <option value="IN"> EMBALAGEM </option>
+                                            </select>
+                                        </div>                                        
+                                        <div class="col-sm-4">
                                             <div class="input-group">
                                                 <input type="text" class="form-control" id="txtProduto"  value="${compraProduto.produto}">
                                                 <div class="input-group-btn">
                                                     <button type="button" class="btn btn-default" onClick="pesquisaProduto()">...</button>
                                                 </div>                                            
                                             </div>                                            
-                                            
                                         </div>
                                         <div class="col-sm-1">
                                             <input type="text" class="form-control" name="txtQuantidade" id="txtQuantidade" value="${compraProduto.quantidade}">
                                         </div> 
-                                        <div class="col-sm-1">
+                                                    <div class="col-sm-1">
                                             <input type="text" class="form-control" name="txtVlUnitario" id="txtVlUnitario" value="${compraProduto.valor}">
                                         </div>                                        
                                         <div class="col-sm-1">
@@ -189,9 +196,7 @@
                                         <div class="col-sm-1">
                                             <input type="text" class="form-control" name="txtVlTotal" id="txtVlTotal" value="${compraProduto.valorTotal}">
                                         </div>  
-                                        <div class="col-sm-1">
-                                            <input type="text" class="form-control" name="txtQtAvaria" id="txtQtAvaria" value="${compraProduto.qtAvaria}">
-                                        </div>
+                                        
                                     </div>
 
                                     <!-- Table -->
@@ -261,8 +266,19 @@
             }
             function pesquisaProduto()
             {
+                var tipoProduto = formCompra.cmbTipoProduto.value;
+                if (tipoProduto == "")
+                {
+                    alert('Necessário informar tipo do produto!');
+                    return false;
+                }
+                else
+                {
                     document.forms[0].action="FabricaGelo.Compra.AcaoBuscarProduto";
-                    document.forms[0].submit();                
+                    document.forms[0].submit();
+                }                
+                
+                                   
             }
             function pesquisaColaborador()
             {

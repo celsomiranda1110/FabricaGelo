@@ -37,7 +37,7 @@
                                                 </ul>
                                                 <ul class="nav navbar-nav navbar-right">
                                                     <li class="btn"><button type="button" class="btn btn-default" onClick="gerarPagamento()">Pagamento</button></li>
-                                                    <li class="btn"><button type="button" class="btn btn-default" onClick="gerarEntrega()">Entrega</button></li>
+                                                    
                                                 </ul>
                                             </div>
                                         </div>                                        
@@ -143,12 +143,24 @@
                                    
                                     
                                     <div class="row">
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-3">
                                             <label class="control-label">Produto/Serviço</label>
                                         </div>
                                         <div class="col-sm-1">
                                             <label class="control-label">Qt</label>
-                                        </div>                                        
+                                        </div>
+                                        <div class="col-sm-1">
+                                            <label class="control-label">Avarias</label>
+                                        </div>
+                                        <div class="col-sm-1">
+                                            <label class="control-label">Bônus</label>
+                                        </div>
+                                        <div class="col-sm-1">
+                                            <label class="control-label">Cortesia</label>
+                                        </div>
+                                        <div class="col-sm-1">
+                                            <label class="control-label">Reposição</label>
+                                        </div>
                                         <div class="col-sm-1">
                                             <label class="control-label">Vl Unit</label>
                                         </div>                                        
@@ -161,12 +173,10 @@
                                         <div class="col-sm-1">
                                             <label class="control-label">Vl Total</label>
                                         </div> 
-                                        <div class="col-sm-1">
-                                            <label class="control-label">Avarias</label>
-                                        </div>
+                                        
                                     </div>
                                     <div class="row">
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-3">
                                             <div class="input-group">
                                                 <input type="text" class="form-control" id="txtProduto"  value="${vendaProduto.produto}">
                                                 <div class="input-group-btn">
@@ -179,6 +189,18 @@
                                             <input type="text" class="form-control" name="txtQuantidade" id="txtQuantidade" value="${vendaProduto.quantidade}">
                                         </div> 
                                         <div class="col-sm-1">
+                                            <input type="text" class="form-control" name="txtQtAvaria" id="txtQtAvaria" value="${vendaProduto.qtAvaria}">
+                                        </div>
+                                        <div class="col-sm-1">
+                                            <input type="text" class="form-control" name="txtQtBonus" id="txtQtBonus" value="${vendaProduto.qtBonus}">
+                                        </div>
+                                        <div class="col-sm-1">
+                                            <input type="text" class="form-control" name="txtQtCortesia" id="txtQtCortesia" value="${vendaProduto.qtCortesia}">
+                                        </div>
+                                        <div class="col-sm-1">
+                                            <input type="text" class="form-control" name="txtQtReposicao" id="txtQtReposicao" value="${vendaProduto.qtReposicao}">
+                                        </div>
+                                        <div class="col-sm-1">
                                             <input type="text" class="form-control" name="txtVlUnitario" id="txtVlUnitario" value="${vendaProduto.valor}">
                                         </div>                                        
                                         <div class="col-sm-1">
@@ -190,9 +212,7 @@
                                         <div class="col-sm-1">
                                             <input type="text" class="form-control" name="txtVlTotal" id="txtVlTotal" value="${vendaProduto.valorTotal}">
                                         </div>  
-                                        <div class="col-sm-1">
-                                            <input type="text" class="form-control" name="txtQtAvaria" id="txtQtAvaria" value="${vendaProduto.qtAvaria}">
-                                        </div>
+                                        
                                     </div>
 
                                     <!-- Table -->
@@ -285,11 +305,7 @@
                     document.forms[0].action="FabricaGelo.Venda.AcaoAbrePagamento";
                     document.forms[0].submit();                
             }               
-            function gerarEntrega()
-            {
-                    document.forms[0].action="FabricaGelo.Venda.AcaoAbreEntrega";
-                    document.forms[0].submit();                
-            }
+            
 
         </script>        
     </body>

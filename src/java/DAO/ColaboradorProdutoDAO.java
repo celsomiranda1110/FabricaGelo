@@ -33,7 +33,7 @@ public class ColaboradorProdutoDAO extends DAO{
         comSql += "     `tblColaboradorProduto`.`dblIcms`,";
         comSql += "     `tblColaboradorProduto`.`dblValor`,";
         comSql += "     `tblColaboradorProduto`.`dblDesconto`";
-        comSql += " FROM `bdGelo`.`tblColaboradorProduto`";
+        comSql += " FROM `smmdaa_bdGelo`.`tblColaboradorProduto`";
         comSql += " WHERE ";
         comSql += "     `tblColaboradorProduto`.`intColaboradorId` = " + colaborador.getIdColaborador() + ";";
         
@@ -75,7 +75,7 @@ public class ColaboradorProdutoDAO extends DAO{
         comSql += "     `tblColaboradorProduto`.`dblIcms`,";
         comSql += "     `tblColaboradorProduto`.`dblValor`,";
         comSql += "     `tblColaboradorProduto`.`dblDesconto`";
-        comSql += " FROM `bdGelo`.`tblColaboradorProduto`";
+        comSql += " FROM `smmdaa_bdGelo`.`tblColaboradorProduto`";
         comSql += " WHERE ";
         comSql += "     `tblColaboradorProduto`.`intColaboradorProdutoId` = " + colaboradorProduto.getIdColaboradorProduto() + ";";
         List tabela = super.listaUm();
@@ -119,7 +119,7 @@ public class ColaboradorProdutoDAO extends DAO{
         if (listaUm(colaboradorProduto) == null)
         {
             comSql = "";
-            comSql += " INSERT INTO `bdGelo`.`tblColaboradorProduto` ";
+            comSql += " INSERT INTO `smmdaa_bdGelo`.`tblColaboradorProduto` ";
             comSql += " 	(`intProdutoId`,";
             comSql += " 	`intColaboradorId`,";
             comSql += " 	`dblIcms`,";
@@ -151,7 +151,7 @@ public class ColaboradorProdutoDAO extends DAO{
         else
         {
             comSql = "";
-            comSql += " UPDATE `bdGelo`.`tblColaboradorProduto` SET ";
+            comSql += " UPDATE `smmdaa_bdGelo`.`tblColaboradorProduto` SET ";
             comSql += "     `intProdutoId` = " + _colaboradorProduto.getIdProduto();
             comSql += "     ,`intColaboradorId` = " + _colaboradorProduto.getIdColaborador();
             comSql += "     ,`dblIcms` = " + _colaboradorProduto.getIcms();
@@ -173,7 +173,7 @@ public class ColaboradorProdutoDAO extends DAO{
         if (listaUm(colaboradorProduto) != null)
         {
             comSql = "";
-            comSql = " Delete from `bdGelo`.`tblColaboradorProduto`";
+            comSql = " Delete from `smmdaa_bdGelo`.`tblColaboradorProduto`";
             comSql += " WHERE ";
             comSql += "     `intColaboradorProdutoId` = " + colaboradorProduto.getIdColaboradorProduto() + ";";
             retorno = atualizar();

@@ -21,6 +21,9 @@ public class ProdutoMovimento implements Bean{
     private double valorTotal;
     private double desconto;
     private double qtAvaria;
+    private double qtBonus;
+    private double qtCortesia;
+    private double qtReposicao;
     private String operacao;
     
 
@@ -33,6 +36,9 @@ public class ProdutoMovimento implements Bean{
         valorTotal = 0;
         desconto = 0;
         qtAvaria = 0;
+        qtBonus = 0;
+        qtReposicao = 0;
+        qtCortesia = 0;
     }
     
     
@@ -118,6 +124,31 @@ public class ProdutoMovimento implements Bean{
         this.qtAvaria = qtAvaria;
     }
 
+    public double getQtBonus() {
+        return qtBonus;
+    }
+
+    public void setQtBonus(double qtBonus) {
+        this.qtBonus = qtBonus;
+    }
+
+    public double getQtCortesia() {
+        return qtCortesia;
+    }
+
+    public void setQtCortesia(double qtCortesia) {
+        this.qtCortesia = qtCortesia;
+    }
+
+    public double getQtReposicao() {
+        return qtReposicao;
+    }
+
+    public void setQtReposicao(double qtReposicao) {
+        this.qtReposicao = qtReposicao;
+    }
+    
+
     public String getOperacao() {
         return operacao;
     }
@@ -126,6 +157,10 @@ public class ProdutoMovimento implements Bean{
         this.operacao = operacao;
     }
 
+    public String toString()
+    {
+        return this.produto.toString();
+    }
 
     
     public void replicar(ProdutoMovimento _produtoMovimento)
@@ -139,8 +174,12 @@ public class ProdutoMovimento implements Bean{
         _produtoMovimento.setValorTotal(this.valorTotal);
         _produtoMovimento.setDesconto(this.desconto);
         _produtoMovimento.setQtAvaria(this.qtAvaria);
+        _produtoMovimento.setQtBonus(this.qtBonus);
+        _produtoMovimento.setQtCortesia(this.qtCortesia);
+        _produtoMovimento.setQtReposicao(this.qtReposicao);
         _produtoMovimento.setOperacao(this.operacao);
         
-        _produtoMovimento.setProduto(this.produto);
+        if (this.produto != null)
+            _produtoMovimento.setProduto(this.produto);
     }
 }

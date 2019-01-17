@@ -126,7 +126,7 @@ public class AcaoGravaCortesia extends Acao
             else
             {
                 // montagem do movimento de cortesia
-                cortesia.setProfissional(usuario);
+                
                 cortesia.setNumero(numero);
                 cortesia.setNotaFiscal(notaFiscal);
                 cortesia.setDataLancamento(dtLancamento);

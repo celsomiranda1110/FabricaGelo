@@ -54,10 +54,10 @@
                                         <label class="control-label">Ordem</label>
                                     </div>
                                     <div class="col-sm-3">
-                                        <label class="control-label">Nota Fiscal</label>
+                                        <label class="control-label">Início</label>
                                     </div>
                                     <div class="col-sm-3">
-                                        <label class="control-label">Lançamento</label>
+                                        <label class="control-label">Validade</label>
                                     </div>
                                     <div class="col-sm-3">
                                         <label class="control-label">Situação</label>
@@ -69,10 +69,10 @@
                                         <input type="text" class="form-control" name="txtNumero"  id="txtNumero" value="${aluguel.numero}">
                                     </div>
                                     <div class="col-sm-3">
-                                        <input type="text" class="form-control" name="txtNotaFiscal" id="txtNotaFiscal" value="${aluguel.notaFiscal}">
+                                        <input type="text" class="form-control" name="txtLancamento" id="txtLancamento" value="${aluguel.dataLancamento}">
                                     </div>
                                     <div class="col-sm-3">
-                                        <input type="date" class="form-control" name="txtLancamento" id="txtLancamento" value="${aluguel.dataLancamento}">
+                                        <input type="date" class="form-control" name="txtDevolucao" id="txtDevolucao" value="${aluguel.dataEntrega}">
                                     </div>                                     
                                     <div class="col-sm-3">
 

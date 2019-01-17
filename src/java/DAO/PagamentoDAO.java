@@ -2,6 +2,7 @@ package DAO;
 
 import Bean.Pagamento;
 import Bean.Parcela;
+import Bean.Movimento;
 import java.sql.Connection;
 import java.util.*;
 
@@ -17,7 +18,7 @@ public class PagamentoDAO extends DAO
         super(conexao);
     }
 
-    public List<Pagamento> listaTodos()
+    public List<Pagamento> listaTodos(Pagamento _pagamento)
     {
         List<Pagamento> lstTabela = new ArrayList();
         
@@ -31,9 +32,16 @@ public class PagamentoDAO extends DAO
         comSql += "     `tblPagamento`.`datData`,";
         comSql += "     `tblPagamento`.`intNumParcela`,";
         comSql += "     `tblPagamento`.`chrSituacao`,";
-        comSql += "     `tblPagamento`.`strCobranca`";
-        comSql += " FROM `bdGelo`.`tblPagamento`;";
-        
+        comSql += "     `tblPagamento`.`strCobranca`,";
+        comSql += "     `tblPagamento`.`bolProcessar`";
+        comSql += " FROM `smmdaa_bdGelo`.`tblPagamento`";
+        if (_pagamento != null)
+        {
+            comSql += " WHERE ";
+            comSql += "     `tblPagamento`.`chrSituacao` = '" + _pagamento.getSituacao() + "';";
+        }
+        else
+            comSql += ";";
         List tabela = super.listaTodos();
         
         for(int i = 0; i < tabela.size(); i++)
@@ -50,6 +58,12 @@ public class PagamentoDAO extends DAO
             pagamento.setNumParcela(((Integer)bkp.get(6)).intValue());
             pagamento.setSituacao((String)bkp.get(7));
             pagamento.setCobranca((String)bkp.get(8));
+            pagamento.setProcessar((((String)bkp.get(9)).equals("S") ? true:false));
+            
+            List<Parcela> lstParcela = new ArrayList<Parcela>();
+            ParcelaDAO parcelaDAO = new ParcelaDAO(conexao);
+            lstParcela = parcelaDAO.listaTodos(pagamento);
+            pagamento.setLstParcela(lstParcela);            
 
             lstTabela.add(pagamento);
         }
@@ -71,8 +85,9 @@ public class PagamentoDAO extends DAO
         comSql += "     `tblPagamento`.`datData`,";
         comSql += "     `tblPagamento`.`intNumParcela`,";
         comSql += "     `tblPagamento`.`chrSituacao`,";
-        comSql += "     `tblPagamento`.`strCobranca`";
-        comSql += " FROM `bdGelo`.`tblPagamento`";
+        comSql += "     `tblPagamento`.`strCobranca`,";
+        comSql += "     `tblPagamento`.`bolProcessar`";
+        comSql += " FROM `smmdaa_bdGelo`.`tblPagamento`";
         comSql += " WHERE ";
         if (pagamento.getIdPagamento() != 0)
             comSql += "     `tblPagamento`.`intPagamentoId` = " + pagamento.getIdPagamento() + ";";
@@ -97,6 +112,7 @@ public class PagamentoDAO extends DAO
                 pagamento.setNumParcela(((Integer)bkp.get(6)).intValue());
                 pagamento.setSituacao((String)bkp.get(7));
                 pagamento.setCobranca((String)bkp.get(8));
+                pagamento.setProcessar((((String)bkp.get(9)).equals("S") ? true:false));
                 
                 List<Parcela> lstParcela = new ArrayList<Parcela>();
                 ParcelaDAO parcelaDAO = new ParcelaDAO(conexao);
@@ -122,7 +138,7 @@ public class PagamentoDAO extends DAO
         if (listaUm(pagamento) == null)
         {
             comSql = "";
-            comSql += " INSERT INTO `bdGelo`.`tblPagamento`";
+            comSql += " INSERT INTO `smmdaa_bdGelo`.`tblPagamento`";
             comSql += " 	(`intMovimentoId`,";
             comSql += " 	`dblValor`,";
             comSql += " 	`dblDesconto`,";
@@ -130,6 +146,7 @@ public class PagamentoDAO extends DAO
             comSql += " 	`datData`,";
             comSql += " 	`intNumParcela`,";
             comSql += " 	`chrSituacao`,";
+            comSql += " 	`bolProcessar`,";
             comSql += " 	`strCobranca`)";
             comSql += " VALUES";
             comSql += " 	(" + _pagamento.getIdMovimento();
@@ -139,6 +156,7 @@ public class PagamentoDAO extends DAO
             comSql += " 	,'" + _pagamento.getDtDataFormatada() + "'";
             comSql += " 	," + _pagamento.getNumParcela();
             comSql += " 	,'" + _pagamento.getSituacao() + "'";
+            comSql += " 	," + (_pagamento.isProcessar() ? "'S'" : "'N'");
             comSql += " 	,'" + _pagamento.getCobranca() + "');";
 
             
@@ -146,7 +164,7 @@ public class PagamentoDAO extends DAO
             if(retorno)
             {
                 comSql = "";
-                comSql += " Select max(intPagamentoId) as idPagamento from `tblPagamento`;";
+                comSql += " Select max(intPagamentoId) as idPagamento from `smmdaa_bdGelo`.`tblPagamento`;";
                 List lstConsulta = listaUm();
                 for(int i = 0; i < lstConsulta.size(); i++)
                 {
@@ -159,8 +177,9 @@ public class PagamentoDAO extends DAO
         }
         else
         {
+            
             comSql = "";
-            comSql += " UPDATE `bdGelo`.`tblPagamento` SET";
+            comSql += " UPDATE `smmdaa_bdGelo`.`tblPagamento` SET";
             comSql += " 	`intMovimentoId` = " + _pagamento.getIdMovimento();
             comSql += " 	,`dblValor` = " + _pagamento.getValor();
             comSql += " 	,`dblDesconto` = " + _pagamento.getDesconto();
@@ -168,6 +187,7 @@ public class PagamentoDAO extends DAO
             comSql += " 	,`datData` = '" + _pagamento.getDtDataFormatada() + "'";
             comSql += " 	,`intNumParcela` = " + _pagamento.getNumParcela();
             comSql += " 	,`chrSituacao` = '" + _pagamento.getSituacao() + "'";
+            comSql += " 	,`bolProcessar` = " + (_pagamento.isProcessar() ? "'S'" : "'N'");
             comSql += " 	,`strCobranca` = '" + _pagamento.getCobranca() + "'";
             comSql += " WHERE ";
             comSql += " 	`intPagamentoId` = " + _pagamento.getIdPagamento() + ";";
@@ -201,7 +221,9 @@ public class PagamentoDAO extends DAO
                     parcelaDAO.atualizar(parcela);
                 }
             }
-                    
+            
+            // baseado no pagamento, verifica se há movimento  
+            setFechaMovimento(pagamento);
 
         }
         
@@ -212,10 +234,32 @@ public class PagamentoDAO extends DAO
     public boolean deletaParcelas(Pagamento pagamento)
     {
         comSql = "";
-        comSql += " Delete from bdGelo.tblParcela " ;
+        comSql += " Delete from `smmdaa_bdGelo`.`tblParcela` " ;
         comSql += " where ";
-        comSql += " intPagamentoId = " + pagamento.getIdPagamento();
+        comSql += " `intPagamentoId` = " + pagamento.getIdPagamento() + ";";
         
         return atualizar();
+    }
+    
+    // atualizando situação de movimento
+    private void setFechaMovimento(Pagamento pagamento)
+    {
+        boolean fechaMovimento = true;
+        
+        PagamentoDAO pagamentoDAO = new PagamentoDAO(conexao);
+        pagamento = pagamentoDAO.listaUm(pagamento);
+        
+        if (pagamento.getSituacao().equals("PG"))
+        {
+            MovimentoDAO movimentoDAO = new MovimentoDAO(conexao);
+            Movimento movimento  = new Movimento();
+            movimento.setIdMovimento(pagamento.getIdMovimento());
+            movimento = movimentoDAO.listaUm(movimento);
+            
+            movimento.setSituacao("FE");
+            movimentoDAO.atualizar(movimento);
+        }
+        
+        
     }
 }

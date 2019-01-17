@@ -33,7 +33,7 @@ public class AvariaProducaoDAO extends DAO{
         comSql += "     `tblAvariaProducao`.`intMaquinaProducaoId`,";
         comSql += "     `tblAvariaProducao`.`dblQuantidade`";
         comSql += " FROM ";
-        comSql += "     `bdGelo`.`tblAvariaProducao`";
+        comSql += "     `smmdaa_bdGelo`.`tblAvariaProducao`";
         comSql += " WHERE";
         comSql += "     `tblAvariaProducao`.`intMaquinaProducaoId` = " + maquinaproducao.getIdMaquinaProducao() + ";";
         List tabela = super.listaTodos();
@@ -71,7 +71,7 @@ public class AvariaProducaoDAO extends DAO{
         comSql += "     `tblAvariaProducao`.`intMaquinaProducaoId`,";
         comSql += "     `tblAvariaProducao`.`dblQuantidade`";
         comSql += " FROM ";
-        comSql += "     `bdGelo`.`tblAvariaProducao`";
+        comSql += "     `smmdaa_bdGelo`.`tblAvariaProducao`";
         comSql += " WHERE";
         if ((avariaProducao.getIdMaquinaProducao() != 0) && (avariaProducao.getIdAvaria() != 0))
         {
@@ -118,7 +118,7 @@ public class AvariaProducaoDAO extends DAO{
         if (listaUm(avariaProducao) == null)
         {
             comSql = "";
-            comSql += " INSERT INTO `bdGelo`.`tblAvariaProducao` ";
+            comSql += " INSERT INTO `smmdaa_bdGelo`.`tblAvariaProducao` ";
             comSql += " (`intAvariaId`";
             comSql += " ,`intMaquinaProducaoId`";
             comSql += " ,`dblQuantidade`)";
@@ -145,8 +145,8 @@ public class AvariaProducaoDAO extends DAO{
         else
         {
             comSql = "";
-            comSql += " UPDATE `bdGelo`.`tblAvariaProducao` SET";
-            comSql += "     `intAvariaId`` = " + _avariaProducao.getIdAvaria();
+            comSql += " UPDATE `smmdaa_bdGelo`.`tblAvariaProducao` SET";
+            comSql += "     `intAvariaId` = " + _avariaProducao.getIdAvaria();
             comSql += "     ,`intMaquinaProducaoId` = " + _avariaProducao.getIdMaquinaProducao();
             comSql += "     ,`dblQuantidade` = " + _avariaProducao.getQuantidade();
             comSql += " WHERE ";

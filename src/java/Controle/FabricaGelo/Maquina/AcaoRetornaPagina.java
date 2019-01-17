@@ -6,7 +6,7 @@
 package Controle.FabricaGelo.Maquina;
 
 import Bean.Colaborador;
-import Bean.Maquina;
+import Bean.Equipamento;
 import Bean.MaquinaProducao;
 import Bean.Producao;
 import Controle.FabricaGelo.Gerais.Acao;
@@ -28,19 +28,16 @@ public class AcaoRetornaPagina extends Acao
         HttpSession sessao = req.getSession(false);
         
         String pagRetorno = (String)sessao.getAttribute("pagRetorno");
-        Maquina maquina = (Maquina)sessao.getAttribute("maquina");
+        Equipamento maquina = (Equipamento)sessao.getAttribute("maquina");
         Producao producao = (Producao)sessao.getAttribute("producao");
         
-        if (pagRetorno != null)
+
+        if (pagRetorno.equals("FabricaGelo.Producao.AcaoAbreProducao"))
         {
-            if (pagRetorno.equals("FabricaGelo.Producao.AcaoAbreProducao"))
-            {
-                MaquinaProducao maquinaProducao = (MaquinaProducao)sessao.getAttribute("maquinaProducao");
-                maquinaProducao.setMaquina(maquina);
-                sessao.setAttribute("maquinaProducao", maquinaProducao);
-                
-            }
-           
+            MaquinaProducao maquinaProducao = new MaquinaProducao();
+            maquinaProducao.setMaquina(maquina);
+            sessao.setAttribute("maquinaProducao", maquinaProducao);
+
         }
         else
         {

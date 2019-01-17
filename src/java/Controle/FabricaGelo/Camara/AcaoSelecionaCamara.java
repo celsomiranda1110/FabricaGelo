@@ -6,9 +6,9 @@
 package Controle.FabricaGelo.Camara;
 
 import Bean.Colaborador;
-import Bean.Camara;
+import Bean.Equipamento;
 import Controle.FabricaGelo.Gerais.Acao;
-import DAO.CamaraDAO;
+import DAO.EquipamentoDAO;
 import java.sql.Connection;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,11 +24,11 @@ public class AcaoSelecionaCamara extends Acao{
         Connection conexao = (Connection)req.getAttribute("connection");
         HttpSession sessao = req.getSession(false);
 
-        CamaraDAO camaraDAO = new CamaraDAO(conexao);
-        Camara camara = new Camara();
+        EquipamentoDAO camaraDAO = new EquipamentoDAO(conexao);
+        Equipamento camara = new Equipamento();
         
-        String idCamara = req.getParameter("idCamara");
-        camara.setIdCamara(Integer.parseInt(idCamara));
+        String idEquipamento = req.getParameter("idEquipamento");
+        camara.setIdEquipamento(Integer.parseInt(idEquipamento));
         camara = camaraDAO.listaUm(camara);
         
         String pagRetorno = (String)sessao.getAttribute("pagRetorno");
@@ -37,6 +37,7 @@ public class AcaoSelecionaCamara extends Acao{
         
         sessao.setAttribute("colaborador",colaborador);
         sessao.setAttribute("camara",camara);
+        sessao.setAttribute("lstManutencao", camara.getLstManutencao());
         sessao.setAttribute("pagRetorno",pagRetorno);
         
         return "visao/camara.jsp";

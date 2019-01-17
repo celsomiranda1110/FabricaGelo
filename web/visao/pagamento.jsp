@@ -30,10 +30,10 @@
                                         <div class="navbar navbar-default">
                                             <div class="container-fluid">
                                                 <ul class="nav navbar-nav">
-                                                    <li class="btn"><button type="button" class="btn btn-success" onClick="atualizar()">Atualizar</button></li>
+                                                    <li class="btn"><button type="button" class="btn btn-default" onClick="atualizar()">Atualizar</button></li>
                                                 </ul>
                                                 <ul class="nav navbar-nav navbar-right">
-                                                    <li class="btn"><button type="button" class="btn btn-success" onClick="retornar()">Retornar</button></li>
+                                                    <li class="btn"><button type="button" class="btn btn-default" onClick="retornar()">Voltar ao movimento</button></li>
                                                 </ul>
                                             </div>
                                         </div>                                        
@@ -43,83 +43,116 @@
 
                         </div> <!-- div dos botoes -->                        
                                 
-                        <div class="row"> <!-- div primeira linha -->
+                        <div class="row">
                             <div class="col-lg-12">
                                 <div class="row">
-                                    <div class="col-sm-3">
-                                        <label class="control-label">Ordem</label>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <label class="control-label">Nota Fiscal</label>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <label class="control-label">Lançamento</label>
-                                    </div>
-                                    <div class="col-sm-3">
+                                    <div class="col-sm-4">
                                         <label class="control-label">Tipo</label>
-                                    </div>                                    
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label class="control-label">Número</label>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label class="control-label">Data</label>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label class="control-label">Situação</label>
+                                    </div>
                                 </div>
                                 <div class="row">
-                                    
-                                    <div class="col-sm-3">
-                                        <input type="text" class="form-control" name="txtNumero"  id="txtNumero" value="${movimento.numero}">
+                                    <div class="col-sm-4">
+                                        <select name="cmbTipo" class="form-control">
+                                            <c:if test="${'BO' != movimento.tipo && 'CP' != movimento.tipo && 'CO' != movimento.tipo && 'VE' != movimento.tipo && 'RE' != movimento.tipo}">
+                                                <option value="" selected="selected">  </option>
+                                                <option value="BO"> BONIFICAÇÃO </option>
+                                                <option value="CP"> COMPRA </option>
+                                                <option value="CO"> CORTESIA </option>
+                                                <option value="VE"> VENDA </option>
+                                                <option value="RE"> REPOSIÇÃO </option>
+                                            </c:if>
+                                            <c:if test="${'BO' == movimento.tipo}">
+                                                <option value="">  </option>
+                                                <option value="BO" selected="selected"> BONIFICAÇÃO </option>
+                                                <option value="CP"> COMPRA </option>
+                                                <option value="CO"> CORTESIA </option>
+                                                <option value="VE"> VENDA </option>
+                                                <option value="RE"> REPOSIÇÃO </option>
+                                            </c:if>
+                                            <c:if test="${'CP' == movimento.tipo}">
+                                                <option value="">  </option>
+                                                <option value="BO"> BONIFICAÇÃO </option>
+                                                <option value="CP" selected="selected"> COMPRA </option>
+                                                <option value="CO"> CORTESIA </option>
+                                                <option value="VE"> VENDA </option>
+                                                <option value="RE"> REPOSIÇÃO </option>
+                                            </c:if>
+                                            <c:if test="${'CO' == movimento.tipo}">
+                                                <option value="">  </option>
+                                                <option value="BO"> BONIFICAÇÃO </option>
+                                                <option value="CP"> COMPRA </option>
+                                                <option value="CO" selected="selected"> CORTESIA </option>
+                                                <option value="VE"> VENDA </option>
+                                                <option value="RE"> REPOSIÇÃO </option>
+                                            </c:if>
+                                            <c:if test="${'VE' == movimento.tipo}">
+                                                <option value="">  </option>
+                                                <option value="BO"> BONIFICAÇÃO </option>
+                                                <option value="CP"> COMPRA </option>
+                                                <option value="CO"> CORTESIA </option>
+                                                <option value="VE" selected="selected"> VENDA </option>
+                                                <option value="RE"> REPOSIÇÃO </option>
+                                            </c:if>
+                                            <c:if test="${'RE' == movimento.tipo}">
+                                                <option value="">  </option>
+                                                <option value="BO"> BONIFICAÇÃO </option>
+                                                <option value="CP"> COMPRA </option>
+                                                <option value="CO"> CORTESIA </option>
+                                                <option value="VE"> VENDA </option>
+                                                <option value="RE" selected="selected"> REPOSIÇÃO </option>
+                                            </c:if>
+                                        </select>                                        
                                     </div>
-                                    <div class="col-sm-3">
-                                        <input type="text" class="form-control" name="txtNotaFiscal" id="txtNotaFiscal" value="${movimento.notaFiscal}">
+                                    <div class="col-sm-2">
+                                        <input type="text" class="form-control" name="txtNumero" id="txtNumero" value="${movimento.numero}">
                                     </div>
                                     <div class="col-sm-3">
                                         <input type="date" class="form-control" name="txtLancamento" id="txtLancamento" value="${movimento.dataLancamento}">
-                                    </div>                                     
+                                    </div>
                                     <div class="col-sm-3">
-
-                                        <select name="cmbTipo" class="form-control">
-
+                                        <select name="cmbSituacao" class="form-control">
+                                            <c:if test="${'AB' != movimento.situacao && 'FE' != movimento.situacao}">
+                                                <option value="" selected="selected">  </option>
+                                                <option value="AB"> ABERTO </option>
+                                                <option value="FE"> FECHADO </option>
+                                            </c:if>
                                             <c:if test="${'AB' == movimento.situacao}">
                                                 <option value="">  </option>
-                                                <option value="AB" selected="selected"> ABERTA </option>
+                                                <option value="AB" selected="selected"> ABERTO </option>
                                                 <option value="FE"> FECHADO </option>
                                             </c:if>
                                             <c:if test="${'FE' == movimento.situacao}">
                                                 <option value="">  </option>
-                                                <option value="AB"> ABERTA </option>
+                                                <option value="AB"> ABERTO </option>
                                                 <option value="FE" selected="selected"> FECHADO </option>
-                                            </c:if>  
-                                            <c:if test="${'AB' != movimento.situacao && 'FE' != movimento.situacao}">
-                                                <option value="" selected="selected">  </option>
-                                                <option value="AB" selected="selected"> ABERTA </option>
-                                                <option value="FE"> FECHADO </option>
                                             </c:if>
-
-                                        </select>
+                                        </select>                                        
 
                                     </div>
-                                    
-                                 
-                                    
                                 </div>
                             </div>
-                            
-
-                        </div> <!-- div primeira linha -->
-                                
+                        </div>
+                                    
                         <div class="row"> <!-- div segunda linha -->
                             <div class="col-lg-12">
                                 <div class="row">
-                                    <div class="col-sm-6">
-                                        <label class="control-label">Funcionário</label>
-                                    </div> 
                                     
-                                    <div class="col-sm-6">
-                                        <label class="control-label">Cliente</label>
+                                    <div class="col-sm-12">
+                                        <label class="control-label">Empresa</label>
                                     </div>
                                 </div>
                                 <div class="row">
                                     
-                                    <div class="col-sm-6">
-                                        <input type="text" class="form-control" id="txtProfissional" value="${movimento.profissional}">
-                                    </div>                                      
-                                    
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-12">
                                         <input type="text" class="form-control" id="txtCliente" value="${movimento.colaborador}">
                                     </div>
                                     
@@ -127,7 +160,7 @@
                             </div>
                             
 
-                        </div> <!-- div segunda linha -->
+                        </div> <!-- div segunda linha --> 
                         
                       
                         <div class="row">
@@ -191,7 +224,7 @@
                                                 </select>
                                             </div> 
                                             <div class="col-sm-3">
-                                                <input type="text" class="form-control" name="txtParcelas" id="txtParcelas" value="${pagamento.numParcela}">
+                                                 <input type="text" class="form-control" name="txtParcelas" id="txtParcelas" value="${pagamento.numParcela}">
                                             </div>
                                         </div>
                                             

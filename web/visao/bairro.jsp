@@ -36,13 +36,21 @@
                             <div class="col-lg-12">
                                 <div class="row">
                                     <div class="col-sm-12">
-                                        <button type="button" class="btn btn-primary" onClick="atualizar()">Atualizar</button>
-                                        <button type="button" class="btn btn-default" onClick="selecionar()">Selecionar</button>
+                                        <div class="navbar navbar-default">
+                                            <div class="container-fluid">
+                                                <ul class="nav navbar-nav">
+                                                    <li class="btn"><button type="button" class="btn btn-default" onClick="atualizar()">Atualizar</button></li>
+                                                </ul>
+                                                <ul class="nav navbar-nav navbar-right">
+                                                    <li class="btn"><button type="button" class="btn btn-default" onClick="selecionar()">Selecionar</button></li>
+                                                </ul>
+                                            </div>
+                                        </div>                                        
                                     </div>
                                 </div>
                             </div>
 
-                        </div> <!-- div dos botoes -->
+                        </div> <!-- div dos botoes --> 
                                 
                         <div class="row"> <!-- div primeira linha -->
                             <div class="col-lg-12">

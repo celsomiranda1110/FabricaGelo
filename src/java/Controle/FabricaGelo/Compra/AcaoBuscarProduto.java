@@ -29,11 +29,11 @@ public class AcaoBuscarProduto extends Acao
         Connection conexao = (Connection)req.getAttribute("connection");
         HttpSession sessao = req.getSession(false);
         
+        String mensagemErro = "";
+        String pagRetorno = "";        
+        
         Profissional usuario = (Profissional)sessao.getAttribute("usuario");
-        
-        List<Produto> lstProduto = new ArrayList<Produto>();
-        ProdutoDAO produtoDAO = new ProdutoDAO(conexao);
-        
+     
         // Dados do compra
         String numero = (req.getParameter("txtNumero") == "" || req.getParameter("txtNumero") == null) ? "" : req.getParameter("txtNumero");
         String notaFiscal = (req.getParameter("txtNotaFiscal").equals("") || req.getParameter("txtNotaFiscal") == null) ? "" : req.getParameter("txtNotaFiscal");        
@@ -44,14 +44,25 @@ public class AcaoBuscarProduto extends Acao
         if (compra == null)
             compra = new Movimento();
         
-        compra.setProfissional(usuario);
         compra.setNumero(numero);
         compra.setNotaFiscal(notaFiscal);
         compra.setDataLancamento(dtLancamento);
         compra.setSituacao(situacao);
         compra.setTipo("CO");
-
-        lstProduto = produtoDAO.listaTodos();
+        
+        // Produto ou Embalagem
+        String tipoProduto = (req.getParameter("cmbTipoProduto") == "" || req.getParameter("cmbTipoProduto") == null) ? "" : req.getParameter("cmbTipoProduto");
+//        if (tipoProduto.equals(""))
+//        {
+//            sessao.setAttribute("avisoErro", "Necessário identificar tipo!");
+//            sessao.setAttribute("pagOrigemErro", "FabricaGelo.Compra.AcaoAbreCompra");
+//            pagRetorno = "visao/erro.jsp";             
+//        }
+        List<Produto> lstProduto = new ArrayList<Produto>();
+        ProdutoDAO produtoDAO = new ProdutoDAO(conexao);
+        Produto produto = new Produto();
+        produto.setTipo(tipoProduto);
+        lstProduto = produtoDAO.listaTodos(produto);
 
         sessao.setAttribute("compra",compra);
         sessao.setAttribute("lstProduto",lstProduto);

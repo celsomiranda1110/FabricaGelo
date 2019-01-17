@@ -9,6 +9,8 @@ package DAO;
  *
  * @author celso
  */
+import Bean.Producao;
+import Bean.ProdutoCamara;
 import Bean.TransferenciaProducao;
 import java.sql.Connection;
 import java.util.*;
@@ -19,7 +21,7 @@ public class TransferenciaProducaoDAO extends DAO{
         super(conexao);
     }
     
-    public List<TransferenciaProducao> listaTodos()
+    public List<TransferenciaProducao> listaTodos(Producao producao)
     {
         List<TransferenciaProducao> lstTabela = new ArrayList();
         
@@ -28,8 +30,15 @@ public class TransferenciaProducaoDAO extends DAO{
         comSql += " 	`tblTransferenciaProducao`.`intTransferenciaProducaoId`,";
         comSql += "     `tblTransferenciaProducao`.`intProducaoId`,";
         comSql += "     `tblTransferenciaProducao`.`intProdutoCamaraId`,";
-        comSql += "     `tblTransferenciaProducao`.`dblQuantidade`";
-        comSql += " FROM `bdGelo`.`tblTransferenciaProducao`;";
+        comSql += "     `tblTransferenciaProducao`.`dblQuantidade`,";
+        comSql += "     `tblTransferenciaProducao`.`datData`";
+        comSql += " FROM `smmdaa_bdGelo`.`tblTransferenciaProducao`";
+        if (producao != null)
+        {
+            comSql += " WHERE ";
+            comSql += "     `tblTransferenciaProducao`.`intProducaoId` = " + producao.getIdProducao();
+        }
+        comSql += ";";
         
         List tabela = super.listaTodos();
         
@@ -42,7 +51,13 @@ public class TransferenciaProducaoDAO extends DAO{
             transferenciaProducao.setIdProducao(((Integer)bkp.get(1)).intValue());
             transferenciaProducao.setIdProdutoCamara(((Integer)bkp.get(2)).intValue());
             transferenciaProducao.setQuantidade((Double)bkp.get(3));
+            transferenciaProducao.setData((Date)bkp.get(4));
             
+            ProdutoCamaraDAO produtoCamaraDAO = new ProdutoCamaraDAO(conexao);
+            ProdutoCamara produtoCamara = new ProdutoCamara();
+            produtoCamara.setIdProdutoCamara(transferenciaProducao.getIdProdutoCamara());
+            produtoCamara = produtoCamaraDAO.listaUm(produtoCamara);
+            transferenciaProducao.setProdutoCamara(produtoCamara);
             
             lstTabela.add(transferenciaProducao);
         }
@@ -59,10 +74,17 @@ public class TransferenciaProducaoDAO extends DAO{
         comSql += " 	`tblTransferenciaProducao`.`intTransferenciaProducaoId`,";
         comSql += "     `tblTransferenciaProducao`.`intProducaoId`,";
         comSql += "     `tblTransferenciaProducao`.`intProdutoCamaraId`,";
-        comSql += "     `tblTransferenciaProducao`.`dblQuantidade`";
-        comSql += " FROM `bdGelo`.`tblTransferenciaProducao`";
+        comSql += "     `tblTransferenciaProducao`.`dblQuantidade`,";
+        comSql += "     `tblTransferenciaProducao`.`datData`";
+        comSql += " FROM `smmdaa_bdGelo`.`tblTransferenciaProducao`";
         comSql += " WHERE ";
-        comSql += "     `tblTransferenciaProducao`.`intTransferenciaProducaoId` = " + transferenciaProducao.getIdTransferenciaProducao()+ ";";
+        if ((transferenciaProducao.getIdProducao() != 0) && (transferenciaProducao.getIdProdutoCamara() != 0))
+        {
+            comSql += "     `tblTransferenciaProducao`.`intProducaoId` = " + transferenciaProducao.getIdProducao();
+            comSql += "      and `tblTransferenciaProducao`.`intProdutoCamaraId` = " + transferenciaProducao.getIdProdutoCamara();            
+        }
+        else
+            comSql += "     `tblTransferenciaProducao`.`intTransferenciaProducaoId` = " + transferenciaProducao.getIdTransferenciaProducao()+ ";";
         List tabela = super.listaUm();
         
         if(!tabela.isEmpty())
@@ -76,6 +98,7 @@ public class TransferenciaProducaoDAO extends DAO{
                 transferenciaProducao.setIdProducao(((Integer)bkp.get(1)).intValue());
                 transferenciaProducao.setIdProdutoCamara(((Integer)bkp.get(2)).intValue());
                 transferenciaProducao.setQuantidade((Double)bkp.get(3));
+                transferenciaProducao.setData((Date)bkp.get(4));
 
             }  
             return transferenciaProducao;
@@ -95,14 +118,16 @@ public class TransferenciaProducaoDAO extends DAO{
         if (listaUm(transferenciaProducao) == null)
         {
             comSql = "";
-            comSql += " INSERT INTO `bdGelo`.`tblTransferenciaProducao`";
+            comSql += " INSERT INTO `smmdaa_bdGelo`.`tblTransferenciaProducao`";
             comSql += " 	(`intProducaoId`,";
             comSql += " 	`intProdutoCamaraId`,";
-            comSql += " 	`dblQuantidade`)";
+            comSql += " 	`dblQuantidade`,";
+            comSql += " 	`datData`)";
             comSql += " VALUES";
             comSql += " 	(" + _transferenciaProducao.getIdProducao();
             comSql += " 	," + _transferenciaProducao.getIdProdutoCamara();
-            comSql += " 	," + _transferenciaProducao.getQuantidade() + ");";
+            comSql += " 	," + _transferenciaProducao.getQuantidade();
+            comSql += " 	,'" + _transferenciaProducao.getDataFormatada() + "');";
 
             retorno = atualizar();
             if(retorno)
@@ -122,19 +147,41 @@ public class TransferenciaProducaoDAO extends DAO{
         else
         {
             comSql = "";
-            comSql += " UPDATE `bdGelo`.`tblTransferenciaProducao` SET";
-            comSql += " 	`intProducaoId` = " + _transferenciaProducao.getIdProducao();
-            comSql += " 	,`intProdutoCamaraId` = " + _transferenciaProducao.getIdProdutoCamara();
-            comSql += " 	,`dblQuantidade` = " + _transferenciaProducao.getQuantidade();
+            comSql += " UPDATE `smmdaa_bdGelo`.`tblTransferenciaProducao` SET";
+            comSql += " 	`dblQuantidade` = " + _transferenciaProducao.getQuantidade();
+            comSql += " 	,`datData` = '" + _transferenciaProducao.getDataFormatada() + "'";
             comSql += " WHERE ";
-            comSql += " 	`intTransferenciaProducaoId` = " + _transferenciaProducao.getIdTransferenciaProducao() + ";";
+            if (_transferenciaProducao.getIdTransferenciaProducao() == 0)
+            {
+                comSql += " 	`intProducaoId` = " + _transferenciaProducao.getIdProducao();
+                comSql += " 	and `intProdutoCamaraId` = " + _transferenciaProducao.getIdProdutoCamara();
+            }
+            else
+                comSql += "    `intTransferenciaProducaoId` = " + _transferenciaProducao.getIdTransferenciaProducao() + ";";
+            
 
             retorno = atualizar();
         }
+        
+        
         
         return retorno;
         
     }       
         
-    
+    public boolean deleta(TransferenciaProducao transferenciaProducao) 
+    {
+        boolean retorno = false;
+
+        if (transferenciaProducao != null)
+        {
+            comSql = "";
+            comSql += " Delete from  `smmdaa_bdGelo`.`tblTransferenciaProducao` ";
+            comSql += " WHERE ";
+            comSql += " 	`intTransferenciaProducaoId` = " + transferenciaProducao.getIdTransferenciaProducao() + ";";
+            retorno = atualizar();
+        }
+        
+        return retorno;
+    }    
 }

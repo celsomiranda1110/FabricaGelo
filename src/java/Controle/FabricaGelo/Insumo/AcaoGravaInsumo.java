@@ -38,14 +38,20 @@ public class AcaoGravaInsumo extends Acao
             insumo = new Produto();
         
         insumo.setDescricao(descricao);
+        insumo.setVlUnitario(0);
         insumo.setTipo("IN");
         
         
         if (insumoDAO.atualizar(insumo))
         {
+            insumo.setIdProduto(insumoDAO.getIdentity());
             insumo = insumoDAO.listaUm(insumo);
             sessao.setAttribute("insumo", insumo);
-            pagRetorno = "FabricaGelo.Insumo.AcaoAbreInsumo";
+            
+            
+            sessao.setAttribute("avisoErro", "Insumo atualizado");
+            sessao.setAttribute("pagOrigemErro", "FabricaGelo.Insumo.AcaoAbreInsumo");
+            pagRetorno = "visao/erro.jsp";                    
         }
         
         return pagRetorno;

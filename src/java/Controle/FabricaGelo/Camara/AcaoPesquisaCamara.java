@@ -5,9 +5,9 @@
  */
 package Controle.FabricaGelo.Camara;
 
-import Bean.Camara;
+import Bean.Equipamento;
 import Controle.FabricaGelo.Gerais.Acao;
-import DAO.CamaraDAO;
+import DAO.EquipamentoDAO;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -26,11 +26,13 @@ public class AcaoPesquisaCamara extends Acao{
         Connection conexao = (Connection)req.getAttribute("connection");
         HttpSession sessao = req.getSession(false);
 
-        List<Camara> lstCamara = new ArrayList<Camara>();
-        List<Camara> lstRetorno = new ArrayList<Camara>();
+        List<Equipamento> lstCamara = new ArrayList<Equipamento>();
+        List<Equipamento> lstRetorno = new ArrayList<Equipamento>();
         
-        CamaraDAO camaraDAO = new CamaraDAO(conexao);
-        lstCamara = camaraDAO.listaTodos();
+        EquipamentoDAO camaraDAO = new EquipamentoDAO(conexao);
+        Equipamento camara = new Equipamento();
+        camara.setTipo("CA");
+        lstCamara = camaraDAO.listaTodos(camara);
         
         String pesquisa = req.getParameter("txtPesquisa");
         if (pesquisa != "")
@@ -38,7 +40,7 @@ public class AcaoPesquisaCamara extends Acao{
             Iterator it = lstCamara.iterator();
             while (it.hasNext())
             {
-                Camara _camara = (Camara)it.next();
+                Equipamento _camara = (Equipamento)it.next();
 
                 if (_camara.getDescricao().contains(pesquisa.toUpperCase()))
                     lstRetorno.add(_camara);

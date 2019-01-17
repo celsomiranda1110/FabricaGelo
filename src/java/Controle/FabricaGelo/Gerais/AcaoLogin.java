@@ -26,6 +26,9 @@ public class AcaoLogin extends Acao
         HttpSession sessao = req.getSession(false);
         String retorno = "";
         
+        String mensagemErro = "";
+        String pagRetorno = "";
+        
 //        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 //
 //        // capta dados da página de login
@@ -76,17 +79,28 @@ public class AcaoLogin extends Acao
                 funcionario = _profissional;
                 break;
             }
+            else
+                funcionario = null;
         }
         
-        List<Menu> lstMenu = new ArrayList();
-        MenuDAO menuDAO = new MenuDAO(conexao);
-        lstMenu = menuDAO.listaTodos(); 
-        
-        sessao.setAttribute("usuario", funcionario);
-        sessao.setAttribute("lstMenuGeral", lstMenu);
+        if (funcionario == null)
+        {
+            sessao.setAttribute("avisoErro", "Usuário não reconhecido");
+            sessao.setAttribute("pagOrigemErro", "index.jsp");
+            pagRetorno = "visao/erro.jsp";              
+        }
+        else
+        {
+            List<Menu> lstMenu = new ArrayList();
+            MenuDAO menuDAO = new MenuDAO(conexao);
+            lstMenu = menuDAO.listaTodos(); 
 
+            sessao.setAttribute("usuario", funcionario);
+            sessao.setAttribute("lstMenuGeral", lstMenu);
+            pagRetorno = "visao/principal.jsp";   
+        }
         
-        return "visao/principal.jsp";  
+        return pagRetorno;  
 
     }
 }

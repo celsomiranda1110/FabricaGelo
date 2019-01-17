@@ -31,7 +31,7 @@ public class AvariaDAO extends DAO{
         comSql += "     `tblAvaria`.`intAvariaId`,";
         comSql += "     `tblAvaria`.`strDescricao`";
         comSql += " FROM ";
-        comSql += "     `bdGelo`.`tblAvaria`;";
+        comSql += "     `smmdaa_bdGelo`.`tblAvaria`;";
         List tabela = super.listaTodos();
         
         for(int i = 0; i < tabela.size(); i++)
@@ -57,7 +57,7 @@ public class AvariaDAO extends DAO{
         comSql += "     `tblAvaria`.`intAvariaId`,";
         comSql += "     `tblAvaria`.`strDescricao`";
         comSql += " FROM ";
-        comSql += "     `bdGelo`.`tblAvaria`";
+        comSql += "     `smmdaa_bdGelo`.`tblAvaria`";
         comSql += " WHERE ";
         comSql += "     `tblAvaria`.`intAvariaId` = " + avaria.getIdAvaria() + ";";
         List tabela = super.listaUm();
@@ -90,7 +90,7 @@ public class AvariaDAO extends DAO{
         if (listaUm(avaria) == null)
         {
             comSql = "";
-            comSql += " INSERT INTO `bdGelo`.`tblAvaria` ";
+            comSql += " INSERT INTO `smmdaa_bdGelo`.`tblAvaria` ";
             comSql += " (`strDescricao`)";
             comSql += " VALUES";
             comSql += " ('" + _avaria.getDescricao() + "');";
@@ -113,7 +113,7 @@ public class AvariaDAO extends DAO{
         else
         {
             comSql = "";
-            comSql += " UPDATE `bdGelo`.`tblAvaria` SET";
+            comSql += " UPDATE `smmdaa_bdGelo`.`tblAvaria` SET";
             comSql += "	`strDescricao` = '" + _avaria.getDescricao() + "'";
             comSql += " WHERE ";
             comSql += "	`intAvariaId` = " + _avaria.getIdAvaria()+ ";  ";   

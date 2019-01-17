@@ -37,8 +37,11 @@ public class ProdutoMovimentoDAO extends DAO{
         comSql += "     `tblProdutoMovimento`.`dblValorTotal`,";
         comSql += "     `tblProdutoMovimento`.`dblDesconto`,";
         comSql += "     `tblProdutoMovimento`.`dblQtAvaria`,";
+        comSql += "     `tblProdutoMovimento`.`dblQtBonus`,";
+        comSql += "     `tblProdutoMovimento`.`dblQtCortesia`,";
+        comSql += "     `tblProdutoMovimento`.`dblQtReposicao`,";
         comSql += "     `tblProdutoMovimento`.`chrOperacao`";
-        comSql += " FROM `bdGelo`.`tblProdutoMovimento`";
+        comSql += " FROM `smmdaa_bdGelo`.`tblProdutoMovimento`";
         comSql += " WHERE ";
         comSql += "     `tblProdutoMovimento`.`intMovimentoId` = " + movimento.getIdMovimento() + ";";
         
@@ -58,8 +61,10 @@ public class ProdutoMovimentoDAO extends DAO{
             produtoMovimento.setValorTotal((Double)bkp.get(6));
             produtoMovimento.setDesconto((Double)bkp.get(7));
             produtoMovimento.setQtAvaria((Double)bkp.get(8));
-            
-            produtoMovimento.setOperacao((String)bkp.get(9));
+            produtoMovimento.setQtBonus((Double)bkp.get(9));
+            produtoMovimento.setQtCortesia((Double)bkp.get(10));
+            produtoMovimento.setQtReposicao((Double)bkp.get(11));
+            produtoMovimento.setOperacao((String)bkp.get(12));
  
             ProdutoDAO produtoDAO = new ProdutoDAO(conexao);
             Produto produto = new Produto();
@@ -88,8 +93,11 @@ public class ProdutoMovimentoDAO extends DAO{
         comSql += "     `tblProdutoMovimento`.`dblValorTotal`,";
         comSql += "     `tblProdutoMovimento`.`dblDesconto`,";
         comSql += "     `tblProdutoMovimento`.`dblQtAvaria`,";
+        comSql += "     `tblProdutoMovimento`.`dblQtBonus`,";
+        comSql += "     `tblProdutoMovimento`.`dblQtCortesia`,";
+        comSql += "     `tblProdutoMovimento`.`dblQtReposicao`,";        
         comSql += "     `tblProdutoMovimento`.`chrOperacao`";
-        comSql += " FROM `bdGelo`.`tblProdutoMovimento`";
+        comSql += " FROM `smmdaa_bdGelo`.`tblProdutoMovimento`";
         comSql += " WHERE ";
         comSql += "     `tblProdutoMovimento`.`intProdutoMovimentoId` = " + produtoMovimento.getIdProdutoMovimento()+ ";";
         List tabela = super.listaUm();
@@ -110,7 +118,10 @@ public class ProdutoMovimentoDAO extends DAO{
                 produtoMovimento.setValorTotal((Double)bkp.get(6));
                 produtoMovimento.setDesconto((Double)bkp.get(7));
                 produtoMovimento.setQtAvaria((Double)bkp.get(8));
-                produtoMovimento.setOperacao((String)bkp.get(9));
+                produtoMovimento.setQtBonus((Double)bkp.get(9));
+                produtoMovimento.setQtCortesia((Double)bkp.get(10));
+                produtoMovimento.setQtReposicao((Double)bkp.get(11));                
+                produtoMovimento.setOperacao((String)bkp.get(12));
 
                 ProdutoDAO produtoDAO = new ProdutoDAO(conexao);
                 Produto produto = new Produto();
@@ -136,7 +147,7 @@ public class ProdutoMovimentoDAO extends DAO{
         if (listaUm(produtoMovimento) == null)
         {
             comSql = "";
-            comSql += " INSERT INTO `bdGelo`.`tblProdutoMovimento`";
+            comSql += " INSERT INTO `smmdaa_bdGelo`.`tblProdutoMovimento`";
             comSql += " 	(`intMovimentoId`,";
             comSql += " 	`intProdutoId`,";
             comSql += " 	`dblIcms`,";
@@ -145,6 +156,9 @@ public class ProdutoMovimentoDAO extends DAO{
             comSql += " 	`dblValorTotal`,";
             comSql += " 	`dblDesconto`,";
             comSql += " 	`dblQtAvaria`,";
+            comSql += " 	`dblQtBonus`,";
+            comSql += " 	`dblQtCortesia`,";
+            comSql += " 	`dblQtReposicao`,";
             comSql += " 	`chrOperacao`)";
             comSql += " VALUES";
             comSql += " 	(" + _produtoMovimento.getIdMovimento();
@@ -155,13 +169,16 @@ public class ProdutoMovimentoDAO extends DAO{
             comSql += " 	," + _produtoMovimento.getValorTotal();
             comSql += " 	," + _produtoMovimento.getDesconto() ;
             comSql += " 	," + _produtoMovimento.getQtAvaria();
+            comSql += " 	," + _produtoMovimento.getQtBonus();
+            comSql += " 	," + _produtoMovimento.getQtCortesia();
+            comSql += " 	," + _produtoMovimento.getQtReposicao();
             comSql += " 	,'" + _produtoMovimento.getOperacao() + "');";
             
             retorno = atualizar();
             if(retorno)
             {
                 comSql = "";
-                comSql += " Select max(intProdutoMovimentoId) as idProdutoMovimento from `tblProdutoMovimento`;";
+                comSql += " Select max(intProdutoMovimentoId) as idProdutoMovimento from `smmdaa_bdGelo`.`tblProdutoMovimento`;";
                 List lstConsulta = listaUm();
                 for(int i = 0; i < lstConsulta.size(); i++)
                 {
@@ -175,7 +192,7 @@ public class ProdutoMovimentoDAO extends DAO{
         else
         {
             comSql = "";
-            comSql += " UPDATE `bdGelo`.`tblProdutoMovimento` SET";
+            comSql += " UPDATE `smmdaa_bdGelo`.`tblProdutoMovimento` SET";
             comSql += " 	`intMovimentoId` = " + _produtoMovimento.getIdMovimento();
             comSql += " 	,`intProdutoId` = " + _produtoMovimento.getIdProduto();
             comSql += " 	,`dblIcms` = "  + _produtoMovimento.getIcms();
@@ -184,6 +201,9 @@ public class ProdutoMovimentoDAO extends DAO{
             comSql += " 	,`dblValorTotal` = "  + _produtoMovimento.getValorTotal();
             comSql += " 	,`dblDesconto` = "  + _produtoMovimento.getDesconto();
             comSql += " 	,`dblQtAvaria` = "  + _produtoMovimento.getQtAvaria();
+            comSql += " 	,`dblQtBonus` = "  + _produtoMovimento.getQtBonus();
+            comSql += " 	,`dblQtCortesia` = "  + _produtoMovimento.getQtCortesia();
+            comSql += " 	,`dblQtReposicao` = "  + _produtoMovimento.getQtReposicao();
             comSql += " 	,`chrOperacao` = '"  + _produtoMovimento.getOperacao() + "'";
             comSql += " WHERE ";
             comSql += " 	`intProdutoMovimentoId` = " + _produtoMovimento.getIdProdutoMovimento() + ";";
@@ -192,23 +212,34 @@ public class ProdutoMovimentoDAO extends DAO{
         
         if (retorno)
         {
+            boolean atualizaSaldo = false;
+            
             // atualização de saldo
             ProdutoDAO produtoDAO = new ProdutoDAO(conexao);
             Produto produto = (Produto)_produtoMovimento.getProduto();
+            if (produto == null)
+            {
+                produto = new Produto();
+                produto.setIdProduto(_produtoMovimento.getIdProduto());
+                produto = produtoDAO.listaUm(produto);
+            }
             double saldoAtual = 0;
             
             if (_produtoMovimento.getOperacao().equals("SU"))
             {
+                atualizaSaldo = true;
                 saldoAtual = produto.getSaldo() - _produtoMovimento.getQuantidade();
                 produto.setSaldo(saldoAtual);
             }
             else if(_produtoMovimento.getOperacao().equals("AD"))
             {
+                atualizaSaldo = true;
                 saldoAtual = produto.getSaldo() + _produtoMovimento.getQuantidade();
                 produto.setSaldo(saldoAtual);
             }
 
-            produtoDAO.atualizar(produto);
+            if (atualizaSaldo)
+                produtoDAO.atualizar(produto);
         }
         
         return retorno;
@@ -222,7 +253,7 @@ public class ProdutoMovimentoDAO extends DAO{
         if (produtoMovimento != null)
         {
             comSql = "";
-            comSql += " Delete from `bdGelo`.`tblProdutoMovimento` ";
+            comSql += " Delete from `smmdaa_bdGelo`.`tblProdutoMovimento` ";
             comSql += " where ";
             comSql += "     `tblProdutoMovimento`.`intProdutoMovimentoId` = " + produtoMovimento.getIdProdutoMovimento()+ ";";
             retorno = atualizar();

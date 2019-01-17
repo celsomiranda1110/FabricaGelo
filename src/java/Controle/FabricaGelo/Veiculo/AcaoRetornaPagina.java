@@ -7,7 +7,7 @@ package Controle.FabricaGelo.Veiculo;
 
 import Bean.Colaborador;
 import Bean.Entrega;
-import Bean.Veiculo;
+import Bean.Equipamento;
 import Controle.FabricaGelo.Gerais.Acao;
 import java.sql.Connection;
 import javax.servlet.http.HttpServletRequest;
@@ -27,7 +27,7 @@ public class AcaoRetornaPagina extends Acao
         HttpSession sessao = req.getSession(false);
         
         String pagRetorno = (String)sessao.getAttribute("pagRetorno");
-        Veiculo veiculo = (Veiculo)sessao.getAttribute("veiculo");
+        Equipamento veiculo = (Equipamento)sessao.getAttribute("veiculo");
         Entrega entrega = (Entrega)sessao.getAttribute("entrega");
         
         if (pagRetorno != null)
@@ -42,16 +42,7 @@ public class AcaoRetornaPagina extends Acao
         {
             pagRetorno =  "FabricaGelo.Veiculo.AcaoListarVeiculo";
         }       
-//        if (pagRetorno != null)
-//        {
-//            sessao.setAttribute("veiculo", veiculo);
-//           //sessao.setAttribute("colaborador", colaborador);
-//        }
-//        else
-//        {
-//            sessao.setAttribute("veiculo", null);
-//            pagRetorno = "FabricaGelo.Veiculo.AcaoListarVeiculo";
-//        }
+
         
         return pagRetorno;
     }

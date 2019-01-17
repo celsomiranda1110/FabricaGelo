@@ -44,7 +44,6 @@ public class AcaoBuscarProduto extends Acao
         if (bonificacao == null)
             bonificacao = new Movimento();
         
-        bonificacao.setProfissional(usuario);
         bonificacao.setNumero(numero);
         bonificacao.setNotaFiscal(notaFiscal);
         bonificacao.setDataLancamento(dtLancamento);

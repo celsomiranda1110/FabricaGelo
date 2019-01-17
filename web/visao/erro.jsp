@@ -20,7 +20,7 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="alert alert-danger">
-                              <strong>Erro!</strong> ${avisoErro}
+                              <strong>Mensagem: </strong> ${avisoErro}
                             </div> 
                         </div>
                     </div>

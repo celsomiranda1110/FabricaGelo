@@ -24,6 +24,7 @@ public class Pagamento implements Bean{
     private int numParcela;
     private String situacao;
     private String cobranca;
+    private boolean processar;
     
     String formato = "dd/MM/yyyy";
     private String descSituacao = "";
@@ -107,9 +108,11 @@ public class Pagamento implements Bean{
     public void setSituacao(String situacao) {
         this.situacao = situacao;
         if (this.situacao.equals("PG"))
-            this.descSituacao = "PAGAMENTO REALIZADO";
+            this.descSituacao = "PAGAMENTO LIQUIDADO";
         else if (this.situacao.equals("PP"))
-            this.descSituacao = "PAGAMENTO PENDENTE";
+            this.descSituacao = "EM PAGAMENTO";
+        else if (this.situacao.equals("PC"))
+            this.descSituacao = "PAGAMENTO CADASTRADO";
     }
 
     public String getDescSituacao() {
@@ -135,6 +138,14 @@ public class Pagamento implements Bean{
     public void setLstParcela(List<Parcela> lstParcela) {
         this.lstParcela = lstParcela;
     }
+
+    public boolean isProcessar() {
+        return processar;
+    }
+
+    public void setProcessar(boolean processar) {
+        this.processar = processar;
+    }
     
     
 
@@ -151,6 +162,7 @@ public class Pagamento implements Bean{
         _pagamento.setNumParcela(this.numParcela);
         _pagamento.setSituacao(this.situacao);
         _pagamento.setCobranca(this.cobranca);
+        _pagamento.setProcessar(this.processar);
         
         _pagamento.setLstParcela(this.lstParcela);
         

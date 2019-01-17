@@ -47,16 +47,16 @@
                                         <th><div align="left">Turno</div></th>
                                         <th><div align="left">Produto</div></th>
                                         <th><div align="left">Qt Produção</div></th>
-                                        
+                                        <th><div align="left">Situação</div></th>
                                     </tr> 
                                     <c:forEach var="lstProd" items="${lstProducao}" varStatus="s">
                                         <tr>
                                             <td> <input type="image" src="visao/css/bootstrap/img/Text.png" onclick="seleciona('FabricaGelo.Producao.AcaoSelecionaProducao?idProducao=${lstProd.idProducao}')"> </td>
                                             <td> ${lstProd.data} </td>
-                                            <td> ${lstProd.turno} </td>
+                                            <td> ${lstProd.descTurno} </td>
                                             <td> ${lstProd.produto} </td>
                                             <td> ${lstProd.quantidade} </td>
-                                            
+                                            <td> ${lstProd.descSituacao} </td>
                                         </tr>
                                     </c:forEach>
                                 </tbody>

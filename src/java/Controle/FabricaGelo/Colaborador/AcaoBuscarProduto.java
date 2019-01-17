@@ -28,8 +28,7 @@ public String executa(HttpServletRequest req, HttpServletResponse res) throws Ex
         Connection conexao = (Connection)req.getAttribute("connection");
         HttpSession sessao = req.getSession(false);
 
-        List<Produto> lstProduto = new ArrayList<Produto>();
-        ProdutoDAO produtoDAO = new ProdutoDAO(conexao);
+
         
         // Dados do colaborador
         String cnpj = (req.getParameter("txtCnpj").equals("") || req.getParameter("txtCnpj") == null) ? "" : req.getParameter("txtCnpj");
@@ -58,9 +57,14 @@ public String executa(HttpServletRequest req, HttpServletResponse res) throws Ex
         colaborador.setCpf(cpf);
         colaborador.setContato(contato);
         colaborador.setFone(fone);
-        colaborador.setEmail(email);          
+        colaborador.setEmail(email); 
         
-        lstProduto = produtoDAO.listaTodos();
+        List<Produto> lstProduto = new ArrayList<Produto>();
+        ProdutoDAO produtoDAO = new ProdutoDAO(conexao); 
+        Produto produto = new Produto();
+        produto.setTipo("PR");
+        lstProduto = produtoDAO.listaTodos(produto);
+        
         sessao.setAttribute("colaborador",colaborador);
         sessao.setAttribute("lstProduto",lstProduto);
         sessao.setAttribute("pagRetorno","FabricaGelo.Colaborador.AcaoAbreColaborador");

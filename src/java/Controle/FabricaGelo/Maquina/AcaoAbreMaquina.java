@@ -5,6 +5,8 @@
  */
 package Controle.FabricaGelo.Maquina;
 
+import Bean.Equipamento;
+import Bean.Manutencao;
 import Controle.FabricaGelo.Gerais.Acao;
 import java.sql.Connection;
 import javax.servlet.http.HttpServletRequest;
@@ -23,7 +25,12 @@ public class AcaoAbreMaquina extends Acao
         Connection conexao = (Connection)req.getAttribute("connection");
         HttpSession sessao = req.getSession(false);
 
-        sessao.setAttribute("maquina",null);
+        Equipamento maquina = (Equipamento)sessao.getAttribute("maquina");
+        Manutencao manutencao = (Manutencao)sessao.getAttribute("manutencao");
+        
+        
+        sessao.setAttribute("maquina",maquina);
+        sessao.setAttribute("manutencao",manutencao);
         
         return "visao/maquina.jsp";
     }

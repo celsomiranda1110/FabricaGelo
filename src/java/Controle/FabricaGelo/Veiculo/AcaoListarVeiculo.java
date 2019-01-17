@@ -5,9 +5,9 @@
  */
 package Controle.FabricaGelo.Veiculo;
 
-import Bean.Veiculo;
+import Bean.Equipamento;
 import Controle.FabricaGelo.Gerais.Acao;
-import DAO.VeiculoDAO;
+import DAO.EquipamentoDAO;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,10 +25,12 @@ public class AcaoListarVeiculo extends Acao{
         Connection conexao = (Connection)req.getAttribute("connection");
         HttpSession sessao = req.getSession(false);
 
-        List<Veiculo> lstVeiculo = new ArrayList<Veiculo>();
-        VeiculoDAO veiculoDAO = new VeiculoDAO(conexao);
+        List<Equipamento> lstVeiculo = new ArrayList<Equipamento>();
+        EquipamentoDAO veiculoDAO = new EquipamentoDAO(conexao);
+        Equipamento equipamento = new Equipamento();
+        equipamento.setTipo("VE");
         
-        lstVeiculo = veiculoDAO.listaTodos();
+        lstVeiculo = veiculoDAO.listaTodos(equipamento);
         sessao.setAttribute("lstVeiculo",lstVeiculo);
         
         return "visao/listarVeiculo.jsp"; 

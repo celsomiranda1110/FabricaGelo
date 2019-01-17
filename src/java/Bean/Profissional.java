@@ -100,7 +100,7 @@ public class Profissional implements Bean{
     
     public String toString()
     {
-        return this.nome;
+        return this.nome + " - " + this.funcao;
     }
     
     public void replicar(Profissional _profissional)
