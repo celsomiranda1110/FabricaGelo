@@ -27,6 +27,8 @@ public class SaidaCamara implements Bean{
     private Equipamento equipamento;
     private ProdutoCamara produtoCamara;
 
+    
+    
     public int getIdSaidaCamara() {
         return idSaidaCamara;
     }

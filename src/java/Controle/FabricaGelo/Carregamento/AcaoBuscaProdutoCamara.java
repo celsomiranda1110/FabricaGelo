@@ -40,6 +40,7 @@ public class AcaoBuscaProdutoCamara extends Acao
             saidaCamara = new SaidaCamara();
         saidaCamara.setDataFormatada(dtSaidaCamara);
         saidaCamara.setIdEquipamento(Integer.parseInt(idVeiculo));
+        saidaCamara.setSituacao("CC"); // setando saída como cadastrada
         
         List<ProdutoCamara> lstProdutoCamara = new ArrayList<ProdutoCamara>();
         ProdutoCamaraDAO produtoCamaraDAO = new ProdutoCamaraDAO(conexao);

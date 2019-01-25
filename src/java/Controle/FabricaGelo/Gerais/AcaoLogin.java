@@ -76,7 +76,8 @@ public class AcaoLogin extends Acao
         {
             if ((_profissional.getUsuario().equals(login)) && (_profissional.getSenha().equals(senha)))
             {
-                funcionario = _profissional;
+                //funcionario = _profissional;
+                funcionario = funcionarioDAO.listaUm(_profissional);
                 break;
             }
             else
@@ -89,6 +90,12 @@ public class AcaoLogin extends Acao
             sessao.setAttribute("pagOrigemErro", "index.jsp");
             pagRetorno = "visao/erro.jsp";              
         }
+        else if (funcionario.getLstMenuProfissional() == null)
+        {
+            sessao.setAttribute("avisoErro", "Necessário definir acesso do funcionário");
+            sessao.setAttribute("pagOrigemErro", "index.jsp");
+            pagRetorno = "visao/erro.jsp";              
+        }
         else
         {
             List<Menu> lstMenu = new ArrayList();
@@ -96,6 +103,7 @@ public class AcaoLogin extends Acao
             lstMenu = menuDAO.listaTodos(); 
 
             sessao.setAttribute("usuario", funcionario);
+            sessao.setAttribute("lstMenuUsuario", funcionario.getLstMenuProfissional());
             sessao.setAttribute("lstMenuGeral", lstMenu);
             pagRetorno = "visao/principal.jsp";   
         }

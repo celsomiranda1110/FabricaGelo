@@ -82,10 +82,6 @@ public class AcaoGravaVenda extends Acao
                 lstProdutos = new ArrayList<ProdutoMovimento>();
                 
                 produtoVenda.setQuantidade(Double.parseDouble(quantidade));
-                produtoVenda.setQtAvaria(dbQtAvaria); 
-                produtoVenda.setQtBonus(Double.parseDouble(quantidadeBonus));
-                produtoVenda.setQtCortesia(Double.parseDouble(quantidadeCortesia));
-                produtoVenda.setQtReposicao(Double.parseDouble(quantidadeReposicao));
                 produtoVenda.setValor(Double.parseDouble(vlUnitario));
                 produtoVenda.setIcms(Double.parseDouble(vlIcms));
                 produtoVenda.setDesconto(Double.parseDouble(vlDesconto));

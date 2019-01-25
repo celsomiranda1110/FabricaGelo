@@ -94,12 +94,17 @@
                                     </div>                                        
                                     <div class="col-sm-9">
                                         
-                                        <div class="input-group">
-                                            <input type="text" class="form-control" id="txtFuncao" value="${profissional.funcao}">
-                                            <div class="input-group-btn">
-                                                <button type="button" class="btn btn-default" onClick="buscaFuncao()">...</button>
-                                            </div>                                            
-                                        </div>                                             
+                                        <select name="cmbFuncao" class="form-control">
+                                            <option value="0">... Selecione uma função profissional ...</option>
+                                            <c:forEach var="varFuncao" items="${lstFuncao}" varStatus="s">
+                                              <c:if test="${varFuncao.idFuncao == profissional.idFuncao}">
+                                                <option value="${varFuncao.idFuncao}" selected="selected">${varFuncao.descricao}</option>
+                                              </c:if>
+                                              <c:if test="${varFuncao.idFuncao != profissional.idFuncao}">
+                                                <option value="${varFuncao.idFuncao}">${varFuncao.descricao}</option>
+                                              </c:if>
+                                            </c:forEach>
+                                        </select>                                             
                                             
                                     </div>
                                 </div>

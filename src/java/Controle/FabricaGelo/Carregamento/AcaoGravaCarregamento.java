@@ -77,7 +77,7 @@ public class AcaoGravaCarregamento extends Acao
                 saidaCamara.setIdProdutoCamara(produtoCamara.getIdProdutoCamara());
                 saidaCamara.setSaida(Double.parseDouble(qtSaida));
                 saidaCamara.setDevolucao(0);
-                saidaCamara.setSituacao("CA");
+                saidaCamara.setSituacao("CC");
 
                 if (saidaCamaraDAO.atualizar(saidaCamara))
                 {

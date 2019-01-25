@@ -104,7 +104,10 @@ public class AcaoBuscarVeiculo extends Acao{
              }
           
              if(entregaDAO.atualizar(entrega))
+             {
+                 entrega.setIdEntrega(entregaDAO.getIdentity());
                  entrega = entregaDAO.listaUm(entrega);
+             }
              
              // produtos para entrega ainda não vinculada no banco
              // necessário confirmar início da entrega

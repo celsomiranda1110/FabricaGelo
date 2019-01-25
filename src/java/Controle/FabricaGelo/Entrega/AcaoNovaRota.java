@@ -12,6 +12,7 @@ import Bean.Produto;
 import Bean.ProdutoCamara;
 import Bean.ProdutoEntrega;
 import Bean.Profissional;
+import Bean.ProfissionalEntrega;
 import Bean.SaidaCamara;
 import Controle.FabricaGelo.Gerais.Acao;
 import DAO.ColaboradorDAO;
@@ -59,7 +60,30 @@ public class AcaoNovaRota extends Acao
         
         ProfissionalDAO profissionalDAO = new ProfissionalDAO(conexao);
         List<Profissional> lstProfissional = new ArrayList<Profissional>();
-        lstProfissional = profissionalDAO.listaTodos();   
+        List<Profissional> lstProfissionalAux = profissionalDAO.listaTodos(); 
+        
+        
+        
+        // excluindo profissionais já selecionados
+        if (entrega.getLstProfissionalEntrega() != null)
+        {
+            boolean incluiProfissional = true;
+            Iterator itProfissional = lstProfissionalAux.iterator();
+            while (itProfissional.hasNext())
+            {
+                incluiProfissional = true;
+                Profissional profissional = (Profissional)itProfissional.next();
+                Iterator itProfissionalColaborador = entrega.getLstProfissionalEntrega().iterator();
+                while (itProfissionalColaborador.hasNext())
+                {
+                    ProfissionalEntrega profissionalEntrega = (ProfissionalEntrega)itProfissionalColaborador.next();
+                    if(profissionalEntrega.getIdProfissional() == profissional.getIdProfissional())
+                        incluiProfissional = false;
+                }
+                if (incluiProfissional)
+                    lstProfissional.add(profissional);
+            }
+        }
         
         // carrega o carregamento do veículo
         // ainda não vinculada à entrega

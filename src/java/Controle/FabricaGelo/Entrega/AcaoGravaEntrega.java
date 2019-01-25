@@ -44,9 +44,23 @@ public class AcaoGravaEntrega extends Acao
         
         String pagRetorno = "";
         
-        sessao.setAttribute("avisoErro", "Rota atualizada com sucesso");
-        sessao.setAttribute("pagOrigemErro", "FabricaGelo.Entrega.AcaoNovaRota");
-        pagRetorno = "visao/erro.jsp";               
+        Entrega entrega = (Entrega)sessao.getAttribute("entrega");
+        EntregaDAO entregaDAO = new EntregaDAO(conexao);
+        entrega = entregaDAO.listaUm(entrega);
+        
+        if (entrega == null)
+        {
+            sessao.setAttribute("avisoErro", "Rota inexistente.");
+            sessao.setAttribute("pagOrigemErro", "FabricaGelo.Entrega.AcaoListarEntrega");
+            pagRetorno = "visao/erro.jsp";             
+        }
+        else
+        {
+            sessao.setAttribute("avisoErro", "Rota atualizada");
+            sessao.setAttribute("pagOrigemErro", "FabricaGelo.Entrega.AcaoNovaRota");
+            pagRetorno = "visao/erro.jsp";              
+        }
+              
  
         
         return pagRetorno;

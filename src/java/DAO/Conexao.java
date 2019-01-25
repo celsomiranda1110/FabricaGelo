@@ -15,8 +15,8 @@ public class Conexao
         try
         {
             Class.forName("org.gjt.mm.mysql.Driver");
-            return DriverManager.getConnection("jdbc:mysql://localhost/smmdaa_bdGelo", "root", "cloim10");
-            //return DriverManager.getConnection("jdbc:mysql://localhost/smmdaa_bdGelo", "smmdaa_dorli", "!#cepapeed#!");
+            //return DriverManager.getConnection("jdbc:mysql://localhost/smmdaa_bdGelo", "root", "cloim10");
+            return DriverManager.getConnection("jdbc:mysql://localhost/smmdaa_bdGelo", "smmdaa_dorli", "!#cepapeed#!");
             
         }
         catch(SQLException e)

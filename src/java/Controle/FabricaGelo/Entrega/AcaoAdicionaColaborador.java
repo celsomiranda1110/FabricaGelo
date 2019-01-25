@@ -46,9 +46,12 @@ public class AcaoAdicionaColaborador extends Acao{
         
         if (entregaDAO.atualizar(entrega))
         {
-           entrega = entregaDAO.listaUm(entrega);
-           
-           sessao.setAttribute("entrega",entrega);
+            entrega = entregaDAO.listaUm(entrega);
+
+            sessao.setAttribute("entrega",entrega);
+            
+            sessao.setAttribute("paramPesquisa",""); 
+            sessao.setAttribute("lstColaborador",null); 
 
         }        
         

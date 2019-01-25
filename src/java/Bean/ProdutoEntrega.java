@@ -24,12 +24,14 @@ public class ProdutoEntrega implements Bean{
     private double dblQuantidadeVenda;
     private double dblSaldo;
     private String situacao;
+    private String descSituacao;
 
     private Produto produto;
     
     private List<AvariaEntrega> lstAvariaEntrega;
 
     public ProdutoEntrega() {
+        this.situacao = "CA";
         this.dblQuantidade = 0;
         this.dblQuantidadeAvaria = 0;
         this.dblQuantidadeCortesia = 0;
@@ -122,14 +124,20 @@ public class ProdutoEntrega implements Bean{
         this.dblSaldo = dblSaldo;
     }
     
-    
-
     public String getSituacao() {
         return situacao;
     }
 
     public void setSituacao(String situacao) {
         this.situacao = situacao;
+        if (situacao.equals("CA"))
+            this.descSituacao = "CADASTRADO";
+        else if (situacao.equals("VI"))
+            this.descSituacao = "VINCULADO";
+    }
+
+    public String getDescSituacao() {
+        return descSituacao;
     }
 
     public Produto getProduto() {

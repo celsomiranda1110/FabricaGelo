@@ -28,7 +28,8 @@ public class MenuDAO extends DAO{
         comSql += " SELECT `tblMenu`.`intMenuId`,"; 
         comSql += "     `tblMenu`.`intSubMenuId`,"; 
         comSql += "     `tblMenu`.`strDescricao`,"; 
-        comSql += "     `tblMenu`.`strCaminhoWeb`"; 
+        comSql += "     `tblMenu`.`strCaminhoWeb`,"; 
+        comSql += "     `tblMenu`.`intOrdem`"; 
         comSql += " FROM `smmdaa_bdGelo`.`tblMenu` ; "; 
         
         
@@ -42,6 +43,7 @@ public class MenuDAO extends DAO{
                 menu.setIdSubMenu(((Integer)registro.get(1)).intValue());
                 menu.setDescricao(((String)registro.get(2)));
                 menu.setCaminhoWeb(((String)registro.get(3)));
+                menu.setOrdem(((Integer)registro.get(4)).intValue());
 
             }
 
@@ -61,10 +63,11 @@ public class MenuDAO extends DAO{
         comSql += " SELECT `tblMenu`.`intMenuId`,"; 
         comSql += "     `tblMenu`.`intSubMenuId`,"; 
         comSql += "     `tblMenu`.`strDescricao`,"; 
-        comSql += "     `tblMenu`.`strCaminhoWeb`"; 
+        comSql += "     `tblMenu`.`strCaminhoWeb`,"; 
+        comSql += "     `tblMenu`.`intOrdem`"; 
         comSql += " FROM `smmdaa_bdGelo`.`tblMenu`  "; 
         comSql += " ORDER BY ";
-        comSql += "     `tblMenu`.`intMenuId`;"; 
+        comSql += "     `tblMenu`.`intOrdem`, `tblMenu`.`intMenuId`;"; 
         
         List tabela = super.listaTodos();
         
@@ -77,6 +80,7 @@ public class MenuDAO extends DAO{
             _menu.setIdSubMenu(((Integer)bkp.get(1)).intValue());
             _menu.setDescricao(((String)bkp.get(2)));
             _menu.setCaminhoWeb(((String)bkp.get(3)));
+            _menu.setOrdem(((Integer)bkp.get(4)).intValue());
 
             
             lstTabela.add(_menu);

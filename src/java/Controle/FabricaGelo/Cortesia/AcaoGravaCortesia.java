@@ -81,7 +81,6 @@ public class AcaoGravaCortesia extends Acao
                 produtoCortesia.setIcms(Double.parseDouble(vlIcms));
                 produtoCortesia.setDesconto(Double.parseDouble(vlDesconto));
                 produtoCortesia.setValorTotal(dbVlTotal);
-                produtoCortesia.setQtAvaria(dbQtAvaria); 
                 produtoCortesia.setOperacao("");
                 Iterator itProduto = lstProdutos.iterator();
                 while (itProduto.hasNext())

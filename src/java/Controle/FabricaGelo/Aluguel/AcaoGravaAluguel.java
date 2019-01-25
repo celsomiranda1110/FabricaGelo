@@ -81,7 +81,6 @@ public class AcaoGravaAluguel extends Acao
                 produtoAluguel.setIcms(Double.parseDouble(vlIcms));
                 produtoAluguel.setDesconto(Double.parseDouble(vlDesconto));
                 produtoAluguel.setValorTotal(dbVlTotal);
-                produtoAluguel.setQtAvaria(dbQtAvaria); 
                 produtoAluguel.setOperacao("");
                 Iterator itProduto = lstProdutos.iterator();
                 while (itProduto.hasNext())

@@ -11,6 +11,7 @@ package DAO;
  */
 
 import Bean.Funcao;
+import Bean.MenuProfissional;
 import Bean.Profissional;
 import java.sql.Connection;
 import java.util.*;
@@ -60,6 +61,8 @@ public class ProfissionalDAO extends DAO{
             funcao.setIdFuncao(profissional.getIdFuncao());
             funcao = funcaoDAO.listaUm(funcao);
             profissional.setFuncao(funcao);
+            
+
 
             lstTabela.add(profissional);
         }
@@ -107,6 +110,11 @@ public class ProfissionalDAO extends DAO{
                 funcao.setIdFuncao(profissional.getIdFuncao());
                 funcao = funcaoDAO.listaUm(funcao);
                 profissional.setFuncao(funcao);
+                
+                List<MenuProfissional> lstMenuProfissional = new ArrayList<MenuProfissional>();
+                MenuProfissionalDAO menuProfissionalDAO = new MenuProfissionalDAO(conexao);
+                lstMenuProfissional = menuProfissionalDAO.listaTodos(profissional);
+                profissional.setLstMenuProfissional(lstMenuProfissional);                
                 
             }  
             return profissional;
@@ -163,7 +171,7 @@ public class ProfissionalDAO extends DAO{
             comSql = "";
             comSql += " UPDATE `smmdaa_bdGelo`.`tblProfissional` SET";
             comSql += " 	`intFuncaoId` = " + _profissional.getIdFuncao();
-            comSql += " 	,`strCTPS` = <'" + _profissional.getCtps() + "'";
+            comSql += " 	,`strCTPS` = '" + _profissional.getCtps() + "'";
             comSql += " 	,`strCpf` = '" + _profissional.getCpf() + "'";
             comSql += " 	,`strNome` = '" + _profissional.getNome() + "'";
             comSql += " 	,`strCelular` = '" + _profissional.getCelular() + "'";
@@ -173,7 +181,23 @@ public class ProfissionalDAO extends DAO{
             comSql += " 	`intProfissionalId` = " + _profissional.getIdProfissional() + ";";
             retorno = atualizar();
         }
-        
+        if (retorno)
+        {
+            
+            if (_profissional.getLstMenuProfissional() != null)
+            {
+                MenuProfissionalDAO menuProfissionalDAO = new MenuProfissionalDAO(conexao);
+                
+                Iterator itMenuProfissional = _profissional.getLstMenuProfissional().iterator();
+                while (itMenuProfissional.hasNext())
+                {
+                    MenuProfissional menuProfissional = (MenuProfissional)itMenuProfissional.next();
+                    menuProfissional.setIdProfissional(profissional.getIdProfissional());
+                    menuProfissionalDAO.atualizar(menuProfissional);
+                }
+            }
+            
+        }
         return retorno;
         
     }      

@@ -36,11 +36,11 @@ public class AcaoSelecionaEntrega extends Acao{
         String idEntrega = req.getParameter("idEntrega");
         entrega.setIdEntrega(Integer.parseInt(idEntrega));
         entrega = entregaDAO.listaUm(entrega);
-        
-        
-        
+       
         if (entrega.getSituacao().equals("CD"))
             pagRetorno = "FabricaGelo.Entrega.AcaoNovaRota";  
+        else if (entrega.getSituacao().equals("ET"))
+            pagRetorno = "FabricaGelo.Entrega.AcaoEncerrarRota";
         
         sessao.setAttribute("entrega", entrega);
         

@@ -25,6 +25,8 @@ public class AcaoSelecionaProduto extends Acao{
         Connection conexao = (Connection)req.getAttribute("connection");
         HttpSession sessao = req.getSession(false);
         
+        String pagRetorno = "FabricaGelo.Entrega.AcaoEncerrarRota";
+        
         EntregaDAO entregaDAO = new EntregaDAO(conexao);
         Entrega entrega = (Entrega)sessao.getAttribute("entrega");
         entrega = entregaDAO.listaUm(entrega);
@@ -36,15 +38,19 @@ public class AcaoSelecionaProduto extends Acao{
         produtoEntrega = produtoEntregaDAO.listaUm(produtoEntrega);
         
         sessao.setAttribute("entrega",entrega);
-        sessao.setAttribute("lstProdutoEntrega",entrega.getLstProdutoEntrega());
-        sessao.setAttribute("lstCustoEntrega",entrega.getLstCustoEntrega());
-        sessao.setAttribute("lstAbastecimento",entrega.getLstAbastecimento());
-        sessao.setAttribute("custoEntrega",null);
-        sessao.setAttribute("avariaEntrega",null);
         sessao.setAttribute("produtoEntrega",produtoEntrega);
         sessao.setAttribute("lstAvariaEntrega",produtoEntrega.getLstAvariaEntrega());
-        sessao.setAttribute("abastecimento",null);
         
-        return "visao/entrega.jsp";
+//        sessao.setAttribute("entrega",entrega);
+//        sessao.setAttribute("lstProdutoEntrega",entrega.getLstProdutoEntrega());
+//        sessao.setAttribute("lstCustoEntrega",entrega.getLstCustoEntrega());
+//        sessao.setAttribute("lstAbastecimento",entrega.getLstAbastecimento());
+//        sessao.setAttribute("custoEntrega",null);
+//        sessao.setAttribute("avariaEntrega",null);
+//        sessao.setAttribute("produtoEntrega",produtoEntrega);
+//        sessao.setAttribute("lstAvariaEntrega",produtoEntrega.getLstAvariaEntrega());
+//        sessao.setAttribute("abastecimento",null);
+        
+        return pagRetorno;
     }
 }

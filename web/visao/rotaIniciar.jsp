@@ -14,7 +14,7 @@
     </head>
 
     <body>
-        <form name="formRota" method="post">
+        <form name="formRotaIniciar" method="post">
             <div class="container">
                 <div class="panel panel-default">
                     <div class="panel-heading"><div class="panel-title text-center"><h3><b>Dados de rota</b></h3></div></div>
@@ -29,7 +29,7 @@
                                             <div class="container-fluid">
                                                 <ul class="nav navbar-nav">
                                                     <li class="btn"><button type="button" class="btn btn-default" onClick="atualizar()">Atualizar</button></li>
-                                                    <li class="btn"><button type="button" class="btn btn-default" onClick="fechar()">Fechar</button></li>
+                                                    <li class="btn"><button type="button" class="btn btn-default" onClick="iniciarTransito()">Iniciar rota</button></li>
                                                 </ul>
                                                 <ul class="nav navbar-nav navbar-right">
                                                     <li class="btn"><button type="button" class="btn btn-default" onClick="retornar()">Retornar</button></li>
@@ -197,7 +197,7 @@
                                                         <select name="cmbColaborador" class="form-control">
                                                             <option value="0">... Selecione uma empresa ...</option>
                                                             <c:forEach var="colab" items="${lstColaborador}" varStatus="s">
-                                                              <option value="${colab.idColaborador}">${colab.nome}</option>
+                                                              <option value="${colab.idColaborador}">${colab.razaoSocial}</option>
                                                             </c:forEach>
                                                         </select> 
                                                     </div> 
@@ -220,7 +220,7 @@
                                                         </tr> 
                                                         <c:forEach var="lstClienteVisit" items="${lstColaboradorEntrega}" varStatus="s">
                                                             <tr>
-                                                                <td> <input type="image" src="visao/css/bootstrap/img/Delete.png" onClick="excluirColaborador('FabricaGelo.Entrega.AcaoExcluirColaborador?idColaboradorEntrega=${lstClienteVisit.idColaboradorEntrega}')">  </td>
+                                                                <td> <input type="image" src="visao/css/bootstrap/img/Delete.png" onClick="selecionaColaborador('FabricaGelo.Entrega.AcaoSelecionaColaborador?idColaboradorEntrega=${lstClienteVisit.idColaboradorEntrega}')">  </td>
                                                                 <td> ${lstClienteVisit.cliente.cnpj} </td>
                                                                 <td> ${lstClienteVisit.cliente.razaoSocial} </td>
                                                                 <td> ${lstClienteVisit.cliente.bairro} </td>
@@ -246,6 +246,11 @@
             function atualizar()
             {
                 document.forms[0].action="FabricaGelo.Entrega.AcaoGravaEntrega";
+                document.forms[0].submit();
+            }
+            function iniciarTransito()
+            {
+                document.forms[0].action="FabricaGelo.Entrega.AcaoAbreInicioRota";
                 document.forms[0].submit();
             }
             function buscarVeiculo()
@@ -277,6 +282,11 @@
             function buscarColaboradorPendente()
             {
                 document.forms[0].action="FabricaGelo.Entrega.AcaoPesquisaColaboradorPendente";
+                document.forms[0].submit();
+            }
+            function retornar()
+            {
+                document.forms[0].action="FabricaGelo.Entrega.AcaoListarEntrega";
                 document.forms[0].submit();
             }
         </script>                                             

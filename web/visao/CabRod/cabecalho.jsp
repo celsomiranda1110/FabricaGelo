@@ -70,9 +70,23 @@
                                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">${varMenu.descricao}</a>
                                 <ul class="dropdown-menu">
                                     <c:forEach var="varSubMenu" items="${lstMenuGeral}" varStatus="s">
+                                        
                                         <c:if test="${varSubMenu.idSubMenu == varMenu.idMenu}">
                                             
-                                            <li> <a href=${varSubMenu.caminhoWeb}>${varSubMenu.descricao}</a> </li>
+                                            <c:forEach var="varAcesso" items="${lstMenuUsuario}" varStatus="s">
+                                                
+                                                <c:if test="${varAcesso.idMenu == varSubMenu.idMenu}">
+                                                    
+                                                    <c:if test="${varAcesso.ativo == 'S'}">
+                                                        
+                                                        <li> <a href=${varSubMenu.caminhoWeb}>${varSubMenu.descricao}</a> </li>
+                                                        
+                                                    </c:if>
+                                                    
+                                                </c:if>
+                                                
+                                            </c:forEach>
+                                            
                                             
                                         </c:if>
                                     </c:forEach>

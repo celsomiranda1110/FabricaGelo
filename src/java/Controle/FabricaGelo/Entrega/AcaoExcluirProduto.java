@@ -25,15 +25,33 @@ public class AcaoExcluirProduto extends Acao{
         Connection conexao = (Connection)req.getAttribute("connection");
         HttpSession sessao = req.getSession(false);
 
-        ProdutoEntregaDAO produtoEntregaDAO = new ProdutoEntregaDAO(conexao);
-        ProdutoEntrega produtoEntrega = new ProdutoEntrega();
-        String idProdutoEntrega = req.getParameter("idProdutoEntrega");
-        produtoEntrega.setIdProdutoEntrega(Integer.parseInt(idProdutoEntrega));
-        produtoEntregaDAO.delete(produtoEntrega);
+        String pagRetorno = "FabricaGelo.Entrega.AcaoEncerrarRota";
         
         EntregaDAO entregaDAO = new EntregaDAO(conexao);
         Entrega entrega = (Entrega)sessao.getAttribute("entrega");
-        entrega = entregaDAO.listaUm(entrega);        
+        ProdutoEntrega produtoEntrega = (ProdutoEntrega)sessao.getAttribute("produtoEntrega"); 
+        
+        if (entrega == null)
+        {
+            sessao.setAttribute("avisoErro", "Rota não selecionada");
+            sessao.setAttribute("pagOrigemErro", "FabricaGelo.Entrega.AcaoEncerrarRota");
+            pagRetorno = "visao/erro.jsp";             
+        }
+        else if (produtoEntrega == null)
+        {
+            sessao.setAttribute("avisoErro", "Produto não selecionado");
+            sessao.setAttribute("pagOrigemErro", "FabricaGelo.Entrega.AcaoEncerrarRota");
+            pagRetorno = "visao/erro.jsp";             
+        }        
+//        ProdutoEntregaDAO produtoEntregaDAO = new ProdutoEntregaDAO(conexao);
+//        ProdutoEntrega produtoEntrega = new ProdutoEntrega();
+//        String idProdutoEntrega = req.getParameter("idProdutoEntrega");
+//        produtoEntrega.setIdProdutoEntrega(Integer.parseInt(idProdutoEntrega));
+//        produtoEntregaDAO.delete(produtoEntrega);
+//        
+//        EntregaDAO entregaDAO = new EntregaDAO(conexao);
+//        Entrega entrega = (Entrega)sessao.getAttribute("entrega");
+//        entrega = entregaDAO.listaUm(entrega);        
         
         sessao.setAttribute("entrega",entrega);
         sessao.setAttribute("lstProdutoEntrega",entrega.getLstProdutoEntrega());

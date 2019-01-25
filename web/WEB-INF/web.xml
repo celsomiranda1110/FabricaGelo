@@ -26,6 +26,14 @@
     <!--Eventos gerais do sistema -->
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.Gerais.AcaoAtualizaAcesso</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.Gerais.AcaoDefinicaoAcesso</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
         <url-pattern>/FabricaGelo.Gerais.AcaoLogin</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
@@ -35,7 +43,11 @@
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
         <url-pattern>/FabricaGelo.Gerais.AcaoMenu</url-pattern>
-    </servlet-mapping>                     
+    </servlet-mapping> 
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.Gerais.AcaoSairSistema</url-pattern>
+    </servlet-mapping>                    
     
     <!--Eventos do móduo Colaborador -->
     <servlet-mapping>
@@ -388,7 +400,22 @@
         <url-pattern>/FabricaGelo.Movimento.AcaoSelecionaProduto</url-pattern>
     </servlet-mapping>       
    <!--Eventos do móduo Venda -->
+   
+    <!--Eventos do móduo movimento entrega -->
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.MovimentoEntrega.AcaoAbreMovimentoEntrega</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.MovimentoEntrega.AcaoCancelarMovimentoEntrega</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.MovimentoEntrega.AcaoSelecionaMovimentoEntrega</url-pattern>
+    </servlet-mapping>
     
+    <!--Eventos do móduo pagamento -->
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
         <url-pattern>/FabricaGelo.Venda.AcaoAbrePagamento</url-pattern>
@@ -640,7 +667,19 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.Entrega.AcaoAbreInicioRota</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.Entrega.AcaoAdicionaAvaria</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
         <url-pattern>/FabricaGelo.Entrega.AcaoAdicionaColaborador</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.Entrega.AcaoAdicionaMovimento</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
@@ -680,6 +719,10 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.Entrega.AcaoEncerrarRota</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
         <url-pattern>/FabricaGelo.Entrega.AcaoExcluirAbastecimento</url-pattern>
     </servlet-mapping>    
     <servlet-mapping>
@@ -701,6 +744,10 @@
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
         <url-pattern>/FabricaGelo.Entrega.AcaoGravaEntrega</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.Entrega.AcaoIniciarRota</url-pattern>
     </servlet-mapping>  
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
@@ -732,7 +779,7 @@
     </servlet-mapping> 
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
-        <url-pattern>/FabricaGelo.Entrega.AcaoSelecionaClienteVisita</url-pattern>
+        <url-pattern>/FabricaGelo.Entrega.AcaoSelecionaColaboradorEntrega</url-pattern>
     </servlet-mapping>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>

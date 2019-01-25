@@ -29,6 +29,7 @@ public class AcaoListarEntrega extends Acao{
         EntregaDAO entregaDAO = new EntregaDAO(conexao);
         lstEntrega = entregaDAO.listaTodos(null);
         
+        sessao.setAttribute("entrega",null);
         sessao.setAttribute("lstEntrega",lstEntrega);
         
         return "visao/listarEntregas.jsp"; 

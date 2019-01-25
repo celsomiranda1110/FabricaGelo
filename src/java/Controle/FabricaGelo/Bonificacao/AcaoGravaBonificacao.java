@@ -81,7 +81,6 @@ public class AcaoGravaBonificacao extends Acao
                 produtoBonificacao.setIcms(Double.parseDouble(vlIcms));
                 produtoBonificacao.setDesconto(Double.parseDouble(vlDesconto));
                 produtoBonificacao.setValorTotal(dbVlTotal);
-                produtoBonificacao.setQtAvaria(dbQtAvaria); 
                 produtoBonificacao.setOperacao("");
                 Iterator itProduto = lstProdutos.iterator();
                 while (itProduto.hasNext())

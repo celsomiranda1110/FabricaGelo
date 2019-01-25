@@ -36,6 +36,7 @@ public class AcaoGravaProfissional extends Acao
         String cpf = (req.getParameter("txtCpf") == "" || req.getParameter("txtCpf") == null) ? "" : req.getParameter("txtCpf");
         String nome = (req.getParameter("txtProfissional") == "" || req.getParameter("txtProfissional") == null) ? "" : req.getParameter("txtProfissional");
         String ctps = (req.getParameter("txtCtps") == "" || req.getParameter("txtCtps") == null) ? "" : req.getParameter("txtCtps");
+        String idFuncao = (req.getParameter("cmbFuncao") == "" || req.getParameter("cmbFuncao") == null) ? "" : req.getParameter("cmbFuncao");
         String celular = (req.getParameter("txtCelular") == "" || req.getParameter("txtCelular") == null) ? "" : req.getParameter("txtCelular");
         String usuario = (req.getParameter("txtUsuario") == "" || req.getParameter("txtUsuario") == null) ? "" : req.getParameter("txtUsuario");
         String senha = (req.getParameter("txtSenha") == "" || req.getParameter("txtSenha") == null) ? "" : req.getParameter("txtSenha");
@@ -43,6 +44,7 @@ public class AcaoGravaProfissional extends Acao
         profissional.setCpf(cpf);
         profissional.setNome(nome);
         profissional.setCtps(ctps);
+        profissional.setIdFuncao(Integer.parseInt(idFuncao));
         profissional.setCelular(celular);
         profissional.setUsuario(usuario);
         profissional.setSenha(senha);

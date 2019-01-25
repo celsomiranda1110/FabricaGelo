@@ -3,15 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controle.FabricaGelo.Profissional;
+package Controle.FabricaGelo.Entrega;
 
-import Bean.Funcao;
-import Bean.Profissional;
+import Bean.Entrega;
 import Controle.FabricaGelo.Gerais.Acao;
-import DAO.FuncaoDAO;
 import java.sql.Connection;
-import java.util.ArrayList;
-import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -20,7 +16,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author celso
  */
-public class AcaoAbreProfissional extends Acao
+public class AcaoAbreInicioRota extends Acao
 {
     
     public String executa(HttpServletRequest req, HttpServletResponse res) throws Exception
@@ -28,16 +24,13 @@ public class AcaoAbreProfissional extends Acao
         Connection conexao = (Connection)req.getAttribute("connection");
         HttpSession sessao = req.getSession(false);
         
-        Profissional profissional = (Profissional)sessao.getAttribute("profissional");
-       
-        FuncaoDAO funcaoDAO = new FuncaoDAO(conexao);
-        List<Funcao> lstFuncao = new ArrayList<Funcao>();
-        lstFuncao = funcaoDAO.listaTodos();
-
-        sessao.setAttribute("profissional",profissional);
-        sessao.setAttribute("lstFuncao",lstFuncao);
+        String pagRetorno = "visao/rotaIniciarTransito.jsp";
         
-        return "visao/profissional.jsp";
+        Entrega entrega = (Entrega)sessao.getAttribute("entrega");
+        
+        sessao.setAttribute("entrega",entrega);
+        
+        return pagRetorno;
+        
     }
-    
 }

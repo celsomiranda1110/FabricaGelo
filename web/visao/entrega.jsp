@@ -326,8 +326,11 @@
                                     <div class="panel-heading"><h3>Abastecimentos</h3></div>
                                     <div class="panel-body">
                                         <div class="row">
-                                            <div class="col-sm-8">
+                                            <div class="col-sm-6">
                                                 <label class="control-label">Posto</label>
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <label class="control-label">NF</label>
                                             </div>
                                             <div class="col-sm-2">
                                                 <label class="control-label">Valor do litro</label>
@@ -344,6 +347,9 @@
                                                         <button type="button" class="btn btn-default" onClick="pesquisaPosto()">...</button>
                                                     </div> 
                                                 </div>
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <input type="text" class="form-control" name="txtNota" id="txtNota" value="${abastecimento.nota}">    
                                             </div>
                                             <div class="col-sm-2">
                                                 <input type="text" class="form-control" name="txtVlLitro" id="txtVlLitro" value="${abastecimento.vlUnitario}">    

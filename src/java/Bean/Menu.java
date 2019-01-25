@@ -16,6 +16,7 @@ public class Menu implements Bean{
     private int idSubMenu;
     private String descricao;
     private String caminhoWeb;
+    private int ordem;
 
     
     public Menu() {
@@ -53,6 +54,14 @@ public class Menu implements Bean{
 
     public void setCaminhoWeb(String caminhoWeb) {
         this.caminhoWeb = caminhoWeb;
+    }
+
+    public int getOrdem() {
+        return ordem;
+    }
+
+    public void setOrdem(int ordem) {
+        this.ordem = ordem;
     }
 
     

@@ -17,6 +17,7 @@ import Bean.Entrega;
 import Controle.FabricaGelo.Gerais.Acao;
 import DAO.ColaboradorDAO;
 import DAO.ColaboradorEntregaDAO;
+import DAO.EntregaDAO;
 import DAO.MovimentoDAO;
 import DAO.PagamentoDAO;
 import java.sql.Connection;
@@ -30,6 +31,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.apache.batik.dom.svg.IdContainer;
 
 /**
  *
@@ -48,18 +50,18 @@ public class AcaoPesquisaColaboradorPendente extends Acao{
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         String dtFormatada = formatter.format(dt);
         int dia = gc.get(gc.DAY_OF_WEEK);
-        
+
+        EntregaDAO entregaDAO = new EntregaDAO(conexao);
         Entrega entrega = (Entrega)sessao.getAttribute("entrega");
-        
+        entrega = entregaDAO.listaUm(entrega);
+
+        List<ColaboradorEntrega> lstColaboradorEntrega = entrega.getLstColaboradorEntrega();
         List<Colaborador> lstColaborador = new ArrayList<Colaborador>();
         List<Colaborador> lstRetorno = new ArrayList<Colaborador>();
-        //List<ColaboradorEntrega> lstRetorno = new ArrayList<ColaboradorEntrega>();
-        //List<ColaboradorEntrega> lstRetornoAux = new ArrayList<ColaboradorEntrega>();
         List<Pagamento> lstPagamento = new ArrayList<Pagamento>();
         List<Parcela> lstParcela = new ArrayList<Parcela>();
         
         ColaboradorDAO colaboradorDAO = new ColaboradorDAO(conexao);
-        
         lstColaborador = colaboradorDAO.listaTodos();
         String pesquisa = req.getParameter("cmbMotivo");
         
@@ -116,26 +118,10 @@ public class AcaoPesquisaColaboradorPendente extends Acao{
                         if (movimento.getTipo().equals("VE"))
                         {
                         
-//                            Colaborador colaborador = (Colaborador)movimento.getColaborador();
-//                            Iterator itColaborador = lstRetorno.iterator();
-//                            while (itColaborador.hasNext())
-//                            {
-//                                ColaboradorEntrega _colaboradorEntrega = (ColaboradorEntrega)itColaborador.next();
-//                                Colaborador _colaborador = _colaboradorEntrega.getCliente();
-//                                if (_colaborador.getIdColaborador() == colaborador.getIdColaborador())
-//                                    inclui = false;
-//                            }
-
-//                            if (inclui)
-//                            {
                                 Colaborador colaborador = (Colaborador)movimento.getColaborador();
-//                                ColaboradorEntrega colaboradorEntrega = new ColaboradorEntrega();
-//                                colaboradorEntrega.setCliente(colaborador);
-//                                colaboradorEntrega.setIdEntrega(entrega.getIdEntrega());
                                 
                                 lstRetorno.add(colaborador);
                                 
-//                            }
                         }
                     }    
                 }
@@ -174,25 +160,8 @@ public class AcaoPesquisaColaboradorPendente extends Acao{
                         if(movimento.getTipo().equals("VE"))
                         {
                         
-//                            Colaborador colaborador = (Colaborador)movimento.getColaborador();
-//                            Iterator itColaborador = lstRetorno.iterator();
-//                            while (itColaborador.hasNext())
-//                            {
-//                                ColaboradorEntrega _colaboradorEntrega = (ColaboradorEntrega)itColaborador.next();
-//                                Colaborador _colaborador = _colaboradorEntrega.getCliente();
-//                                if (_colaborador.getIdColaborador() == colaborador.getIdColaborador())
-//                                    inclui = false;
-//                            }
-//
-//                            if (inclui)
-//                            {
-                                                                
-//                                ColaboradorEntrega colaboradorEntrega = new ColaboradorEntrega();
-//                                colaboradorEntrega.setCliente(colaborador);
-//                                colaboradorEntrega.setIdEntrega(entrega.getIdEntrega());
-                                Colaborador colaborador = (Colaborador)movimento.getColaborador();                                
-                                lstRetorno.add(colaborador);
-//                            }
+                            Colaborador colaborador = (Colaborador)movimento.getColaborador();                                
+                            lstRetorno.add(colaborador);
                             
                         }
                     }    
@@ -205,34 +174,36 @@ public class AcaoPesquisaColaboradorPendente extends Acao{
             while (itColaborador.hasNext())
             {
                 Colaborador colaborador = (Colaborador)itColaborador.next();
-//                ColaboradorEntrega colaboradorEntrega = new ColaboradorEntrega();
-//                colaboradorEntrega.setCliente(colaborador);
-//                colaboradorEntrega.setIdEntrega(entrega.getIdEntrega());
                 lstRetorno.add(colaborador);
             }
             
         }
         
-//        // atualizando lista de colaboradores para o usuário
-//        ColaboradorEntregaDAO colaboradorEntregaDAO = new ColaboradorEntregaDAO(conexao);
-//        Iterator itColaboradorEntrega = lstRetorno.iterator();
-//        while (itColaboradorEntrega.hasNext())
-//        {
-//            ColaboradorEntrega colaboradorEntrega = new ColaboradorEntrega();
-//            ColaboradorEntrega _colaboradorEntrega = (ColaboradorEntrega)itColaboradorEntrega.next();
-//            
-//            colaboradorEntrega = colaboradorEntregaDAO.listaUm(_colaboradorEntrega);
-//            
-//            if (colaboradorEntrega != null)
-//                lstRetornoAux.add(colaboradorEntrega);
-//            else
-//                lstRetornoAux.add(_colaboradorEntrega);
-// 
-//        }
+        // excluindo colaboradores já selecionados
+        List<Colaborador> lstColaboradorPendente = new ArrayList<Colaborador>();
+        if (entrega.getLstColaboradorEntrega() != null)
+        {
+            boolean incluiColaborador = true;
+            Iterator itRetorno = lstRetorno.iterator();
+            while (itRetorno.hasNext())
+            {
+                Colaborador colaborador = (Colaborador)itRetorno.next();
+                incluiColaborador = true;
+                Iterator itColaboradorEntrega = lstColaboradorEntrega.iterator();
+                while (itColaboradorEntrega.hasNext())
+                {
+                    ColaboradorEntrega colaboradorEntrega = (ColaboradorEntrega)itColaboradorEntrega.next();
+                    if (colaboradorEntrega.getIdColaborador() == colaborador.getIdColaborador())
+                        incluiColaborador = false;
+                }
+                if (incluiColaborador)
+                    lstColaboradorPendente.add(colaborador);
+            }
+        }
         
         sessao.setAttribute("entrega",entrega);
         sessao.setAttribute("paramPesquisa",pesquisa); 
-        sessao.setAttribute("lstColaborador",lstRetorno); 
+        sessao.setAttribute("lstColaborador",lstColaboradorPendente); 
         
         return "FabricaGelo.Entrega.AcaoNovaRota";
     }

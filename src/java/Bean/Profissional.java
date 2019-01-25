@@ -5,6 +5,8 @@
  */
 package Bean;
 
+import java.util.List;
+
 /**
  *
  * @author celso
@@ -20,6 +22,7 @@ public class Profissional implements Bean{
     private String usuario;
     
     private Funcao funcao;
+    private List<MenuProfissional> lstMenuProfissional;
 
     public int getIdProfissional() {
         return IdProfissional;
@@ -97,6 +100,16 @@ public class Profissional implements Bean{
         this.funcao = funcao;
         this.IdFuncao = funcao.getIdFuncao();
     }
+
+    public List<MenuProfissional> getLstMenuProfissional() {
+        return lstMenuProfissional;
+    }
+
+    public void setLstMenuProfissional(List<MenuProfissional> lstMenuProfissional) {
+        this.lstMenuProfissional = lstMenuProfissional;
+    }
+    
+    
     
     public String toString()
     {
@@ -114,6 +127,9 @@ public class Profissional implements Bean{
         _profissional.setCelular(this.celular);
         _profissional.setSenha(this.senha);
         _profissional.setUsuario(this.usuario);
+        
+        if (this.lstMenuProfissional != null)
+            _profissional.setLstMenuProfissional(this.lstMenuProfissional);
     
     }
 }

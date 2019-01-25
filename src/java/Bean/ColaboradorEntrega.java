@@ -106,8 +106,7 @@ public class ColaboradorEntrega implements Bean{
     }
 
    
-    
-    
+  
     
     
     

@@ -95,7 +95,10 @@ public class ProdutoEntregaDAO extends DAO{
         comSql += "     `tblProdutoEntrega`.`chrSituacao`";
         comSql += " FROM `smmdaa_bdGelo`.`tblProdutoEntrega`";
         comSql += " WHERE ";
-        comSql += "     `tblProdutoEntrega`.`intProdutoEntregaId` = " + produtoEntrega.getIdProdutoEntrega()+ ";";
+        if (produtoEntrega.getIdEntrega() != 0)
+            comSql += "     `tblProdutoEntrega`.`intEntregaId` = " + produtoEntrega.getIdEntrega()+ ";";
+        else
+            comSql += "     `tblProdutoEntrega`.`intProdutoEntregaId` = " + produtoEntrega.getIdProdutoEntrega()+ ";";
         List tabela = super.listaUm();
         
         if(!tabela.isEmpty())
@@ -206,6 +209,8 @@ public class ProdutoEntregaDAO extends DAO{
         
         if (retorno)
         {
+            double qtAvaria = 0;
+            
             if (_produtoEntrega.getLstAvariaEntrega() != null)
             {
                 AvariaEntregaDAO avariaEntregaDAO = new AvariaEntregaDAO(conexao);
@@ -214,18 +219,18 @@ public class ProdutoEntregaDAO extends DAO{
                 {
                     AvariaEntrega _avariaEntrega = (AvariaEntrega)itAvaria.next();
                     _avariaEntrega.setIdProdutoEntrega(_produtoEntrega.getIdProdutoEntrega());
-                    if (avariaEntregaDAO.atualizar(_avariaEntrega))
-                    {
-                        // atualizando quantidades
-                        comSql = "";
-                        comSql += " UPDATE `smmdaa_bdGelo`.`tblProdutoEntrega` SET";
-                        comSql += " 	`dblQtAvaria` = dblQtAvaria + " + _avariaEntrega.getQuantidade();
-                        comSql += "     ,`dblSaldo` = `dblSaldo` - " + _avariaEntrega.getQuantidade();
-                        comSql += " WHERE ";
-                        comSql += " 	`intProdutoEntregaId` = " + _produtoEntrega.getIdProdutoEntrega() + ";";                        
-                        atualizar();
-                    }
+                    avariaEntregaDAO.atualizar(_avariaEntrega);
+                    qtAvaria += _avariaEntrega.getQuantidade();
+
                 }
+                // atualizando quantidades
+                comSql = "";
+                comSql += " UPDATE `smmdaa_bdGelo`.`tblProdutoEntrega` SET";
+                comSql += " 	`dblQtAvaria` = " + qtAvaria;
+                comSql += "     ,`dblSaldo` = `dblQuantidade` - " + qtAvaria;
+                comSql += " WHERE ";
+                comSql += " 	`intProdutoEntregaId` = " + _produtoEntrega.getIdProdutoEntrega() + ";";                        
+                atualizar();                
             }
         }
         
