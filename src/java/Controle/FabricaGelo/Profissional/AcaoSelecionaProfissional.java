@@ -24,10 +24,10 @@ public class AcaoSelecionaProfissional extends Acao{
     {
         Connection conexao = (Connection)req.getAttribute("connection");
         HttpSession sessao = req.getSession(false);
-
-        Movimento venda = (Movimento)sessao.getAttribute("venda");
-        String pagRetorno = (String)sessao.getAttribute("pagRetorno");        
         
+        String pagRetorno = "FabricaGelo.Profissional.AcaoAbreProfissional";
+
+
         ProfissionalDAO profissionalDAO = new ProfissionalDAO(conexao);
         Profissional profissional = new Profissional();
         
@@ -35,13 +35,11 @@ public class AcaoSelecionaProfissional extends Acao{
         profissional.setIdProfissional(Integer.parseInt(idProfissional));
         profissional = profissionalDAO.listaUm(profissional);
 
-        sessao.setAttribute("venda",venda);
-        sessao.setAttribute("pagRetorno",pagRetorno);
-        
+
         sessao.setAttribute("profissional",profissional);
         
         
-        return "visao/profissional.jsp";
+        return pagRetorno;
     }
 
 }

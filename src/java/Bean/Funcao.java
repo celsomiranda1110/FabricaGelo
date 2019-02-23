@@ -11,8 +11,16 @@ package Bean;
  */
 public class Funcao implements Bean{
     private int idFuncao;
-    private String descricao;   
+    private String descricao; 
+    private String ativo;
+    private String descAtivo;    
 
+    public Funcao() {
+        this.ativo = "A";
+    }
+
+    
+    
     public int getIdFuncao() {
         return idFuncao;
     }
@@ -34,7 +42,23 @@ public class Funcao implements Bean{
         _funcao.setIdFuncao(this.idFuncao);
         _funcao.setDescricao(this.descricao);
     }
-    
+
+    public String getAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(String ativo) {
+        this.ativo = ativo;
+        if (ativo.equals("I"))
+            this.descAtivo = "checked";
+        else
+            this.descAtivo = "";
+    }
+
+    public String getDescAtivo() {
+        return descAtivo;
+    }
+
     public String toString()
     {
         return this.descricao;

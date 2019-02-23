@@ -34,33 +34,25 @@ public class AcaoExcluirProduto extends Acao{
         if (entrega == null)
         {
             sessao.setAttribute("avisoErro", "Rota não selecionada");
+            sessao.setAttribute("tipoAviso","alert alert-danger");
             sessao.setAttribute("pagOrigemErro", "FabricaGelo.Entrega.AcaoEncerrarRota");
             pagRetorno = "visao/erro.jsp";             
         }
         else if (produtoEntrega == null)
         {
             sessao.setAttribute("avisoErro", "Produto não selecionado");
+            sessao.setAttribute("tipoAviso","alert alert-danger");
             sessao.setAttribute("pagOrigemErro", "FabricaGelo.Entrega.AcaoEncerrarRota");
             pagRetorno = "visao/erro.jsp";             
         }        
-//        ProdutoEntregaDAO produtoEntregaDAO = new ProdutoEntregaDAO(conexao);
-//        ProdutoEntrega produtoEntrega = new ProdutoEntrega();
-//        String idProdutoEntrega = req.getParameter("idProdutoEntrega");
-//        produtoEntrega.setIdProdutoEntrega(Integer.parseInt(idProdutoEntrega));
-//        produtoEntregaDAO.delete(produtoEntrega);
-//        
-//        EntregaDAO entregaDAO = new EntregaDAO(conexao);
-//        Entrega entrega = (Entrega)sessao.getAttribute("entrega");
-//        entrega = entregaDAO.listaUm(entrega);        
+        
         
         sessao.setAttribute("entrega",entrega);
         sessao.setAttribute("lstProdutoEntrega",entrega.getLstProdutoEntrega());
         sessao.setAttribute("lstCustoEntrega",entrega.getLstCustoEntrega());
-        sessao.setAttribute("lstAbastecimento",entrega.getLstAbastecimento());
-        sessao.setAttribute("custoEntrega",null);
         sessao.setAttribute("avariaEntrega",null);
         sessao.setAttribute("produtoEntrega",null);
-        sessao.setAttribute("abastecimento",null);
+        sessao.setAttribute("custoEntrega",null);
 
         return "visao/entrega.jsp";        
     }

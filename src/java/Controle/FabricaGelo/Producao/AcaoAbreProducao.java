@@ -38,9 +38,14 @@ public class AcaoAbreProducao extends Acao
         Connection conexao = (Connection)req.getAttribute("connection");
         HttpSession sessao = req.getSession(false);
         
+        List<ProdutoCamara> lstProdutoCamara = new ArrayList<ProdutoCamara>();
+        
+        MaquinaProducao maquinaProducao = (MaquinaProducao)sessao.getAttribute("maquinaProducao");
+        
         ProducaoDAO producaoDAO = new ProducaoDAO(conexao);
         Producao producao = (Producao)sessao.getAttribute("producao");
-        producao = producaoDAO.listaUm(producao);
+        if (producao != null)
+            producao = producaoDAO.listaUm(producao);
         
         ProdutoDAO produtoDAO = new ProdutoDAO(conexao);
         Produto produto = new Produto();
@@ -60,34 +65,19 @@ public class AcaoAbreProducao extends Acao
         maquina.setTipo("MA");
         lstMaquina = maquinaDAO.listaTodos(maquina);
 
-        AvariaDAO avariaDAO = new AvariaDAO(conexao);
-        List<Avaria> lstAvaria = new ArrayList<Avaria>();
-        lstAvaria = avariaDAO.listaTodos();
-        
-        ProdutoCamaraDAO produtoCamaraDAO = new ProdutoCamaraDAO(conexao);
-        List<ProdutoCamara> lstProdutoCamara = new ArrayList<ProdutoCamara>();
-        ProdutoCamara produtoCamara = new ProdutoCamara();
-        produtoCamara.setIdProduto(producao.getIdProduto());
-        produtoCamara.setIdEquipamento(0);
-        lstProdutoCamara = produtoCamaraDAO.listaTodos(produtoCamara);
-                
-        if (producao != null)
-        {
 
-            sessao.setAttribute("producao",producao);
-            sessao.setAttribute("lstMaquinaProducao", producao.getLstMaquinaProducao());
-            sessao.setAttribute("lstTransferencia", producao.getLstTransferenciaProducao());
-            sessao.setAttribute("lstProduto", lstProduto);
-            sessao.setAttribute("lstEmbalagem", lstEmbalagem);
-            sessao.setAttribute("lstMaquina", lstMaquina);
-            sessao.setAttribute("lstAvaria", lstAvaria);
-            sessao.setAttribute("lstProdutoCamara", lstProdutoCamara);
-//            sessao.setAttribute("maquinaProducao", null); 
-//            sessao.setAttribute("lstAvariaProducao", null);
-//            sessao.setAttribute("avariaProducao", null); 
-//            sessao.setAttribute("transf", null); 
+        
+      
+        
+        sessao.setAttribute("producao",producao);
+        sessao.setAttribute("lstMaquinaProducao", (producao == null ? null : producao.getLstMaquinaProducao()) );
+        sessao.setAttribute("lstProduto", lstProduto);
+        sessao.setAttribute("lstEmbalagem", lstEmbalagem);
+        sessao.setAttribute("lstMaquina", lstMaquina);
+        sessao.setAttribute("maquinaProducao",maquinaProducao);
+
             
-        }
+
         
         return "visao/producao.jsp";
 

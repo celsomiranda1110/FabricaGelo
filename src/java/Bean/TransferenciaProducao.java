@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class TransferenciaProducao implements Bean{
     private int IdTransferenciaProducao;
-    private int IdProducao;
+    private int IdMaquinaProducao;
     private int IdProdutoCamara;
     private double quantidade;
     private Date data;
@@ -31,12 +31,12 @@ public class TransferenciaProducao implements Bean{
         this.IdTransferenciaProducao = IdTransferenciaProducao;
     }
 
-    public int getIdProducao() {
-        return IdProducao;
+    public int getIdMaquinaProducao() {
+        return IdMaquinaProducao;
     }
 
-    public void setIdProducao(int IdProducao) {
-        this.IdProducao = IdProducao;
+    public void setIdMaquinaProducao(int IdMaquinaProducao) {
+        this.IdMaquinaProducao = IdMaquinaProducao;
     }
 
     public int getIdProdutoCamara() {
@@ -92,7 +92,7 @@ public class TransferenciaProducao implements Bean{
     public void replicar(TransferenciaProducao _transferenciaProducao)
     {
         _transferenciaProducao.setIdTransferenciaProducao(this.IdTransferenciaProducao);
-        _transferenciaProducao.setIdProducao(this.IdProducao);
+        _transferenciaProducao.setIdMaquinaProducao(this.IdMaquinaProducao);
         _transferenciaProducao.setIdProdutoCamara(this.IdProdutoCamara);
         _transferenciaProducao.setQuantidade(this.quantidade);
         _transferenciaProducao.setData(this.data);

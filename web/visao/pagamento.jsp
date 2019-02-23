@@ -5,7 +5,7 @@
 --%>
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 
 <html>
     <head>
@@ -50,13 +50,13 @@
                                         <label class="control-label">Tipo</label>
                                     </div>
                                     <div class="col-sm-2">
-                                        <label class="control-label">NÃºmero</label>
+                                        <label class="control-label">Número</label>
                                     </div>
                                     <div class="col-sm-3">
                                         <label class="control-label">Data</label>
                                     </div>
                                     <div class="col-sm-3">
-                                        <label class="control-label">SituaÃ§Ã£o</label>
+                                        <label class="control-label">Situação</label>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -64,51 +64,51 @@
                                         <select name="cmbTipo" class="form-control">
                                             <c:if test="${'BO' != movimento.tipo && 'CP' != movimento.tipo && 'CO' != movimento.tipo && 'VE' != movimento.tipo && 'RE' != movimento.tipo}">
                                                 <option value="" selected="selected">  </option>
-                                                <option value="BO"> BONIFICAÃ‡ÃƒO </option>
+                                                <option value="BO"> BONIFICAÇÃO </option>
                                                 <option value="CP"> COMPRA </option>
                                                 <option value="CO"> CORTESIA </option>
                                                 <option value="VE"> VENDA </option>
-                                                <option value="RE"> REPOSIÃ‡ÃƒO </option>
+                                                <option value="RE"> REPOSIÇÃO </option>
                                             </c:if>
                                             <c:if test="${'BO' == movimento.tipo}">
                                                 <option value="">  </option>
-                                                <option value="BO" selected="selected"> BONIFICAÃ‡ÃƒO </option>
+                                                <option value="BO" selected="selected"> BONIFICAÇÃO </option>
                                                 <option value="CP"> COMPRA </option>
                                                 <option value="CO"> CORTESIA </option>
                                                 <option value="VE"> VENDA </option>
-                                                <option value="RE"> REPOSIÃ‡ÃƒO </option>
+                                                <option value="RE"> REPOSIÇÃO </option>
                                             </c:if>
                                             <c:if test="${'CP' == movimento.tipo}">
                                                 <option value="">  </option>
-                                                <option value="BO"> BONIFICAÃ‡ÃƒO </option>
+                                                <option value="BO"> BONIFICAÇÃO </option>
                                                 <option value="CP" selected="selected"> COMPRA </option>
                                                 <option value="CO"> CORTESIA </option>
                                                 <option value="VE"> VENDA </option>
-                                                <option value="RE"> REPOSIÃ‡ÃƒO </option>
+                                                <option value="RE"> REPOSIÇÃO </option>
                                             </c:if>
                                             <c:if test="${'CO' == movimento.tipo}">
                                                 <option value="">  </option>
-                                                <option value="BO"> BONIFICAÃ‡ÃƒO </option>
+                                                <option value="BO"> BONIFICAÇÃO </option>
                                                 <option value="CP"> COMPRA </option>
                                                 <option value="CO" selected="selected"> CORTESIA </option>
                                                 <option value="VE"> VENDA </option>
-                                                <option value="RE"> REPOSIÃ‡ÃƒO </option>
+                                                <option value="RE"> REPOSIÇÃO </option>
                                             </c:if>
                                             <c:if test="${'VE' == movimento.tipo}">
                                                 <option value="">  </option>
-                                                <option value="BO"> BONIFICAÃ‡ÃƒO </option>
+                                                <option value="BO"> BONIFICAÇÃO </option>
                                                 <option value="CP"> COMPRA </option>
                                                 <option value="CO"> CORTESIA </option>
                                                 <option value="VE" selected="selected"> VENDA </option>
-                                                <option value="RE"> REPOSIÃ‡ÃƒO </option>
+                                                <option value="RE"> REPOSIÇÃO </option>
                                             </c:if>
                                             <c:if test="${'RE' == movimento.tipo}">
                                                 <option value="">  </option>
-                                                <option value="BO"> BONIFICAÃ‡ÃƒO </option>
+                                                <option value="BO"> BONIFICAÇÃO </option>
                                                 <option value="CP"> COMPRA </option>
                                                 <option value="CO"> CORTESIA </option>
                                                 <option value="VE"> VENDA </option>
-                                                <option value="RE" selected="selected"> REPOSIÃ‡ÃƒO </option>
+                                                <option value="RE" selected="selected"> REPOSIÇÃO </option>
                                             </c:if>
                                         </select>                                        
                                     </div>
@@ -173,7 +173,7 @@
                                                 <label class="control-label">Valor da Nota</label>
                                             </div>
                                             <div class="col-sm-6">
-                                                <label class="control-label">CobranÃ§a</label>
+                                                <label class="control-label">Cobrança</label>
                                             </div> 
                                             <div class="col-sm-3">
                                                 <label class="control-label">Parcelas</label>
@@ -187,35 +187,35 @@
                                                 <select name="cmbCobranca" class="form-control">
                                                     <c:if test="${'0' == pagamento.cobranca}">
                                                         <option value="">  </option>
-                                                        <option value="0" selected="selected"> Ã€ VISTA </option>
+                                                        <option value="0" selected="selected"> À VISTA </option>
                                                         <option value="7"> SEMANAL </option>
                                                         <option value="15"> QUINZENAL </option>
                                                         <option value="30"> MENSAL </option>
                                                     </c:if>
                                                     <c:if test="${'7' == pagamento.cobranca}">
                                                         <option value="">  </option>
-                                                        <option value="0"> Ã€ VISTA </option>
+                                                        <option value="0"> À VISTA </option>
                                                         <option value="7" selected="selected"> SEMANAL </option>
                                                         <option value="15"> QUINZENAL </option>
                                                         <option value="30"> MENSAL </option>
                                                     </c:if>
                                                     <c:if test="${'15' == pagamento.cobranca}">
                                                         <option value="">  </option>
-                                                        <option value="0"> Ã€ VISTA </option>
+                                                        <option value="0"> À VISTA </option>
                                                         <option value="7"> SEMANAL </option>
                                                         <option value="15" selected="selected"> QUINZENAL </option>
                                                         <option value="30"> MENSAL </option>
                                                     </c:if>  
                                                     <c:if test="${'30' == pagamento.cobranca}">
                                                         <option value="">  </option>
-                                                        <option value="0"> Ã€ VISTA </option>
+                                                        <option value="0"> À VISTA </option>
                                                         <option value="7"> SEMANAL </option>
                                                         <option value="15"> QUINZENAL </option>
                                                         <option value="30" selected="selected"> MENSAL </option>
                                                     </c:if>
                                                     <c:if test="${'0' != pagamento.cobranca && '7' != pagamento.cobranca && '15' != pagamento.cobranca && '30' != pagamento.cobranca}">
                                                         <option value="" selected="selected">  </option>
-                                                        <option value="0"> Ã€ VISTA </option>
+                                                        <option value="0"> À VISTA </option>
                                                         <option value="7"> SEMANAL </option>
                                                         <option value="15"> QUINZENAL </option>
                                                         <option value="30"> MENSAL </option>
@@ -278,50 +278,50 @@
                                                     <c:if test="${'DI' == parcela.formaPagamento}">
                                                         <option value="">  </option>
                                                         <option value="DI" selected="selected"> DINHEIRO </option>
-                                                        <option value="DB"> DÃ‰BITO </option>
-                                                        <option value="CR"> CRÃ‰DITO </option>
+                                                        <option value="DB"> DÉBITO </option>
+                                                        <option value="CR"> CRÉDITO </option>
                                                         <option value="CT"> CARTEIRA </option>
-                                                        <option value="TR"> TRANSFERÃŠNCIA </option>
+                                                        <option value="TR"> TRANSFERÊNCIA </option>
                                                     </c:if>
                                                     <c:if test="${'DB' == parcela.formaPagamento}">
                                                         <option value="">  </option>
                                                         <option value="DI"> DINHEIRO </option>
-                                                        <option value="DB" selected="selected"> DÃ‰BITO </option>
-                                                        <option value="CR"> CRÃ‰DITO </option>
+                                                        <option value="DB" selected="selected"> DÉBITO </option>
+                                                        <option value="CR"> CRÉDITO </option>
                                                         <option value="CT"> CARTEIRA </option>
-                                                        <option value="TR"> TRANSFERÃŠNCIA </option>
+                                                        <option value="TR"> TRANSFERÊNCIA </option>
                                                     </c:if>  
                                                     <c:if test="${'CR' == parcela.formaPagamento}">
                                                         <option value="">  </option>
                                                         <option value="DI"> DINHEIRO </option>
-                                                        <option value="DB"> DÃ‰BITO </option>
-                                                        <option value="CR" selected="selected"> CRÃ‰DITO </option>
+                                                        <option value="DB"> DÉBITO </option>
+                                                        <option value="CR" selected="selected"> CRÉDITO </option>
                                                         <option value="CT"> CARTEIRA </option>
-                                                        <option value="TR"> TRANSFERÃŠNCIA </option>
+                                                        <option value="TR"> TRANSFERÊNCIA </option>
                                                     </c:if>
                                                     <c:if test="${'CT' == parcela.formaPagamento}">
                                                         <option value="">  </option>
                                                         <option value="DI"> DINHEIRO </option>
-                                                        <option value="DB"> DÃ‰BITO </option>
-                                                        <option value="CR"> CRÃ‰DITO </option>
+                                                        <option value="DB"> DÉBITO </option>
+                                                        <option value="CR"> CRÉDITO </option>
                                                         <option value="CT" selected="selected"> CARTEIRA </option>
-                                                        <option value="TR"> TRANSFERÃŠNCIA </option>
+                                                        <option value="TR"> TRANSFERÊNCIA </option>
                                                     </c:if>
                                                     <c:if test="${'TR' == parcela.formaPagamento}">
                                                         <option value="">  </option>
                                                         <option value="DI"> DINHEIRO </option>
-                                                        <option value="DB"> DÃ‰BITO </option>
-                                                        <option value="CR"> CRÃ‰DITO </option>
+                                                        <option value="DB"> DÉBITO </option>
+                                                        <option value="CR"> CRÉDITO </option>
                                                         <option value="CT"> CARTEIRA </option>
-                                                        <option value="TR" selected="selected"> TRANSFERÃŠNCIA </option>
+                                                        <option value="TR" selected="selected"> TRANSFERÊNCIA </option>
                                                     </c:if>                                                        
                                                     <c:if test="${'DI' != parcela.formaPagamento && 'DB' != parcela.formaPagamento && 'CR' != parcela.formaPagamento && 'CT' != parcela.formaPagamento && 'TR' != parcela.formaPagamento}">
                                                         <option value="" selected="selected">  </option>
                                                         <option value="DI"> DINHEIRO </option>
-                                                        <option value="DB"> DÃ‰BITO </option>
-                                                        <option value="CR"> CRÃ‰DITO </option>
+                                                        <option value="DB"> DÉBITO </option>
+                                                        <option value="CR"> CRÉDITO </option>
                                                         <option value="CT"> CARTEIRA </option>
-                                                        <option value="TR"> TRANSFERÃŠNCIA </option>
+                                                        <option value="TR"> TRANSFERÊNCIA </option>
                                                     </c:if> 
                                                 </select>
                                             </div>                                                                                  

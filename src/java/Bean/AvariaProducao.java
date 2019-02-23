@@ -73,7 +73,8 @@ public class AvariaProducao implements Bean{
         _avariaProducao.setIdMaquinaProducao(this.idMaquinaProducao);
         _avariaProducao.setQuantidade(this.quantidade);
         
-        _avariaProducao.setAvaria(this.avaria);
+        if (this.avaria != null)
+            _avariaProducao.setAvaria(this.avaria);
     }
     
 }

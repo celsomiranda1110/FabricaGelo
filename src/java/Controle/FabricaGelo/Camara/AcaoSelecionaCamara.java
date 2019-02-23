@@ -24,6 +24,8 @@ public class AcaoSelecionaCamara extends Acao{
         Connection conexao = (Connection)req.getAttribute("connection");
         HttpSession sessao = req.getSession(false);
 
+        String pagRetorno = "FabricaGelo.Camara.AcaoAbreCamara";
+        
         EquipamentoDAO camaraDAO = new EquipamentoDAO(conexao);
         Equipamento camara = new Equipamento();
         
@@ -31,16 +33,12 @@ public class AcaoSelecionaCamara extends Acao{
         camara.setIdEquipamento(Integer.parseInt(idEquipamento));
         camara = camaraDAO.listaUm(camara);
         
-        String pagRetorno = (String)sessao.getAttribute("pagRetorno");
-        Colaborador colaborador = (Colaborador)sessao.getAttribute("colaborador");
         
-        
-        sessao.setAttribute("colaborador",colaborador);
+
         sessao.setAttribute("camara",camara);
-        sessao.setAttribute("lstManutencao", camara.getLstManutencao());
-        sessao.setAttribute("pagRetorno",pagRetorno);
+
         
-        return "visao/camara.jsp";
+        return pagRetorno;
     }
 }
 

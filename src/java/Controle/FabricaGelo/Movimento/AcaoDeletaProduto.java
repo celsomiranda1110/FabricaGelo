@@ -33,6 +33,7 @@ public class AcaoDeletaProduto extends Acao{
         if ((movimento != null) && (movimento.getIdMovimento() == 0))
         {
             sessao.setAttribute("avisoErro", "Movimento deve ser atualizada");
+            sessao.setAttribute("tipoAviso","alert alert-danger");
             sessao.setAttribute("pagOrigemErro", "FabricaGelo.Movimento.AcaoAbreMovimento");
             pagRetorno = "visao/erro.jsp";            
         }
@@ -56,6 +57,7 @@ public class AcaoDeletaProduto extends Acao{
         else
         {
             sessao.setAttribute("avisoErro", "Movimento Fechado");
+            sessao.setAttribute("tipoAviso","alert alert-danger");
             sessao.setAttribute("pagOrigemErro", "FabricaGelo.Movimento.AcaoAbreMovimento");
             pagRetorno = "visao/erro.jsp";            
         }

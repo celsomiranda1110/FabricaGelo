@@ -23,6 +23,8 @@ public class AcaoSelecionaFuncao extends Acao{
     {
         Connection conexao = (Connection)req.getAttribute("connection");
         HttpSession sessao = req.getSession(false);
+        
+        String parRetorno = "FabricaGelo.Funcao.AcaoAbreFuncao";
 
         FuncaoDAO funcaoDAO = new FuncaoDAO(conexao);
         Funcao funcao = new Funcao();
@@ -31,15 +33,11 @@ public class AcaoSelecionaFuncao extends Acao{
         funcao.setIdFuncao(Integer.parseInt(idFuncao));
         funcao = funcaoDAO.listaUm(funcao);
         
-        String pagRetorno = (String)sessao.getAttribute("pagRetorno");
-        Colaborador colaborador = (Colaborador)sessao.getAttribute("colaborador");
         
-        
-        sessao.setAttribute("colaborador",colaborador);
         sessao.setAttribute("funcao",funcao);
-        sessao.setAttribute("pagRetorno",pagRetorno);
         
-        return "visao/funcao.jsp";
+        
+        return parRetorno;
     }
     
 }

@@ -13,7 +13,15 @@ public class Avaria implements Bean{
     
     private int idAvaria;
     private String descricao;
+    private String ativo;
+    private String descAtivo;    
 
+    public Avaria() {
+        this.ativo = "A";
+    }
+
+    
+    
     public int getIdAvaria() {
         return idAvaria;
     }
@@ -35,10 +43,27 @@ public class Avaria implements Bean{
         return this.descricao;
     }
     
+    public String getAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(String ativo) {
+        this.ativo = ativo;
+        if (ativo.equals("I"))
+            this.descAtivo = "checked";
+        else
+            this.descAtivo = "";
+    }   
+
+    public String getDescAtivo() {
+        return descAtivo;
+    }
+    
     public void replicar(Avaria _avaria)
     {
         _avaria.setIdAvaria(this.idAvaria);
         _avaria.setDescricao(this.descricao);
+        _avaria.setAtivo(this.ativo);
     }
     
     

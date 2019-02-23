@@ -5,18 +5,18 @@
 --%>
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 
 <html>
     <c:import url="CabRod/cabecalho.jsp"/>
     <head>
-        <title>Maquina</title>
+        <title>Equipamentos</title>
     </head>
     <body>
         <form name="formMaquina" method="post">
             <div class="container">
                 <div class="panel panel-default">
-                    <div class="panel-heading"><h3 class="panel-title text-center"><b>Lista de Maquinas</b></h3></div>
+                    <div class="panel-heading"><h3 class="panel-title text-center"><b>Lista de Equipamentos</b></h3></div>
                     <div class="panel-body">
                         
                         <div class="row">
@@ -26,11 +26,18 @@
                                         <div class="navbar navbar-default">
                                             <div class="container-fluid">
                                                 <ul class="nav navbar-nav">
-                                                    <li class="btn bottom-right"><button type="button" class="btn btn-default" onClick="novo()">Nova MÃ¡quina</button></li>
+                                                    <li class="btn bottom-right"><button type="button" class="btn btn-default" onClick="novo()">Novo equipamento</button></li>
                                                     
                                                 </ul>
                                                 <ul class="nav navbar-nav navbar-right">
                                                     <li class="btn"><input type="text" class="form-control" name="txtPesquisa" id="txtPesquisa"></li>
+                                                    <li class="btn">
+                                                        <select name="cmbSituacaoPesquisa" class="form-control" >
+                                                            <option value=""> Situação </option>
+                                                            <option value="A">Ativo</option>
+                                                            <option value="I">Inativo</option>
+                                                        </select> 
+                                                    </li>
                                                     <li class="btn"><button type="button" class="btn btn-default" onClick="pesquisar()">Pesquisa</button></li>
                                                     
                                                 </ul>
@@ -46,14 +53,18 @@
                                 <tbody>
                                     <tr>
                                         <th><div align="left"></div></th>
-                                        <th><div align="left">DescriÃ§Ã£o</div></th>
-                                        <th><div align="left">SituaÃ§Ã£o</div></th>
+                                        <th><div align="left">Descrição</div></th>
+                                        <th><div align="left">Situação</div></th>
+                                        <th><div align="left">Marca</div></th>
+                                        <th><div align="left">Modelo</div></th>
                                     </tr> 
                                     <c:forEach var="lstMaq" items="${lstMaquina}" varStatus="s">
                                         <tr>
                                             <td> <input type="image" src="visao/css/bootstrap/img/Text.png" onclick="seleciona('FabricaGelo.Maquina.AcaoSelecionaMaquina?idEquipamento=${lstMaq.idEquipamento}')"> </td>
                                             <td> ${lstMaq.descricao} </td>
                                             <td> ${lstMaq.descSituacao} </td>
+                                            <td> ${lstMaq.marca} </td>
+                                            <td> ${lstMaq.modelo} </td>
                                         </tr>
                                     </c:forEach>
                                 </tbody>
@@ -70,7 +81,7 @@
             function novo()
             {
  
-                document.forms[0].action="FabricaGelo.Maquina.AcaoAbreMaquina";
+                document.forms[0].action="FabricaGelo.Maquina.AcaoNovoMaquina";
                 document.forms[0].submit();
             }
             function pesquisar()

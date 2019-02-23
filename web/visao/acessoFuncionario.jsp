@@ -5,12 +5,12 @@
 --%>
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 
 <html>
     <c:import url="CabRod/cabecalho.jsp"/>
     <head>
-        <title>DefiniÃ§Ã£o de acesso</title>
+        <title>Definição de acesso</title>
     </head>
     <body>
         <form name="formAcesso" method="post">

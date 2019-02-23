@@ -20,10 +20,18 @@ public class Profissional implements Bean{
     private String celular;
     private String senha;
     private String usuario;
+    private String ativo;
+    private String descAtivo;
     
     private Funcao funcao;
     private List<MenuProfissional> lstMenuProfissional;
 
+    public Profissional() {
+        this.ativo = "A";
+    }
+
+    
+    
     public int getIdProfissional() {
         return IdProfissional;
     }
@@ -109,7 +117,21 @@ public class Profissional implements Bean{
         this.lstMenuProfissional = lstMenuProfissional;
     }
     
-    
+    public String getAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(String ativo) {
+        this.ativo = ativo;
+        if (ativo.equals("I"))
+            this.descAtivo = "checked";
+        else
+            this.descAtivo = "";
+    }   
+
+    public String getDescAtivo() {
+        return descAtivo;
+    }    
     
     public String toString()
     {
@@ -120,7 +142,7 @@ public class Profissional implements Bean{
     {
         _profissional.setIdProfissional(this.IdProfissional);
         _profissional.setIdFuncao(this.IdFuncao);
-       
+        _profissional.setAtivo(this.ativo);
         _profissional.setCtps(this.ctps);
         _profissional.setCpf(this.cpf);
         _profissional.setNome(this.nome);

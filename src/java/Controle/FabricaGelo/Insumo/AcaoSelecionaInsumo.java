@@ -31,10 +31,10 @@ public class AcaoSelecionaInsumo extends Acao{
         insumo.setIdProduto(Integer.parseInt(idInsumo));
         insumo = insumoDAO.listaUm(insumo);
         
-        String pagRetorno = (String)sessao.getAttribute("pagRetorno");
+        
         
         sessao.setAttribute("insumo",insumo);
-        sessao.setAttribute("pagRetorno",pagRetorno);
+        
         
         return "visao/insumo.jsp";
     }

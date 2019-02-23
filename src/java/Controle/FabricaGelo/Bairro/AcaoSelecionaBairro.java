@@ -23,6 +23,8 @@ public class AcaoSelecionaBairro extends Acao{
     {
         Connection conexao = (Connection)req.getAttribute("connection");
         HttpSession sessao = req.getSession(false);
+        
+        String pagRetorno = "FabricaGelo.Bairro.AcaoAbreBairro";
 
         BairroDAO bairroDAO = new BairroDAO(conexao);
         Bairro bairro = new Bairro();
@@ -31,14 +33,10 @@ public class AcaoSelecionaBairro extends Acao{
         bairro.setIdBairro(Integer.parseInt(idBairro));
         bairro = bairroDAO.listaUm(bairro);
         
-        Colaborador colaborador = (Colaborador)sessao.getAttribute("colaborador");
-        String pagRetorno = (String)sessao.getAttribute("pagRetorno");
-        
-        sessao.setAttribute("colaborador",colaborador);
-        sessao.setAttribute("pagRetorno",pagRetorno);
+       
         sessao.setAttribute("bairro",bairro);
         
         
-        return "visao/bairro.jsp";
+        return pagRetorno;
     }
 }

@@ -5,7 +5,7 @@
 --%>
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 
 <html>
     <c:import url="CabRod/cabecalho.jsp"/>
@@ -26,11 +26,18 @@
                                         <div class="navbar navbar-default">
                                             <div class="container-fluid">
                                                 <ul class="nav navbar-nav">
-                                                    <li class="btn bottom-right"><button type="button" class="btn btn-default" onClick="novo()">Nova CÃ¢mara</button></li>
+                                                    <li class="btn bottom-right"><button type="button" class="btn btn-default" onClick="novo()">Nova Câmara</button></li>
                                                     
                                                 </ul>
                                                 <ul class="nav navbar-nav navbar-right">
-                                                    <li class="btn"><input type="text" class="form-control" name="txtPesquisa" id="txtPesquisa"></li>
+                                                    <li class="btn"><input type="text" class="form-control" name="txtPesquisa" id="txtPesquisa" placeholder="Descrição da câmara"></li>
+                                                    <li class="btn">
+                                                        <select name="cmbSituacaoPesquisa" class="form-control" >
+                                                            <option value=""> Situação </option>
+                                                            <option value="A">Ativo</option>
+                                                            <option value="I">Inativo</option>
+                                                        </select> 
+                                                    </li>
                                                     <li class="btn"><button type="button" class="btn btn-default" onClick="pesquisar()">Pesquisa</button></li>
                                                     
                                                 </ul>
@@ -46,9 +53,9 @@
                                 <tbody>
                                     <tr>
                                         <th><div align="left"></div></th>
-                                        <th><div align="left">DescriÃ§Ã£o</div></th>
+                                        <th><div align="left">Descrição</div></th>
                                         <th><div align="left">Capacidade</div></th>
-                                        <th><div align="left">SituaÃ§Ã£o</div></th>
+                                        <th><div align="left">Situação</div></th>
                                     </tr> 
                                     <c:forEach var="lstCam" items="${lstCamara}" varStatus="s">
                                         <tr>
@@ -72,7 +79,7 @@
             function novo()
             {
  
-                document.forms[0].action="FabricaGelo.Camara.AcaoAbreCamara";
+                document.forms[0].action="FabricaGelo.Camara.AcaoNovoCamara";
                 document.forms[0].submit();
             }
             function pesquisar()

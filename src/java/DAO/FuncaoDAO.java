@@ -20,15 +20,21 @@ public class FuncaoDAO extends DAO{
         super(conexao);
     }
     
-    public List<Funcao> listaTodos()
+    public List<Funcao> listaTodos(Funcao _funcao)
     {
         List<Funcao> lstTabela = new ArrayList();
         
         comSql = "";      
         comSql += " SELECT ";
         comSql += " 	`tblFuncao`.`intFuncaoId`,";
-        comSql += "     `tblFuncao`.`strDescricao`";
-        comSql += " FROM `smmdaa_bdGelo`.`tblFuncao`;";
+        comSql += "     `tblFuncao`.`strDescricao`,";
+        comSql += "     `tblFuncao`.`bolAtivo`";
+        comSql += " FROM `smmdaa_bdGelo`.`tblFuncao`";
+        if (_funcao != null)
+        {
+            comSql += " WHERE ";
+            comSql += "     `tblFuncao`.`bolAtivo` = '" + _funcao.getAtivo() + "'";
+        }
         
         List tabela = super.listaTodos();
         
@@ -39,7 +45,7 @@ public class FuncaoDAO extends DAO{
             
             funcao.setIdFuncao(((Integer)bkp.get(0)).intValue());
             funcao.setDescricao((String)bkp.get(1));
-            
+            funcao.setAtivo((String)bkp.get(2));
 
             lstTabela.add(funcao);
         }
@@ -54,7 +60,8 @@ public class FuncaoDAO extends DAO{
         comSql = "";      
         comSql += " SELECT ";
         comSql += " 	`tblFuncao`.`intFuncaoId`,";
-        comSql += "     `tblFuncao`.`strDescricao`";
+        comSql += "     `tblFuncao`.`strDescricao`,";
+        comSql += "     `tblFuncao`.`bolAtivo`";
         comSql += " FROM `smmdaa_bdGelo`.`tblFuncao`";
         comSql += " WHERE ";
         comSql += "     `tblFuncao`.`intFuncaoId` = " + funcao.getIdFuncao()+ ";";
@@ -69,7 +76,7 @@ public class FuncaoDAO extends DAO{
 
                 funcao.setIdFuncao(((Integer)bkp.get(0)).intValue());
                 funcao.setDescricao((String)bkp.get(1));
-            
+                funcao.setAtivo((String)bkp.get(2));
                 
             }  
             return funcao;
@@ -90,9 +97,10 @@ public class FuncaoDAO extends DAO{
         {
             comSql = "";
             comSql += " INSERT INTO `smmdaa_bdGelo`.`tblFuncao`";
-            comSql += " 	(`strDescricao`)";
+            comSql += " 	(`strDescricao`, `bolAtivo`)";
             comSql += " VALUES";
-            comSql += " 	('" + _funcao.getDescricao() + "');";
+            comSql += " 	('" + _funcao.getDescricao() + "'";
+            comSql += " 	,'" + _funcao.getAtivo() + "');";
 
             
             retorno = atualizar();
@@ -115,12 +123,27 @@ public class FuncaoDAO extends DAO{
             comSql = "";
             comSql += " UPDATE `smmdaa_bdGelo`.`tblFuncao` SET";
             comSql += " 	`strDescricao` = '" + _funcao.getDescricao() + "'";
+            comSql += " 	,`bolAtivo` = '" + _funcao.getAtivo() + "'";
             comSql += " WHERE ";
             comSql += " 	`intFuncaoId` = " + _funcao.getIdFuncao() + ";";
             retorno = atualizar();
+            identity = _funcao.getIdFuncao();
         }
         
         return retorno;
         
-    }      
+    }  
+
+    public boolean delete(Funcao funcao)
+    {
+        boolean retorno;
+        
+        comSql = "";
+        comSql += " Delete from tblFuncao ";
+        comSql += " where ";
+        comSql += " 	`intFuncaoId` = " + funcao.getIdFuncao() + ";";
+        retorno = atualizar();
+        
+        return retorno;
+    }
 }

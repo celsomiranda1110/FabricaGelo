@@ -5,7 +5,8 @@
 --%>
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 
 <html>
     <c:import url="CabRod/cabecalho.jsp"/>
@@ -26,11 +27,18 @@
                                         <div class="navbar navbar-default">
                                             <div class="container-fluid">
                                                 <ul class="nav navbar-nav">
-                                                    <li class="btn bottom-right"><button type="button" class="btn btn-default" onClick="novo()">Novo VeÃ­culo</button></li>
+                                                    <li class="btn bottom-right"><button type="button" class="btn btn-default" onClick="novo()">Novo Veículo</button></li>
                                                     
                                                 </ul>
                                                 <ul class="nav navbar-nav navbar-right">
-                                                    <li class="btn"><input type="text" class="form-control" name="txtPesquisa" id="txtPesquisa"></li>
+                                                    <li class="btn"><input type="text" class="form-control" name="txtPesquisa" id="txtPesquisa" placeholder="Descrição do veículo"></li>
+                                                    <li class="btn">
+                                                        <select name="cmbSituacaoPesquisa" class="form-control" >
+                                                            <option value=""> Situação </option>
+                                                            <option value="A">Ativo</option>
+                                                            <option value="I">Inativo</option>
+                                                        </select> 
+                                                    </li>
                                                     <li class="btn"><button type="button" class="btn btn-default" onClick="pesquisar()">Pesquisa</button></li>
                                                     
                                                 </ul>
@@ -46,12 +54,13 @@
                                 <tbody>
                                     <tr>
                                         <th><div align="left"></div></th>
-                                        <th><div align="left">DescriÃ§Ã£o</div></th>
+                                        <th><div align="left">Descrição</div></th>
                                         <th><div align="left">Placa</div></th>
                                         <th><div align="left">Marca</div></th>
                                         <th><div align="left">Modelo</div></th>
                                         <th><div align="left">Ano</div></th>
-                                        <th><div align="left">Capacidade</div></th>
+                                        <th><div align="left">Quilometragem</div></th>
+                                        <th><div align="left">Capacidade (Kg)</div></th>
                                     </tr> 
                                     <c:forEach var="lstVeic" items="${lstVeiculo}" varStatus="s">
                                         <tr>
@@ -61,7 +70,8 @@
                                             <td> ${lstVeic.marca} </td>
                                             <td> ${lstVeic.modelo} </td>
                                             <td> ${lstVeic.ano} </td>
-                                            <td> ${lstVeic.capacidade} </td>
+                                            <td> ${lstVeic.quilometragem} </td>
+                                            <td> <fmt:formatNumber value="${lstVeic.capacidade}" pattern="#,#00.00#"/> </td>
                                         </tr>
                                     </c:forEach>
                                 </tbody>
@@ -78,7 +88,7 @@
             function novo()
             {
  
-                document.forms[0].action="FabricaGelo.Veiculo.AcaoAbreVeiculo";
+                document.forms[0].action="FabricaGelo.Veiculo.AcaoNovoVeiculo";
                 document.forms[0].submit();
             }
             function pesquisar()

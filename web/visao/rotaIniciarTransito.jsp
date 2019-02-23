@@ -6,7 +6,7 @@
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 
 <html>
     <head>
@@ -29,7 +29,7 @@
                                         <div class="navbar navbar-default">
                                             <div class="container-fluid">
                                                 <ul class="nav navbar-nav">
-                                                    <li class="btn"><button type="button" class="btn btn-default" onClick="confirmar()"> Confirme in√≠cio de rota </button></li>
+                                                    <li class="btn"><button type="button" class="btn btn-default" onClick="confirmar()"> Confirme inÌcio de rota </button></li>
                                                     
                                                 </ul>
                                                 <ul class="nav navbar-nav navbar-right">
@@ -49,7 +49,7 @@
                             <div class="col-lg-5">
                                 <div class="row">
                                     <div class="col-sm-5">
-                                        <label class="control-label">Hor√°rio</label>
+                                        <label class="control-label">Hor·rio</label>
                                     </div>
                                 </div>
                                 <div class="row">

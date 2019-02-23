@@ -6,8 +6,13 @@
 package Controle.FabricaGelo.Producao;
 
 
+import Bean.Producao;
+import Bean.Produto;
 import Controle.FabricaGelo.Gerais.Acao;
+import DAO.ProdutoDAO;
 import java.sql.Connection;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -24,7 +29,19 @@ public class AcaoNovaProducao extends Acao
         Connection conexao = (Connection)req.getAttribute("connection");
         HttpSession sessao = req.getSession(false);
         
+        String pagRetorno = "visao/producaoIniciar.jsp";
+        
+        Producao producao = (Producao)sessao.getAttribute("producao");
 
-        return "visao/producao.jsp";
+        ProdutoDAO produtoDAO = new ProdutoDAO(conexao);
+        Produto produto = new Produto();
+        List<Produto> lstProduto = new ArrayList<Produto>();
+        produto.setTipo("PR");
+        lstProduto = produtoDAO.listaTodos(produto);
+
+        sessao.setAttribute("lstProduto", lstProduto);
+        sessao.setAttribute("producao", producao);
+
+        return pagRetorno;
     }
 }

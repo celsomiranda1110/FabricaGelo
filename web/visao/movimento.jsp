@@ -6,7 +6,7 @@
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 
 <html>
     <head>
@@ -34,13 +34,7 @@
                                                     <li class="btn"><button type="button" class="btn btn-default" onClick="fechar()">Fechar</button></li>
                                                     
                                                 </ul>
-                                                <ul class="nav navbar-nav text-center">
-                                                    <li class="btn">
-                                                        
-                                                        <span class="badge badge-info">${movimento.descSituacao}  ${movimento.pagamento.descSituacao}</span>
-                                                                                                           
-                                                    </li>
-                                                </ul>
+                                                
                                                 <ul class="nav navbar-nav navbar-right">
                                                     <li class="btn"><button type="button" class="btn btn-default" onClick="gerarPagamento()">Pagamento</button></li>
                                                     
@@ -63,7 +57,7 @@
                                         <label class="control-label">Tipo</label>
                                     </div>
                                     <div class="col-sm-2">
-                                        <label class="control-label">NÃºmero</label>
+                                        <label class="control-label">Número</label>
                                     </div>
                                     <div class="col-sm-2">
                                         <label class="control-label">Data</label>
@@ -88,51 +82,51 @@
                                         <select name="cmbTipo" class="form-control">
                                             <c:if test="${'BO' != movimento.tipo && 'CP' != movimento.tipo && 'CO' != movimento.tipo && 'VE' != movimento.tipo && 'RE' != movimento.tipo}">
                                                 <option value="" selected="selected">  </option>
-                                                <option value="BO"> BONIFICAÃ‡ÃƒO </option>
+                                                <option value="BO"> BONIFICAÇÃO </option>
                                                 <option value="CP"> COMPRA </option>
                                                 <option value="CO"> CORTESIA </option>
                                                 <option value="VE"> VENDA </option>
-                                                <option value="RE"> REPOSIÃ‡ÃƒO </option>
+                                                <option value="RE"> REPOSIÇÃO </option>
                                             </c:if>
                                             <c:if test="${'BO' == movimento.tipo}">
                                                 <option value="">  </option>
-                                                <option value="BO" selected="selected"> BONIFICAÃ‡ÃƒO </option>
+                                                <option value="BO" selected="selected"> BONIFICAÇÃO </option>
                                                 <option value="CP"> COMPRA </option>
                                                 <option value="CO"> CORTESIA </option>
                                                 <option value="VE"> VENDA </option>
-                                                <option value="RE"> REPOSIÃ‡ÃƒO </option>
+                                                <option value="RE"> REPOSIÇÃO </option>
                                             </c:if>
                                             <c:if test="${'CP' == movimento.tipo}">
                                                 <option value="">  </option>
-                                                <option value="BO"> BONIFICAÃ‡ÃƒO </option>
+                                                <option value="BO"> BONIFICAÇÃO </option>
                                                 <option value="CP" selected="selected"> COMPRA </option>
                                                 <option value="CO"> CORTESIA </option>
                                                 <option value="VE"> VENDA </option>
-                                                <option value="RE"> REPOSIÃ‡ÃƒO </option>
+                                                <option value="RE"> REPOSIÇÃO </option>
                                             </c:if>
                                             <c:if test="${'CO' == movimento.tipo}">
                                                 <option value="">  </option>
-                                                <option value="BO"> BONIFICAÃ‡ÃƒO </option>
+                                                <option value="BO"> BONIFICAÇÃO </option>
                                                 <option value="CP"> COMPRA </option>
                                                 <option value="CO" selected="selected"> CORTESIA </option>
                                                 <option value="VE"> VENDA </option>
-                                                <option value="RE"> REPOSIÃ‡ÃƒO </option>
+                                                <option value="RE"> REPOSIÇÃO </option>
                                             </c:if>
                                             <c:if test="${'VE' == movimento.tipo}">
                                                 <option value="">  </option>
-                                                <option value="BO"> BONIFICAÃ‡ÃƒO </option>
+                                                <option value="BO"> BONIFICAÇÃO </option>
                                                 <option value="CP"> COMPRA </option>
                                                 <option value="CO"> CORTESIA </option>
                                                 <option value="VE" selected="selected"> VENDA </option>
-                                                <option value="RE"> REPOSIÃ‡ÃƒO </option>
+                                                <option value="RE"> REPOSIÇÃO </option>
                                             </c:if>
                                             <c:if test="${'RE' == movimento.tipo}">
                                                 <option value="">  </option>
-                                                <option value="BO"> BONIFICAÃ‡ÃƒO </option>
+                                                <option value="BO"> BONIFICAÇÃO </option>
                                                 <option value="CP"> COMPRA </option>
                                                 <option value="CO"> CORTESIA </option>
                                                 <option value="VE"> VENDA </option>
-                                                <option value="RE" selected="selected"> REPOSIÃ‡ÃƒO </option>
+                                                <option value="RE" selected="selected"> REPOSIÇÃO </option>
                                             </c:if>
                                         </select>                                        
                                     </div>
@@ -157,7 +151,7 @@
 
                                     <div class="row">
                                         <div class="col-sm-7">
-                                            <label class="control-label">Produto/ServiÃ§o</label>
+                                            <label class="control-label">Produto/Serviço</label>
                                         </div>
                                         <div class="col-sm-1">
                                             <label class="control-label">Vl Unit</label>
@@ -179,7 +173,7 @@
                                     <div class="row">
                                         <div class="col-sm-7">
                                             <select name="cmbProduto" class="form-control" onchange="buscaPreco()">
-                                                <option value="0">... Selecione Produto/ServiÃ§o ...</option>
+                                                <option value="0">... Selecione Produto/Serviço ...</option>
                                                 <c:forEach var="prod" items="${lstProduto}" varStatus="s">
                                                   <c:if test="${prod.idProduto == produtoMovimento.idProduto}">
                                                     <option value="${prod.idProduto}" selected="selected">${prod.descricao}</option>
@@ -217,7 +211,7 @@
                                                         <th><div align="left"></div></th>
                                                         <th><div align="left">Produto</div></th>
                                                         <th><div align="left">Quantidade</div></th>
-                                                        <th><div align="left">Vl UnitÃ¡rio</div></th>
+                                                        <th><div align="left">Vl Unitário</div></th>
                                                         <th><div align="left">Icms</div></th>
                                                         <th><div align="left">Desconto</div></th>
                                                         <th><div align="left">Vl Total</div></th>

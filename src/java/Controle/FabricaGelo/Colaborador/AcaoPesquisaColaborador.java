@@ -30,10 +30,14 @@ public class AcaoPesquisaColaborador extends Acao{
         List<Colaborador> lstRetorno = new ArrayList();
         
         ColaboradorDAO colaboradorDAO = new ColaboradorDAO(conexao);
-        
-        lstColaborador = colaboradorDAO.listaTodos();
+        Colaborador colaborador = new Colaborador();
         String pesquisa = req.getParameter("txtPesquisa");
-        if (pesquisa != "")
+        String situacao = req.getParameter("cmbSituacaoPesquisa").equals("") ? "" : req.getParameter("cmbSituacaoPesquisa");
+        colaborador.setAtivo(situacao);
+        
+        lstColaborador = colaboradorDAO.listaTodos(colaborador);
+        
+        if (!pesquisa.equals(""))
         {
             Iterator it = lstColaborador.iterator();
             while (it.hasNext())

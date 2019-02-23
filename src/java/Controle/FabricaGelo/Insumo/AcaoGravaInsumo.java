@@ -32,7 +32,8 @@ public class AcaoGravaInsumo extends Acao
         Produto insumo = (Produto)sessao.getAttribute("insumo");
         
         // dados do produto
-        String descricao = (req.getParameter("txtInsumo").equals("") || req.getParameter("txtInsumo") == null) ? "" : req.getParameter("txtInsumo");
+        String descricao = (req.getParameter("txtInsumo").equals("") || req.getParameter("txtInsumo") == null) ? "" : req.getParameter("txtInsumo").toUpperCase();
+        String inativo = (req.getParameter("ck_Ativo") == null ? "A" : "I");
         
         if (insumo == null)
             insumo = new Produto();
@@ -40,6 +41,7 @@ public class AcaoGravaInsumo extends Acao
         insumo.setDescricao(descricao);
         insumo.setVlUnitario(0);
         insumo.setTipo("IN");
+        insumo.setAtivo(inativo);
         
         
         if (insumoDAO.atualizar(insumo))
@@ -50,6 +52,7 @@ public class AcaoGravaInsumo extends Acao
             
             
             sessao.setAttribute("avisoErro", "Insumo atualizado");
+            sessao.setAttribute("tipoAviso","alert alert-success");
             sessao.setAttribute("pagOrigemErro", "FabricaGelo.Insumo.AcaoAbreInsumo");
             pagRetorno = "visao/erro.jsp";                    
         }

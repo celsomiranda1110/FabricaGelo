@@ -18,12 +18,16 @@ public class Produto implements Bean{
     private double saldo;
     private double vlUnitario;
     private String tipo;
+    private String ativo;
+    private String descAtivo;    
+
 
 
     
     public Produto() {
         this.saldo = 0;
         this.vlUnitario = 0;
+        this.ativo = "A";
     }
     
     
@@ -76,6 +80,22 @@ public class Produto implements Bean{
         return this.descricao;
     }
 
+    public String getAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(String ativo) {
+        this.ativo = ativo;
+        if (ativo.equals("I"))
+            this.descAtivo = "checked";
+        else
+            this.descAtivo = "";
+    }  
+
+    public String getDescAtivo() {
+        return descAtivo;
+    }
+
  
     
     
@@ -87,6 +107,8 @@ public class Produto implements Bean{
         _produto.setSaldo(this.saldo);
         _produto.setVlUnitario(this.vlUnitario);
         _produto.setTipo(this.tipo);
+        _produto.setAtivo(this.ativo);
+        
         
     
     }

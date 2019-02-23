@@ -26,25 +26,46 @@ public class AcaoGravaAvaria extends Acao
         Connection conexao = (Connection)req.getAttribute("connection");
         HttpSession sessao = req.getSession(false);
         
+        String pagRetorno = "FabricaGelo.Avaria.AcaoAbreAvaria";
+        
         AvariaDAO avariaDAO = new AvariaDAO(conexao);
         Avaria avaria = (Avaria)sessao.getAttribute("avaria");
         if (avaria == null)
             avaria = new Avaria();
         
-        String pagRetorno = (String)sessao.getAttribute("pagRetorno");
         
-        String descricao = (req.getParameter("txtAvaria") == "" || req.getParameter("txtAvaria") == null) ? "" : req.getParameter("txtAvaria");
+        
+        String descricao = (req.getParameter("txtAvaria").equals("") || req.getParameter("txtAvaria") == null) ? "" : req.getParameter("txtAvaria").toUpperCase();
+        String inativo = (req.getParameter("ck_Ativo") == null ? "A" : "I");
         
         avaria.setDescricao(descricao);
+        avaria.setAtivo(inativo);
         
+        if (avaria.getDescricao().equals(""))
+        {
+            sessao.setAttribute("avisoErro", "Descrição vazia");
+            sessao.setAttribute("tipoAviso","alert alert-danger");
+            sessao.setAttribute("pagOrigemErro", "FabricaGelo.Avaria.AcaoAbreAvaria");
+            pagRetorno = "visao/erro.jsp";             
+        }
+        else
+        {
+            if (avariaDAO.atualizar(avaria))
+            {
+                avaria.setIdAvaria(avariaDAO.getIdentity());
+                avaria = avariaDAO.listaUm(avaria);
+
+                sessao.setAttribute("avaria", avaria);
+
+                sessao.setAttribute("avisoErro", "Avaria atualizada");
+                sessao.setAttribute("tipoAviso","alert alert-success");
+                sessao.setAttribute("pagOrigemErro", "FabricaGelo.Avaria.AcaoAbreAvaria");
+                pagRetorno = "visao/erro.jsp";                          
+
+            }
+        }
         
-        if (avariaDAO.atualizar(avaria))
-        
-            sessao.setAttribute("avaria", avaria);
-        
-        sessao.setAttribute("pagRetorno",pagRetorno);
-        
-        return "FabricaGelo.Avaria.AcaoListarAvaria";
+        return pagRetorno;
     }
 }
 

@@ -37,24 +37,28 @@ public class AcaoGravaCarregamento extends Acao
         if (saidaCamara == null)
         {
             sessao.setAttribute("avisoErro", "Campos do carregamento não preenchidos.");
+            sessao.setAttribute("tipoAviso","alert alert-danger");
             sessao.setAttribute("pagOrigemErro", "FabricaGelo.Carregamento.AcaoAbreCarregamento");
             pagRetorno = "visao/erro.jsp";             
         }
         else if(produtoCamara == null)
         {
             sessao.setAttribute("avisoErro", "Produto ou estoque não selecionados.");
+            sessao.setAttribute("tipoAviso","alert alert-danger");
             sessao.setAttribute("pagOrigemErro", "FabricaGelo.Carregamento.AcaoAbreCarregamento");
             pagRetorno = "visao/erro.jsp";             
         } 
         else if (saidaCamara.getSituacao().equals("CA"))
         {
             sessao.setAttribute("avisoErro", "Carregamento finalizado");
+            sessao.setAttribute("tipoAviso","alert alert-danger");
             sessao.setAttribute("pagOrigemErro", "FabricaGelo.Carregamento.AcaoAbreCarregamento");
             pagRetorno = "visao/erro.jsp";             
         }
         else if (saidaCamara.getSituacao().equals("CD"))
         {
             sessao.setAttribute("avisoErro", "Carregamento devolvido");
+            sessao.setAttribute("tipoAviso","alert alert-danger");
             sessao.setAttribute("pagOrigemErro", "FabricaGelo.Carregamento.AcaoAbreCarregamento");
             pagRetorno = "visao/erro.jsp";             
         }
@@ -68,6 +72,7 @@ public class AcaoGravaCarregamento extends Acao
             if (produtoCamara.getSaldo() < Double.parseDouble(qtSaida))
             {
                 sessao.setAttribute("avisoErro", "Qt de saída maior que o estoque na câmara");
+                sessao.setAttribute("tipoAviso","alert alert-danger");
                 sessao.setAttribute("pagOrigemErro", "FabricaGelo.Carregamento.AcaoAbreCarregamento");
                 pagRetorno = "visao/erro.jsp";                 
             }
@@ -84,6 +89,7 @@ public class AcaoGravaCarregamento extends Acao
                     saidaCamara = saidaCamaraDAO.listaUm(saidaCamara);
 
                     sessao.setAttribute("avisoErro", "Carregamento salvo com sucesso");
+                    sessao.setAttribute("tipoAviso","alert alert-success");
                     sessao.setAttribute("pagOrigemErro", "FabricaGelo.Carregamento.AcaoListarCarregamento");
                     pagRetorno = "visao/erro.jsp";                 
                 }

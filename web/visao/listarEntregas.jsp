@@ -5,7 +5,7 @@
 --%>
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 
 <html>
     <c:import url="CabRod/cabecalho.jsp"/>
@@ -16,7 +16,7 @@
         <form name="formEntrega" method="post">
             <div class="container">
                 <div class="panel panel-default">
-                    <div class="panel-heading"><h3 class="panel-title text-center"><b>Rotas di√°rias das entregas</b></h3></div>
+                    <div class="panel-heading"><h3 class="panel-title text-center"><b>Rotas di·rias das entregas</b></h3></div>
                     <div class="panel-body">
                         
                         <div class="row">
@@ -58,8 +58,8 @@
                                     <tr>
                                         <th><div align="left"></div></th>
                                         <th><div align="left">Data</div></th>
-                                        <th><div align="left">Ve√≠culo</div></th>
-                                        <th><div align="left">Situa√ß√£o</div></th>
+                                        <th><div align="left">VeÌculo</div></th>
+                                        <th><div align="left">SituaÁ„o</div></th>
                                         
                                     </tr> 
                                     <c:forEach var="lstEntreg" items="${lstEntrega}" varStatus="s">

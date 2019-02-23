@@ -26,11 +26,10 @@ public class AcaoAbreMaquina extends Acao
         HttpSession sessao = req.getSession(false);
 
         Equipamento maquina = (Equipamento)sessao.getAttribute("maquina");
-        Manutencao manutencao = (Manutencao)sessao.getAttribute("manutencao");
-        
+
         
         sessao.setAttribute("maquina",maquina);
-        sessao.setAttribute("manutencao",manutencao);
+ 
         
         return "visao/maquina.jsp";
     }

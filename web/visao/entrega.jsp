@@ -6,7 +6,7 @@
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 
 <html>
     <head>
@@ -56,7 +56,7 @@
                                                 <label class="control-label">Profissional</label>
                                             </div>
                                             <div class="col-sm-6">
-                                                <label class="control-label">Ve√≠culo</label>
+                                                <label class="control-label">VeÌculo</label>
                                             </div>
                                             
                                             
@@ -77,7 +77,7 @@
                                             </div>                                            
                                             <div class="col-sm-6">
                                                 <select name="cmbVeiculo" class="form-control">
-                                                    <option value="0">... Selecione um Ve√≠culo ...</option>
+                                                    <option value="0">... Selecione um VeÌculo ...</option>
                                                     <c:forEach var="veic" items="${lstVeiculo}" varStatus="s">
                                                       <c:if test="${veic.idEquipamento == entrega.idEquipamento}">
                                                         <option value="${veic.idEquipamento}" selected="selected">${veic.descricao}</option>
@@ -96,7 +96,7 @@
                                                 <label class="control-label">Data</label>
                                             </div>
                                             <div class="col-sm-2">
-                                                <label class="control-label">Sa√≠da</label>
+                                                <label class="control-label">SaÌda</label>
                                             </div>
                                             <div class="col-sm-2">
                                                 <label class="control-label">Chegada</label>
@@ -137,7 +137,7 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="panel panel-default">
-                                    <div class="panel-heading"><h3>Produtos da entrega e poss√≠veis avarias</h3></div>
+                                    <div class="panel-heading"><h3>Produtos da entrega e possÌveis avarias</h3></div>
                                     <div class="panel-body">
                                         <div class="row">
                                             <div class="col-sm-6">
@@ -147,7 +147,7 @@
                                                 <label class="control-label">Qt</label>
                                             </div>
                                             <div class="col-sm-1">
-                                                <label class="control-label">B√¥nus</label>
+                                                <label class="control-label">BÙnus</label>
                                             </div> 
                                             <div class="col-sm-1">
                                                 <label class="control-label">Cortesia</label>
@@ -156,7 +156,7 @@
                                                 <label class="control-label">Avaria</label>
                                             </div> 
                                             <div class="col-sm-1">
-                                                <label class="control-label">Reposi√ß√£o</label>
+                                                <label class="control-label">ReposiÁ„o</label>
                                             </div>
                                             <div class="col-sm-1">
                                                 <label class="control-label">Saldo</label>
@@ -270,7 +270,7 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="panel panel-default">
-                                    <div class="panel-heading"><h3>Roteiro de visitas</h3><h6>* Editando um cliente, voc√™ definir√° movimentos gerados pela visita.</h6></div>
+                                    <div class="panel-heading"><h3>Roteiro de visitas</h3><h6>* Editando um cliente, vocÍ definir· movimentos gerados pela visita.</h6></div>
                                     <div class="panel-body">
                                         <div class="row">
                                             <div class="col-sm-12">
@@ -294,7 +294,7 @@
                                                         <tr>
                                                             <th><div align="left"></div></th>
                                                             <th><div align="left">CNPJ</div></th>
-                                                            <th><div align="left">RAZ√ÉO SOCIAL</div></th>
+                                                            <th><div align="left">RAZ√O SOCIAL</div></th>
                                                             <th><div align="left">BAIRRO</div></th>
                                                             <th><div align="left">MOTIVO</div></th>
                                                         </tr> 
@@ -385,58 +385,7 @@
                                 </div>
                             </div>
                         </div>
-                                           
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading"><h3>Outros custos de entrega</h3></div>
-                                    <div class="panel-body">
-                                        <div class="row">
-                                            <div class="col-sm-8">
-                                                <label class="control-label">Descri√ß√£o</label>
-                                            </div>
-                                            <div class="col-sm-4">
-                                                <label class="control-label">Valor</label>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-sm-8">
-                                                <input type="text" class="form-control" name="txtDescCusto" id="txtDescCusto" value="${custoEntrega.descricao}">
-                                            </div>
-                                            <div class="col-sm-4">
-                                                <input type="text" class="form-control" name="txtValor" id="txtValor" value="${custoEntrega.valor}">
-                                            </div>
-                                            
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-sm-12">
-                                                <table class="table table-hover table-striped" overflow="scroll">
-                                                    <tbody>
-                                                        <tr>
-                                                            <th><div align="left"></div></th>
-                                                            <th><div align="left">Custo</div></th>
-                                                            <th><div align="left">Valor</div></th>
-                                                            
-                                                        </tr> 
-                                                        <c:forEach var="lstCustoEntr" items="${lstCustoEntrega}" varStatus="s">
-                                                            <tr>
-                                                                <td> <input type="image" src="visao/css/bootstrap/img/Text.png" onClick="selecionarCusto('FabricaGelo.Entrega.AcaoSelecionaCustoEntrega?idCustoEntrega=${lstCustoEntr.idCustoEntrega}')">  
-                                                                     <input type="image" src="visao/css/bootstrap/img/Delete.png" onClick="cancelarCusto('FabricaGelo.Entrega.AcaoCancelaCustoEntrega?idCustoEntrega=${lstCustoEntr.idCustoEntrega}')">  </td>
-                                                                <td> ${lstCustoEntr.descricao} </td>
-                                                                <td> ${lstCustoEntr.valor} </td>
-                                                           
-                                                            </tr>
-
-                                                        </c:forEach>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
+                        
                     </div>
                 
                 </div>

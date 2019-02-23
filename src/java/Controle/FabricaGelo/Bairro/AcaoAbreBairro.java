@@ -24,10 +24,9 @@ public class AcaoAbreBairro extends Acao
         Connection conexao = (Connection)req.getAttribute("connection");
         HttpSession sessao = req.getSession(false);
         
-        Colaborador colaborador = (Colaborador)sessao.getAttribute("colaborador");
+        String pagRetorno = "visao/bairro.jsp";
         
-        sessao.setAttribute("colaborador",colaborador);
-        sessao.setAttribute("bairro",null);
-        return "visao/bairro.jsp";
+        
+        return pagRetorno;
     }
 }

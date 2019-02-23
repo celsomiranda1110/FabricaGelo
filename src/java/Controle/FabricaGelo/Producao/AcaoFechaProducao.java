@@ -36,122 +36,61 @@ public class AcaoFechaProducao extends Acao
         Connection conexao = (Connection)req.getAttribute("connection");
         HttpSession sessao = req.getSession(false);
         
-        String pagRetorno = "";
+        String pagRetorno = "visao/producaoFinalizar.jsp";
         
         ProducaoDAO producaoDAO = new ProducaoDAO(conexao);
         Producao producao = (Producao)sessao.getAttribute("producao");
 
+        if (producao == null)
+        {
+            sessao.setAttribute("avisoErro", "Produção não selecionada");
+            sessao.setAttribute("tipoAviso","alert alert-danger");
+            sessao.setAttribute("pagOrigemErro", "FabricaGelo.Producao.AcaoListarProducao");
+            pagRetorno = "visao/erro.jsp";            
+        }
         if (producao.getSituacao().equals("PF"))
         {
             sessao.setAttribute("avisoErro", "Produção já finalizada");
+            sessao.setAttribute("tipoAviso","alert alert-danger");
             sessao.setAttribute("pagOrigemErro", "FabricaGelo.Producao.AcaoAbreProducao");
             pagRetorno = "visao/erro.jsp";            
         }   
         else
         {
-            double qtProducao = 0;
-            double qtMaquinas = 0;
-            double qtAvarias = 0;
-            double qtTransf = 0;
-            MaquinaProducaoDAO maqProdDAO = new MaquinaProducaoDAO(conexao);
+            // verificando se há transferência de produção para as câmeras
+            // obrigatório
+            double qtTransferencia = 0;
+            boolean naoFecha = false;
             
-            
-            // verificando se quantidade produzida condiz com as diferenças
-            // da quantidade de avarias
+            MaquinaProducaoDAO maquinaProducaoDAO = new MaquinaProducaoDAO(conexao);
             producao = producaoDAO.listaUm(producao);
-            qtProducao = producao.getQuantidade();
-            
-            // capturando quantidade das máquinas e quantidade de avarias
-            Iterator itMaqProd = producao.getLstMaquinaProducao().iterator();
-            while (itMaqProd.hasNext())
+            Iterator itMaquinaProducao = producao.getLstMaquinaProducao().iterator();
+            while (itMaquinaProducao.hasNext())
             {
-                MaquinaProducao maqProd = (MaquinaProducao)itMaqProd.next();
-                maqProd = maqProdDAO.listaUm(maqProd);
-                qtMaquinas += maqProd.getQtProducao();
-                
-                Iterator itAvaria = maqProd.getLstAvariaProducao().iterator();
-                while (itAvaria.hasNext())
+                qtTransferencia = 0;
+                MaquinaProducao maquinaProducao = (MaquinaProducao)itMaquinaProducao.next();
+                maquinaProducao = maquinaProducaoDAO.listaUm(maquinaProducao);
+                Iterator itTransferenciaProducao = maquinaProducao.getLstTransferenciaProducao().iterator();
+                while (itTransferenciaProducao.hasNext())
                 {
-                    AvariaProducao avaProd = (AvariaProducao)itAvaria.next();
-                    qtAvarias += avaProd.getQuantidade();
+                    TransferenciaProducao transferenciaProducao = (TransferenciaProducao)itTransferenciaProducao.next();
+                    qtTransferencia += transferenciaProducao.getQuantidade();
                 }
+                if (qtTransferencia == 0)
+                    naoFecha = true;
             }
             
-            //capturando a quantidade de transferências da produção para câmaras
-            Iterator itTransf = producao.getLstTransferenciaProducao().iterator();
-            while (itTransf.hasNext())
+            if (naoFecha)
             {
-                TransferenciaProducao transf = (TransferenciaProducao)itTransf.next();
-                qtTransf += transf.getQuantidade();
-            }
-            
-            // verificando quantidades
-            if (qtProducao != (qtMaquinas - qtAvarias))
-            {
-                sessao.setAttribute("avisoErro", "Quantidade produzida diferente do total das máquinas");
+                sessao.setAttribute("avisoErro", "Há máquinas sem transferência para câmaras");
+                sessao.setAttribute("tipoAviso","alert alert-danger");
                 sessao.setAttribute("pagOrigemErro", "FabricaGelo.Producao.AcaoAbreProducao");
-                pagRetorno = "visao/erro.jsp";                 
-            }
-            else if (qtProducao != qtTransf)
-            {
-                sessao.setAttribute("avisoErro", "Necessário transferir toda a produção para câmaras");
-                sessao.setAttribute("pagOrigemErro", "FabricaGelo.Producao.AcaoAbreProducao");
-                pagRetorno = "visao/erro.jsp";                 
-            }
-            else
-            {
-                String mensagem = "";
-                
-                // ajuste de saldos em câmaras e no produto
-                ProdutoDAO produtoDAO = new ProdutoDAO(conexao);
-                Produto produto = new Produto();
-                produto = producao.getProduto();
-                produto.setSaldo(produto.getSaldo() + qtProducao);
-                if (!produtoDAO.atualizar(produto))
-                    mensagem = "Problemas ao atualizar saldo de produto";
-                
-                if (mensagem.equals(""))
-                {
-                    // atualizando saldo por câmara
-                    ProdutoCamaraDAO produtoCamaraDAO = new ProdutoCamaraDAO(conexao);
-                    Iterator itTransfSaldo = producao.getLstTransferenciaProducao().iterator();
-                    while (itTransfSaldo.hasNext())
-                    {
-                        if (mensagem.equals(""))
-                        {
-                            TransferenciaProducao transf = (TransferenciaProducao)itTransfSaldo.next();
-                            ProdutoCamara prodCamara = (ProdutoCamara)transf.getProdutoCamara();
-                            prodCamara.setSaldo(prodCamara.getSaldo() + qtTransf);
-                            prodCamara.setSaldoAnterior(prodCamara.getSaldo());
-                            if (!produtoCamaraDAO.atualizar(prodCamara))
-                                mensagem = "Problemas ao atualizar saldo de câmaras";
-                        }
-                    } 
-                    
-
-                }
-                
-                if (mensagem.equals(""))
-                {
-                    producao.setSituacao("PF");
-                    if (!producaoDAO.atualizar(producao))
-                        mensagem = "Problemas ao atualizar produção";
-                }
-                
-                if (mensagem.equals(""))
-                    mensagem = "Produção fechada e estoques atualizados";                
-                
-                sessao.setAttribute("maquinaProducao", null); 
-                sessao.setAttribute("lstAvariaProducao", null);
-                sessao.setAttribute("avariaProducao", null); 
-                sessao.setAttribute("transf", null);
-                
-                sessao.setAttribute("avisoErro", mensagem);
-                sessao.setAttribute("pagOrigemErro", "FabricaGelo.Producao.AcaoAbreProducao");
-                pagRetorno = "visao/erro.jsp";                   
+                pagRetorno = "visao/erro.jsp" ;              
             }
             
         }
+        
+        sessao.setAttribute("producao", producao);
         
         return pagRetorno;
     }

@@ -44,6 +44,7 @@ public class AcaoGravaMovimento extends Acao
             {
                 atualiza = false;
                 sessao.setAttribute("avisoErro", "Movimento fechado");
+                sessao.setAttribute("tipoAviso","alert alert-danger");
                 sessao.setAttribute("pagOrigemErro", "FabricaGelo.Movimento.AcaoAbreMovimento");
                 pagRetorno = "visao/erro.jsp";                 
 
@@ -52,6 +53,7 @@ public class AcaoGravaMovimento extends Acao
             {
                 atualiza = false;
                 sessao.setAttribute("avisoErro", "Movimento cancelado");
+                sessao.setAttribute("tipoAviso","alert alert-danger");
                 sessao.setAttribute("pagOrigemErro", "FabricaGelo.Movimento.AcaoAbreMovimento");
                 pagRetorno = "visao/erro.jsp";                 
 

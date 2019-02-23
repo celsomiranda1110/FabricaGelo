@@ -29,6 +29,8 @@ public class AcaoAlteraDia extends Acao
         Connection conexao = (Connection)req.getAttribute("connection");
         HttpSession sessao = req.getSession(false);
         
+        String pagRetorno = "FabricaGelo.Colaborador.AcaoAbreColaborador";
+        
         ColaboradorDAO colaboradorDAO = new ColaboradorDAO(conexao);
         Colaborador colaborador = (Colaborador)sessao.getAttribute("colaborador");
 
@@ -51,6 +53,6 @@ public class AcaoAlteraDia extends Acao
         sessao.setAttribute("lstColaboradorProduto",colaborador.getLstColaboradorProduto());
         sessao.setAttribute("lstVisitaColaborador",colaborador.getLstVisitaColaborador());        
         
-        return "visao/colaborador.jsp";
+        return pagRetorno;
     }
 }

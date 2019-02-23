@@ -5,6 +5,7 @@
  */
 package Controle.FabricaGelo.Avaria;
 
+import Bean.Avaria;
 import Bean.Colaborador;
 import Controle.FabricaGelo.Gerais.Acao;
 import java.sql.Connection;
@@ -24,10 +25,10 @@ public class AcaoAbreAvaria extends Acao
         Connection conexao = (Connection)req.getAttribute("connection");
         HttpSession sessao = req.getSession(false);
         
-        Colaborador colaborador = (Colaborador)sessao.getAttribute("colaborador");
+        Avaria avaria = (Avaria)sessao.getAttribute("avaria");
         
-        sessao.setAttribute("colaborador",colaborador);
-        sessao.setAttribute("avaria",null);
+        sessao.setAttribute("avaria",avaria);
+        
         return "visao/avaria.jsp";
     }
 }

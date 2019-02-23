@@ -5,7 +5,7 @@
 --%>
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 
 <html>
     <c:import url="CabRod/cabecalho.jsp"/>
@@ -16,7 +16,7 @@
         <form name="formFuncao" method="post">
             <div class="container">
                 <div class="panel panel-default">
-                    <div class="panel-heading"><h3 class="panel-title text-center"><b>Lista de FunÃ§Ãµes</b></h3></div>
+                    <div class="panel-heading"><h3 class="panel-title text-center"><b>Lista de Funções</b></h3></div>
                     <div class="panel-body">
                         
                         <div class="row">
@@ -26,11 +26,18 @@
                                         <div class="navbar navbar-default">
                                             <div class="container-fluid">
                                                 <ul class="nav navbar-nav">
-                                                    <li class="btn bottom-right"><button type="button" class="btn btn-default" onClick="novo()">Nova FunÃ§Ã£o</button></li>
+                                                    <li class="btn bottom-right"><button type="button" class="btn btn-default" onClick="novo()">Nova Função</button></li>
                                                     
                                                 </ul>
                                                 <ul class="nav navbar-nav navbar-right">
-                                                    <li class="btn"><input type="text" class="form-control" name="txtPesquisa" id="txtPesquisa"></li>
+                                                    <li class="btn"><input type="text" class="form-control" name="txtPesquisa" id="txtPesquisa" placeholder="Descrição de função"></li>
+                                                    <li class="btn">
+                                                        <select name="cmbSituacaoPesquisa" class="form-control" >
+                                                            <option value=""> Situação </option>
+                                                            <option value="A">Ativo</option>
+                                                            <option value="I">Inativo</option>
+                                                        </select> 
+                                                    </li>
                                                     <li class="btn"><button type="button" class="btn btn-default" onClick="pesquisar()">Pesquisa</button></li>
                                                     
                                                 </ul>
@@ -46,7 +53,7 @@
                                 <tbody>
                                     <tr>
                                         <th><div align="left"></div></th>
-                                        <th><div align="left">DescriÃ§Ã£o</div></th>
+                                        <th><div align="left">Descrição</div></th>
                                         
                                     </tr> 
                                     <c:forEach var="lstFunc" items="${lstFuncao}" varStatus="s">
@@ -70,7 +77,7 @@
             function novo()
             {
  
-                document.forms[0].action="FabricaGelo.Funcao.AcaoAbreFuncao";
+                document.forms[0].action="FabricaGelo.Funcao.AcaoNovaFuncao";
                 document.forms[0].submit();
             }
             function pesquisar()

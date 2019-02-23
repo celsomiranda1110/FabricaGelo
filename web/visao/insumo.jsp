@@ -5,12 +5,12 @@
 --%>
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 
 <html>
     <head>
         <c:import url="CabRod/cabecalho.jsp"/>
-        <title>InformaÃ§Ãµes sobre a Insumo</title>
+        <title>Informações sobre a Insumo</title>
         
     </head>
     <body>
@@ -31,10 +31,11 @@
                                         <div class="navbar navbar-default">
                                             <div class="container-fluid">
                                                 <ul class="nav navbar-nav">
-                                                    <li class="btn"><button type="button" class="btn btn-success" onClick="atualizar()">Atualizar</button></li>
+                                                    <li class="btn"><button type="button" class="btn btn-default" onClick="atualizar()">Atualizar</button></li>
+                                                    <li class="btn"><button type="button" class="btn btn-default" onClick="excluir()">Excluir</button></li>
                                                 </ul>
                                                 <ul class="nav navbar-nav navbar-right">
-                                                    <li class="btn"><button type="button" class="btn btn-default" onClick="selecionar()">Selecionar</button></li>
+                                                    <li class="btn"><button type="button" class="btn btn-default" onClick="retornar()">Retornar</button></li>
                                                 </ul>
                                             </div>
                                         </div>                                        
@@ -47,12 +48,10 @@
                         <div class="row"> <!-- div primeira linha -->
                             <div class="col-lg-12">
                                 <div class="row">
-                                    <div class="col-sm-10">
-                                        <label class="control-label">DescriÃ§Ã£o</label>
+                                    <div class="col-sm-12">
+                                        <label class="control-label">Descrição</label>
                                     </div>
-                                    <div class="col-sm-2">
-                                        <label class="control-label">Estoque</label>
-                                    </div>                                    
+                                                                       
                                 </div>
                                 <div class="row">
                                    
@@ -61,7 +60,7 @@
                                     </div>
                                     
                                     <div class="col-sm-2">
-                                        <input type="text" class="form-control" name="txtSaldo" id="txtSaldo" value="${insumo.saldo}">
+                                        <input type="checkbox" name="ck_Ativo" ${insumo.descAtivo}> Inativo
                                     </div>                                    
                                 </div>
                             </div>
@@ -83,7 +82,7 @@
                 var descricao = formInsumo.txtInsumo.value;
                 if (descricao == "")
                 {
-                    alert('NecessÃ¡rio descriÃ§Ã£o do insumo!');
+                    alert('Necessário descrição do insumo!');
                     return false;
                 }
                 else
@@ -92,9 +91,14 @@
                     document.forms[0].submit();
                 }
             }
-            function selecionar()
+            function excluir()
             {
-                document.forms[0].action="FabricaGelo.Insumo.AcaoRetornaPagina";
+                document.forms[0].action="FabricaGelo.Insumo.AcaoDeleteInsumo";
+                document.forms[0].submit();
+            }             
+            function retornar()
+            {
+                document.forms[0].action="FabricaGelo.Insumo.AcaoListarInsumo";
                 document.forms[0].submit();                
             }
 

@@ -6,7 +6,7 @@
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 
 <html>
     <head>
@@ -62,7 +62,7 @@
                                                 <label class="control-label">Tipo</label>
                                             </div>
                                             <div class="col-sm-2">
-                                                <label class="control-label">NÃºmero</label>
+                                                <label class="control-label">Número</label>
                                             </div>
                                             <div class="col-sm-2">
                                                 <label class="control-label">Data</label>
@@ -100,7 +100,7 @@
 
                                     <div class="row">
                                         <div class="col-sm-7">
-                                            <label class="control-label">Produto/ServiÃ§o</label>
+                                            <label class="control-label">Produto/Serviço</label>
                                         </div>
                                         <div class="col-sm-1">
                                             <label class="control-label">Vl Unit</label>
@@ -136,7 +136,7 @@
                                             <input type="text" class="form-control" name="txtVlDesconto" id="txtVlDesconto" value="${produtoMovimento.desconto}">
                                         </div>                                          
                                         <div class="col-sm-1">
-                                            <input type="text" class="form-control" name="txtVlTotal" id="txtVlTotal" value="${produtoMovimento.valorTotal}">
+                                            <input type="text" class="form-control" name="txtVlTotal" id="txtVlTotal" readonly="true" value="${produtoMovimento.valorTotal}">
                                         </div>  
                                         
                                     </div>
@@ -150,7 +150,7 @@
                                                         <th><div align="left"></div></th>
                                                         <th><div align="left">Produto</div></th>
                                                         <th><div align="left">Quantidade</div></th>
-                                                        <th><div align="left">Vl UnitÃ¡rio</div></th>
+                                                        <th><div align="left">Vl Unitário</div></th>
                                                         <th><div align="left">Icms</div></th>
                                                         <th><div align="left">Desconto</div></th>
                                                         <th><div align="left">Vl Total</div></th>
@@ -160,7 +160,7 @@
                                                         <tr>
                                                             <c:set var="tQuantidade" value="${tQuantidade + lstProdMov.quantidade}" />
                                                             <c:set var="tVlItens" value="${tVlItens + lstProdMov.valorTotal}" />
-                                                            <td> <input type="image" src="visao/css/bootstrap/img/Text.png" onClick="selecionarProduto('FabricaGelo.Movimento.AcaoSelecionaProduto?idProdutoMovimento=${lstProdMov.idProdutoMovimento}')"></td>
+                                                            <td> <input type="image" src="visao/css/bootstrap/img/Text.png" onClick="selecionarProduto('FabricaGelo.MovimentoEntrega.AcaoSelecionaProduto?idProdutoMovimento=${lstProdMov.idProdutoMovimento}')"></td>
                                                             <td> ${lstProdMov.produto} </td>
                                                             <td> ${lstProdMov.quantidade} </td>
                                                             <td> ${lstProdMov.valor} </td>
@@ -204,7 +204,7 @@
 
             function atualizar()
             {
-                document.forms[0].action="FabricaGelo.Movimento.AcaoGravaMovimento";
+                document.forms[0].action="FabricaGelo.MovimentoEntrega.AcaoGravaMovimentoEntrega";
                 document.forms[0].submit();
             }
             function cancelar()
@@ -217,7 +217,11 @@
                 document.forms[0].action="FabricaGelo.Entrega.AcaoEncerrarRota";
                 document.forms[0].submit();
             }
-                
+            function selecionarProduto(caminho)
+            {
+                document.forms[0].action=caminho;
+                document.forms[0].submit();
+            }  
 
         </script>                                                         
     </body>

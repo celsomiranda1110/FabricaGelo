@@ -37,6 +37,7 @@ public class AcaoFechaMovimento extends Acao
         {
             fechar = false;
             sessao.setAttribute("avisoErro", "Movimento inexistente");
+            sessao.setAttribute("tipoAviso","alert alert-danger");
             sessao.setAttribute("pagOrigemErro", "FabricaGelo.Movimento.AcaoAbreMovimento");
             pagRetorno = "visao/erro.jsp";                 
             
@@ -45,6 +46,7 @@ public class AcaoFechaMovimento extends Acao
         {
             fechar = false;
             sessao.setAttribute("avisoErro", "Movimento fechado");
+            sessao.setAttribute("tipoAviso","alert alert-danger");
             sessao.setAttribute("pagOrigemErro", "FabricaGelo.Movimento.AcaoAbreMovimento");
             pagRetorno = "visao/erro.jsp";                 
         }        
@@ -52,6 +54,7 @@ public class AcaoFechaMovimento extends Acao
         {
             fechar = false;
             sessao.setAttribute("avisoErro", "Movimento cancelado");
+            sessao.setAttribute("tipoAviso","alert alert-danger");
             sessao.setAttribute("pagOrigemErro", "FabricaGelo.Movimento.AcaoAbreMovimento");
             pagRetorno = "visao/erro.jsp";                 
             

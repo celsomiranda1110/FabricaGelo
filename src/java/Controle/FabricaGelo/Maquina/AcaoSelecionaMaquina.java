@@ -38,8 +38,7 @@ public class AcaoSelecionaMaquina extends Acao{
         
         sessao.setAttribute("colaborador",colaborador);
         sessao.setAttribute("maquina",maquina);
-        sessao.setAttribute("lstManutencao", maquina.getLstManutencao());
-        sessao.setAttribute("pagRetorno",pagRetorno);
+ 
         
         return "visao/maquina.jsp";
     }

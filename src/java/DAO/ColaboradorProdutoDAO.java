@@ -181,4 +181,18 @@ public class ColaboradorProdutoDAO extends DAO{
         
         return retorno;
     }
+    
+    public boolean delete(Colaborador colaborador)
+    {
+        boolean retorno = false;
+        
+        comSql = "";
+        comSql = " Delete from `smmdaa_bdGelo`.`tblColaboradorProduto`";
+        comSql += " WHERE ";
+        comSql += "     `intColaboradorId` = " + colaborador.getIdColaborador() + ";";
+        retorno = atualizar();
+ 
+        
+        return retorno;
+    }    
 }

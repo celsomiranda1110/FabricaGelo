@@ -14,6 +14,8 @@ public class MovimentoEntrega implements Bean{
     private int idMovimentoEntrega;
     private int idColaboradorEntrega;
     private int idMovimento;
+    private String situacao;
+    private String descSituacao;
     
     
     private Movimento movimento;
@@ -51,13 +53,34 @@ public class MovimentoEntrega implements Bean{
         this.movimento = movimento;
         this.idMovimento = movimento.getIdMovimento();
     }
-    
+
+    public String getSituacao() {
+        return situacao;
+    }
+
+    public void setSituacao(String situacao) {
+        this.situacao = situacao;
+        
+        if (situacao.equals("AB"))
+            this.descSituacao = "ABERTA";
+        else if (situacao.equals("FE"))
+            this.descSituacao = "FECHADA";
+        else if (situacao.equals("EP"))
+            this.descSituacao = "EM PAGAMENTO";
+        else if (situacao.equals("CA"))
+            this.descSituacao = "CANCELADA";
+    }
+
+    public String getDescSituacao() {
+        return descSituacao;
+    }
     
     public void replicar(MovimentoEntrega _movimentoEntrega)
     {
         _movimentoEntrega.setIdMovimentoEntrega(this.idMovimentoEntrega);
         _movimentoEntrega.setIdColaboradorEntrega(this.idColaboradorEntrega);
         _movimentoEntrega.setIdMovimento(this.idMovimento);
+        _movimentoEntrega.setSituacao(this.situacao);
         
         if (this.movimento != null)
             _movimentoEntrega.setMovimento(movimento);

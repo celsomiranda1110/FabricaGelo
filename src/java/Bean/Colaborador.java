@@ -15,6 +15,7 @@ import java.util.ArrayList;
 
 public class Colaborador implements Bean{
     private int idColaborador;
+    private int idTipoColaborador;
     private String cnpj;
     private String  inscricaoEstadual;
     private String  inscricaoMunicipal;
@@ -28,10 +29,20 @@ public class Colaborador implements Bean{
     private String contato;
     private String fone;
     private String email;
+    private String ativo;
+    private String descAtivo;
+    private String observacao;
+    
+    private TipoColaborador tipoColaborador;
     
     private Bairro bairro;
     private List<ColaboradorProduto> lstColaboradorProduto = new ArrayList<ColaboradorProduto>();
     private List<VisitaColaborador> lstVisitaColaborador = new ArrayList<VisitaColaborador>();
+
+    public Colaborador() {
+        this.ativo = "A";
+    }
+    
     
 
     public Bairro getBairro() {
@@ -173,6 +184,49 @@ public class Colaborador implements Bean{
         this.lstVisitaColaborador = lstVisitaColaborador;
     }
 
+    public String getAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(String ativo) {
+        this.ativo = ativo;
+        if (ativo.equals("I"))
+            this.descAtivo = "checked";
+        else
+            this.descAtivo = "";
+    }
+
+    public int getIdTipoColaborador() {
+        return idTipoColaborador;
+    }
+
+    public void setIdTipoColaborador(int idTipoColaborador) {
+        this.idTipoColaborador = idTipoColaborador;
+    }
+
+    public String getObservacao() {
+        return observacao;
+    }
+
+    public void setObservacao(String observacao) {
+        this.observacao = observacao;
+    }
+
+    public String getDescAtivo() {
+        return descAtivo;
+    }
+
+    public TipoColaborador getTipoColaborador() {
+        return tipoColaborador;
+    }
+
+    public void setTipoColaborador(TipoColaborador tipoColaborador) {
+        this.tipoColaborador = tipoColaborador;
+        this.idTipoColaborador = tipoColaborador.getIdTipoColaborador();
+    }
+    
+    
+
     public String toString()
     {
         return this.razaoSocial;
@@ -182,6 +236,7 @@ public class Colaborador implements Bean{
     {
     
         _colaborador.setIdColaborador(this.idColaborador);
+        _colaborador.setIdTipoColaborador(this.idTipoColaborador);
         _colaborador.setCnpj(this.cnpj);
         _colaborador.setInscricaoEstadual(this.inscricaoEstadual);
         _colaborador.setInscricaoMunicipal(this.inscricaoMunicipal);
@@ -195,8 +250,14 @@ public class Colaborador implements Bean{
         _colaborador.setContato(this.contato);
         _colaborador.setFone(this.fone);
         _colaborador.setEmail(this.email);
+        _colaborador.setAtivo(this.ativo);
+        _colaborador.setObservacao(this.observacao);
         
-        _colaborador.setBairro(this.bairro);
+        if (this.bairro != null)
+            _colaborador.setBairro(this.bairro);
+        
+        if (this.tipoColaborador != null)
+            _colaborador.setTipoColaborador(this.tipoColaborador);
         
         _colaborador.setLstVisitaColaborador(this.lstVisitaColaborador);
         _colaborador.setLstColaboradorProduto(this.lstColaboradorProduto);

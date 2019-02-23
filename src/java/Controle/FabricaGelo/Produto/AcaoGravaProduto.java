@@ -26,19 +26,21 @@ public class AcaoGravaProduto extends Acao
         Connection conexao = (Connection)req.getAttribute("connection");
         HttpSession sessao = req.getSession(false);
 
-        String pagRetorno = "";
+        String pagRetorno = "FabricaGelo.Produto.AcaoAbreProduto";
         
         ProdutoDAO produtoDAO = new ProdutoDAO(conexao);
         Produto produto = (Produto)sessao.getAttribute("produto");
         if (produto == null)
             produto = new Produto();
         
-        String descricao = (req.getParameter("txtProduto").equals("") || req.getParameter("txtProduto") == null) ? "" : req.getParameter("txtProduto");
+        String descricao = (req.getParameter("txtProduto").equals("") || req.getParameter("txtProduto") == null) ? "" : req.getParameter("txtProduto").toUpperCase();
         String vlUnitario = (req.getParameter("txtVlUnitario").equals("") || req.getParameter("txtVlUnitario") == null) ? "0" : req.getParameter("txtVlUnitario");
+        String inativo = (req.getParameter("ck_Ativo") == null ? "A" : "I");
         
         produto.setDescricao(descricao);
         produto.setVlUnitario(Double.parseDouble(vlUnitario));
         produto.setTipo("PR");
+        produto.setAtivo(inativo);
                 
         
         if (produtoDAO.atualizar(produto))
@@ -48,6 +50,7 @@ public class AcaoGravaProduto extends Acao
             sessao.setAttribute("produto", produto);
             
             sessao.setAttribute("avisoErro", "Produto atualizado");
+            sessao.setAttribute("tipoAviso","alert alert-success");
             sessao.setAttribute("pagOrigemErro", "FabricaGelo.Produto.AcaoAbreProduto");
             pagRetorno = "visao/erro.jsp";            
         }

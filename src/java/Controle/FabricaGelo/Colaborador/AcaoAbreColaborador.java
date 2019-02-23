@@ -14,7 +14,11 @@ import DAO.FuncaoDAO;
 import Controle.FabricaGelo.Gerais.Acao;
 import DAO.BairroDAO;
 import Bean.Bairro;
+import Bean.TipoColaborador;
+import Bean.VisitaColaborador;
+import DAO.ColaboradorDAO;
 import DAO.ProdutoDAO;
+import DAO.TipoColaboradorDAO;
 import java.sql.Connection;
 import java.util.*;
 import javax.servlet.http.HttpServletRequest;
@@ -33,32 +37,31 @@ public String executa(HttpServletRequest req, HttpServletResponse res) throws Ex
         Connection conexao = (Connection)req.getAttribute("connection");
         HttpSession sessao = req.getSession(false);
         
+        
+        String pagRetorno = "visao/colaborador.jsp";
+        
+        List<VisitaColaborador> lstVisitaColaborador = new ArrayList<VisitaColaborador>();
+        
+//        ColaboradorProduto colaboradorProduto = (ColaboradorProduto)sessao.getAttribute("colaboradorProduto");
+        ColaboradorDAO colaboradorDAO = new ColaboradorDAO(conexao);
         Colaborador colaborador = (Colaborador)sessao.getAttribute("colaborador");
-        
-        
-        String pagRetorno = (String)sessao.getAttribute("pagRetorno");
-        if (pagRetorno != null)
+        if (colaborador != null)
         {
-            if (pagRetorno.equals("FabricaGelo.Colaborador.AcaoAbreColaborador"))
-            {
-                ColaboradorProduto colaboradorProduto = (ColaboradorProduto)sessao.getAttribute("colaboradorProduto");
-                if (colaboradorProduto == null)
-                    colaboradorProduto = new ColaboradorProduto();
-                Produto produto = (Produto)sessao.getAttribute("produto");
-                
-                if (produto != null)
-                    colaboradorProduto.setProduto(produto);
-                
-                sessao.setAttribute("colaboradorProduto", colaboradorProduto);
-                
-            }
+            colaborador = colaboradorDAO.listaUm(colaborador);
+            lstVisitaColaborador = colaborador.getLstVisitaColaborador();
         }
+        
+        
+        // Tipo colaborador
+        TipoColaboradorDAO tipoColaboradorDAO = new TipoColaboradorDAO(conexao);
+        List<TipoColaborador> lstTipoColaborador = new ArrayList<TipoColaborador>();
+        lstTipoColaborador = tipoColaboradorDAO.listaTodos(new TipoColaborador());
         
         // lstando bairros
         BairroDAO bairroDAO = new BairroDAO(conexao);
         List<Bairro> lstBairro = new ArrayList<Bairro>();
-        lstBairro = bairroDAO.listaTodos();
-        sessao.setAttribute("lstBairro",lstBairro);
+        lstBairro = bairroDAO.listaTodos(new Bairro());
+        
         
         ProdutoDAO produtoDAO = new ProdutoDAO(conexao);
         Produto produto = new Produto();
@@ -66,19 +69,15 @@ public String executa(HttpServletRequest req, HttpServletResponse res) throws Ex
         produto.setTipo("PR");
         lstProduto = produtoDAO.listaTodos(produto);        
         
-        // Lista de funcionários da empresa
         sessao.setAttribute("colaborador",colaborador);
+//        sessao.setAttribute("colaboradorProduto",colaboradorProduto);
         sessao.setAttribute("lstProduto", lstProduto);
-        if (colaborador != null)
-        {
-            sessao.setAttribute("lstColaboradorProduto",colaborador.getLstColaboradorProduto());
-            sessao.setAttribute("lstVisitaColaborador",colaborador.getLstVisitaColaborador());
-        }
-        else
-            sessao.setAttribute("lstColaboradorProduto",null);
-            
+        sessao.setAttribute("lstTipoColaborador", lstTipoColaborador);
+        sessao.setAttribute("lstBairro",lstBairro);        
+        sessao.setAttribute("lstColaboradorProduto",(colaborador == null ? null : colaborador.getLstColaboradorProduto()));
+        sessao.setAttribute("lstVisitaColaborador",lstVisitaColaborador);
 
-        return "visao/colaborador.jsp";
+        return pagRetorno;
         
     }    
 }

@@ -5,12 +5,13 @@
 --%>
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 
 <html>
     <head>
         <c:import url="CabRod/cabecalho.jsp"/>
-        <title>Informações sobre a Veiculo</title>
+        <title>Informa��es sobre a Veiculo</title>
         
     </head>
     <body>
@@ -32,9 +33,10 @@
                                             <div class="container-fluid">
                                                 <ul class="nav navbar-nav">
                                                     <li class="btn"><button type="button" class="btn btn-default" onClick="atualizar()">Atualizar</button></li>
+                                                    <li class="btn"><button type="button" class="btn btn-default" onClick="excluir()">Excluir</button></li>
                                                 </ul>
                                                 <ul class="nav navbar-nav navbar-right">
-                                                    <li class="btn"><button type="button" class="btn btn-default" onClick="selecionar()">Selecionar</button></li>
+                                                    <li class="btn"><button type="button" class="btn btn-default" onClick="retornar()">Retornar</button></li>
                                                 </ul>
                                             </div>
                                         </div>                                        
@@ -46,44 +48,63 @@
                                 
                         <div class="row"> <!-- div primeira linha -->
                             <div class="col-lg-12">
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <label class="control-label">Descrição</label>
-                                    </div>
-                                    <div class="col-sm-2">
-                                        <label class="control-label">Placa</label>
-                                    </div>
-                                    <div class="col-sm-2">
-                                        <label class="control-label">Marca</label>
-                                    </div>                                    
-                                    <div class="col-sm-2">
-                                        <label class="control-label">Modelo</label>
-                                    </div> 
-                                    <div class="col-sm-1">
-                                        <label class="control-label">Ano</label>
-                                    </div> 
-                                    <div class="col-sm-1">
-                                        <label class="control-label">Capacidade</label>
-                                    </div>                                     
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <input type="text" class="form-control" name="txtDescricao" id="txtDescricao" value="${veiculo.descricao}">
-                                    </div>
-                                    <div class="col-sm-2">
-                                        <input type="text" class="form-control" name="txtPlaca" id="txtPlaca" value="${veiculo.placa}">
-                                    </div>
-                                    <div class="col-sm-2">
-                                        <input type="text" class="form-control" name="txtMarca" id="txtMarca" value="${veiculo.marca}">
-                                    </div>
-                                    <div class="col-sm-2">
-                                        <input type="text" class="form-control" name="txtModelo" id="txtModelo" value="${veiculo.modelo}">
-                                    </div>
-                                    <div class="col-sm-1">
-                                        <input type="text" class="form-control" name="txtAno" id="txtAno" value="${veiculo.ano}">
-                                    </div>                                    
-                                    <div class="col-sm-1">
-                                        <input type="text" class="form-control" name="txtCapacidade" id="txtAno" value="${veiculo.capacidade}">
+                                <div class="navbar navbar-default">
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <label class="control-label">Descri��o</label>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <label class="control-label">Marca</label>
+                                            </div>                                    
+                                            <div class="col-sm-3">
+                                                <label class="control-label">Modelo</label>
+                                            </div> 
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" name="txtDescricao" id="txtDescricao" value="${veiculo.descricao}">
+                                            </div>
+                                            
+                                            <div class="col-sm-3">
+                                                <input type="text" class="form-control" name="txtMarca" id="txtMarca" value="${veiculo.marca}">
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <input type="text" class="form-control" name="txtModelo" id="txtModelo" value="${veiculo.modelo}">
+                                            </div>
+                                            
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <label class="control-label">Placa</label>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <label class="control-label">Ano</label>
+                                            </div> 
+                                            <div class="col-sm-3">
+                                                <label class="control-label">Quilometragem</label>
+                                            </div> 
+                                            <div class="col-sm-3">
+                                                <label class="control-label">Capacidade (Kg)</label>
+                                            </div>                                            
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <input type="text" class="form-control" name="txtPlaca" id="txtPlaca" value="${veiculo.placa}">
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <input type="text" class="form-control" name="txtAno" id="txtAno" value="${veiculo.ano}">
+                                            </div>   
+                                            <div class="col-sm-3">
+                                                <input type="text" class="form-control" name="txtQuilometragem" id="txtQuilometragem" value="${veiculo.quilometragem}" readonly="true">
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <input type="text" class="form-control" name="txtCapacidade" id="txtCapacidade" value="${veiculo.capacidade}" onkeypress="return SomenteNumero(event)">
+                                            </div>
+                                            <div class="col-sm-1">
+                                                <input type="checkbox" name="ck_Ativo" ${veiculo.descAtivo}> Inativo
+                                            </div> 
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -91,89 +112,7 @@
 
                         </div> <!-- div primeira linha -->
                         
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">Manutenções</div>
-                                    <div class="panel-body">
-                                        <div class="row">
-                                            <div class="col-sm-4">
-                                                <label class="control-label">Prestador do serviço</label>
-                                            </div>
-                                            <div class="col-sm-2">
-                                                <label class="control-label">Início</label>
-                                            </div>
-                                            <div class="col-sm-2">
-                                                <label class="control-label">Fim</label>
-                                            </div>
-                                            <div class="col-sm-2">
-                                                <label class="control-label">Garantia</label>
-                                            </div>
-                                            <div class="col-sm-2">
-                                                <label class="control-label">Valor</label>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-sm-4">
-                                                <div class="input-group">
-                                                    <input type="text" class="form-control" id="txtColaborador"  value="${manutencao.colaborador}">
-                                                    <div class="input-group-btn">
-                                                        <button type="button" class="btn btn-default" onClick="pesquisaColaborador()">...</button>
-                                                    </div>                                            
-                                                </div>     
-                                            </div>
-                                            <div class="col-sm-2">
-                                                <input type="date" class="form-control" name="txtDtInicio" id="txtDtInicio" value="${manutencao.dataInicio}">
-                                            </div>
-                                            <div class="col-sm-2">
-                                                <input type="date" class="form-control" name="txtDtFinal" id="txtDtFinal" value="${manutencao.dataFim}">
-                                            </div>
-                                            <div class="col-sm-2">
-                                                <input type="date" class="form-control" name="txtDtGarantia" id="txtDtGarantia" value="${manutencao.dataGarantia}">
-                                            </div>
-                                            <div class="col-sm-2">
-                                                <input type="text" class="form-control" name="txtValor" id="txtValor" value="${manutencao.valor}">
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-sm-12">
-                                                <label class="control-label">Motivo</label>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-sm-12">
-                                                <input type="text" class="form-control" name="txtMotivo" id="txtMotivo" value="${manutencao.motivo}">
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <table class="table table-hover table-striped" overflow="scroll">
-                                                <tbody>
-                                                    <tr>
-                                                        <th><div align="left"></div></th>
-                                                        <th><div align="left">Prestador do serviço</div></th>
-                                                        <th><div align="left">Inicio</div></th>
-                                                        <th><div align="left">Fim</div></th>
-                                                        <th><div align="left">Garantia</div></th>
-                                                        <th><div align="left">Valor</div></th>
-                                                    </tr> 
-                                                    <c:forEach var="lstManut" items="${lstManutencao}" varStatus="s">
-                                                        <tr>
-                                                            <td> <input type="image" src="visao/css/bootstrap/img/Text.png" onclick="selecionaManutencao('FabricaGelo.Veiculo.AcaoSelecionaManutencao?idManutencao=${lstManut.idManutencao}')"> </td>
-                                                            <td> ${lstManut.colaborador} </td>
-                                                            <td> ${lstManut.dataInicio} </td>
-                                                            <td> ${lstManut.dataFim} </td>
-                                                            <td> ${lstManut.dataGarantia} </td>
-                                                            <td> ${lstManut.valor} </td>
-                                                        </tr>
-                                                    </c:forEach>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-    
+                        
                     </div>
                 
                 </div>
@@ -185,33 +124,31 @@
 
             function atualizar()
             {
-                var descricao = formVeiculo.txtPlaca.value;
-                if (descricao == "")
-                {
-                    alert('Necessário identificação do veiculo!');
-                    return false;
-                }
-                else
-                {
-                    document.forms[0].action="FabricaGelo.Veiculo.AcaoGravaVeiculo";
-                    document.forms[0].submit();
-                }
+                
+                document.forms[0].action="FabricaGelo.Veiculo.AcaoGravaVeiculo";
+                document.forms[0].submit();
+               
             }
-            function selecionar()
+            function excluir()
             {
-                document.forms[0].action="FabricaGelo.Veiculo.AcaoRetornaPagina";
+                document.forms[0].action="FabricaGelo.Veiculo.AcaoDeleteVeiculo";
+                document.forms[0].submit();
+            }
+            function retornar()
+            {
+                document.forms[0].action="FabricaGelo.Veiculo.AcaoListarVeiculo";
                 document.forms[0].submit();                
             }
-            function pesquisaColaborador()
-            {
-                document.forms[0].action="FabricaGelo.Veiculo.AcaoBuscarColaborador";
-                document.forms[0].submit();                
-            }            
-            function selecionaManutencao(caminho)
-            {
-                document.forms[0].action=caminho;
-                document.forms[0].submit();                
-            }            
+            function SomenteNumero(e){
+                var tecla=(window.event)?event.keyCode:e.which;   
+                if((tecla>47 && tecla<58) || (tecla == 44)) return true;
+                else{
+                    if (tecla==8 || tecla==0) return true;
+                    else  return false;
+                }
+            }
+                     
+                    
         </script> 
     </body>
 </html>

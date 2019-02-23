@@ -66,6 +66,7 @@ public class AcaoBuscarVeiculo extends Acao{
         if (temRotaAtiva)
         {
             sessao.setAttribute("avisoErro", "Há rota ativa para o veículo selecionado");
+            sessao.setAttribute("tipoAviso","alert alert-danger");
             sessao.setAttribute("pagOrigemErro", "FabricaGelo.Entrega.AcaoListarEntrega");
             pagRetorno = "visao/erro.jsp";               
         }

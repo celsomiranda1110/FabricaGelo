@@ -28,7 +28,7 @@ public class AcaoListarFuncao extends Acao{
         List<Funcao> lstFuncao = new ArrayList<Funcao>();
         FuncaoDAO funcaoDAO = new FuncaoDAO(conexao);
         
-        lstFuncao = funcaoDAO.listaTodos();
+        lstFuncao = funcaoDAO.listaTodos(new Funcao());
         sessao.setAttribute("lstFuncao",lstFuncao);
         
         return "visao/listarFuncao.jsp"; 

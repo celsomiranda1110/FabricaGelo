@@ -6,7 +6,7 @@
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 <html>
     <head>
         <c:import url="CabRod/cabecalho.jsp"/>
@@ -45,7 +45,7 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="panel panel-default">
-                                    <div class="panel-heading"><h4><b>Ve√≠culo e carga</b></h4></div>
+                                    <div class="panel-heading"><h4><b>VeÌculo e carga</b></h4></div>
                                     <div class="panel-body">
                                         
                                         
@@ -54,7 +54,7 @@
                                                 <div class="container-fluid">
                                                     <div class="col-sm-10">
                                                         <select name="cmbVeiculo" class="form-control" onchange="buscarVeiculo()">
-                                                            <option value="0">... Selecione um Ve√≠culo ...</option>
+                                                            <option value="0">... Selecione um VeÌculo ...</option>
                                                             <c:forEach var="veic" items="${lstVeiculo}" varStatus="s">
                                                               <c:if test="${veic.idEquipamento == entrega.idEquipamento}">
                                                                 <option value="${veic.idEquipamento}" selected="selected">${veic.descricao}</option>
@@ -214,7 +214,7 @@
                                                         <tr>
                                                             <th><div align="left"></div></th>
                                                             <th><div align="left">CNPJ</div></th>
-                                                            <th><div align="left">RAZ√ÉO SOCIAL</div></th>
+                                                            <th><div align="left">RAZ√O SOCIAL</div></th>
                                                             <th><div align="left">BAIRRO</div></th>
                                                             <th><div align="left">MOTIVO</div></th>
                                                         </tr> 

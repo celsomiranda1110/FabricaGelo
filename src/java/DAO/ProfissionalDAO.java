@@ -22,7 +22,7 @@ public class ProfissionalDAO extends DAO{
         super(conexao);
     }
     
-    public List<Profissional> listaTodos()
+    public List<Profissional> listaTodos(Profissional _profissional)
     {
         List<Profissional> lstTabela = new ArrayList();
         
@@ -35,8 +35,14 @@ public class ProfissionalDAO extends DAO{
         comSql += "     `tblProfissional`.`strNome`,";
         comSql += "     `tblProfissional`.`strCelular`,";
         comSql += "     `tblProfissional`.`strSenha`,";
-        comSql += "     `tblProfissional`.`strUsuario`";
+        comSql += "     `tblProfissional`.`strUsuario`,";
+        comSql += "     `tblProfissional`.`bolAtivo`";
         comSql += " FROM `smmdaa_bdGelo`.`tblProfissional`";
+        if (_profissional != null)
+        {
+            comSql += " WHERE ";
+            comSql += "     `tblProfissional`.`bolAtivo` = '" + _profissional.getAtivo() + "'";
+        }
         comSql += " ORDER BY ";
         comSql += " `tblProfissional`.`strNome`;";
         
@@ -55,6 +61,7 @@ public class ProfissionalDAO extends DAO{
             profissional.setCelular((String)bkp.get(5));
             profissional.setSenha((String)bkp.get(6));
             profissional.setUsuario((String)bkp.get(7));
+            profissional.setAtivo((String)bkp.get(8));
             
             FuncaoDAO funcaoDAO = new FuncaoDAO(conexao);
             Funcao funcao = new Funcao();
@@ -83,7 +90,8 @@ public class ProfissionalDAO extends DAO{
         comSql += "     `tblProfissional`.`strNome`,";
         comSql += "     `tblProfissional`.`strCelular`,";
         comSql += "     `tblProfissional`.`strSenha`,";
-        comSql += "     `tblProfissional`.`strUsuario`";
+        comSql += "     `tblProfissional`.`strUsuario`,";
+        comSql += "     `tblProfissional`.`bolAtivo`";
         comSql += " FROM `smmdaa_bdGelo`.`tblProfissional`";
         comSql += " WHERE ";
         comSql += "     `tblProfissional`.`intProfissionalId` = " + profissional.getIdProfissional()+ ";";
@@ -104,6 +112,7 @@ public class ProfissionalDAO extends DAO{
                 profissional.setCelular((String)bkp.get(5));
                 profissional.setSenha((String)bkp.get(6));
                 profissional.setUsuario((String)bkp.get(7));
+                profissional.setAtivo((String)bkp.get(8));
 
                 FuncaoDAO funcaoDAO = new FuncaoDAO(conexao);
                 Funcao funcao = new Funcao();
@@ -141,7 +150,8 @@ public class ProfissionalDAO extends DAO{
             comSql += " 	`strNome`,";
             comSql += " 	`strCelular`,";
             comSql += " 	`strSenha`,";
-            comSql += " 	`strUsuario`)";
+            comSql += " 	`strUsuario`,";
+            comSql += " 	`bolAtivo`)";
             comSql += " VALUES";
             comSql += " 	(" + _profissional.getIdFuncao();
             comSql += " 	,'" + _profissional.getCtps() + "'";
@@ -149,7 +159,8 @@ public class ProfissionalDAO extends DAO{
             comSql += " 	,'" + _profissional.getNome() + "'";
             comSql += " 	,'" + _profissional.getCelular() + "'";
             comSql += " 	,'" + _profissional.getSenha() + "'";
-            comSql += " 	,'" + _profissional.getUsuario() + "');";
+            comSql += " 	,'" + _profissional.getUsuario() + "'";
+            comSql += " 	,'" + _profissional.getAtivo() + "');";
             
             retorno = atualizar();
             if(retorno)
@@ -176,13 +187,15 @@ public class ProfissionalDAO extends DAO{
             comSql += " 	,`strNome` = '" + _profissional.getNome() + "'";
             comSql += " 	,`strCelular` = '" + _profissional.getCelular() + "'";
             comSql += " 	,`strUsuario` = '" + _profissional.getUsuario() + "'";
-            comSql += " 	,`strSenha` = '" + _profissional.getSenha() + "'";           
+            comSql += " 	,`strSenha` = '" + _profissional.getSenha() + "'";  
+            comSql += " 	,`bolAtivo` = '" + _profissional.getAtivo() + "'";  
             comSql += " WHERE ";
             comSql += " 	`intProfissionalId` = " + _profissional.getIdProfissional() + ";";
             retorno = atualizar();
         }
         if (retorno)
         {
+            identity = _profissional.getIdProfissional();
             
             if (_profissional.getLstMenuProfissional() != null)
             {
@@ -200,5 +213,25 @@ public class ProfissionalDAO extends DAO{
         }
         return retorno;
         
-    }      
+    }  
+
+    public boolean delete(Profissional profissional)
+    {
+        boolean retorno;
+        
+        comSql = "";
+        comSql += " Delete `smmdaa_bdGelo`.`tblMenuProfissional`";
+        comSql += " WHERE ";
+        comSql += "     `tblMenuProfissional`.`intProfissionalId` = " + profissional.getIdProfissional() + ";";
+        atualizar();
+        
+        comSql = "";
+        comSql += " Delete from  `smmdaa_bdGelo`.`tblProfissional` ";
+        comSql += " where ";
+        comSql += " 	`intProfissionalId` = " + profissional.getIdProfissional() + ";";
+        
+        retorno = atualizar();
+        
+        return retorno;
+    }
 }

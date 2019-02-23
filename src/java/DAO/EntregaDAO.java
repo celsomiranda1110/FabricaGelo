@@ -10,7 +10,6 @@ package DAO;
  * @author celso
  */
 
-import Bean.Abastecimento;
 import Bean.CustoEntrega;
 import Bean.AvariaEntrega;
 import Bean.ColaboradorEntrega;
@@ -67,7 +66,8 @@ public class EntregaDAO extends DAO{
             }
             
         }
-        comSql += "ORDER BY `tblEntrega`.`datData`;";
+        comSql += ";";
+        //comSql += "ORDER BY `tblEntrega`.`datData`;";
         
         List tabela = super.listaTodos();
         
@@ -84,6 +84,7 @@ public class EntregaDAO extends DAO{
             entrega.setHrSaida((String)bkp.get(5));
             entrega.setHrChegada((String)bkp.get(6));
             entrega.setSituacao((String)bkp.get(7));
+            
             
             EquipamentoDAO veiculoDAO = new EquipamentoDAO(conexao);
             Equipamento veiculo = new Equipamento();
@@ -149,20 +150,16 @@ public class EntregaDAO extends DAO{
                 veiculo = veiculoDAO.listaUm(veiculo);
                 entrega.setVeiculo(veiculo);
                 
-                List<CustoEntrega> lstCustoEntrega = new ArrayList<CustoEntrega>();
-                CustoEntregaDAO custoEntregaDAO = new CustoEntregaDAO(conexao);
-                lstCustoEntrega = custoEntregaDAO.listaTodos(entrega);
-                entrega.setLstCustoEntrega(lstCustoEntrega);
-                
+              
                 List<ProdutoEntrega> lstProdutoEntrega = new ArrayList<ProdutoEntrega>();
                 ProdutoEntregaDAO produtoEntregaDAO = new ProdutoEntregaDAO(conexao);
                 lstProdutoEntrega = produtoEntregaDAO.listaTodos(entrega);
                 entrega.setLstProdutoEntrega(lstProdutoEntrega);
                 
-                List<Abastecimento> lstAbastecimento = new ArrayList<Abastecimento>();
-                AbastecimentoDAO abastecimentoDAO = new AbastecimentoDAO(conexao);
-                lstAbastecimento = abastecimentoDAO.listaTodos(entrega);
-                entrega.setLstAbastecimento(lstAbastecimento);
+                List<CustoEntrega> lstCustoEntrega = new ArrayList<CustoEntrega>();
+                CustoEntregaDAO custoEntregaDAO = new CustoEntregaDAO(conexao);
+                lstCustoEntrega = custoEntregaDAO.listaTodos(entrega);
+                entrega.setLstCustoEntrega(lstCustoEntrega);
                 
                 List<ColaboradorEntrega> lstColaboradorEntrega = new ArrayList<ColaboradorEntrega>();
                 ColaboradorEntregaDAO colaboradorEntregaDAO = new ColaboradorEntregaDAO(conexao);
@@ -246,19 +243,7 @@ public class EntregaDAO extends DAO{
         
         if (retorno)
         {
-            if (_entrega.getLstCustoEntrega() != null)
-            {
-                CustoEntregaDAO custoEntregaDAO = new CustoEntregaDAO(conexao);
-                Iterator itCustoEntrega = _entrega.getLstCustoEntrega().iterator();
-                while (itCustoEntrega.hasNext())
-                {
-                    CustoEntrega _custoEntrega = (CustoEntrega)itCustoEntrega.next();
-                    _custoEntrega.setIdEntrega(_entrega.getIdEntrega());
-                    
-                    custoEntregaDAO.atualizar(_custoEntrega);
-                }
-            }
-            
+
             if (_entrega.getLstProdutoEntrega() != null)
             {
                 ProdutoEntregaDAO produtoEntregaDAO = new ProdutoEntregaDAO(conexao);
@@ -272,16 +257,15 @@ public class EntregaDAO extends DAO{
                 }
             }
             
-            if (_entrega.getLstAbastecimento() != null)
+            if (_entrega.getLstCustoEntrega() != null)
             {
-                AbastecimentoDAO abastecimentoDAO = new AbastecimentoDAO(conexao);
-                Iterator itAbastecimento = _entrega.getLstAbastecimento().iterator();
-                while (itAbastecimento.hasNext())
+                CustoEntregaDAO custoEntregaDAO = new CustoEntregaDAO(conexao);
+                Iterator itCustoEntrega = _entrega.getLstCustoEntrega().iterator();
+                while (itCustoEntrega.hasNext())
                 {
-                    Abastecimento _abastecimento = (Abastecimento)itAbastecimento.next();
-                    _abastecimento.setIdEntrega((_entrega.getIdEntrega()));
-                    _abastecimento.setDataFormatada(_entrega.getDataFormatada());
-                    abastecimentoDAO.atualizar(_abastecimento);
+                    CustoEntrega _custoEntrega = (CustoEntrega)itCustoEntrega.next();
+                    _custoEntrega.setIdEntrega((_entrega.getIdEntrega()));
+                    custoEntregaDAO.atualizar(_custoEntrega);
                 }
             }
             

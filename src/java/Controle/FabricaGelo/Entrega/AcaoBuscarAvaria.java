@@ -46,6 +46,7 @@ public class AcaoBuscarAvaria extends Acao{
         else
         {
             sessao.setAttribute("avisoErro", "Produto não selecionado!");
+            sessao.setAttribute("tipoAviso","alert alert-danger");
             sessao.setAttribute("pagOrigemErro", "FabricaGelo.Entrega.AcaoAbreEntrega");
             pagRetorno = "visao/erro.jsp";              
         }

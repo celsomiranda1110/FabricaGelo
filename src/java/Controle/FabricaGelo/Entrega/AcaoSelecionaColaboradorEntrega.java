@@ -30,6 +30,7 @@ public class AcaoSelecionaColaboradorEntrega extends Acao{
         if (idColaboradorEntrega.equals(""))
         {
             sessao.setAttribute("avisoErro", "Cliente não selecionado!");
+            sessao.setAttribute("tipoAviso","alert alert-danger");
             sessao.setAttribute("pagOrigemErro", "FabricaGelo.Entrega.AcaoEncerrarRota");
             pagRetorno = "visao/erro.jsp";             
         }

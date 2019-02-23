@@ -104,8 +104,6 @@ public class ComSql
 
                         case Types.DATE: // '['
                             registro.add(rs.getDate(i));
-//                            SimpleDateFormat formatter = new SimpleDateFormat(formato);
-//                            registro.add(formatter.format(rs.getDate(i)));
                             break;
 
                         case Types.DOUBLE: // '\b'
@@ -115,6 +113,13 @@ public class ComSql
                         case Types.DECIMAL: // '\b'
                             registro.add(Double.valueOf(rs.getDouble(i)));
                             break;
+                            
+                        case Types.TIME: // '\b'
+//                            registro.add(rs.getTime(i));
+                            SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+                            String horaFormatada = sdf.format(rs.getTime(i));                            
+                            registro.add(horaFormatada);                            
+                            break;                            
 
                         default:
                             registro.add(null);
@@ -198,6 +203,12 @@ public class ComSql
                             
                         case Types.DECIMAL: // '\b'
                             registro.add(Double.valueOf(rs.getDouble(i)));
+                            break;  
+                            
+                        case Types.TIME: // '\b'
+                            SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+                            String horaFormatada = sdf.format(rs.getTime(i));                            
+                            registro.add(horaFormatada);
                             break;                            
 
                         default:

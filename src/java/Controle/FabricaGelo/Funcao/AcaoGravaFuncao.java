@@ -26,7 +26,7 @@ public class AcaoGravaFuncao extends Acao
         Connection conexao = (Connection)req.getAttribute("connection");
         HttpSession sessao = req.getSession(false);
         
-        String pagRetorno = "";
+        String pagRetorno = "FabricaGelo.Funcao.AcaoAbreFuncao";
         
 
         FuncaoDAO funcaoDAO = new FuncaoDAO(conexao);
@@ -34,9 +34,11 @@ public class AcaoGravaFuncao extends Acao
         if (funcao == null)
             funcao = new Funcao();
         
-        String descricao = (req.getParameter("txtFuncao") == "" || req.getParameter("txtFuncao") == null) ? "" : req.getParameter("txtFuncao");
+        String descricao = (req.getParameter("txtFuncao") == "" || req.getParameter("txtFuncao") == null) ? "" : req.getParameter("txtFuncao").toUpperCase();
+        String inativo = (req.getParameter("ck_Ativo") == null ? "A" : "I");
         
         funcao.setDescricao(descricao);
+        funcao.setAtivo(inativo);
         
         if (funcaoDAO.atualizar(funcao))
         {
@@ -45,6 +47,7 @@ public class AcaoGravaFuncao extends Acao
             sessao.setAttribute("funcao", funcao);
             
             sessao.setAttribute("avisoErro", "Função atualizada");
+            sessao.setAttribute("tipoAviso","alert alert-success");
             sessao.setAttribute("pagOrigemErro", "FabricaGelo.Funcao.AcaoAbreFuncao");
             pagRetorno = "visao/erro.jsp";             
         }

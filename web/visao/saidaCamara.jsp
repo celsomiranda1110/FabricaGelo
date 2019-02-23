@@ -5,12 +5,12 @@
 --%>
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 
 <html>
     <head>
         <c:import url="CabRod/cabecalho.jsp"/>
-        <title>InformaÃ§Ãµes sobre Carregamento</title>
+        <title>Informações sobre Carregamento</title>
         
     </head>
     <body>
@@ -52,7 +52,7 @@
                                         <label class="control-label">Data</label>
                                     </div>
                                     <div class="col-sm-9">
-                                        <label class="control-label">VeÃ­culo</label>
+                                        <label class="control-label">Veículo</label>
                                     </div> 
                                 </div>
                                 <div class="row">
@@ -63,7 +63,7 @@
                                     
                                     <div class="col-sm-9">
                                         <select name="cmbVeiculo" class="form-control">
-                                            <option value="0">... Selecione um VeÃ­culo ...</option>
+                                            <option value="0">... Selecione um Veículo ...</option>
                                             <c:forEach var="veic" items="${lstVeiculo}" varStatus="s">
                                               <c:if test="${veic.idEquipamento == saidaCamara.idEquipamento}">
                                                 <option value="${veic.idEquipamento}" selected="selected">${veic.descricao}</option>
@@ -117,7 +117,7 @@
                                                 <tbody>
                                                     <tr>
                                                         <th><div align="left"></div></th>
-                                                        <th><div align="left">CÃ¢mara</div></th>
+                                                        <th><div align="left">Câmara</div></th>
                                                         <th><div align="left">Saldo</div></th>
                                                         
                                                     </tr> 

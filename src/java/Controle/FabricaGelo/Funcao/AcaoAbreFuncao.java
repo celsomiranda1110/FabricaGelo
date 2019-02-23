@@ -5,6 +5,7 @@
  */
 package Controle.FabricaGelo.Funcao;
 
+import Bean.Funcao;
 import Controle.FabricaGelo.Gerais.Acao;
 import java.sql.Connection;
 import javax.servlet.http.HttpServletRequest;
@@ -22,9 +23,11 @@ public class AcaoAbreFuncao extends Acao
     {
         Connection conexao = (Connection)req.getAttribute("connection");
         HttpSession sessao = req.getSession(false);
-
-        sessao.setAttribute("funcao",null);
         
+        Funcao funcao = (Funcao)sessao.getAttribute("funcao");
+
+        sessao.setAttribute("funcao", funcao);
+       
         return "visao/funcao.jsp";
     }
 }

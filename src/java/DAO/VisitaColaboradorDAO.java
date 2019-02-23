@@ -136,6 +136,20 @@ public class VisitaColaboradorDAO extends DAO{
         
         return retorno;
         
-    }      
+    }  
+
+    public boolean deleta(Colaborador colaborador)
+    {
+        boolean retorno = false;
+        
+        comSql = "";
+        comSql += " Delete from tblVisitaColaborador ";
+        comSql += " where ";
+        comSql += "     intColaboradorId = " + colaborador.getIdColaborador() + ";";
+        
+        retorno = atualizar();
+        
+        return retorno;
+    }
     
 }

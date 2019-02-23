@@ -30,48 +30,33 @@ public class AcaoGravaMaquina extends Acao{
         
         EquipamentoDAO maquinaDAO = new EquipamentoDAO(conexao);
         Equipamento maquina = (Equipamento)sessao.getAttribute("maquina");
-        Manutencao manutencao = (Manutencao)sessao.getAttribute("manutencao");
+
         
         if (maquina == null)
             maquina = new Equipamento();
         
 
-        List<Manutencao> lstManutencao = new ArrayList<Manutencao>();
 
-        String descricao = (req.getParameter("txtDescricao").equals("") || req.getParameter("txtDescricao") == null) ? "" : req.getParameter("txtDescricao");
-        String situacao = (req.getParameter("cmbSituacao").equals("") || req.getParameter("cmbSituacao") == null) ? "A" : req.getParameter("cmbSituacao");
+
+        String descricao = (req.getParameter("txtDescricao").equals("") || req.getParameter("txtDescricao") == null) ? "" : req.getParameter("txtDescricao").toUpperCase();
+        String inativo = (req.getParameter("ck_Ativo") == null ? "A" : "I");
         String placa = "";
-        String marca = "";
-        String modelo = "";
+        String marca = (req.getParameter("txtMarca").equals("") || req.getParameter("txtMarca") == null) ? "A" : req.getParameter("txtMarca").toUpperCase();
+        String modelo = (req.getParameter("txtModelo").equals("") || req.getParameter("txtModelo") == null) ? "A" : req.getParameter("txtModelo").toUpperCase();
         String ano = "";
         String capacidade = "0";
         
-        // dados de manutenção
-        String dtInicio = (req.getParameter("txtDtInicio").equals("") || req.getParameter("txtDtInicio") == null) ? "" : req.getParameter("txtDtInicio");
-        String dtFim = (req.getParameter("txtDtFinal").equals("") || req.getParameter("txtDtFinal") == null) ? "" : req.getParameter("txtDtFinal");
-        String dtGarantia = (req.getParameter("txtDtGarantia").equals("") || req.getParameter("txtDtGarantia") == null) ? "" : req.getParameter("txtDtGarantia");
-        String valor = (req.getParameter("txtValor").equals("") || req.getParameter("txtValor") == null) ? "" : req.getParameter("txtValor");
-        String motivo = (req.getParameter("txtMotivo").equals("") || req.getParameter("txtMotivo") == null) ? "" : req.getParameter("txtMotivo");
-        
-        if (manutencao != null)
-        {
-            manutencao.setDataInicioFormatada(dtInicio);
-            manutencao.setDataFimFormatada(dtFim);
-            manutencao.setDataGarantiaFormatada(dtGarantia);
-            manutencao.setValor(Double.parseDouble(valor));
-            manutencao.setMotivo(motivo);
-            lstManutencao.add(manutencao);
-        }
         
         maquina.setTipo("MA");
         maquina.setDescricao(descricao);
-        maquina.setSituacao(situacao);
+        maquina.setSituacao("A");
         maquina.setPlaca(placa);
         maquina.setMarca(marca);
         maquina.setModelo(modelo);
         maquina.setAno(ano);
         maquina.setCapacidade(Double.parseDouble(capacidade));
-        maquina.setLstManutencao(lstManutencao);        
+        maquina.setAtivo(inativo);
+        maquina.setLstManutencao(null);        
         
         if (maquinaDAO.atualizar(maquina))
         {
@@ -79,7 +64,8 @@ public class AcaoGravaMaquina extends Acao{
             maquina = maquinaDAO.listaUm(maquina);
             sessao.setAttribute("maquina", maquina);
             
-            sessao.setAttribute("avisoErro", "Máquina de gelo atualizada");
+            sessao.setAttribute("avisoErro", "Equipamento atualizado");
+            sessao.setAttribute("tipoAviso","alert alert-success");
             sessao.setAttribute("pagOrigemErro", "FabricaGelo.Maquina.AcaoAbreMaquina");
             pagRetorno = "visao/erro.jsp";              
         }

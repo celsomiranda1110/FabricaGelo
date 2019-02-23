@@ -41,12 +41,14 @@ public class AcaoFecharCarregamento extends Acao
         if (saidaCamara.getSituacao().equals("CA"))
         {
             sessao.setAttribute("avisoErro", "Carregamento finalizada");
+            sessao.setAttribute("tipoAviso","alert alert-danger");
             sessao.setAttribute("pagOrigemErro", "FabricaGelo.Carregamento.AcaoAbreCarregamento");
             pagRetorno = "visao/erro.jsp";             
         } 
         else if (saidaCamara.getSituacao().equals("CD"))
         {
             sessao.setAttribute("avisoErro", "Carregamento devolvido");
+            sessao.setAttribute("tipoAviso","alert alert-danger");
             sessao.setAttribute("pagOrigemErro", "FabricaGelo.Carregamento.AcaoAbreCarregamento");
             pagRetorno = "visao/erro.jsp";             
         }
@@ -62,6 +64,7 @@ public class AcaoFecharCarregamento extends Acao
                 saidaCamaraDAO.atualizar(saidaCamara);
 
                 sessao.setAttribute("avisoErro", "Carregamento finalizado");
+                sessao.setAttribute("tipoAviso","alert alert-success");
                 sessao.setAttribute("pagOrigemErro", "FabricaGelo.Carregamento.AcaoAbreCarregamento");
                 pagRetorno = "visao/erro.jsp";             
             }

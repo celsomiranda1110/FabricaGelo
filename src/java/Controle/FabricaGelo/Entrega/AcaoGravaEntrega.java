@@ -5,11 +5,11 @@
  */
 package Controle.FabricaGelo.Entrega;
 
-import Bean.CustoEntrega;
+
 import Bean.AvariaEntrega;
 import Bean.Entrega;
 import Bean.Movimento;
-import Bean.Abastecimento;
+import Bean.CustoEntrega;
 import Bean.Equipamento;
 import Bean.Produto;
 import Bean.ProdutoCamara;
@@ -51,12 +51,14 @@ public class AcaoGravaEntrega extends Acao
         if (entrega == null)
         {
             sessao.setAttribute("avisoErro", "Rota inexistente.");
+            sessao.setAttribute("tipoAviso","alert alert-danger");
             sessao.setAttribute("pagOrigemErro", "FabricaGelo.Entrega.AcaoListarEntrega");
             pagRetorno = "visao/erro.jsp";             
         }
         else
         {
             sessao.setAttribute("avisoErro", "Rota atualizada");
+            sessao.setAttribute("tipoAviso","alert alert-success");
             sessao.setAttribute("pagOrigemErro", "FabricaGelo.Entrega.AcaoNovaRota");
             pagRetorno = "visao/erro.jsp";              
         }
@@ -72,7 +74,7 @@ public class AcaoGravaEntrega extends Acao
 //        List<Abastecimento> lstAbastecimento = null;
 //        ProdutoEntrega produtoEntrega = (ProdutoEntrega)sessao.getAttribute("produtoEntrega");
 //        AvariaEntrega avariaEntrega = (AvariaEntrega)sessao.getAttribute("avariaEntrega");
-//        Abastecimento abastecimento = (Abastecimento)sessao.getAttribute("abastecimento");
+//        CustoEntrega abastecimento = (CustoEntrega)sessao.getAttribute("abastecimento");
 //        CustoEntrega custoEntrega = (CustoEntrega)sessao.getAttribute("custoEntrega");
 //        Entrega entrega = (Entrega)sessao.getAttribute("entrega");
 //        

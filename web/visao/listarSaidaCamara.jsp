@@ -5,12 +5,12 @@
 --%>
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 
 <html>
     <head>
         <c:import url="CabRod/cabecalho.jsp"/>
-        <title>Carregamentos em veÃ­culos</title>
+        <title>Carregamentos em veículos</title>
     </head>
     <body>
         <form name="formBairro" method="post">
@@ -53,11 +53,11 @@
                                 <table class="table table-hover table-striped">
                                     <tbody>
                                         <tr>
-                                            <th><div align="left">AÃ§Ã£o</div></th>
+                                            <th><div align="left">Ação</div></th>
                                             <th><div align="left">Data</div></th>
                                             <th><div align="left">Carga</div></th>
                                             <th><div align="left">Quantidade</div></th>
-                                            <th><div align="left">SituaÃ§Ã£o</div></th>
+                                            <th><div align="left">Situação</div></th>
                                         </tr>
                                         <c:forEach var="lstCarr" items="${lstSaidaCamara}" varStatus="s">
                                         <tr>

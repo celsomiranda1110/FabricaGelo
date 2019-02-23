@@ -5,6 +5,7 @@
  */
 package Controle.FabricaGelo.Produto;
 
+import Bean.Produto;
 import Controle.FabricaGelo.Gerais.Acao;
 import java.sql.Connection;
 import javax.servlet.http.HttpServletRequest;
@@ -23,7 +24,8 @@ public class AcaoAbreProduto extends Acao
         Connection conexao = (Connection)req.getAttribute("connection");
         HttpSession sessao = req.getSession(false);
 
-        sessao.setAttribute("produto",null);
+        Produto produto = (Produto)sessao.getAttribute("produto");
+        sessao.setAttribute("produto", produto);
         
         return "visao/produto.jsp";
     }

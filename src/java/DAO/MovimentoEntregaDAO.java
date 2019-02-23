@@ -34,7 +34,8 @@ public class MovimentoEntregaDAO extends DAO{
         comSql += " SELECT ";
         comSql += " 	`tblMovimentoEntrega`.`intMovimentoEntregaId`,";
         comSql += "     `tblMovimentoEntrega`.`intEntregaColaboradorId`,";
-        comSql += "     `tblMovimentoEntrega`.`intMovimentoId`";
+        comSql += "     `tblMovimentoEntrega`.`intMovimentoId`,";
+        comSql += "     `tblMovimentoEntrega`.`chrSituacao`";
         comSql += " FROM `smmdaa_bdGelo`.`tblMovimentoEntrega`";
         comSql += " WHERE ";
         comSql += "     `tblMovimentoEntrega`.`intEntregaColaboradorId` = " + _colaboradorEntrega.getIdColaboradorEntrega();
@@ -50,6 +51,7 @@ public class MovimentoEntregaDAO extends DAO{
             movimentoEntrega.setIdMovimentoEntrega(((Integer)bkp.get(0)).intValue());
             movimentoEntrega.setIdColaboradorEntrega(((Integer)bkp.get(1)).intValue());
             movimentoEntrega.setIdMovimento(((Integer)bkp.get(2)).intValue());
+            movimentoEntrega.setSituacao((String)bkp.get(3));
             
             MovimentoDAO movimentoDAO = new MovimentoDAO(conexao);
             Movimento movimento = new Movimento();
@@ -71,7 +73,8 @@ public class MovimentoEntregaDAO extends DAO{
         comSql += " SELECT ";
         comSql += " 	`tblMovimentoEntrega`.`intMovimentoEntregaId`,";
         comSql += "     `tblMovimentoEntrega`.`intEntregaColaboradorId`,";
-        comSql += "     `tblMovimentoEntrega`.`intMovimentoId`";
+        comSql += "     `tblMovimentoEntrega`.`intMovimentoId`,";
+        comSql += "     `tblMovimentoEntrega`.`chrSituacao`";
         comSql += " FROM `smmdaa_bdGelo`.`tblMovimentoEntrega`";
         comSql += " WHERE ";
         comSql += "     `tblMovimentoEntrega`.`intMovimentoEntregaId` = " + movimentoEntrega.getIdMovimentoEntrega();
@@ -89,6 +92,7 @@ public class MovimentoEntregaDAO extends DAO{
                 movimentoEntrega.setIdMovimentoEntrega(((Integer)bkp.get(0)).intValue());
                 movimentoEntrega.setIdColaboradorEntrega(((Integer)bkp.get(1)).intValue());
                 movimentoEntrega.setIdMovimento(((Integer)bkp.get(2)).intValue());
+                movimentoEntrega.setSituacao((String)bkp.get(3));
                 
                 MovimentoDAO movimentoDAO = new MovimentoDAO(conexao);
                 Movimento movimento = new Movimento();
@@ -123,11 +127,13 @@ public class MovimentoEntregaDAO extends DAO{
             comSql += " INSERT INTO `smmdaa_bdGelo`.`tblMovimentoEntrega`";
             comSql += " 	(";
             comSql += " 	`intEntregaColaboradorId`,";
-            comSql += " 	`intMovimentoId`)";
+            comSql += " 	`intMovimentoId`,";
+            comSql += " 	`chrSituacao`)";
             comSql += " VALUES";
             comSql += " 	(" ;
             comSql += " 	" + _movimentoEntrega.getIdColaboradorEntrega();
-            comSql += " 	," + _movimentoEntrega.getIdMovimento() + ");";
+            comSql += " 	," + _movimentoEntrega.getIdMovimento() ;
+            comSql += " 	,'" + _movimentoEntrega.getSituacao() + "');";
            
             retorno = atualizar();
             if(retorno)
@@ -150,6 +156,7 @@ public class MovimentoEntregaDAO extends DAO{
             comSql += " UPDATE `smmdaa_bdGelo`.`tblMovimentoEntrega` SET ";
             comSql += " 	`intEntregaColaboradorId` = " + _movimentoEntrega.getIdColaboradorEntrega();
             comSql += " 	,`intMovimentoId` = " + _movimentoEntrega.getIdMovimento();
+            comSql += " 	,`chrSituacao` = '" + _movimentoEntrega.getSituacao() + "'";
             comSql += " WHERE ";
             comSql += " 	`intMovimentoEntregaId` = " + _movimentoEntrega.getIdMovimentoEntrega() + ";";
 

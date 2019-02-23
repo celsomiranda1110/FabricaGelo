@@ -5,7 +5,7 @@
 --%>
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 <html>
     <head>
         <c:import url="CabRod/cabecalho.jsp"/>
@@ -36,11 +36,11 @@
                                                         <select name="cmbTipoPesquisa" class="form-control">
                                                             
                                                             <option value="">  </option>
-                                                            <option value="BO"> BONIFICAÃ‡ÃƒO </option>
+                                                            <option value="BO"> BONIFICAÇÃO </option>
                                                             <option value="CP"> COMPRA </option>
                                                             <option value="CO"> CORTESIA </option>
                                                             <option value="VE"> VENDA </option>
-                                                            <option value="RE"> REPOSIÃ‡ÃƒO </option>
+                                                            <option value="RE"> REPOSIÇÃO </option>
                                                             
                                                         </select>
                                                     </li>
@@ -62,12 +62,12 @@
                                 <table class="table table-hover table-striped">
                                     <tbody>
                                         <tr>
-                                            <th><div align="left">AÃ§Ã£o</div></th>
+                                            <th><div align="left">Ação</div></th>
                                             <th><div align="left">Empresa</div></th>
                                             <th><div align="left">Movimento</div></th>
-                                            <th><div align="left">NÃºmero</div></th>
-                                            <th><div align="left">LanÃ§amento</div></th>
-                                            <th><div align="left">SituaÃ§Ã£o</div></th>
+                                            <th><div align="left">Número</div></th>
+                                            <th><div align="left">Lançamento</div></th>
+                                            <th><div align="left">Situação</div></th>
                                         </tr>
                                         <c:forEach var="lstMovEntrega" items="${lstMovimentoEntrega}" varStatus="s">
                                         <tr>

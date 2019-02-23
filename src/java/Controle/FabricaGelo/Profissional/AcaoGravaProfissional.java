@@ -26,7 +26,7 @@ public class AcaoGravaProfissional extends Acao
         Connection conexao = (Connection)req.getAttribute("connection");
         HttpSession sessao = req.getSession(false);
 
-        String pagRetorno = "";
+        String pagRetorno = "FabricaGelo.Profissional.AcaoAbreProfissional";
         
         ProfissionalDAO profissionalDAO = new ProfissionalDAO(conexao);
         Profissional profissional = (Profissional)sessao.getAttribute("profissional");
@@ -34,12 +34,13 @@ public class AcaoGravaProfissional extends Acao
             profissional = new Profissional();
         
         String cpf = (req.getParameter("txtCpf") == "" || req.getParameter("txtCpf") == null) ? "" : req.getParameter("txtCpf");
-        String nome = (req.getParameter("txtProfissional") == "" || req.getParameter("txtProfissional") == null) ? "" : req.getParameter("txtProfissional");
+        String nome = (req.getParameter("txtProfissional") == "" || req.getParameter("txtProfissional") == null) ? "" : req.getParameter("txtProfissional").toUpperCase();
         String ctps = (req.getParameter("txtCtps") == "" || req.getParameter("txtCtps") == null) ? "" : req.getParameter("txtCtps");
         String idFuncao = (req.getParameter("cmbFuncao") == "" || req.getParameter("cmbFuncao") == null) ? "" : req.getParameter("cmbFuncao");
         String celular = (req.getParameter("txtCelular") == "" || req.getParameter("txtCelular") == null) ? "" : req.getParameter("txtCelular");
         String usuario = (req.getParameter("txtUsuario") == "" || req.getParameter("txtUsuario") == null) ? "" : req.getParameter("txtUsuario");
         String senha = (req.getParameter("txtSenha") == "" || req.getParameter("txtSenha") == null) ? "" : req.getParameter("txtSenha");
+        String inativo = (req.getParameter("ck_Ativo") == null ? "A" : "I");
  
         profissional.setCpf(cpf);
         profissional.setNome(nome);
@@ -48,18 +49,42 @@ public class AcaoGravaProfissional extends Acao
         profissional.setCelular(celular);
         profissional.setUsuario(usuario);
         profissional.setSenha(senha);
-       
-        if (profissionalDAO.atualizar(profissional))
-        {
-            profissional.setIdProfissional(profissionalDAO.getIdentity());
-            profissional = profissionalDAO.listaUm(profissional);
-            sessao.setAttribute("profissional", profissional);
-            
-            sessao.setAttribute("avisoErro", "Dados do Profissional atualizados");
-            sessao.setAttribute("pagOrigemErro", "FabricaGelo.Profissional.AcaoAbreProfissional");
-            pagRetorno = "visao/erro.jsp";                
-        }
+        profissional.setAtivo(inativo);
         
+        if (profissional.getCpf().equals(""))
+        {
+            sessao.setAttribute("avisoErro", "Inclua um cpf válido");
+            sessao.setAttribute("tipoAviso","alert alert-danger");
+            sessao.setAttribute("pagOrigemErro", "FabricaGelo.Profissional.AcaoAbreProfissional");
+            pagRetorno = "visao/erro.jsp";              
+        }
+        else if (profissional.getNome().equals(""))
+        {
+            sessao.setAttribute("avisoErro", "Nome do profissional vazio");
+            sessao.setAttribute("tipoAviso","alert alert-danger");
+            sessao.setAttribute("pagOrigemErro", "FabricaGelo.Profissional.AcaoAbreProfissional");
+            pagRetorno = "visao/erro.jsp";              
+        }
+        else if (profissional.getIdFuncao() == 0)
+        {
+            sessao.setAttribute("avisoErro", "Função do profissional não selecionada");
+            sessao.setAttribute("tipoAviso","alert alert-danger");
+            sessao.setAttribute("pagOrigemErro", "FabricaGelo.Profissional.AcaoAbreProfissional");
+            pagRetorno = "visao/erro.jsp";              
+        }
+        {
+            if (profissionalDAO.atualizar(profissional))
+            {
+                profissional.setIdProfissional(profissionalDAO.getIdentity());
+                profissional = profissionalDAO.listaUm(profissional);
+                sessao.setAttribute("profissional", profissional);
+
+                sessao.setAttribute("avisoErro", "Dados do Profissional atualizados");
+                sessao.setAttribute("tipoAviso","alert alert-success");
+                sessao.setAttribute("pagOrigemErro", "FabricaGelo.Profissional.AcaoAbreProfissional");
+                pagRetorno = "visao/erro.jsp";                
+            }
+        }
         return pagRetorno;
         
         

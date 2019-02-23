@@ -145,6 +145,11 @@ public class Movimento implements Bean{
             this.descTipo = "VENDA";
             //this.pagamento.setProcessar(true);
         }
+        else if (this.tipo.equals("RE"))
+        {
+            this.descTipo = "REPOSIÇÃO";
+            //this.pagamento.setProcessar(true);
+        }
     }
 
     public String getDescTipo() {
@@ -167,7 +172,8 @@ public class Movimento implements Bean{
             this.descSituacao = "FECHADA";
         else if (situacao.equals("EP"))
             this.descSituacao = "EM PAGAMENTO";
-        
+        else if (situacao.equals("CA"))
+            this.descSituacao = "CANCELADA";
     }
 
     public String getDescSituacao() {

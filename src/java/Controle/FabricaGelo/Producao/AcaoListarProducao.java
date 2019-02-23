@@ -28,7 +28,8 @@ public class AcaoListarProducao extends Acao{
         List<Producao> lstProducao = new ArrayList<Producao>();
         ProducaoDAO producaoDAO = new ProducaoDAO(conexao);
         
-        lstProducao = producaoDAO.listaTodos();
+        
+        lstProducao = producaoDAO.listaTodos(null);
         sessao.setAttribute("lstProducao",lstProducao);
         
         return "visao/listarProducao.jsp"; 

@@ -38,6 +38,7 @@ public class AcaoBuscarProfissional extends Acao{
         if (!entregaDAO.atualizar(entrega))
         {
             sessao.setAttribute("avisoErro", "Problemas ao adicionar rota");
+            sessao.setAttribute("tipoAviso","alert alert-danger");
             sessao.setAttribute("pagOrigemErro", "FabricaGelo.Entrega.AcaoListarEntrega");
             pagRetorno = "visao/erro.jsp";            
         }

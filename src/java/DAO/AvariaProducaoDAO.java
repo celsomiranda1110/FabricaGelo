@@ -158,4 +158,16 @@ public class AvariaProducaoDAO extends DAO{
         
     }
     
+    public boolean delete(AvariaProducao avariaProducao)
+    {
+        boolean retorno;
+        comSql = "";
+        comSql += " Delete from `smmdaa_bdGelo`.`tblAvariaProducao`";
+        comSql += " WHERE ";
+        comSql += "     `intAvariaProducaoId` = " + avariaProducao.getIdAvariaProducao() + ";  ";           
+        retorno = atualizar();
+        
+        return retorno;
+    }
+    
 }

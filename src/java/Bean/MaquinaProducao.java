@@ -5,6 +5,7 @@
  */
 package Bean;
 
+import java.util.ArrayList;
 import java.util.List;
 /**
  *
@@ -20,6 +21,7 @@ public class MaquinaProducao implements Bean{
     private double qtSaldoAnterior;
     private double qtProducao;
     private double qtAvaria;
+    private double qtSaldo;
     private double rendimento;
     private String hrInicial;
     private String hrFinal;
@@ -28,6 +30,7 @@ public class MaquinaProducao implements Bean{
     private Produto embalagem;
     
     private List<AvariaProducao> lstAvariaProducao;
+    List<TransferenciaProducao> lstTransferenciaProducao = new ArrayList<TransferenciaProducao>();
 
     public int getIdMaquinaProducao() {
         return idMaquinaProducao;
@@ -93,6 +96,14 @@ public class MaquinaProducao implements Bean{
         this.qtAvaria = qtAvaria;
     }
 
+    public double getQtSaldo() {
+        return qtSaldo;
+    }
+
+    public void setQtSaldo(double qtSaldo) {
+        this.qtSaldo = qtSaldo;
+    }
+
     public double getRendimento() {
         return rendimento;
     }
@@ -123,7 +134,7 @@ public class MaquinaProducao implements Bean{
 
     public void setMaquina(Equipamento maquina) {
         this.maquina = maquina;
-        this.idEquipamento = maquina.getIdEquipamento();
+        this.idEquipamento = (maquina == null ? 0 :maquina.getIdEquipamento());
     }
 
     public Produto getEmbalagem() {
@@ -132,7 +143,7 @@ public class MaquinaProducao implements Bean{
 
     public void setEmbalagem(Produto embalagem) {
         this.embalagem = embalagem;
-        this.idProduto = embalagem.getIdProduto();
+        this.idProduto = (embalagem == null ? 0 : embalagem.getIdProduto());
     }
 
     public List<AvariaProducao> getLstAvariaProducao() {
@@ -143,7 +154,13 @@ public class MaquinaProducao implements Bean{
         this.lstAvariaProducao = lstAvariaProducao;
     }
     
-    
+    public List<TransferenciaProducao> getLstTransferenciaProducao() {
+        return lstTransferenciaProducao;
+    }
+
+    public void setLstTransferenciaProducao(List<TransferenciaProducao> lstTransferenciaProducao) {
+        this.lstTransferenciaProducao = lstTransferenciaProducao;
+    }
    
     public void replicar(MaquinaProducao _maquinaProducao)
     {
@@ -154,16 +171,20 @@ public class MaquinaProducao implements Bean{
         _maquinaProducao.setQtReposicao(this.qtReposicao);
         _maquinaProducao.setQtSaldoAnterior(this.qtSaldoAnterior);
         _maquinaProducao.setQtProducao(this.qtProducao);
+        _maquinaProducao.setQtSaldo(this.qtSaldo);
         _maquinaProducao.setQtAvaria(this.qtAvaria);
         _maquinaProducao.setRendimento(this.rendimento);
         _maquinaProducao.setHrInicial(this.hrInicial);
         _maquinaProducao.setHrFinal(this.hrFinal);
         
-        _maquinaProducao.setEmbalagem(this.embalagem);
-        _maquinaProducao.setMaquina(this.maquina);
+        if (this.embalagem != null)
+            _maquinaProducao.setEmbalagem(this.embalagem);
+        
+        if (this.maquina != null)
+            _maquinaProducao.setMaquina(this.maquina);
         
         _maquinaProducao.setLstAvariaProducao(this.lstAvariaProducao);
-        
+        _maquinaProducao.setLstTransferenciaProducao(this.lstTransferenciaProducao);
     }
     
     

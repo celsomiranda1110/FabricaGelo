@@ -24,10 +24,13 @@ public String executa(HttpServletRequest req, HttpServletResponse res) throws Ex
         Connection conexao = (Connection)req.getAttribute("connection");
         HttpSession sessao = req.getSession(false);
         
-        List<Colaborador> lstColaborador = new ArrayList();
+        List<Colaborador> lstColaborador = new ArrayList<Colaborador>();
         ColaboradorDAO colaboradorDAO = new ColaboradorDAO(conexao);
+        Colaborador colaborador = new Colaborador();
         
-        lstColaborador = colaboradorDAO.listaTodos();
+
+        
+        lstColaborador = colaboradorDAO.listaTodos(colaborador);
         sessao.setAttribute("lstColaborador",lstColaborador);
 
         return "visao/listarColaborador.jsp";

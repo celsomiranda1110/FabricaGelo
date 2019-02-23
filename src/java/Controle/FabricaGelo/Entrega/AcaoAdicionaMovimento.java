@@ -49,18 +49,21 @@ public class AcaoAdicionaMovimento extends Acao{
         if (entrega == null)
         {
             sessao.setAttribute("avisoErro", "Entrega não selecionada");
+            sessao.setAttribute("tipoAviso","alert alert-danger");
             sessao.setAttribute("pagOrigemErro", "FabricaGelo.Entrega.AcaoEncerrarRota");
             pagRetorno = "visao/erro.jsp";              
         }
         else if (colaboradorEntrega == null)
         {
             sessao.setAttribute("avisoErro", "Cliente não selecionado");
+            sessao.setAttribute("tipoAviso","alert alert-danger");
             sessao.setAttribute("pagOrigemErro", "FabricaGelo.Entrega.AcaoEncerrarRota");
             pagRetorno = "visao/erro.jsp";             
         }
         else if (tipoMovimento.equals(""))
         {
             sessao.setAttribute("avisoErro", "Tipo de movimento não selecionado");
+            sessao.setAttribute("tipoAviso","alert alert-danger");
             sessao.setAttribute("pagOrigemErro", "FabricaGelo.Entrega.AcaoEncerrarRota");
             pagRetorno = "visao/erro.jsp";             
         }
@@ -88,6 +91,7 @@ public class AcaoAdicionaMovimento extends Acao{
             // para o movimento
             List<ProdutoMovimento> lstProdutoMovimento = new ArrayList<ProdutoMovimento>();
             ProdutoDAO produtoDAO = new ProdutoDAO(conexao);
+            entrega = entregaDAO.listaUm(entrega);
             List<ProdutoEntrega> lstProdutoEntrega = entrega.getLstProdutoEntrega();
             Iterator itProdutoEntrega = lstProdutoEntrega.iterator();
             while (itProdutoEntrega.hasNext())
@@ -95,9 +99,10 @@ public class AcaoAdicionaMovimento extends Acao{
                 prodColaborador = false;
                 
                 ProdutoEntrega produtoEntrega = (ProdutoEntrega)itProdutoEntrega.next();
-                Produto produto = new Produto();
-                produto.setIdProduto(produtoEntrega.getIdProduto());
-                produto = produtoDAO.listaUm(produto);
+                Produto produto = (Produto)produtoEntrega.getProduto();
+//                Produto produto = new Produto();
+//                produto.setIdProduto(produtoEntrega.getIdProduto());
+//                produto = produtoDAO.listaUm(produto);
                 
                 // verificando se produto está na lista de produtos
                 // do colaborador
@@ -140,21 +145,32 @@ public class AcaoAdicionaMovimento extends Acao{
             movimento.setDtLancamento(entrega.getData());
             movimento.setDtEntrega(entrega.getData());
             movimento.setTipo(tipoMovimento);  
+            movimento.setNumero("");
+            movimento.setNotaFiscal("");
             movimento.setSituacao("AB");
             movimento.setLstProdutoMovimento(lstProdutoMovimento);
+            
             if (movimentoDAO.atualizar(movimento))
             {
+//                movimento.setIdMovimento(movimentoDAO.getIdentity());
+//                movimento = movimentoDAO.listaUm(movimento);
+                
                 movimento.setIdMovimento(movimentoDAO.getIdentity());
                 movimentoEntrega.setIdColaboradorEntrega(colaboradorEntrega.getIdColaboradorEntrega());
                 movimentoEntrega.setIdMovimento(movimento.getIdMovimento());
-                movimentoEntregaDAO.atualizar(movimentoEntrega);
+                movimentoEntrega.setSituacao(movimento.getSituacao());
+                
                 if (movimentoEntregaDAO.atualizar(movimentoEntrega))
+                {
                     movimentoEntrega.setIdMovimentoEntrega(movimentoEntregaDAO.getIdentity());
+                    movimentoEntrega = movimentoEntregaDAO.listaUm(movimentoEntrega);
+                }
+                
             }
             
             sessao.setAttribute("movimentoEntrega", movimentoEntrega);
             sessao.setAttribute("colaboradorEntrega", colaboradorEntrega);
-            sessao.setAttribute("movimentoEntrega", movimento);
+            
             
         }
         

@@ -6,7 +6,7 @@
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 
 <html>
     <head>
@@ -18,7 +18,7 @@
             
             <div class="container">
                 <div class="panel panel-default">
-                    <div class="panel-heading"><div class="panel-title text-center"><h3><b>DefiniÃ§Ã£o de veÃ­culo</b></h3></div></div>
+                    <div class="panel-heading"><div class="panel-title text-center"><h3><b>Definição de veículo</b></h3></div></div>
                     <div class="panel-body">
                         
                         <div class="row"> 
@@ -27,7 +27,7 @@
                                     <div class="panel-body">
                                         <div class="row">
                                             <div class="col-sm-10">
-                                                <label class="control-label">VeÃ­culo</label>
+                                                <label class="control-label">Veículo</label>
                                             </div>
                                             <div class="col-sm-2">
                                                 <label class="control-label">Km Inicial</label>
@@ -36,7 +36,7 @@
                                         <div class="row">
                                             <div class="col-sm-10">
                                                 <select name="cmbVeiculo" class="form-control" onchange="buscarVeiculo()">
-                                                    <option value="0">... Selecione um VeÃ­culo ...</option>
+                                                    <option value="0">... Selecione um Veículo ...</option>
                                                     <c:forEach var="veic" items="${lstVeiculo}" varStatus="s">
                                                       <c:if test="${veic.idEquipamento == entrega.idEquipamento}">
                                                         <option value="${veic.idEquipamento}" selected="selected">${veic.descricao}</option>

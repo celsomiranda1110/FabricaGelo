@@ -17,6 +17,8 @@ public class ProdutoDAO extends DAO
 
     public List<Produto> listaTodos(Produto _produto)
     {
+        boolean temAnd = false;
+        
         List<Produto> lstTabela = new ArrayList();
         
         comSql = "";      
@@ -25,12 +27,24 @@ public class ProdutoDAO extends DAO
         comSql += "     `tblProduto`.`strDescricao`,";
         comSql += "     `tblProduto`.`dblSaldo`,";
         comSql += "     `tblProduto`.`dblVlUnitario`,";
-        comSql += "     `tblProduto`.`chrTipo`";
+        comSql += "     `tblProduto`.`chrTipo`,";
+        comSql += "     `tblProduto`.`bolAtivo`";
         comSql += " FROM `smmdaa_bdGelo`.`tblProduto`";
         if (_produto != null)
         {
             comSql += " WHERE";
-            comSql += "     `tblProduto`.`chrTipo` = '" + _produto.getTipo() + "'";
+            if (!_produto.getTipo().equals(""))
+            {
+                comSql += "     `tblProduto`.`chrTipo` = '" + _produto.getTipo() + "'";
+                temAnd = true;
+            }
+            
+            if (!_produto.getAtivo().equals(""))
+            {
+                if (temAnd)
+                    comSql += " and";
+                comSql += "     `tblProduto`.`bolAtivo` = '" + _produto.getAtivo() + "'";
+            }
         }
         comSql += ";";
         
@@ -46,6 +60,7 @@ public class ProdutoDAO extends DAO
             produto.setSaldo((Double)bkp.get(2));
             produto.setVlUnitario((Double)bkp.get(3));
             produto.setTipo((String)bkp.get(4));
+            produto.setAtivo((String)bkp.get(5));
 
             lstTabela.add(produto);
         }
@@ -63,7 +78,8 @@ public class ProdutoDAO extends DAO
         comSql += "     `tblProduto`.`strDescricao`,";
         comSql += "     `tblProduto`.`dblSaldo`,";
         comSql += "     `tblProduto`.`dblVlUnitario`,";
-        comSql += "     `tblProduto`.`chrTipo`";
+        comSql += "     `tblProduto`.`chrTipo`,";
+        comSql += "     `tblProduto`.`bolAtivo`";
         comSql += " FROM `smmdaa_bdGelo`.`tblProduto`";
         comSql += " WHERE ";
         comSql += "     `tblProduto`.`intProdutoId` = " + produto.getIdProduto() + ";";
@@ -81,7 +97,7 @@ public class ProdutoDAO extends DAO
                 produto.setSaldo((Double)bkp.get(2));
                 produto.setVlUnitario((Double)bkp.get(3));
                 produto.setTipo((String)bkp.get(4));
-                
+                produto.setAtivo((String)bkp.get(5));
 
                 
             }  
@@ -106,12 +122,14 @@ public class ProdutoDAO extends DAO
             comSql += " 	(`strDescricao`,";
             comSql += " 	`dblSaldo`,";
             comSql += "         `dblVlUnitario`,";
-            comSql += "         `chrTipo`)";
+            comSql += "         `chrTipo`,";
+            comSql += "         `bolAtivo`)";
             comSql += " VALUES";
             comSql += " 	('" + _produto.getDescricao() + "'";
             comSql += " 	," + _produto.getSaldo() ;
             comSql += " 	," + _produto.getVlUnitario();
-            comSql += " 	,'" + _produto.getTipo() + "');";
+            comSql += " 	,'" + _produto.getTipo() + "'";
+            comSql += " 	,'" + _produto.getAtivo() + "');";
             
             retorno = atualizar();
             if(retorno)
@@ -135,7 +153,8 @@ public class ProdutoDAO extends DAO
             comSql += " 	`strDescricao` = '" + _produto.getDescricao() + "',";
             comSql += " 	`dblSaldo` = " + _produto.getSaldo() + ",";
             comSql += " 	`dblVlUnitario` = " + _produto.getVlUnitario() + ",";
-            comSql += " 	`chrTipo` = '" + _produto.getTipo() + "'";
+            comSql += " 	`chrTipo` = '" + _produto.getTipo() + "',";
+            comSql += " 	`bolAtivo` = '" + _produto.getAtivo() + "'";
             comSql += " WHERE ";
             comSql += " 	`intProdutoId` = " + _produto.getIdProduto() + ";";
 
@@ -145,7 +164,7 @@ public class ProdutoDAO extends DAO
         if (retorno)
         {
             
-            
+            identity = _produto.getIdProduto();
             // vinculando produtos a câmara
             ProdutoCamaraDAO produtoCamaraDAO = new ProdutoCamaraDAO(conexao);
             EquipamentoDAO equipamentoDAO = new EquipamentoDAO(conexao);
@@ -174,5 +193,18 @@ public class ProdutoDAO extends DAO
             }
         }
         return retorno;
-    }   
+    } 
+    
+    public boolean delete(Produto produto)
+    {
+        boolean retorno = false;
+        
+        comSql = "";
+        comSql += " Delete from `smmdaa_bdGelo`.`tblProduto` ";
+        comSql += " WHERE ";
+        comSql += "     `intProdutoId` = " + produto.getIdProduto() + ";";
+        retorno = atualizar();
+        
+        return retorno;
+    }
 }

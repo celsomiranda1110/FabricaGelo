@@ -9,6 +9,7 @@ package DAO;
  *
  * @author celso
  */
+import Bean.MaquinaProducao;
 import Bean.Producao;
 import Bean.ProdutoCamara;
 import Bean.TransferenciaProducao;
@@ -21,22 +22,22 @@ public class TransferenciaProducaoDAO extends DAO{
         super(conexao);
     }
     
-    public List<TransferenciaProducao> listaTodos(Producao producao)
+    public List<TransferenciaProducao> listaTodos(MaquinaProducao maquinaProducao)
     {
         List<TransferenciaProducao> lstTabela = new ArrayList();
         
         comSql = "";      
         comSql += " SELECT ";
         comSql += " 	`tblTransferenciaProducao`.`intTransferenciaProducaoId`,";
-        comSql += "     `tblTransferenciaProducao`.`intProducaoId`,";
+        comSql += "     `tblTransferenciaProducao`.`intMaquinaProducaoId`,";
         comSql += "     `tblTransferenciaProducao`.`intProdutoCamaraId`,";
         comSql += "     `tblTransferenciaProducao`.`dblQuantidade`,";
         comSql += "     `tblTransferenciaProducao`.`datData`";
         comSql += " FROM `smmdaa_bdGelo`.`tblTransferenciaProducao`";
-        if (producao != null)
+        if (maquinaProducao != null)
         {
             comSql += " WHERE ";
-            comSql += "     `tblTransferenciaProducao`.`intProducaoId` = " + producao.getIdProducao();
+            comSql += "     `tblTransferenciaProducao`.`intMaquinaProducaoId` = " + maquinaProducao.getIdMaquinaProducao();
         }
         comSql += ";";
         
@@ -48,7 +49,7 @@ public class TransferenciaProducaoDAO extends DAO{
             List bkp = (ArrayList)tabela.get(i);
             
             transferenciaProducao.setIdTransferenciaProducao(((Integer)bkp.get(0)).intValue());
-            transferenciaProducao.setIdProducao(((Integer)bkp.get(1)).intValue());
+            transferenciaProducao.setIdMaquinaProducao(((Integer)bkp.get(1)).intValue());
             transferenciaProducao.setIdProdutoCamara(((Integer)bkp.get(2)).intValue());
             transferenciaProducao.setQuantidade((Double)bkp.get(3));
             transferenciaProducao.setData((Date)bkp.get(4));
@@ -72,15 +73,15 @@ public class TransferenciaProducaoDAO extends DAO{
         comSql = "";      
         comSql += " SELECT ";
         comSql += " 	`tblTransferenciaProducao`.`intTransferenciaProducaoId`,";
-        comSql += "     `tblTransferenciaProducao`.`intProducaoId`,";
+        comSql += "     `tblTransferenciaProducao`.`intMaquinaProducaoId`,";
         comSql += "     `tblTransferenciaProducao`.`intProdutoCamaraId`,";
         comSql += "     `tblTransferenciaProducao`.`dblQuantidade`,";
         comSql += "     `tblTransferenciaProducao`.`datData`";
         comSql += " FROM `smmdaa_bdGelo`.`tblTransferenciaProducao`";
         comSql += " WHERE ";
-        if ((transferenciaProducao.getIdProducao() != 0) && (transferenciaProducao.getIdProdutoCamara() != 0))
+        if ((transferenciaProducao.getIdMaquinaProducao() != 0) && (transferenciaProducao.getIdProdutoCamara() != 0))
         {
-            comSql += "     `tblTransferenciaProducao`.`intProducaoId` = " + transferenciaProducao.getIdProducao();
+            comSql += "     `tblTransferenciaProducao`.`intMaquinaProducaoId` = " + transferenciaProducao.getIdMaquinaProducao();
             comSql += "      and `tblTransferenciaProducao`.`intProdutoCamaraId` = " + transferenciaProducao.getIdProdutoCamara();            
         }
         else
@@ -95,7 +96,7 @@ public class TransferenciaProducaoDAO extends DAO{
                 List bkp = (ArrayList)tabela.get(i);
 
                 transferenciaProducao.setIdTransferenciaProducao(((Integer)bkp.get(0)).intValue());
-                transferenciaProducao.setIdProducao(((Integer)bkp.get(1)).intValue());
+                transferenciaProducao.setIdMaquinaProducao(((Integer)bkp.get(1)).intValue());
                 transferenciaProducao.setIdProdutoCamara(((Integer)bkp.get(2)).intValue());
                 transferenciaProducao.setQuantidade((Double)bkp.get(3));
                 transferenciaProducao.setData((Date)bkp.get(4));
@@ -119,12 +120,12 @@ public class TransferenciaProducaoDAO extends DAO{
         {
             comSql = "";
             comSql += " INSERT INTO `smmdaa_bdGelo`.`tblTransferenciaProducao`";
-            comSql += " 	(`intProducaoId`,";
+            comSql += " 	(`intMaquinaProducaoId`,";
             comSql += " 	`intProdutoCamaraId`,";
             comSql += " 	`dblQuantidade`,";
             comSql += " 	`datData`)";
             comSql += " VALUES";
-            comSql += " 	(" + _transferenciaProducao.getIdProducao();
+            comSql += " 	(" + _transferenciaProducao.getIdMaquinaProducao();
             comSql += " 	," + _transferenciaProducao.getIdProdutoCamara();
             comSql += " 	," + _transferenciaProducao.getQuantidade();
             comSql += " 	,'" + _transferenciaProducao.getDataFormatada() + "');";
@@ -153,7 +154,7 @@ public class TransferenciaProducaoDAO extends DAO{
             comSql += " WHERE ";
             if (_transferenciaProducao.getIdTransferenciaProducao() == 0)
             {
-                comSql += " 	`intProducaoId` = " + _transferenciaProducao.getIdProducao();
+                comSql += " 	`intMaquinaProducaoId` = " + _transferenciaProducao.getIdMaquinaProducao();
                 comSql += " 	and `intProdutoCamaraId` = " + _transferenciaProducao.getIdProdutoCamara();
             }
             else

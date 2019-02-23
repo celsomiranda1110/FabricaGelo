@@ -39,11 +39,15 @@ public class EquipamentoDAO extends DAO{
         comSql += "     `tblEquipamento`.`strMarca`,";
         comSql += "     `tblEquipamento`.`strModelo`,";
         comSql += "     `tblEquipamento`.`strAno`,";
-        comSql += "     `tblEquipamento`.`dblKm`";
+        comSql += "     `tblEquipamento`.`dblKm`,";
+        comSql += "     `tblEquipamento`.`bolAtivo`";
         comSql += " FROM ";
         comSql += "     `smmdaa_bdGelo`.`tblEquipamento`";
         comSql += " WHERE ";
         comSql += "     `tblEquipamento`.`chrTipo` = '" + _equipamento.getTipo() + "'";
+        if (!_equipamento.getAtivo().equals(""))
+           comSql += " and `tblEquipamento`.`bolAtivo` = '" + _equipamento.getAtivo() + "'";
+        
         comSql += " ORDER BY ";
         comSql += "     `tblEquipamento`.`strDescricao`;";
         List tabela = super.listaTodos();
@@ -63,6 +67,7 @@ public class EquipamentoDAO extends DAO{
             equipamento.setModelo((String)bkp.get(7));
             equipamento.setAno((String)bkp.get(8));
             equipamento.setQuilometragem((Double)bkp.get(9));
+            equipamento.setAtivo((String)bkp.get(10));
             
             lstTabela.add(equipamento);
         }
@@ -85,7 +90,8 @@ public class EquipamentoDAO extends DAO{
         comSql += "     `tblEquipamento`.`strMarca`,";
         comSql += "     `tblEquipamento`.`strModelo`,";
         comSql += "     `tblEquipamento`.`strAno`,"; 
-        comSql += "     `tblEquipamento`.`dblKm`";
+        comSql += "     `tblEquipamento`.`dblKm`,";
+        comSql += "     `tblEquipamento`.`bolAtivo`";
         comSql += " FROM ";
         comSql += "     `smmdaa_bdGelo`.`tblEquipamento`";
         comSql += " WHERE ";
@@ -109,6 +115,7 @@ public class EquipamentoDAO extends DAO{
                 equipamento.setModelo((String)bkp.get(7));
                 equipamento.setAno((String)bkp.get(8));
                 equipamento.setQuilometragem((Double)bkp.get(9));
+                equipamento.setAtivo((String)bkp.get(10));
                 
                 List<Manutencao> lstManutencao = new ArrayList<Manutencao>();
                 ManutencaoDAO manutencaoDAO = new ManutencaoDAO(conexao);
@@ -142,7 +149,8 @@ public class EquipamentoDAO extends DAO{
             comSql += " ,`strMarca`";
             comSql += " ,`strModelo`";
             comSql += " ,`strAno`";
-            comSql += " ,`dblKm`)";
+            comSql += " ,`dblKm`";
+            comSql += " ,`bolAtivo`)";
             comSql += " VALUES";
             comSql += " ('" + _equipamento.getDescricao() + "'";
             comSql += " ,'" + _equipamento.getSituacao() + "'";
@@ -152,7 +160,8 @@ public class EquipamentoDAO extends DAO{
             comSql += " ,'" + _equipamento.getMarca() + "'";
             comSql += " ,'" + _equipamento.getModelo() + "'";
             comSql += " ,'" + _equipamento.getAno() + "'";
-            comSql += " ," + _equipamento.getQuilometragem() + ");";
+            comSql += " ," + _equipamento.getQuilometragem() ;
+            comSql += " ,'" + _equipamento.getAtivo() + "');";
             
             retorno = atualizar();
             if(retorno)
@@ -181,14 +190,18 @@ public class EquipamentoDAO extends DAO{
             comSql += "	,`strMarca` = '" + _equipamento.getMarca() + "'";
             comSql += "	,`strModelo` = '" + _equipamento.getModelo() + "'";
             comSql += "	,`strAno` = '" + _equipamento.getAno() + "'";
-            comSql += "	,`dblKm` = '" + _equipamento.getQuilometragem();
+            comSql += "	,`dblKm` = " + _equipamento.getQuilometragem();
+            comSql += "	,`bolAtivo` = '" + _equipamento.getAtivo() + "'";
             comSql += " WHERE ";
-            comSql += "	`intEquipamentoId` = " + _equipamento.getIdEquipamento()+ ";  ";   
+            comSql += "     `intEquipamentoId` = " + _equipamento.getIdEquipamento()+ ";  ";   
             retorno = atualizar();
+            
         }
         
         if (retorno)
         {
+            identity = _equipamento.getIdEquipamento();
+            
             if (_equipamento.getLstManutencao() != null)
             {
                 ManutencaoDAO manutencaoDAO = new ManutencaoDAO(conexao);
@@ -236,6 +249,18 @@ public class EquipamentoDAO extends DAO{
         
         return retorno;
         
-    }   
+    }
+    
+    public boolean delete(Equipamento equipamento)
+    {
+        boolean retorno;
+        comSql = "";
+        comSql += " Delete from tblEquipamento ";
+        comSql += " where ";
+        comSql += "     `intEquipamentoId` = " + equipamento.getIdEquipamento()+ ";  ";  
+        retorno = atualizar();
+        
+        return retorno;
+    }
     
 }

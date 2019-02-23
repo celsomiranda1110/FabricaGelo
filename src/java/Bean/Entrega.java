@@ -33,9 +33,9 @@ public class Entrega implements Bean{
 
     private Equipamento veiculo;
     
-    private List<CustoEntrega> lstCustoEntrega;
+
     private List<ProdutoEntrega> lstProdutoEntrega;
-    private List<Abastecimento> lstAbastecimento;
+    private List<CustoEntrega> lstCustoEntrega;
     private List<ColaboradorEntrega> lstColaboradorEntrega;
     private List<ProfissionalEntrega> lstProfissionalEntrega;
     
@@ -144,13 +144,7 @@ public class Entrega implements Bean{
         this.idEquipamento = veiculo.getIdEquipamento();
     }
 
-    public List<CustoEntrega> getLstCustoEntrega() {
-        return lstCustoEntrega;
-    }
 
-    public void setLstCustoEntrega(List<CustoEntrega> lstCustoEntrega) {
-        this.lstCustoEntrega = lstCustoEntrega;
-    }
 
     
 
@@ -185,12 +179,12 @@ public class Entrega implements Bean{
         this.lstProdutoEntrega = lstProdutoEntrega;
     }
 
-    public List<Abastecimento> getLstAbastecimento() {
-        return lstAbastecimento;
+    public List<CustoEntrega> getLstCustoEntrega() {
+        return lstCustoEntrega;
     }
 
-    public void setLstAbastecimento(List<Abastecimento> lstAbastecimento) {
-        this.lstAbastecimento = lstAbastecimento;
+    public void setLstCustoEntrega(List<CustoEntrega> lstCustoEntrega) {
+        this.lstCustoEntrega = lstCustoEntrega;
     }
 
     public List<ColaboradorEntrega> getLstColaboradorEntrega() {
@@ -208,6 +202,8 @@ public class Entrega implements Bean{
     public void setLstProfissionalEntrega(List<ProfissionalEntrega> lstProfissionalEntrega) {
         this.lstProfissionalEntrega = lstProfissionalEntrega;
     }
+
+    
     
     
 
@@ -224,9 +220,9 @@ public class Entrega implements Bean{
         
         _entrega.setVeiculo(this.veiculo);
         
-        _entrega.setLstCustoEntrega(this.lstCustoEntrega);
+
         _entrega.setLstProdutoEntrega(lstProdutoEntrega);
-        _entrega.setLstAbastecimento(this.lstAbastecimento);
+        _entrega.setLstCustoEntrega(this.lstCustoEntrega);
         _entrega.setLstColaboradorEntrega(this.lstColaboradorEntrega);
         _entrega.setLstProfissionalEntrega(this.lstProfissionalEntrega);
         

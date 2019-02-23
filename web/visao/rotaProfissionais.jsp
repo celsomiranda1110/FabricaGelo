@@ -6,7 +6,7 @@
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 
 <html>
     <head>
@@ -18,7 +18,7 @@
             
             <div class="container">
                 <div class="panel panel-default">
-                    <div class="panel-heading"><div class="panel-title text-center"><h3><b>DefiniÃ§Ã£o de profissionais</b></h3></div></div>
+                    <div class="panel-heading"><div class="panel-title text-center"><h3><b>Definição de profissionais</b></h3></div></div>
                     <div class="panel-body">
                         
                         <div class="row"> 

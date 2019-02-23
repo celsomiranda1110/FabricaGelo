@@ -37,18 +37,21 @@ public class AcaoExcluirAvaria extends Acao{
         if (entrega == null)
         {
             sessao.setAttribute("avisoErro", "Rota não selecionada");
+            sessao.setAttribute("tipoAviso","alert alert-danger");
             sessao.setAttribute("pagOrigemErro", "FabricaGelo.Entrega.AcaoEncerrarRota");
             pagRetorno = "visao/erro.jsp";             
         }
         else if (produtoEntrega == null)
         {
             sessao.setAttribute("avisoErro", "Produto não selecionado");
+            sessao.setAttribute("tipoAviso","alert alert-danger");
             sessao.setAttribute("pagOrigemErro", "FabricaGelo.Entrega.AcaoEncerrarRota");
             pagRetorno = "visao/erro.jsp";             
         }
         else if ((idAvariaEntrega == null) || (idAvariaEntrega.equals("")))
         {
             sessao.setAttribute("avisoErro", "Avaria não selecionada");
+            sessao.setAttribute("tipoAviso","alert alert-danger");
             sessao.setAttribute("pagOrigemErro", "FabricaGelo.Entrega.AcaoEncerrarRota");
             pagRetorno = "visao/erro.jsp";             
         }

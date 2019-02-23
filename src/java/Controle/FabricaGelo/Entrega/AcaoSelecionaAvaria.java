@@ -49,11 +49,9 @@ public class AcaoSelecionaAvaria extends Acao{
         sessao.setAttribute("entrega",entrega);
         sessao.setAttribute("lstAvaria",produtoEntrega.getLstAvariaEntrega());
         sessao.setAttribute("lstCustoEntrega",entrega.getLstCustoEntrega());
-        sessao.setAttribute("lstAbastecimento",entrega.getLstAbastecimento());
-        sessao.setAttribute("custoEntrega",null);
         sessao.setAttribute("avariaEntrega",avariaEntrega);
         sessao.setAttribute("produtoEntrega",produtoEntrega);
-        sessao.setAttribute("abastecimento",null);
+        sessao.setAttribute("custoEntrega",null);
         
         return "visao/entrega.jsp";
     }

@@ -8,8 +8,11 @@ package Controle.FabricaGelo.Veiculo;
 import Bean.Colaborador;
 import Bean.Equipamento;
 import Controle.FabricaGelo.Gerais.Acao;
+import DAO.ColaboradorDAO;
 import DAO.EquipamentoDAO;
 import java.sql.Connection;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -24,6 +27,8 @@ public class AcaoSelecionaVeiculo extends Acao{
         Connection conexao = (Connection)req.getAttribute("connection");
         HttpSession sessao = req.getSession(false);
 
+        String pagRetorno = "FabricaGelo.Veiculo.AcaoAbreVeiculo";
+        
         EquipamentoDAO veiculoDAO = new EquipamentoDAO(conexao);
         Equipamento veiculo = new Equipamento();
         
@@ -31,12 +36,10 @@ public class AcaoSelecionaVeiculo extends Acao{
         veiculo.setIdEquipamento(Integer.parseInt(idEquipamento));
         veiculo = veiculoDAO.listaUm(veiculo);
         
-        String pagRetorno = (String)sessao.getAttribute("pagRetorno");
-
-        sessao.setAttribute("veiculo",veiculo);
-        sessao.setAttribute("lstManutencao", veiculo.getLstManutencao());
-        sessao.setAttribute("pagRetorno",pagRetorno);
         
-        return "visao/veiculo.jsp";
+        sessao.setAttribute("veiculo",veiculo);
+        
+        
+        return pagRetorno;
     }
 }

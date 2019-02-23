@@ -5,7 +5,7 @@
 --%>
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 
 <html>
     <head>
@@ -34,7 +34,14 @@
                                                     
                                                 </ul>
                                                 <ul class="nav navbar-nav navbar-right">
-                                                    <li class="btn"><input type="text" class="form-control" name="txtPesquisa" id="txtPesquisa"></li>
+                                                    <li class="btn"><input type="text" class="form-control" name="txtPesquisa" id="txtPesquisa" placeholder="Descrição do bairro"></li>
+                                                    <li class="btn">
+                                                        <select name="cmbSituacaoPesquisa" class="form-control" >
+                                                            <option value=""> Situação </option>
+                                                            <option value="A">Ativo</option>
+                                                            <option value="I">Inativo</option>
+                                                        </select> 
+                                                    </li>
                                                     <li class="btn"><button type="button" class="btn btn-default" onClick="pesquisar()">Listar Bairro</button></li>
                                                     
                                                 </ul>
@@ -52,8 +59,8 @@
                                 <table class="table table-hover table-striped">
                                     <tbody>
                                         <tr>
-                                            <th><div align="left">AÃ§Ã£o</div></th>
-                                            <th><div align="left">DescriÃ§Ã£o</div></th>
+                                            <th><div align="left">Ação</div></th>
+                                            <th><div align="left">Descrição</div></th>
                                             
                                         </tr>
                                         <c:forEach var="lstBairro" items="${lstBairro}" varStatus="s">
@@ -80,7 +87,7 @@
         <script>
             function adicionar()
             {
-                document.forms[0].action="FabricaGelo.Bairro.AcaoAbreBairro";
+                document.forms[0].action="FabricaGelo.Bairro.AcaoNovoBairro";
                 document.forms[0].submit();
             }                            
             function pesquisar()

@@ -32,7 +32,7 @@ public class AcaoAbreProfissional extends Acao
        
         FuncaoDAO funcaoDAO = new FuncaoDAO(conexao);
         List<Funcao> lstFuncao = new ArrayList<Funcao>();
-        lstFuncao = funcaoDAO.listaTodos();
+        lstFuncao = funcaoDAO.listaTodos(new Funcao());
 
         sessao.setAttribute("profissional",profissional);
         sessao.setAttribute("lstFuncao",lstFuncao);

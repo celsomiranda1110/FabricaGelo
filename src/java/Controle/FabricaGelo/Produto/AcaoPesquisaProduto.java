@@ -28,12 +28,19 @@ public class AcaoPesquisaProduto extends Acao{
 
         List<Produto> lstProduto = new ArrayList<Produto>();
         List<Produto> lstRetorno = new ArrayList<Produto>();
+
+        String pesquisa = req.getParameter("txtPesquisa");
+        String situacao = req.getParameter("cmbSituacaoPesquisa").equals("") ? "" : req.getParameter("cmbSituacaoPesquisa");
+
         
         ProdutoDAO produtoDAO = new ProdutoDAO(conexao);
-        lstProduto = produtoDAO.listaTodos();
+        Produto produto = new Produto();
+        produto.setTipo("PR");
+        produto.setAtivo(situacao);
         
-        String pesquisa = req.getParameter("txtPesquisa");
-        if (pesquisa != "")
+        lstProduto = produtoDAO.listaTodos(produto);
+        
+        if (!pesquisa.equals(""))
         {
             Iterator it = lstProduto.iterator();
             while (it.hasNext())

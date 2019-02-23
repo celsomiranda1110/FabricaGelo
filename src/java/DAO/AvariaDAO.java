@@ -22,16 +22,24 @@ public class AvariaDAO extends DAO{
     
     
     
-    public List<Avaria> listaTodos()
+    public List<Avaria> listaTodos(Avaria _avaria)
     {
         List<Avaria> lstTabela = new ArrayList();
         
         comSql = "";      
         comSql += " SELECT ";
         comSql += "     `tblAvaria`.`intAvariaId`,";
-        comSql += "     `tblAvaria`.`strDescricao`";
+        comSql += "     `tblAvaria`.`strDescricao`,";
+        comSql += "     `tblAvaria`.`bolAtivo`";
         comSql += " FROM ";
-        comSql += "     `smmdaa_bdGelo`.`tblAvaria`;";
+        comSql += "     `smmdaa_bdGelo`.`tblAvaria`";
+        if (_avaria != null)
+        {
+            comSql += " WHERE ";
+            comSql += "     `tblAvaria`.`bolAtivo` = '" + _avaria.getAtivo() + "'";
+        }
+        comSql += ";";
+        
         List tabela = super.listaTodos();
         
         for(int i = 0; i < tabela.size(); i++)
@@ -41,6 +49,7 @@ public class AvariaDAO extends DAO{
             
             avaria.setIdAvaria(((Integer)bkp.get(0)).intValue());
             avaria.setDescricao((String)bkp.get(1));
+            avaria.setAtivo((String)bkp.get(2));
             
             lstTabela.add(avaria);
         }
@@ -55,7 +64,8 @@ public class AvariaDAO extends DAO{
         comSql = "";      
         comSql += " SELECT ";
         comSql += "     `tblAvaria`.`intAvariaId`,";
-        comSql += "     `tblAvaria`.`strDescricao`";
+        comSql += "     `tblAvaria`.`strDescricao`,";
+        comSql += "     `tblAvaria`.`bolAtivo`";
         comSql += " FROM ";
         comSql += "     `smmdaa_bdGelo`.`tblAvaria`";
         comSql += " WHERE ";
@@ -71,6 +81,7 @@ public class AvariaDAO extends DAO{
 
                 avaria.setIdAvaria(((Integer)bkp.get(0)).intValue());
                 avaria.setDescricao((String)bkp.get(1));
+                avaria.setAtivo((String)bkp.get(2));
                 
             }  
             return avaria;
@@ -91,10 +102,10 @@ public class AvariaDAO extends DAO{
         {
             comSql = "";
             comSql += " INSERT INTO `smmdaa_bdGelo`.`tblAvaria` ";
-            comSql += " (`strDescricao`)";
+            comSql += " (`strDescricao`, `bolAtivo`)";
             comSql += " VALUES";
-            comSql += " ('" + _avaria.getDescricao() + "');";
-            
+            comSql += " ('" + _avaria.getDescricao() + "',";
+            comSql += " '" + _avaria.getAtivo() + "');";
             retorno = atualizar();
             if(retorno)
             {
@@ -114,14 +125,30 @@ public class AvariaDAO extends DAO{
         {
             comSql = "";
             comSql += " UPDATE `smmdaa_bdGelo`.`tblAvaria` SET";
-            comSql += "	`strDescricao` = '" + _avaria.getDescricao() + "'";
+            comSql += "     `strDescricao` = '" + _avaria.getDescricao() + "',";
+            comSql += "     `bolAtivo` = '" + _avaria.getAtivo() + "'";
             comSql += " WHERE ";
             comSql += "	`intAvariaId` = " + _avaria.getIdAvaria()+ ";  ";   
             retorno = atualizar();
         }
+        if (retorno)
+            identity = _avaria.getIdAvaria();
         
         return retorno;
         
+    }
+    
+    public boolean delete(Avaria avaria)
+    {
+        boolean retorno;
+        
+        comSql = "";
+        comSql += " Delete from tblAvaria ";
+        comSql += " WHERE ";
+        comSql += "	`intAvariaId` = " + avaria.getIdAvaria()+ ";  "; 
+        retorno = atualizar();
+        
+        return retorno;
     }
     
 }

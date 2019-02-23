@@ -29,9 +29,15 @@ public class Producao implements Bean{
     private Produto produto;
     
     List<MaquinaProducao> lstMaquinaProducao = new ArrayList<MaquinaProducao>();
-    List<TransferenciaProducao> lstTransferenciaProducao = new ArrayList<TransferenciaProducao>();
+    
    
     String formato = "dd/MM/yyyy";
+
+    public Producao() {
+        this.quantidade = 0;
+    }
+    
+    
     
     public int getIdProducao() {
         return IdProducao;
@@ -118,13 +124,7 @@ public class Producao implements Bean{
         this.lstMaquinaProducao = lstMaquinaProducao;
     }
 
-    public List<TransferenciaProducao> getLstTransferenciaProducao() {
-        return lstTransferenciaProducao;
-    }
-
-    public void setLstTransferenciaProducao(List<TransferenciaProducao> lstTransferenciaProducao) {
-        this.lstTransferenciaProducao = lstTransferenciaProducao;
-    }
+    
 
     public String getSituacao() {
         return situacao;
@@ -132,19 +132,15 @@ public class Producao implements Bean{
 
     public void setSituacao(String situacao) {
         this.situacao = situacao;
-        if (this.situacao.equals("PC"))
-            this.descSituacao = "PRODUÇÃO CADASTRADA";
+        if (this.situacao.equals("PI"))
+            this.descSituacao = "PRODUÇÃO INICIADA";
         else if(this.situacao.equals("PF"))
-            this.descSituacao = "PRODUÇÃO FECHADA";
+            this.descSituacao = "PRODUÇÃO FINALIZADA";
     }
 
     public String getDescSituacao() {
         return descSituacao;
     }
-
-    
-
-    
 
     public void replicar(Producao _producao)
     {
@@ -152,7 +148,6 @@ public class Producao implements Bean{
         _producao.setIdProduto(this.idProduto);
         _producao.setTurno(this.turno);
         _producao.setData(this.data);
-        _producao.setProduto(this.produto);
         _producao.setQuantidade(this.quantidade);
         _producao.setSituacao(this.situacao);
 
@@ -160,7 +155,7 @@ public class Producao implements Bean{
             _producao.setProduto(this.produto);
         
         _producao.setLstMaquinaProducao(this.lstMaquinaProducao);
-        _producao.setLstTransferenciaProducao(this.lstTransferenciaProducao);
+        
         
     }
 }

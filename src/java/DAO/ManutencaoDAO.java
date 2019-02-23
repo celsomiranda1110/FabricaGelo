@@ -39,8 +39,12 @@ public class ManutencaoDAO extends DAO{
         comSql += "     `tblManutencao`.`strMotivo`,";
         comSql += "     `tblManutencao`.`dblValor`";
         comSql += " FROM `smmdaa_bdGelo`.`tblManutencao`";
-        comSql += " WHERE ";
-        comSql += "     `tblManutencao`.`intEquipamentoId` = " + equipamento.getIdEquipamento();
+        if (equipamento != null)
+        {
+            comSql += " WHERE ";
+            comSql += "     `tblManutencao`.`intEquipamentoId` = " + equipamento.getIdEquipamento();
+        }
+        comSql += ";";
         
         List tabela = super.listaTodos();
         

@@ -119,6 +119,7 @@ public class AcaoGravaAluguel extends Acao
             if (!mensagemErro.equals(""))
             {
                 sessao.setAttribute("avisoErro", mensagemErro);
+                sessao.setAttribute("tipoAviso","alert alert-danger");
                 sessao.setAttribute("pagOrigemErro", "FabricaGelo.Aluguel.AcaoAbreAluguel");
                 pagRetorno = "visao/erro.jsp";                 
             }
@@ -146,6 +147,7 @@ public class AcaoGravaAluguel extends Acao
         else
         {
             sessao.setAttribute("avisoErro", "Movimento de aluguel Fechado");
+            sessao.setAttribute("tipoAviso","alert alert-danger");
             sessao.setAttribute("pagOrigemErro", "FabricaGelo.Aluguel.AcaoAbreAluguel");
             pagRetorno = "visao/erro.jsp";            
         }

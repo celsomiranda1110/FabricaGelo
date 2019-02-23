@@ -10,6 +10,7 @@ import Bean.Equipamento;
 import Bean.MaquinaProducao;
 import Bean.Producao;
 import Bean.Produto;
+import Bean.TransferenciaProducao;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -39,6 +40,7 @@ public class MaquinaProducaoDAO extends DAO{
         comSql += "     `tblMaquinaProducao`.`dblSaldoAnterior`,";
         comSql += "     `tblMaquinaProducao`.`dblQtProducao`,";
         comSql += "     `tblMaquinaProducao`.`dblQtAvaria`,";
+        comSql += "     `tblMaquinaProducao`.`dblSaldo`,";
         comSql += "     `tblMaquinaProducao`.`strHoraInicial`,";
         comSql += "     `tblMaquinaProducao`.`strHoraFinal`,";
         comSql += "     `tblMaquinaProducao`.`dblRendimento`";
@@ -62,9 +64,10 @@ public class MaquinaProducaoDAO extends DAO{
             maquinaProducao.setQtSaldoAnterior((Double)bkp.get(5));
             maquinaProducao.setQtProducao((Double)bkp.get(6));
             maquinaProducao.setQtAvaria((Double)bkp.get(7));
-            maquinaProducao.setHrInicial((String)bkp.get(8));
-            maquinaProducao.setHrFinal((String)bkp.get(9));
-            maquinaProducao.setRendimento((Double)bkp.get(10));
+            maquinaProducao.setQtSaldo((Double)bkp.get(8));
+            maquinaProducao.setHrInicial((String)bkp.get(9));
+            maquinaProducao.setHrFinal((String)bkp.get(10));
+            maquinaProducao.setRendimento((Double)bkp.get(11));
 
             // Embalagem
             ProdutoDAO produtoDAO = new ProdutoDAO(conexao);
@@ -80,6 +83,11 @@ public class MaquinaProducaoDAO extends DAO{
             maquina = maquinaDAO.listaUm(maquina);
             maquinaProducao.setMaquina(maquina);
                 
+            // descobrindo as transferências
+            List<TransferenciaProducao> lstTransferenciaProducao = new ArrayList<TransferenciaProducao>();
+            TransferenciaProducaoDAO transferenciaProducaoDAO = new TransferenciaProducaoDAO(conexao);
+            lstTransferenciaProducao = transferenciaProducaoDAO.listaTodos(maquinaProducao);
+            maquinaProducao.setLstTransferenciaProducao(lstTransferenciaProducao);
                 
             lstTabela.add(maquinaProducao);
         }
@@ -101,6 +109,7 @@ public class MaquinaProducaoDAO extends DAO{
         comSql += "     `tblMaquinaProducao`.`dblSaldoAnterior`,";
         comSql += "     `tblMaquinaProducao`.`dblQtProducao`,";
         comSql += "     `tblMaquinaProducao`.`dblQtAvaria`,";
+        comSql += "     `tblMaquinaProducao`.`dblSaldo`,";
         comSql += "     `tblMaquinaProducao`.`strHoraInicial`,";
         comSql += "     `tblMaquinaProducao`.`strHoraFinal`,";
         comSql += "     `tblMaquinaProducao`.`dblRendimento`";
@@ -131,9 +140,10 @@ public class MaquinaProducaoDAO extends DAO{
                 maquinaProducao.setQtSaldoAnterior((Double)bkp.get(5));
                 maquinaProducao.setQtProducao((Double)bkp.get(6));
                 maquinaProducao.setQtAvaria((Double)bkp.get(7));
-                maquinaProducao.setHrInicial((String)bkp.get(8));
-                maquinaProducao.setHrFinal((String)bkp.get(9));
-                maquinaProducao.setRendimento((Double)bkp.get(10));
+                maquinaProducao.setQtSaldo((Double)bkp.get(8));
+                maquinaProducao.setHrInicial((String)bkp.get(9));
+                maquinaProducao.setHrFinal((String)bkp.get(10));
+                maquinaProducao.setRendimento((Double)bkp.get(11));
                 
                 // Embalagem
                 ProdutoDAO produtoDAO = new ProdutoDAO(conexao);
@@ -154,15 +164,13 @@ public class MaquinaProducaoDAO extends DAO{
                 lstAvariaProducao = avariaProducaoDAO.listaTodos(maquinaProducao);
                 maquinaProducao.setLstAvariaProducao(lstAvariaProducao);
                 
-                //descobrindo a qtAvarias
-                Iterator itAvaria = lstAvariaProducao.iterator();
-                double qtAvaria = 0;
-                while (itAvaria.hasNext())
-                {
-                    AvariaProducao _avariaProducao = (AvariaProducao)itAvaria.next();
-                    qtAvaria += _avariaProducao.getQuantidade();
-                }
-                maquinaProducao.setQtAvaria(qtAvaria);
+                // descobrindo as transferências
+                List<TransferenciaProducao> lstTransferenciaProducao = new ArrayList<TransferenciaProducao>();
+                TransferenciaProducaoDAO transferenciaProducaoDAO = new TransferenciaProducaoDAO(conexao);
+                lstTransferenciaProducao = transferenciaProducaoDAO.listaTodos(maquinaProducao);
+                maquinaProducao.setLstTransferenciaProducao(lstTransferenciaProducao);
+                
+                
                 
             }  
             return maquinaProducao;
@@ -175,7 +183,7 @@ public class MaquinaProducaoDAO extends DAO{
     public boolean atualizar(MaquinaProducao maquinaProducao) 
     {
         boolean retorno;
-        double qtAvaria = 0;
+        
         
         MaquinaProducao _maquinaProducao = new MaquinaProducao();
         maquinaProducao.replicar(_maquinaProducao);
@@ -191,6 +199,7 @@ public class MaquinaProducaoDAO extends DAO{
             comSql += " 	`dblSaldoAnterior`,";
             comSql += " 	`dblQtProducao`,";
             comSql += " 	`dblQtAvaria`,";
+            comSql += " 	`dblSaldo`,";
             comSql += " 	`strHoraInicial`,";
             comSql += " 	`strHoraFinal`,";
             comSql += " 	`dblRendimento`)";
@@ -202,6 +211,7 @@ public class MaquinaProducaoDAO extends DAO{
             comSql += " 	," + _maquinaProducao.getQtSaldoAnterior();
             comSql += " 	," + _maquinaProducao.getQtProducao();
             comSql += " 	," + _maquinaProducao.getQtAvaria();
+            comSql += " 	," + _maquinaProducao.getQtSaldo();
             comSql += " 	,'" + _maquinaProducao.getHrInicial() + "'";
             comSql += " 	,'" + _maquinaProducao.getHrFinal() + "'";
             comSql += " 	," + _maquinaProducao.getRendimento() + ");";
@@ -233,6 +243,7 @@ public class MaquinaProducaoDAO extends DAO{
             comSql += " 	,`dblSaldoAnterior` = " + _maquinaProducao.getQtSaldoAnterior();
             comSql += " 	,`dblQtProducao` = " + _maquinaProducao.getQtProducao();
             comSql += " 	,`dblQtAvaria` = " + _maquinaProducao.getQtAvaria();
+            comSql += " 	,`dblSaldo` = " + _maquinaProducao.getQtSaldo();
             comSql += " 	,`strHoraInicial` = '" + _maquinaProducao.getHrInicial() + "'";
             comSql += " 	,`strHoraFinal` = '" + _maquinaProducao.getHrFinal() + "'";
             comSql += " 	,`dblRendimento` = " + _maquinaProducao.getRendimento();
@@ -242,6 +253,12 @@ public class MaquinaProducaoDAO extends DAO{
         }
         if (retorno)
         {
+            double qtAvaria = 0;
+            double qtSaldoAnterior = 0;
+            double qtReposicao = 0;
+            double qtProducao = 0;
+            double qtSaldo = 0;
+            double qtTransferencia = 0;
             
             _maquinaProducao = listaUm(_maquinaProducao);
             
@@ -252,23 +269,41 @@ public class MaquinaProducaoDAO extends DAO{
                 while (itAvariaProducao.hasNext())
                 {
                     AvariaProducao avariaProducao = (AvariaProducao)itAvariaProducao.next();
-                    avariaProducao.setIdMaquinaProducao(_maquinaProducao.getIdMaquinaProducao());
-                    if(avariaProducaoDAO.atualizar(avariaProducao))
-                        qtAvaria += avariaProducao.getQuantidade();
+                    qtAvaria += avariaProducao.getQuantidade();
                 }
                 
-                // atualizando quantidade real produzida pela máquina
-                if (qtAvaria != _maquinaProducao.getQtAvaria())
+
+            }
+        
+            
+             // salvando transferẽncias, se houver
+            if (_maquinaProducao.getLstTransferenciaProducao() != null)
+            {
+                TransferenciaProducaoDAO transfDAO = new TransferenciaProducaoDAO(conexao);
+                Iterator itTransf = _maquinaProducao.getLstTransferenciaProducao().iterator();
+                while (itTransf.hasNext())
                 {
-                    comSql = "";
-                    comSql += " UPDATE `smmdaa_bdGelo`.`tblMaquinaProducao` SET";
-                    comSql += " 	`dblQtAvaria` = " + qtAvaria;
-                    comSql += " 	,`dblQtProducao` = " + (_maquinaProducao.getQtProducao() - qtAvaria);
-                    comSql += " WHERE ";
-                    comSql += " 	`intMaquinaProducaoId` = " + _maquinaProducao.getIdMaquinaProducao() + ";";                
-                    atualizar();
+                    TransferenciaProducao transf = (TransferenciaProducao)itTransf.next();
+                    qtTransferencia += transf.getQuantidade();
+
                 }
             }
+            
+            // atualizando quantidades
+            qtSaldoAnterior = _maquinaProducao.getQtSaldoAnterior();
+            qtReposicao = _maquinaProducao.getQtReposicao();
+            qtProducao = (qtSaldoAnterior + qtReposicao) - qtAvaria;
+            qtSaldo = qtProducao - qtTransferencia;
+            
+            comSql = "";
+            comSql += " UPDATE `smmdaa_bdGelo`.`tblMaquinaProducao` SET";
+            comSql += " 	`dblQtAvaria` = " + qtAvaria;
+            comSql += " 	,`dblQtProducao` = " + qtProducao;
+            comSql += " 	,`dblSaldo` = " + qtSaldo;
+            comSql += " WHERE ";
+            comSql += " 	`intMaquinaProducaoId` = " + _maquinaProducao.getIdMaquinaProducao() + ";";                
+            atualizar();                
+            
         }
         
         return retorno;

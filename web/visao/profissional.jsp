@@ -5,12 +5,12 @@
 --%>
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 
 <html>
     <head>
         <c:import url="CabRod/cabecalho.jsp"/>
-        <title>Informa√ß√µes sobre a Profissional</title>
+        <title>InformaÁıes sobre a Profissional</title>
         
     </head>
     <body>
@@ -22,15 +22,7 @@
                     <div class="panel-heading"><h3 class="panel-title text-center"><b>Dados do Profissional</b></h3></div>
                     <div class="panel-body">
                         
-                        <div class="row">
-                            <div class="col-lg-12">
-                                
-                                <span class="label label-danger">${avisoProfissional}</span>
-                                
-                            </div>
-                        </div>
-                   
-                                
+                        
                         <div class="row"> <!-- div dos botoes -->
 
                             <div class="col-lg-12">
@@ -39,10 +31,11 @@
                                         <div class="navbar navbar-default">
                                             <div class="container-fluid">
                                                 <ul class="nav navbar-nav">
-                                                    <li class="btn"><button type="button" class="btn btn-success" onClick="atualizar()">Atualizar</button></li>
+                                                    <li class="btn"><button type="button" class="btn btn-default" onClick="atualizar()">Atualizar</button></li>
+                                                    <li class="btn"><button type="button" class="btn btn-default" onClick="excluir()">Excluir</button></li>
                                                 </ul>
                                                 <ul class="nav navbar-nav navbar-right">
-                                                    <li class="btn"><button type="button" class="btn btn-default" onClick="selecionar()">Selecionar</button></li>
+                                                    <li class="btn"><button type="button" class="btn btn-default" onClick="retornar()">Retornar</button></li>
                                                 </ul>
                                             </div>
                                         </div>                                        
@@ -56,10 +49,10 @@
                             <div class="col-lg-12">
                                 <div class="row">
                                     <div class="col-sm-3">
-                                        <label class="control-label">CPF</label>
+                                        <label class="control-label">CPF(*)</label>
                                     </div>
                                     <div class="col-sm-9">
-                                        <label class="control-label">Nome</label>
+                                        <label class="control-label">Nome(*)</label>
                                     </div>                                    
                                     
                                 </div>
@@ -67,6 +60,7 @@
                                    
                                     <div class="col-sm-3">
                                         <input type="text" class="form-control" name="txtCpf" id="txtCpf" value="${profissional.cpf}">
+                                        
                                     </div>
                                     <div class="col-sm-9">
                                         <input type="text" class="form-control" name="txtProfissional" id="txtProfissional" value="${profissional.nome}">
@@ -84,7 +78,7 @@
                                         <label class="control-label">CTPS</label>
                                     </div>
                                     <div class="col-sm-9">
-                                        <label class="control-label">Fun√ß√£o</label>
+                                        <label class="control-label">FunÁ„o</label>
                                     </div>
                                     
                                 </div>
@@ -95,7 +89,7 @@
                                     <div class="col-sm-9">
                                         
                                         <select name="cmbFuncao" class="form-control">
-                                            <option value="0">... Selecione uma fun√ß√£o profissional ...</option>
+                                            <option value="0">... Selecione uma funÁ„o profissional ...</option>
                                             <c:forEach var="varFuncao" items="${lstFuncao}" varStatus="s">
                                               <c:if test="${varFuncao.idFuncao == profissional.idFuncao}">
                                                 <option value="${varFuncao.idFuncao}" selected="selected">${varFuncao.descricao}</option>
@@ -124,7 +118,9 @@
                                     <div class="col-sm-6">
                                         <input type="text" class="form-control" name="txtCelular" id="txtCpf" value="${profissional.celular}">
                                     </div>
-                                    
+                                    <div class="col-sm-2">
+                                        <input type="checkbox" name="ck_Ativo" ${profissional.descAtivo}> Inativo
+                                    </div> 
                                   
                                 </div>
                             </div>
@@ -135,7 +131,7 @@
                             <div class="col-lg-12">
                                 <div class="row">
                                     <div class="col-sm-6">
-                                        <label class="control-label">Usu√°rio</label>
+                                        <label class="control-label">Usu·rio</label>
                                     </div>
                                     <div class="col-sm-6">
                                         <label class="control-label">Senha</label>
@@ -170,7 +166,7 @@
                 var descricao = formProfissional.txtProfissional.value;
                 if (descricao == "")
                 {
-                    alert('Necess√°rio descri√ß√£o do profissional!');
+                    alert('Necess·rio descriÁ„o do profissional!');
                     return false;
                 }
                 else
@@ -179,9 +175,14 @@
                     document.forms[0].submit();
                 }
             }
-            function selecionar()
+            function excluir()
             {
-                document.forms[0].action="FabricaGelo.Profissional.AcaoRetornaPagina";
+                document.forms[0].action="FabricaGelo.Profissional.AcaoDeletaProfissional";
+                document.forms[0].submit();
+            }
+            function retornar()
+            {
+                document.forms[0].action="FabricaGelo.Profissional.AcaoListarProfissional";
                 document.forms[0].submit();                
             }
             function buscaFuncao()

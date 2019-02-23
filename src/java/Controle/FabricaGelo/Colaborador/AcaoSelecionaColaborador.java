@@ -10,10 +10,12 @@ import Bean.Bairro;
 import Bean.Colaborador;
 import Bean.Movimento;
 import Bean.Produto;
+import Bean.TipoColaborador;
 import Controle.FabricaGelo.Gerais.Acao;
 import DAO.BairroDAO;
 import DAO.ColaboradorDAO;
 import DAO.ProdutoDAO;
+import DAO.TipoColaboradorDAO;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +47,11 @@ public class AcaoSelecionaColaborador extends Acao{
         colaborador.setIdColaborador(Integer.parseInt(idColaborador));
         colaborador = colaboradorDAO.listaUm(colaborador);
         
+        // Tipo colaborador
+        TipoColaboradorDAO tipoColaboradorDAO = new TipoColaboradorDAO(conexao);
+        List<TipoColaborador> lstTipoColaborador = new ArrayList<TipoColaborador>();
+        lstTipoColaborador = tipoColaboradorDAO.listaTodos(new TipoColaborador());        
+        
         // lstando bairros
         BairroDAO bairroDAO = new BairroDAO(conexao);
         List<Bairro> lstBairro = new ArrayList<Bairro>();
@@ -63,6 +70,7 @@ public class AcaoSelecionaColaborador extends Acao{
         
         sessao.setAttribute("colaborador",colaborador);
         sessao.setAttribute("lstProduto", lstProduto);
+        sessao.setAttribute("lstTipoColaborador", lstTipoColaborador);
         sessao.setAttribute("lstColaboradorProduto",colaborador.getLstColaboradorProduto());
         sessao.setAttribute("lstVisitaColaborador",colaborador.getLstVisitaColaborador());
               

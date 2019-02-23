@@ -29,13 +29,19 @@ public class AcaoPesquisaVeiculo extends Acao{
         List<Equipamento> lstVeiculo = new ArrayList<Equipamento>();
         List<Equipamento> lstRetorno = new ArrayList<Equipamento>();
         
+        String pesquisa = req.getParameter("txtPesquisa");
+        String situacao = req.getParameter("cmbSituacaoPesquisa").equals("") ? "" : req.getParameter("cmbSituacaoPesquisa");
+        
+        
         EquipamentoDAO veiculoDAO = new EquipamentoDAO(conexao);
         Equipamento equipamento = new Equipamento();
         equipamento.setTipo("VE");
+        equipamento.setAtivo(situacao);
+        
         lstVeiculo = veiculoDAO.listaTodos(equipamento);
         
-        String pesquisa = req.getParameter("txtPesquisa");
-        if (pesquisa != "")
+        
+        if (!pesquisa.equals(""))
         {
             Iterator it = lstVeiculo.iterator();
             while (it.hasNext())

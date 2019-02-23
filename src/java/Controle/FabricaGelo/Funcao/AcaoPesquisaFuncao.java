@@ -28,12 +28,18 @@ public class AcaoPesquisaFuncao extends Acao{
 
         List<Funcao> lstFuncao = new ArrayList<Funcao>();
         List<Funcao> lstRetorno = new ArrayList<Funcao>();
+
+        String pesquisa = req.getParameter("txtPesquisa");
+        String situacao = req.getParameter("cmbSituacaoPesquisa").equals("") ? "" : req.getParameter("cmbSituacaoPesquisa");
         
         FuncaoDAO funcaoDAO = new FuncaoDAO(conexao);
-        lstFuncao = funcaoDAO.listaTodos();
+        Funcao funcao = new Funcao();
+        funcao.setAtivo(situacao);
         
-        String pesquisa = req.getParameter("txtPesquisa");
-        if (pesquisa != "")
+        lstFuncao = funcaoDAO.listaTodos(funcao);
+        
+        
+        if (!pesquisa.equals(""))
         {
             Iterator it = lstFuncao.iterator();
             while (it.hasNext())

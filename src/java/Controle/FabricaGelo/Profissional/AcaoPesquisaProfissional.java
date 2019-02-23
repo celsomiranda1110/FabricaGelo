@@ -28,12 +28,17 @@ public class AcaoPesquisaProfissional extends Acao{
 
         List<Profissional> lstProfissional = new ArrayList<Profissional>();
         List<Profissional> lstRetorno = new ArrayList<Profissional>();
+
+        String pesquisa = req.getParameter("txtPesquisa");
+        String situacao = req.getParameter("cmbSituacaoPesquisa").equals("") ? "" : req.getParameter("cmbSituacaoPesquisa");
         
         ProfissionalDAO profissionalDAO = new ProfissionalDAO(conexao);
-        lstProfissional = profissionalDAO.listaTodos();
+        Profissional profissional = new Profissional();
+        profissional.setAtivo(situacao);
+        lstProfissional = profissionalDAO.listaTodos(profissional);
         
-        String pesquisa = req.getParameter("txtPesquisa");
-        if (pesquisa != "")
+
+        if (!pesquisa.equals(""))
         {
             Iterator it = lstProfissional.iterator();
             while (it.hasNext())

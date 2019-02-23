@@ -26,11 +26,10 @@ public class AcaoAbreCamara extends Acao
         HttpSession sessao = req.getSession(false);
 
         Equipamento camara = (Equipamento)sessao.getAttribute("camara");
-        Manutencao manutencao = (Manutencao)sessao.getAttribute("manutencao");
+ 
 
         sessao.setAttribute("camara",camara);
-        sessao.setAttribute("manutencao",manutencao);
-        
+
         return "visao/camara.jsp";
     }
 }

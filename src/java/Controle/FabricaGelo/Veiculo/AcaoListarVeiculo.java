@@ -30,6 +30,7 @@ public class AcaoListarVeiculo extends Acao{
         Equipamento equipamento = new Equipamento();
         equipamento.setTipo("VE");
         
+        
         lstVeiculo = veiculoDAO.listaTodos(equipamento);
         sessao.setAttribute("lstVeiculo",lstVeiculo);
         

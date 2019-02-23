@@ -24,8 +24,16 @@ public class Equipamento implements Bean{
     private String ano;
     private String descSituacao;
     private double quilometragem;
+    private String ativo;
+    private String descAtivo;    
     
     List<Manutencao> lstManutencao;
+
+    public Equipamento() {
+        this.ativo = "A";
+    }
+    
+    
 
     public int getIdEquipamento() {
         return idEquipamento;
@@ -50,9 +58,11 @@ public class Equipamento implements Bean{
     public void setSituacao(String situacao) {
         this.situacao = situacao;
         if (situacao.equals("A"))
-            this.descSituacao = "ATIVO";
-        else
-            this.descSituacao = "INATIVO";
+            this.descSituacao = "EM FUNCIONAMENTO";
+        else if (situacao.equals("P"))
+            this.descSituacao = "PARADO";
+        else if (situacao.equals("M"))
+            this.descSituacao = "EM MANUTENÇÃO";
     }
 
     public double getCapacidade() {
@@ -134,7 +144,21 @@ public class Equipamento implements Bean{
         this.quilometragem = quilometragem;
     }
     
-    
+    public String getAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(String ativo) {
+        this.ativo = ativo;
+        if (ativo.equals("I"))
+            this.descAtivo = "checked";
+        else
+            this.descAtivo = "";
+    }   
+
+    public String getDescAtivo() {
+        return descAtivo;
+    }    
  
     public void replicar(Equipamento _equipamento)
     {
@@ -148,6 +172,7 @@ public class Equipamento implements Bean{
         _equipamento.setModelo(this.modelo);
         _equipamento.setAno(this.ano);
         _equipamento.setQuilometragem(this.quilometragem);
+        _equipamento.setAtivo(this.ativo);
         
         _equipamento.setLstManutencao(this.lstManutencao);
     }

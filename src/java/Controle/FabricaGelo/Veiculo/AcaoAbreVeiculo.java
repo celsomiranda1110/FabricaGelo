@@ -5,10 +5,14 @@
  */
 package Controle.FabricaGelo.Veiculo;
 
+import Bean.Colaborador;
 import Bean.Equipamento;
 import Bean.Manutencao;
 import Controle.FabricaGelo.Gerais.Acao;
+import DAO.ColaboradorDAO;
 import java.sql.Connection;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -26,11 +30,10 @@ public class AcaoAbreVeiculo extends Acao
         HttpSession sessao = req.getSession(false);
 
         Equipamento veiculo = (Equipamento)sessao.getAttribute("veiculo");
-        Manutencao manutencao = (Manutencao)sessao.getAttribute("manutencao");
         
-        
+         
         sessao.setAttribute("veiculo",veiculo);
-        sessao.setAttribute("manutencao",manutencao);
+
         
         return "visao/veiculo.jsp";
     }

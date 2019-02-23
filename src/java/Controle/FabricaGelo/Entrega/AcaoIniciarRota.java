@@ -48,24 +48,28 @@ public class AcaoIniciarRota extends Acao
         if (entrega == null)
         {
             sessao.setAttribute("avisoErro", "Rota não cadastrada");
+            sessao.setAttribute("tipoAviso","alert alert-danger");
             sessao.setAttribute("pagOrigemErro", "FabricaGelo.Entrega.AcaoListarEntrega");
             pagRetorno = "visao/erro.jsp";              
         }
         else if (entrega.getLstColaboradorEntrega() == null)
         {
             sessao.setAttribute("avisoErro", "Rota deve possuir clientes.");
+            sessao.setAttribute("tipoAviso","alert alert-danger");
             sessao.setAttribute("pagOrigemErro", "FabricaGelo.Entrega.AcaoNovaRota");
             pagRetorno = "visao/erro.jsp";              
         }
         else if (entrega.getLstProfissionalEntrega() == null)
         {
             sessao.setAttribute("avisoErro", "Rota deve possuir profissionais.");
+            sessao.setAttribute("tipoAviso","alert alert-danger");
             sessao.setAttribute("pagOrigemErro", "FabricaGelo.Entrega.AcaoNovaRota");
             pagRetorno = "visao/erro.jsp";              
         }
         else if( ( (hInicial <= 0) || (hInicial > 24) ) || ( (mInicial <= 0) || (mInicial > 60) ) )
         {
             sessao.setAttribute("avisoErro", "Horário indefinido");
+            sessao.setAttribute("tipoAviso","alert alert-danger");
             sessao.setAttribute("pagOrigemErro", "FabricaGelo.Entrega.AcaoNovaRota");
             pagRetorno = "visao/erro.jsp";              
         }        
@@ -94,6 +98,7 @@ public class AcaoIniciarRota extends Acao
             if (lstSaidaCamara == null)
             {
                 sessao.setAttribute("avisoErro", "Não há carga no veículo");
+                sessao.setAttribute("tipoAviso","alert alert-danger");
                 sessao.setAttribute("pagOrigemErro", "Fabricaelo.Entrega.AcaoNovaRota");
                 pagRetorno = "visao/erro.jsp";                   
             }
@@ -129,12 +134,14 @@ public class AcaoIniciarRota extends Acao
                 if (!entregaDAO.atualizar(entrega))
                 {
                     sessao.setAttribute("avisoErro", "Ocorreu um erro ao iniciar rota.");
+                    sessao.setAttribute("tipoAviso","alert alert-danger");
                     sessao.setAttribute("pagOrigemErro", "FabricaGelo.Entrega.AcaoNovaRota");
                     pagRetorno = "visao/erro.jsp";                   
                 }
                 else
                 {
                     sessao.setAttribute("avisoErro", "Rota iniciada com sucesso.");
+                    sessao.setAttribute("tipoAviso","alert alert-success");
                     sessao.setAttribute("pagOrigemErro", "FabricaGelo.Entrega.AcaoNovaRota");
                     pagRetorno = "visao/erro.jsp";                   
                     

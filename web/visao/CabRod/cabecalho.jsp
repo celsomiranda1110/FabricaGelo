@@ -2,10 +2,15 @@
     Document   : cabecalho
     Created on : 09/08/2011, 16:32:52
     Author     : silva
---%>
+
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+--%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 	
@@ -28,16 +33,20 @@
     </head>
     <body>
     
-    <!-- implementação com bootstrap -->
+    <!-- implementa��o com bootstrap -->
     
     <nav class="navbar navbar-inverse">
         <div class="container-fluid" >
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                    <span class="icon-bar"></span>
+                    
                 </button>
                 
-                <a class="navbar-brand" href="#"> Fábrica de Gelo Esquimó </a>
+                
+                <a class="navbar-brand" href="#"> 
+                    <img src="visao/utils/logoIce.jpg" width="30" height="30" class="d-inline-block align-top" alt=""></img>
+                     
+                </a>
                 
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
@@ -103,7 +112,7 @@
         </div>
     </nav>
     
-    <!-- fim da implementação com bootstrap -->
+    <!-- fim da implementa??o com bootstrap -->
     
 </body>
 </html>

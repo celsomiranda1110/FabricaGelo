@@ -28,7 +28,7 @@ public class AcaoListarBairro extends Acao{
         List<Bairro> lstBairro = new ArrayList<Bairro>();
         BairroDAO bairroDAO = new BairroDAO(conexao);
         
-        lstBairro = bairroDAO.listaTodos();
+        lstBairro = bairroDAO.listaTodos(new Bairro());
         sessao.setAttribute("lstBairro",lstBairro);
         
         return "visao/listarBairro.jsp"; 

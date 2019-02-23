@@ -2,10 +2,14 @@
     Document   : listarEmprresa
     Created on : 11/04/2017, 02:12:40
     Author     : Miranda
---%>
+
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+--%>
+
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 
 <html>
     <c:import url="CabRod/cabecalho.jsp"/>
@@ -32,7 +36,14 @@
                                                     
                                                 </ul>
                                                 <ul class="nav navbar-nav navbar-right">
-                                                    <li class="btn"><input type="text" class="form-control" name="txtPesquisa" id="txtPesquisa"></li>
+                                                    <li class="btn"><input type="text" class="form-control" name="txtPesquisa" placeholder="Razão social" id="txtPesquisa"></li>
+                                                    <li class="btn">
+                                                        <select name="cmbSituacaoPesquisa" class="form-control" >
+                                                            <option value=""> Situação </option>
+                                                            <option value="A">Ativo</option>
+                                                            <option value="I">Inativo</option>
+                                                        </select> 
+                                                    </li>
                                                     <li class="btn"><button type="button" class="btn btn-default" onClick="pesquisar()">Pesquisa</button></li>
                                                     
                                                 </ul>
@@ -50,13 +61,15 @@
                                     <tr>
                                         <th><div align="left"></div></th>
                                         <th><div align="left">CNPJ</div></th>
-                                        <th><div align="left">RazÃ£o social</div></th>
+                                        <th><div align="left">Razão social</div></th>
+                                        <th><div align="left">Tipo empreendimento</div></th>
                                     </tr> 
                                     <c:forEach var="lstColab" items="${lstColaborador}" varStatus="s">
                                         <tr>
                                             <td> <input type="image" src="visao/css/bootstrap/img/Text.png" onClick="selecionar('FabricaGelo.Colaborador.AcaoSelecionaColaborador?idColaborador=${lstColab.idColaborador}')">  </td>
                                             <td> ${lstColab.cnpj} </td>
                                             <td> ${lstColab.razaoSocial} </td>
+                                            <td> ${lstColab.tipoColaborador} </td>
                                         </tr>
                                     </c:forEach>
                                 </tbody>

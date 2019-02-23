@@ -10,6 +10,7 @@ import Bean.Colaborador;
 import Bean.ColaboradorProduto;
 import Controle.FabricaGelo.Gerais.Acao;
 import DAO.BairroDAO;
+import DAO.ColaboradorDAO;
 import DAO.ColaboradorProdutoDAO;
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -30,6 +31,7 @@ public class AcaoDeletaColaboradorProduto extends Acao{
         
         Colaborador colaborador = (Colaborador)sessao.getAttribute("colaborador");
         ColaboradorProdutoDAO colaboradorProdutoDAO = new ColaboradorProdutoDAO(conexao);
+        ColaboradorDAO colaboradorDAO = new ColaboradorDAO(conexao);
         
         ColaboradorProduto colaboradorProduto = (ColaboradorProduto)sessao.getAttribute("colaboradorProduto");
         if (colaboradorProduto == null)
@@ -37,7 +39,9 @@ public class AcaoDeletaColaboradorProduto extends Acao{
 
         String idColaboradorProduto = req.getParameter("idColaboradorProduto");
         colaboradorProduto.setIdColaboradorProduto(Integer.parseInt(idColaboradorProduto));
-        colaboradorProdutoDAO.delete(colaboradorProduto);
+        if(colaboradorProdutoDAO.delete(colaboradorProduto))
+           colaborador = colaboradorDAO.listaUm(colaborador);
+
         
         // Lista de funcionários da empresa
         sessao.setAttribute("colaborador",colaborador);

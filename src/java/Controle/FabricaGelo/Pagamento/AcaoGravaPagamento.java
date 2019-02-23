@@ -46,6 +46,7 @@ public class AcaoGravaPagamento extends Acao
         if ((pagamento.getSituacao().equals("PG")))
         {
             sessao.setAttribute("avisoErro", "Pagamento liquidado");
+            sessao.setAttribute("tipoAviso","alert alert-danger");
             sessao.setAttribute("pagOrigemErro", "FabricaGelo.Pagamento.AcaoAbrePagamento");
             pagRetorno = "visao/erro.jsp";             
         }
@@ -58,6 +59,7 @@ public class AcaoGravaPagamento extends Acao
         else if (!pagamento.isProcessar())
         {
             sessao.setAttribute("avisoErro", "Pagamento não processável.");
+            sessao.setAttribute("tipoAviso","alert alert-danger");
             sessao.setAttribute("pagOrigemErro", "FabricaGelo.Pagamento.AcaoAbrePagamento");
             pagRetorno = "visao/erro.jsp";            
         }
@@ -70,6 +72,7 @@ public class AcaoGravaPagamento extends Acao
                 if (parcela.getSituacao().equals("G"))
                 {
                     sessao.setAttribute("avisoErro", "Parcela paga");
+                    sessao.setAttribute("tipoAviso","alert alert-danger");
                     sessao.setAttribute("pagOrigemErro", "FabricaGelo.Pagamento.AcaoAbrePagamento");
                     pagRetorno = "visao/erro.jsp";                 
                 }
@@ -195,6 +198,7 @@ public class AcaoGravaPagamento extends Acao
                 else
                 {
                     sessao.setAttribute("avisoErro", "Pagamento com parcela paga. Não é possível alterar pagamento.");
+                    sessao.setAttribute("tipoAviso","alert alert-danger");
                     sessao.setAttribute("pagOrigemErro", "FabricaGelo.Pagamento.AcaoAbrePagamento");
                     pagRetorno = "visao/erro.jsp";             
                 }  

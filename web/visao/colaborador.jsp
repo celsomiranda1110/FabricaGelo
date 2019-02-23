@@ -5,13 +5,13 @@
 --%>
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 
 <html>
     
     <head>
         <c:import url="CabRod/cabecalho.jsp"/>
-        <title>InformaÃ§Ãµes sobre a Empresa</title>
+        <title>Informações sobre a Empresa</title>
         
     </head>
     <body>
@@ -22,15 +22,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading"><h3 class="panel-title text-center"><b>Dados da Empresa</b></h3></div>
                     <div class="panel-body">
-                        
-                        <div class="row">
-                            <div class="col-lg-12">
-                                
-                                <span class="label label-danger">${avisoColaborador}</span>
-                                
-                            </div>
-                        </div>
-                   
+
                                 
                         <div class="row"> <!-- div dos botoes -->
 
@@ -40,10 +32,11 @@
                                         <div class="navbar navbar-default">
                                             <div class="container-fluid">
                                                 <ul class="nav navbar-nav">
-                                                    <li class="btn"><button type="button" class="btn btn-success" onClick="atualizar()">Atualizar</button></li>
+                                                    <li class="btn"><button type="button" class="btn btn-default" onClick="atualizar()">Atualizar</button></li>
+                                                    <li class="btn"><button type="button" class="btn btn-default" onClick="excluir()">Excluir</button></li>
                                                 </ul>
                                                 <ul class="nav navbar-nav navbar-right">
-                                                    <li class="btn"><button type="button" class="btn btn-default" onClick="selecionar()">Selecionar</button></li>
+                                                    <li class="btn"><button type="button" class="btn btn-default" onClick="retornar()">Retornar</button></li>
                                                 </ul>
                                             </div>
                                         </div>                                        
@@ -57,13 +50,13 @@
                             <div class="col-lg-12">
                                 <div class="row">
                                     <div class="col-sm-3">
-                                        <label class="control-label">CNPJ</label>
+                                        <label class="control-label">CNPJ(*)</label>
                                     </div>
                                     <div class="col-sm-3">
-                                        <label class="control-label">InscriÃ§Ã£o Estadual</label>
+                                        <label class="control-label">Inscrição Estadual(*)</label>
                                     </div>
                                     <div class="col-sm-3">
-                                        <label class="control-label">InscriÃ§Ã£o Municipal</label>
+                                        <label class="control-label">Inscrição Municipal(*)</label>
                                     </div>
                                     <div class="col-sm-3">
                                         <label class="control-label">MEI</label>
@@ -95,7 +88,7 @@
                             <div class="col-lg-12">
                                 <div class="row">
                                     <div class="col-sm-6">
-                                        <label class="control-label">RazÃ£o Social</label>
+                                        <label class="control-label">Razão Social(*)</label>
                                     </div>
                                     <div class="col-sm-6">
                                         <label class="control-label">Nome Fantasia</label>
@@ -116,11 +109,11 @@
                                 <div class="row">
 
                                     <div class="col-sm-6">
-                                        <label class="control-label">EndereÃ§o</label>
+                                        <label class="control-label">Endereço</label>
                                     </div>
                                     
                                     <div class="col-sm-6">
-                                        <label class="control-label">Bairro</label>
+                                        <label class="control-label">Bairro(*)</label>
                                     </div>                                    
                                     
                                 </div>
@@ -196,17 +189,61 @@
                         
                         <div class="row">
                             <div class="col-lg-12">
+                                <div class="row">
+                                    <div class="col-sm-8">
+                                        <label class="control-label">Tipo de estabelecimentos</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label class="control-label">Inativo</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-8">
+                                        <select name="cmbTipoColaborador" class="form-control">
+                                            <option value="0">... Selecione Tipo Colaborador ...</option>
+                                            <c:forEach var="varTipoColaborador" items="${lstTipoColaborador}" varStatus="s">
+                                              <c:if test="${varTipoColaborador.idTipoColaborador == colaborador.idTipoColaborador}">
+                                                <option value="${varTipoColaborador.idTipoColaborador}" selected="selected">${varTipoColaborador.descricao}</option>
+                                              </c:if>
+                                              <c:if test="${varTipoColaborador.idTipoColaborador != colaborador.idTipoColaborador}">
+                                                <option value="${varTipoColaborador.idTipoColaborador}">${varTipoColaborador.descricao}</option>
+                                              </c:if>
+                                            </c:forEach>
+                                        </select>                                       
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="checkbox" name="ck_Ativo" ${colaborador.descAtivo}>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <label class="control-label">Observação</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <input type="text" class="form-control" name="txtObservacao" id="txtObservacao" value="${colaboradorProduto.observacao}">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-lg-12">
                                 
                                 <div class="panel panel-default">
                                   <!-- Default panel contents -->
                                   <div class="panel-heading">Produtos associados</div>
                                   <div class="panel-body">
-                                      
-                                   
-                                    
+
                                     <div class="row">
-                                        <div class="col-sm-6">
-                                            <label class="control-label">Produto/ServiÃ§o</label>
+                                        <div class="col-sm-4">
+                                            <label class="control-label">Produto/Serviço</label>
                                         </div>
                                         <div class="col-sm-2">
                                             <label class="control-label">ICMS</label>
@@ -216,12 +253,15 @@
                                         </div>                                         
                                         <div class="col-sm-2">
                                             <label class="control-label">Valor contratado</label>
-                                        </div>                                        
+                                        </div>  
+                                        <div class="col-sm-2">
+                                            
+                                        </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-4">
                                             <select name="cmbProduto" class="form-control" onchange="buscaPreco()">
-                                                <option value="0">... Selecione Produto/ServiÃ§o ...</option>
+                                                <option value="0">... Selecione Produto/Serviço ...</option>
                                                 <c:forEach var="prod" items="${lstProduto}" varStatus="s">
                                                   <c:if test="${prod.idProduto == colaboradorProduto.idProduto}">
                                                     <option value="${prod.idProduto}" selected="selected">${prod.descricao}</option>
@@ -242,14 +282,13 @@
                                         </div>
                                         <div class="col-sm-2">
                                             <input type="text" class="form-control" name="txtValor" id="txtValor" value="${colaboradorProduto.valor}">
-                                        </div>                                         
+                                        </div> 
+                                        <div class="col-sm-2">
+                                            <button type="button" class="btn btn-default" onClick="addProduto()">Adicionar</button>
+                                        </div>                                        
                                     </div>
                                     
-                                    
-                                  
-                                  
-                                  
-                                    
+                                     
                                     <!-- Table -->
                                     <div class="row">
                                         <table class="table table-hover table-striped" overflow="scroll">
@@ -263,8 +302,7 @@
                                                 </tr> 
                                                 <c:forEach var="lstColabProd" items="${lstColaboradorProduto}" varStatus="s">
                                                     <tr>
-                                                        <td> <input type="image" src="visao/css/bootstrap/img/Text.png" onClick="selecionarProduto('FabricaGelo.Colaborador.AcaoSelecionaColaboradorProduto?idColaboradorProduto=${lstColabProd.idColaboradorProduto}')">  
-                                                             <input type="image" src="visao/css/bootstrap/img/Delete.png" onClick="deletarProduto('FabricaGelo.Colaborador.AcaoDeletaColaboradorProduto?idColaboradorProduto=${lstColabProd.idColaboradorProduto}')">  </td>
+                                                        <td> <input type="image" src="visao/css/bootstrap/img/Delete.png" onClick="deletarProduto('FabricaGelo.Colaborador.AcaoDeletaColaboradorProduto?idColaboradorProduto=${lstColabProd.idColaboradorProduto}')">  </td>
                                                         <td> ${lstColabProd.produto} </td>
                                                         <td> ${lstColabProd.icms} </td>
                                                         <td> ${lstColabProd.desconto} </td>
@@ -294,11 +332,11 @@
                                                     <tr>
                                                         <th><div align="left">Domingo</div></th>
                                                         <th><div align="left">Segunda-feira</div></th>
-                                                        <th><div align="left">TerÃ§a-feira</div></th>
+                                                        <th><div align="left">Terça-feira</div></th>
                                                         <th><div align="left">Quarta-feira</div></th>
                                                         <th><div align="left">Quinta-feira</div></th>
                                                         <th><div align="left">Sexta-feira</div></th>
-                                                        <th><div align="left">SÃ¡bado</div></th>
+                                                        <th><div align="left">Sábado</div></th>
                                                     </tr> 
                                                     <tr>
                                                         
@@ -328,47 +366,48 @@
 
             function atualizar()
             {
-//                var numRazaoSocial = formColaborador.txtRazaoSocial.value;
-//                
-//                if (numRazaoSocial == "")
-//                {
-//                    alert('NecessÃ¡rio documento do colaborador!');
-//                    return false;
-//                }
-//                else
-//                {
-                    document.forms[0].action="FabricaGelo.Colaborador.AcaoGravaColaborador";
-                    document.forms[0].submit();
-//                }
+                document.forms[0].action="FabricaGelo.Colaborador.AcaoGravaColaborador";
+                document.forms[0].submit();
             }
+            function excluir()
+            {
+                document.forms[0].action="FabricaGelo.Colaborador.AcaoDeletaColaborador";
+                document.forms[0].submit();
+            }
+            function addProduto()
+            {
+                document.forms[0].action="FabricaGelo.Colaborador.AcaoAdicionaProduto";
+                document.forms[0].submit();
+            }
+                        
             function pesquisaProduto()
             {
-                    document.forms[0].action="FabricaGelo.Colaborador.AcaoBuscarProduto";
-                    document.forms[0].submit();                
+                document.forms[0].action="FabricaGelo.Colaborador.AcaoBuscarProduto";
+                document.forms[0].submit();                
             }
             function pesquisaTaxa()
             {
-                    document.forms[0].action="FabricaGelo.Colaborador.AcaoBuscarTaxa";
-                    document.forms[0].submit();                
+                document.forms[0].action="FabricaGelo.Colaborador.AcaoBuscarTaxa";
+                document.forms[0].submit();                
             } 
             function selecionarProduto(caminho)
             {
-                    document.forms[0].action=caminho;
-                    document.forms[0].submit();                
+                document.forms[0].action=caminho;
+                document.forms[0].submit();                
             }
             function deletarProduto(caminho)
             {
-                    document.forms[0].action=caminho;
-                    document.forms[0].submit();                
+                document.forms[0].action=caminho;
+                document.forms[0].submit();                
             }     
             function alterarDia(caminho)
             {
-                    document.forms[0].action=caminho;
-                    document.forms[0].submit();                
+                document.forms[0].action=caminho;
+                document.forms[0].submit();                
             }
-            function selecionar()
+            function retornar()
             {
-                document.forms[0].action="FabricaGelo.Colaborador.AcaoRetornaPagina";
+                document.forms[0].action="FabricaGelo.Colaborador.AcaoListarColaborador";
                 document.forms[0].submit();                
             }   
             

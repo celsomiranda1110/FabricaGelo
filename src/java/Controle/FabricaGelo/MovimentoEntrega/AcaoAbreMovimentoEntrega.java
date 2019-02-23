@@ -9,6 +9,7 @@ import Bean.ColaboradorEntrega;
 import Bean.Entrega;
 import Bean.Movimento;
 import Bean.MovimentoEntrega;
+import Bean.ProdutoMovimento;
 import Controle.FabricaGelo.Gerais.Acao;
 import DAO.EntregaDAO;
 import java.sql.Connection;
@@ -33,23 +34,26 @@ public class AcaoAbreMovimentoEntrega extends Acao{
         ColaboradorEntrega colaboradorEntrega = (ColaboradorEntrega)sessao.getAttribute("colaboradorEntrega");        
         MovimentoEntrega movimentoEntrega = (MovimentoEntrega)sessao.getAttribute("movimentoEntrega");
         Movimento movimento = (Movimento)movimentoEntrega.getMovimento();
-        //Movimento movimento = (Movimento)sessao.getAttribute("movimento");
+        ProdutoMovimento produtoMovimento = (ProdutoMovimento)sessao.getAttribute("produtoMovimento");
         
         if (entrega == null)
         {
             sessao.setAttribute("avisoErro", "Entrega não selecionada");
+            sessao.setAttribute("tipoAviso","alert alert-danger");
             sessao.setAttribute("pagOrigemErro", "FabricaGelo.Entrega.AcaoEncerrarRota");
             pagRetorno = "visao/erro.jsp";              
         }
         else if (colaboradorEntrega == null)
         {
             sessao.setAttribute("avisoErro", "Cliente não selecionado");
+            sessao.setAttribute("tipoAviso","alert alert-danger");
             sessao.setAttribute("pagOrigemErro", "FabricaGelo.Entrega.AcaoEncerrarRota");
             pagRetorno = "visao/erro.jsp";             
         }
         else if (movimento == null)
         {
             sessao.setAttribute("avisoErro", "Movimento não selecionado");
+            sessao.setAttribute("tipoAviso","alert alert-danger");
             sessao.setAttribute("pagOrigemErro", "FabricaGelo.Entrega.AcaoEncerrarRota");
             pagRetorno = "visao/erro.jsp";             
         }
@@ -57,8 +61,10 @@ public class AcaoAbreMovimentoEntrega extends Acao{
         {
             sessao.setAttribute("entrega", entrega);
             sessao.setAttribute("colaboradorEntrega", colaboradorEntrega);
+            sessao.setAttribute("movimentoEntrega", movimentoEntrega);
             sessao.setAttribute("movimento", movimento);
-            sessao.setAttribute("lstProdutoMovimento", movimento.getLstProdutoMovimento());             
+            sessao.setAttribute("lstProdutoMovimento", movimento.getLstProdutoMovimento()); 
+                       
         }
         
         return pagRetorno;

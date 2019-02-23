@@ -5,8 +5,16 @@
  */
 package Controle.FabricaGelo.Colaborador;
 
+import Bean.Bairro;
+import Bean.Colaborador;
+import Bean.TipoColaborador;
+import Bean.VisitaColaborador;
 import Controle.FabricaGelo.Gerais.Acao;
+import DAO.BairroDAO;
+import DAO.TipoColaboradorDAO;
 import java.sql.Connection;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -24,10 +32,27 @@ public String executa(HttpServletRequest req, HttpServletResponse res) throws Ex
         Connection conexao = (Connection)req.getAttribute("connection");
         HttpSession sessao = req.getSession(false);
         
+        String pagRetorno = "visao/colaborador.jsp";
+        
+       
+        // lstando bairros
+        BairroDAO bairroDAO = new BairroDAO(conexao);
+        List<Bairro> lstBairro = new ArrayList<Bairro>();
+        lstBairro = bairroDAO.listaTodos();  
+        
+        // Tipo colaborador
+        TipoColaboradorDAO tipoColaboradorDAO = new TipoColaboradorDAO(conexao);
+        List<TipoColaborador> lstTipoColaborador = new ArrayList<TipoColaborador>();
+        lstTipoColaborador = tipoColaboradorDAO.listaTodos(new TipoColaborador());        
+        
         sessao.setAttribute("colaborador",null);
         sessao.setAttribute("lstColaboradorProduto",null);
+        sessao.setAttribute("lstVisitaColaborador",null);
+        sessao.setAttribute("lstProduto", null);
+        sessao.setAttribute("lstBairro",lstBairro);
+        sessao.setAttribute("lstTipoColaborador", lstTipoColaborador);
         
-        return "visao/colaborador.jsp";
+        return pagRetorno;
     }
 
 }

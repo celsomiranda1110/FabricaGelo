@@ -5,7 +5,7 @@
 --%>
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 
 <html>
     <head>
@@ -52,7 +52,7 @@
                                 <table class="table table-hover table-striped">
                                     <tbody>
                                         <tr>
-                                            <th><div align="left">AÃ§Ã£o</div></th>
+                                            <th><div align="left">Ação</div></th>
                                             <th><div align="left">Ordem</div></th>
                                             <th><div align="left">Dt Aluguel</div></th>
                                             <th><div align="left">Profissional</div></th>

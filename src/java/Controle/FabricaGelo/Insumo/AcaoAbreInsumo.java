@@ -24,6 +24,7 @@ public class AcaoAbreInsumo extends Acao
         Connection conexao = (Connection)req.getAttribute("connection");
         HttpSession sessao = req.getSession(false);
 
+        String pagRetorno = "visao/insumo.jsp";
         Produto insumo = (Produto)sessao.getAttribute("insumo");
         
         
@@ -31,7 +32,7 @@ public class AcaoAbreInsumo extends Acao
                 
         
         
-        return "visao/insumo.jsp";
+        return pagRetorno;
     }
     
 }

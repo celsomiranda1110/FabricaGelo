@@ -30,10 +30,15 @@ public class AcaoPesquisaBairro extends Acao{
         List<Bairro> lstRetorno = new ArrayList<Bairro>();
         
         BairroDAO bairroDAO = new BairroDAO(conexao);
-        lstBairro = bairroDAO.listaTodos();
-        
+        Bairro bairro = new Bairro();
         String pesquisa = req.getParameter("txtPesquisa");
-        if (pesquisa != "")
+        String situacao = req.getParameter("cmbSituacaoPesquisa").equals("") ? "" : req.getParameter("cmbSituacaoPesquisa");
+        bairro.setAtivo(situacao);
+        
+        lstBairro = bairroDAO.listaTodos(bairro);
+        
+        
+        if (!pesquisa.equals(""))
         {
             Iterator it = lstBairro.iterator();
             while (it.hasNext())

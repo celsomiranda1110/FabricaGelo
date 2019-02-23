@@ -31,7 +31,7 @@ public class ProdutoMovimento implements Bean{
         quantidade = 0;
         valorTotal = 0;
         desconto = 0;
-
+        this.operacao = "SO";
     }
     
     

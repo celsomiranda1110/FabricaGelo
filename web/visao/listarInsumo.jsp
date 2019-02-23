@@ -5,7 +5,7 @@
 --%>
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 
 <html>
     <c:import url="CabRod/cabecalho.jsp"/>
@@ -30,7 +30,14 @@
                                                     
                                                 </ul>
                                                 <ul class="nav navbar-nav navbar-right">
-                                                    <li class="btn"><input type="text" class="form-control" name="txtPesquisa" id="txtPesquisa"></li>
+                                                    <li class="btn"><input type="text" class="form-control" name="txtPesquisa" id="txtPesquisa" placeholder="Descrição do insumo"></li>
+                                                    <li class="btn">
+                                                        <select name="cmbSituacaoPesquisa" class="form-control" >
+                                                            <option value=""> Situação </option>
+                                                            <option value="A">Ativo</option>
+                                                            <option value="I">Inativo</option>
+                                                        </select> 
+                                                    </li>
                                                     <li class="btn"><button type="button" class="btn btn-default" onClick="pesquisar()">Pesquisa</button></li>
                                                     
                                                 </ul>
@@ -46,14 +53,14 @@
                                 <tbody>
                                     <tr>
                                         <th><div align="left"></div></th>
-                                        <th><div align="left">DescriÃ§Ã£o</div></th>
-                                        <th><div align="left">Saldo</div></th>
+                                        <th><div align="left">Descrição</div></th>
+                                        
                                     </tr> 
                                     <c:forEach var="lstInsum" items="${lstInsumo}" varStatus="s">
                                         <tr>
                                             <td> <input type="image" src="visao/css/bootstrap/img/Text.png" onclick="seleciona('FabricaGelo.Insumo.AcaoSelecionaInsumo?idInsumo=${lstInsum.idProduto}')"> </td>
                                             <td> ${lstInsum.descricao} </td>
-                                            <td> ${lstInsum.saldo} </td>
+                                            
                                         </tr>
                                     </c:forEach>
                                 </tbody>
@@ -69,7 +76,7 @@
 
             function novo()
             {
-                document.forms[0].action="FabricaGelo.Insumo.AcaoAbreInsumo";
+                document.forms[0].action="FabricaGelo.Insumo.AcaoNovoInsumo";
                 document.forms[0].submit();
             }
             function pesquisar()

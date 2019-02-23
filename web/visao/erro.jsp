@@ -5,7 +5,7 @@
 --%>
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 
 <html>
     <head>
@@ -19,7 +19,7 @@
                 <div class="panel panel-default">
                     <div class="row">
                         <div class="col-lg-12">
-                            <div class="alert alert-danger">
+                            <div class="${tipoAviso}">
                               <strong>Mensagem: </strong> ${avisoErro}
                             </div> 
                         </div>

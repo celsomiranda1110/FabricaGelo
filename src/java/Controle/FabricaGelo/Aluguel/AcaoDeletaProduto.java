@@ -33,6 +33,7 @@ public class AcaoDeletaProduto extends Acao{
         if ((aluguel != null) && (aluguel.getIdMovimento() == 0))
         {
             sessao.setAttribute("avisoErro", "Aluguel deve ser atualizada");
+            sessao.setAttribute("tipoAviso","alert alert-danger");
             sessao.setAttribute("pagOrigemErro", "FabricaGelo.Aluguel.AcaoAbreAluguel");
             pagRetorno = "visao/erro.jsp";            
         }
@@ -60,6 +61,7 @@ public class AcaoDeletaProduto extends Acao{
         else
         {
             sessao.setAttribute("avisoErro", "Movimento de aluguel Fechado");
+            sessao.setAttribute("tipoAviso","alert alert-danger");
             sessao.setAttribute("pagOrigemErro", "FabricaGelo.Aluguel.AcaoAbreAluguel");
             pagRetorno = "visao/erro.jsp";            
         }

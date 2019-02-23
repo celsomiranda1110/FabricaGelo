@@ -43,24 +43,28 @@ public class AcaoAdicionaAvaria extends Acao
         if (entrega == null)
         {
             sessao.setAttribute("avisoErro", "Rota não selecionada");
+            sessao.setAttribute("tipoAviso","alert alert-danger");
             sessao.setAttribute("pagOrigemErro", "FabricaGelo.Entrega.AcaoEncerrarRota");
             pagRetorno = "visao/erro.jsp";             
         }
         else if (produtoEntrega == null)
         {
             sessao.setAttribute("avisoErro", "Produto não selecionado");
+            sessao.setAttribute("tipoAviso","alert alert-danger");
             sessao.setAttribute("pagOrigemErro", "FabricaGelo.Entrega.AcaoEncerrarRota");
             pagRetorno = "visao/erro.jsp";             
         }
         else if (idAvaria.equals("0"))
         {
             sessao.setAttribute("avisoErro", "Avaria não selecionada");
+            sessao.setAttribute("tipoAviso","alert alert-danger");
             sessao.setAttribute("pagOrigemErro", "FabricaGelo.Entrega.AcaoEncerrarRota");
             pagRetorno = "visao/erro.jsp";              
         }
         else if (qtAvaria.equals("0"))
         {
             sessao.setAttribute("avisoErro", "Não há avarias para registrar");
+            sessao.setAttribute("tipoAviso","alert alert-danger");
             sessao.setAttribute("pagOrigemErro", "FabricaGelo.Entrega.AcaoEncerrarRota");
             pagRetorno = "visao/erro.jsp";              
         }

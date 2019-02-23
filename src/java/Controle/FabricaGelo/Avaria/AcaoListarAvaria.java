@@ -28,7 +28,8 @@ public class AcaoListarAvaria extends Acao{
         List<Avaria> lstAvaria = new ArrayList<Avaria>();
         AvariaDAO avariaDAO = new AvariaDAO(conexao);
         
-        lstAvaria = avariaDAO.listaTodos();
+        
+        lstAvaria = avariaDAO.listaTodos(new Avaria());
         sessao.setAttribute("lstAvaria",lstAvaria);
         
         return "visao/listarAvaria.jsp"; 

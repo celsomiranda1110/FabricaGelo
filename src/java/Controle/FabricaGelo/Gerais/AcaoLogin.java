@@ -71,7 +71,7 @@ public class AcaoLogin extends Acao
         // Busca funcionário de login na empresa
         ProfissionalDAO funcionarioDAO = new ProfissionalDAO(conexao);
         Profissional funcionario = new Profissional();
-        List<Profissional> lstFuncionario = funcionarioDAO.listaTodos();
+        List<Profissional> lstFuncionario = funcionarioDAO.listaTodos(new Profissional());
         for(Profissional _profissional : lstFuncionario)
         {
             if ((_profissional.getUsuario().equals(login)) && (_profissional.getSenha().equals(senha)))
@@ -87,12 +87,14 @@ public class AcaoLogin extends Acao
         if (funcionario == null)
         {
             sessao.setAttribute("avisoErro", "Usuário não reconhecido");
+            sessao.setAttribute("tipoAviso","alert alert-danger");
             sessao.setAttribute("pagOrigemErro", "index.jsp");
             pagRetorno = "visao/erro.jsp";              
         }
         else if (funcionario.getLstMenuProfissional() == null)
         {
             sessao.setAttribute("avisoErro", "Necessário definir acesso do funcionário");
+            sessao.setAttribute("tipoAviso","alert alert-danger");
             sessao.setAttribute("pagOrigemErro", "index.jsp");
             pagRetorno = "visao/erro.jsp";              
         }

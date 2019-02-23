@@ -7,7 +7,10 @@ package Controle.FabricaGelo.MovimentoEntrega;
 
 import Bean.ColaboradorEntrega;
 import Bean.Movimento;
+import Bean.MovimentoEntrega;
+import Bean.ProdutoMovimento;
 import Controle.FabricaGelo.Gerais.Acao;
+import DAO.ProdutoMovimentoDAO;
 import java.sql.Connection;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,10 +29,17 @@ public class AcaoSelecionaProduto extends Acao{
         String pagRetorno = "FabricaGelo.MovimentoEntrega.AcaoAbreMovimentoEntrega";
 
         ColaboradorEntrega colaboradorEntrega = (ColaboradorEntrega)sessao.getAttribute("colaboradorEntrega");        
-        Movimento movimento = (Movimento)sessao.getAttribute("movimentoEntrega");
+        MovimentoEntrega movimentoEntrega = (MovimentoEntrega)sessao.getAttribute("movimentoEntrega");
+        Movimento movimento = (Movimento)sessao.getAttribute("movimento");
         
+        ProdutoMovimentoDAO produtoMovimentoDAO = new ProdutoMovimentoDAO(conexao);
+        ProdutoMovimento produtoMovimento = new ProdutoMovimento();
         
+        String idProdutoEntrega = req.getParameter("idProdutoMovimento");
+        produtoMovimento.setIdProdutoMovimento(Integer.parseInt(idProdutoEntrega));
+        produtoMovimento = produtoMovimentoDAO.listaUm(produtoMovimento);
         
+        sessao.setAttribute("produtoMovimento", produtoMovimento);
         
         
         return pagRetorno;

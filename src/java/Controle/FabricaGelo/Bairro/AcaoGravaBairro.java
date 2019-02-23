@@ -26,7 +26,7 @@ public class AcaoGravaBairro extends Acao
         Connection conexao = (Connection)req.getAttribute("connection");
         HttpSession sessao = req.getSession(false);
         
-        String pagRetorno = "";
+        String pagRetorno = "FabricaGelo.Bairro.AcaoAbreBairro";
         
         BairroDAO bairroDAO = new BairroDAO(conexao);
         Bairro bairro = (Bairro)sessao.getAttribute("bairro");
@@ -34,7 +34,9 @@ public class AcaoGravaBairro extends Acao
             bairro = new Bairro();
       
         String descricao = (req.getParameter("txtBairro") == "" || req.getParameter("txtBairro") == null) ? "" : req.getParameter("txtBairro");
+        String inativo = (req.getParameter("ck_Ativo") == null ? "A" : "I");
         bairro.setDescricao(descricao);
+        bairro.setAtivo(inativo);
         
         
         if (bairroDAO.atualizar(bairro))
@@ -44,6 +46,7 @@ public class AcaoGravaBairro extends Acao
             sessao.setAttribute("bairro", bairro);
             
             sessao.setAttribute("avisoErro", "Bairro atualizado");
+            sessao.setAttribute("tipoAviso","alert alert-success");
             sessao.setAttribute("pagOrigemErro", "FabricaGelo.Bairro.AcaoAbreBairro");
             pagRetorno = "visao/erro.jsp";              
         }

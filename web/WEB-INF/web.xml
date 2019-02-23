@@ -56,16 +56,24 @@
     </servlet-mapping> 
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.Colaborador.AcaoAdicionaProduto</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
         <url-pattern>/FabricaGelo.Colaborador.AcaoAlteraDia</url-pattern>
     </servlet-mapping>     
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
-        <url-pattern>/FabricaGelo.Colaborador.AcaoBuscarProduto</url-pattern>
-    </servlet-mapping>   
+        <url-pattern>/FabricaGelo.Colaborador.AcaoBuscarBairro</url-pattern>
+    </servlet-mapping> 
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
-        <url-pattern>/FabricaGelo.Colaborador.AcaoBuscarBairro</url-pattern>
-    </servlet-mapping>              
+        <url-pattern>/FabricaGelo.Colaborador.AcaoBuscarProduto</url-pattern>
+    </servlet-mapping> 
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.Colaborador.AcaoDeletaColaborador</url-pattern>
+    </servlet-mapping>            
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
         <url-pattern>/FabricaGelo.Colaborador.AcaoGravaColaborador</url-pattern>
@@ -98,17 +106,17 @@
         <servlet-name>SGeral</servlet-name>
         <url-pattern>/FabricaGelo.Colaborador.AcaoDeletaColaboradorProduto</url-pattern>
     </servlet-mapping> 
-    <servlet-mapping>
-        <servlet-name>SGeral</servlet-name>
-        <url-pattern>/FabricaGelo.Colaborador.AcaoRetornaPagina</url-pattern>
-    </servlet-mapping>       
     
     
     <!--Eventos do móduo Produto -->
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
         <url-pattern>/FabricaGelo.Produto.AcaoAbreProduto</url-pattern>
-    </servlet-mapping>    
+    </servlet-mapping> 
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.Produto.AcaoDeletaProduto</url-pattern>
+    </servlet-mapping>   
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
         <url-pattern>/FabricaGelo.Produto.AcaoGravaProduto</url-pattern>
@@ -116,6 +124,10 @@
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
         <url-pattern>/FabricaGelo.Produto.AcaoListarProduto</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.Produto.AcaoNovoProduto</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
@@ -134,7 +146,11 @@
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
         <url-pattern>/FabricaGelo.Insumo.AcaoAbreInsumo</url-pattern>
-    </servlet-mapping>    
+    </servlet-mapping> 
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.Insumo.AcaoDeleteInsumo</url-pattern>
+    </servlet-mapping>   
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
         <url-pattern>/FabricaGelo.Insumo.AcaoGravaInsumo</url-pattern>
@@ -145,12 +161,12 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
-        <url-pattern>/FabricaGelo.Insumo.AcaoPesquisaInsumo</url-pattern>
-    </servlet-mapping>  
+        <url-pattern>/FabricaGelo.Insumo.AcaoNovoInsumo</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
-        <url-pattern>/FabricaGelo.Insumo.AcaoRetornaPagina</url-pattern>
-    </servlet-mapping>   
+        <url-pattern>/FabricaGelo.Insumo.AcaoPesquisaInsumo</url-pattern>
+    </servlet-mapping>  
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
         <url-pattern>/FabricaGelo.Insumo.AcaoSelecionaInsumo</url-pattern>
@@ -160,7 +176,11 @@
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
         <url-pattern>/FabricaGelo.Bairro.AcaoAbreBairro</url-pattern>
-    </servlet-mapping>    
+    </servlet-mapping> 
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.Bairro.AcaoDeletaBairro</url-pattern>
+    </servlet-mapping>   
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
         <url-pattern>/FabricaGelo.Bairro.AcaoGravaBairro</url-pattern>
@@ -171,22 +191,58 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.Bairro.AcaoNovoBairro</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
         <url-pattern>/FabricaGelo.Bairro.AcaoPesquisaBairro</url-pattern>
     </servlet-mapping>  
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
-        <url-pattern>/FabricaGelo.Bairro.AcaoRetornaPagina</url-pattern>
-    </servlet-mapping>   
-    <servlet-mapping>
-        <servlet-name>SGeral</servlet-name>
         <url-pattern>/FabricaGelo.Bairro.AcaoSelecionaBairro</url-pattern>
     </servlet-mapping>    
+      
+      
+    <!--Eventos do móduo TipoColaborador -->
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.TipoColaborador.AcaoAbreTipoColaborador</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.TipoColaborador.AcaoDeleteTipoColaborador</url-pattern>
+    </servlet-mapping>    
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.TipoColaborador.AcaoGravaTipoColaborador</url-pattern>
+    </servlet-mapping>     
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.TipoColaborador.AcaoListarTipoColaborador</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.TipoColaborador.AcaoNovoTipoColaborador</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.TipoColaborador.AcaoPesquisaTipoColaborador</url-pattern>
+    </servlet-mapping>  
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.TipoColaborador.AcaoSelecionaTipoColaborador</url-pattern>
+    </servlet-mapping>    
+            
       
                    
     <!--Eventos do móduo Funcao -->
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
         <url-pattern>/FabricaGelo.Funcao.AcaoAbreFuncao</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.Funcao.AcaoDeleteFuncao</url-pattern>
     </servlet-mapping>    
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
@@ -198,12 +254,12 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
-        <url-pattern>/FabricaGelo.Funcao.AcaoPesquisaFuncao</url-pattern>
-    </servlet-mapping>  
+        <url-pattern>/FabricaGelo.Funcao.AcaoNovaFuncao</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
-        <url-pattern>/FabricaGelo.Funcao.AcaoRetornaPagina</url-pattern>
-    </servlet-mapping>   
+        <url-pattern>/FabricaGelo.Funcao.AcaoPesquisaFuncao</url-pattern>
+    </servlet-mapping>  
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
         <url-pattern>/FabricaGelo.Funcao.AcaoSelecionaFuncao</url-pattern>
@@ -214,11 +270,11 @@
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
         <url-pattern>/FabricaGelo.Veiculo.AcaoAbreVeiculo</url-pattern>
-    </servlet-mapping> 
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
-        <url-pattern>/FabricaGelo.Veiculo.AcaoBuscarColaborador</url-pattern>
-    </servlet-mapping>       
+        <url-pattern>/FabricaGelo.Veiculo.AcaoDeleteVeiculo</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
         <url-pattern>/FabricaGelo.Veiculo.AcaoGravaVeiculo</url-pattern>
@@ -229,16 +285,12 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
-        <url-pattern>/FabricaGelo.Veiculo.AcaoPesquisaVeiculo</url-pattern>
-    </servlet-mapping>  
-    <servlet-mapping>
-        <servlet-name>SGeral</servlet-name>
-        <url-pattern>/FabricaGelo.Veiculo.AcaoRetornaPagina</url-pattern>
+        <url-pattern>/FabricaGelo.Veiculo.AcaoNovoVeiculo</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
-        <url-pattern>/FabricaGelo.Veiculo.AcaoSelecionaManutencao</url-pattern>
-    </servlet-mapping>       
+        <url-pattern>/FabricaGelo.Veiculo.AcaoPesquisaVeiculo</url-pattern>
+    </servlet-mapping>  
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
         <url-pattern>/FabricaGelo.Veiculo.AcaoSelecionaVeiculo</url-pattern>
@@ -251,8 +303,8 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
-        <url-pattern>/FabricaGelo.Maquina.AcaoBuscarColaborador</url-pattern>
-    </servlet-mapping>         
+        <url-pattern>/FabricaGelo.Maquina.AcaoDeleteMaquina</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
         <url-pattern>/FabricaGelo.Maquina.AcaoGravaMaquina</url-pattern>
@@ -263,12 +315,12 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
-        <url-pattern>/FabricaGelo.Maquina.AcaoPesquisaMaquina</url-pattern>
-    </servlet-mapping>  
+        <url-pattern>/FabricaGelo.Maquina.AcaoNovoMaquina</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
-        <url-pattern>/FabricaGelo.Maquina.AcaoRetornaPagina</url-pattern>
-    </servlet-mapping>   
+        <url-pattern>/FabricaGelo.Maquina.AcaoPesquisaMaquina</url-pattern>
+    </servlet-mapping>  
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
         <url-pattern>/FabricaGelo.Maquina.AcaoSelecionaMaquina</url-pattern>
@@ -281,15 +333,19 @@
     </servlet-mapping>  
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
-        <url-pattern>/FabricaGelo.Camara.AcaoBuscarColaborador</url-pattern>
-    </servlet-mapping>      
+        <url-pattern>/FabricaGelo.Camara.AcaoGravaCamara</url-pattern>
+    </servlet-mapping> 
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
-        <url-pattern>/FabricaGelo.Camara.AcaoGravaCamara</url-pattern>
-    </servlet-mapping>     
+        <url-pattern>/FabricaGelo.Camara.AcaoDeletaCamara</url-pattern>
+    </servlet-mapping>    
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
         <url-pattern>/FabricaGelo.Camara.AcaoListarCamara</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.Camara.AcaoNovoCamara</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
@@ -297,22 +353,18 @@
     </servlet-mapping>  
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
-        <url-pattern>/FabricaGelo.Camara.AcaoRetornaPagina</url-pattern>
-    </servlet-mapping>   
-    <servlet-mapping>
-        <servlet-name>SGeral</servlet-name>
         <url-pattern>/FabricaGelo.Camara.AcaoSelecionaCamara</url-pattern>
     </servlet-mapping>   
-    <servlet-mapping>
-        <servlet-name>SGeral</servlet-name>
-        <url-pattern>/FabricaGelo.Camara.AcaoSelecionaManutencao</url-pattern>
-    </servlet-mapping>                                                                                    
                                                                                                    
    <!--Eventos do móduo Profissional -->
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
         <url-pattern>/FabricaGelo.Profissional.AcaoAbreProfissional</url-pattern>
-    </servlet-mapping>  
+    </servlet-mapping> 
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.Profissional.AcaoDeletaProfissional</url-pattern>
+    </servlet-mapping> 
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
         <url-pattern>/FabricaGelo.Profissional.AcaoGravaProfissional</url-pattern>
@@ -323,12 +375,12 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
-        <url-pattern>/FabricaGelo.Profissional.AcaoPesquisaProfissional</url-pattern>
-    </servlet-mapping>  
+        <url-pattern>/FabricaGelo.Profissional.AcaoNovoProfissional</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
-        <url-pattern>/FabricaGelo.Profissional.AcaoRetornaPagina</url-pattern>
-    </servlet-mapping>   
+        <url-pattern>/FabricaGelo.Profissional.AcaoPesquisaProfissional</url-pattern>
+    </servlet-mapping>  
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
         <url-pattern>/FabricaGelo.Profissional.AcaoSelecionaProfissional</url-pattern>
@@ -412,146 +464,16 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.MovimentoEntrega.AcaoGravaMovimentoEntrega</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
         <url-pattern>/FabricaGelo.MovimentoEntrega.AcaoSelecionaMovimentoEntrega</url-pattern>
     </servlet-mapping>
-    
-    <!--Eventos do móduo pagamento -->
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
-        <url-pattern>/FabricaGelo.Venda.AcaoAbrePagamento</url-pattern>
-    </servlet-mapping>   
-    <servlet-mapping>
-        <servlet-name>SGeral</servlet-name>
-        <url-pattern>/FabricaGelo.Venda.AcaoAbreVenda</url-pattern>
-    </servlet-mapping> 
-    <servlet-mapping>
-        <servlet-name>SGeral</servlet-name>
-        <url-pattern>/FabricaGelo.Venda.AcaoDeletaProduto</url-pattern>
-    </servlet-mapping>      
-    <servlet-mapping>
-        <servlet-name>SGeral</servlet-name>
-        <url-pattern>/FabricaGelo.Venda.AcaoGravaVenda</url-pattern>
-    </servlet-mapping>     
-    <servlet-mapping>
-        <servlet-name>SGeral</servlet-name>
-        <url-pattern>/FabricaGelo.Venda.AcaoListarVenda</url-pattern>
+        <url-pattern>/FabricaGelo.MovimentoEntrega.AcaoSelecionaProduto</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>SGeral</servlet-name>
-        <url-pattern>/FabricaGelo.Venda.AcaoNovaVenda</url-pattern>
-    </servlet-mapping>     
-    <servlet-mapping>
-        <servlet-name>SGeral</servlet-name>
-        <url-pattern>/FabricaGelo.Venda.AcaoPesquisaVenda</url-pattern>
-    </servlet-mapping>  
-    <servlet-mapping>
-        <servlet-name>SGeral</servlet-name>
-        <url-pattern>/FabricaGelo.Venda.AcaoSelecionaVenda</url-pattern>
-    </servlet-mapping> 
-    <servlet-mapping>
-        <servlet-name>SGeral</servlet-name>
-        <url-pattern>/FabricaGelo.Venda.AcaoSelecionaProduto</url-pattern>
-    </servlet-mapping>      
-    <servlet-mapping>
-        <servlet-name>SGeral</servlet-name>
-        <url-pattern>/FabricaGelo.Venda.AcaoBuscarEmpresa</url-pattern>
-    </servlet-mapping>                                                                                                                         
-    <servlet-mapping>
-        <servlet-name>SGeral</servlet-name>
-        <url-pattern>/FabricaGelo.Venda.AcaoBuscarProduto</url-pattern>
-    </servlet-mapping>  
-    
-   <!--Eventos do móduo Compra -->
-    <servlet-mapping>
-        <servlet-name>SGeral</servlet-name>
-        <url-pattern>/FabricaGelo.Compra.AcaoAbrePagamento</url-pattern>
-    </servlet-mapping>   
-    <servlet-mapping>
-        <servlet-name>SGeral</servlet-name>
-        <url-pattern>/FabricaGelo.Compra.AcaoAbreCompra</url-pattern>
-    </servlet-mapping> 
-    <servlet-mapping>
-        <servlet-name>SGeral</servlet-name>
-        <url-pattern>/FabricaGelo.Compra.AcaoDeletaProduto</url-pattern>
-    </servlet-mapping>      
-    <servlet-mapping>
-        <servlet-name>SGeral</servlet-name>
-        <url-pattern>/FabricaGelo.Compra.AcaoGravaCompra</url-pattern>
-    </servlet-mapping>     
-    <servlet-mapping>
-        <servlet-name>SGeral</servlet-name>
-        <url-pattern>/FabricaGelo.Compra.AcaoListarCompra</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>SGeral</servlet-name>
-        <url-pattern>/FabricaGelo.Compra.AcaoNovaCompra</url-pattern>
-    </servlet-mapping>     
-    <servlet-mapping>
-        <servlet-name>SGeral</servlet-name>
-        <url-pattern>/FabricaGelo.Compra.AcaoPesquisaCompra</url-pattern>
-    </servlet-mapping>  
-    <servlet-mapping>
-        <servlet-name>SGeral</servlet-name>
-        <url-pattern>/FabricaGelo.Compra.AcaoSelecionaCompra</url-pattern>
-    </servlet-mapping> 
-    <servlet-mapping>
-        <servlet-name>SGeral</servlet-name>
-        <url-pattern>/FabricaGelo.Compra.AcaoSelecionaProduto</url-pattern>
-    </servlet-mapping>      
-    <servlet-mapping>
-        <servlet-name>SGeral</servlet-name>
-        <url-pattern>/FabricaGelo.Compra.AcaoBuscarEmpresa</url-pattern>
-    </servlet-mapping>                                                                                                                         
-    <servlet-mapping>
-        <servlet-name>SGeral</servlet-name>
-        <url-pattern>/FabricaGelo.Compra.AcaoBuscarProduto</url-pattern>
-    </servlet-mapping>             
-
-         <!--Eventos do móduo Cortesia -->
-    <servlet-mapping>
-        <servlet-name>SGeral</servlet-name>
-        <url-pattern>/FabricaGelo.Cortesia.AcaoAbrePagamento</url-pattern>
-    </servlet-mapping>   
-    <servlet-mapping>
-        <servlet-name>SGeral</servlet-name>
-        <url-pattern>/FabricaGelo.Cortesia.AcaoAbreCortesia</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>SGeral</servlet-name>
-        <url-pattern>/FabricaGelo.Cortesia.AcaoDeletaProduto</url-pattern>
-    </servlet-mapping>      
-    <servlet-mapping>
-        <servlet-name>SGeral</servlet-name>
-        <url-pattern>/FabricaGelo.Cortesia.AcaoGravaCortesia</url-pattern>
-    </servlet-mapping>     
-    <servlet-mapping>
-        <servlet-name>SGeral</servlet-name>
-        <url-pattern>/FabricaGelo.Cortesia.AcaoListarCortesia</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>SGeral</servlet-name>
-        <url-pattern>/FabricaGelo.Cortesia.AcaoNovaCortesia</url-pattern>
-    </servlet-mapping>     
-    <servlet-mapping>
-        <servlet-name>SGeral</servlet-name>
-        <url-pattern>/FabricaGelo.Cortesia.AcaoPesquisaCortesia</url-pattern>
-    </servlet-mapping>  
-    <servlet-mapping>
-        <servlet-name>SGeral</servlet-name>
-        <url-pattern>/FabricaGelo.Cortesia.AcaoSelecionaCortesia</url-pattern>
-    </servlet-mapping> 
-    <servlet-mapping>
-        <servlet-name>SGeral</servlet-name>
-        <url-pattern>/FabricaGelo.Cortesia.AcaoSelecionaProduto</url-pattern>
-    </servlet-mapping>      
-    <servlet-mapping>
-        <servlet-name>SGeral</servlet-name>
-        <url-pattern>/FabricaGelo.Cortesia.AcaoBuscarEmpresa</url-pattern>
-    </servlet-mapping>                                                                                                                         
-    <servlet-mapping>
-        <servlet-name>SGeral</servlet-name>
-        <url-pattern>/FabricaGelo.Cortesia.AcaoBuscarProduto</url-pattern>
-    </servlet-mapping>        
     
     <!--Eventos do móduo Aluguel -->
     <servlet-mapping>
@@ -599,53 +521,7 @@
         <url-pattern>/FabricaGelo.Aluguel.AcaoBuscarProduto</url-pattern>
     </servlet-mapping>                    
           
-    <!--Eventos do móduo Bonificacao -->
-    <servlet-mapping>
-        <servlet-name>SGeral</servlet-name>
-        <url-pattern>/FabricaGelo.Bonificacao.AcaoAbrePagamento</url-pattern>
-    </servlet-mapping>   
-    <servlet-mapping>
-        <servlet-name>SGeral</servlet-name>
-        <url-pattern>/FabricaGelo.Bonificacao.AcaoAbreBonificacao</url-pattern>
-    </servlet-mapping> 
-    <servlet-mapping>
-        <servlet-name>SGeral</servlet-name>
-        <url-pattern>/FabricaGelo.Bonificacao.AcaoDeletaProduto</url-pattern>
-    </servlet-mapping>      
-    <servlet-mapping>
-        <servlet-name>SGeral</servlet-name>
-        <url-pattern>/FabricaGelo.Bonificacao.AcaoGravaBonificacao</url-pattern>
-    </servlet-mapping>     
-    <servlet-mapping>
-        <servlet-name>SGeral</servlet-name>
-        <url-pattern>/FabricaGelo.Bonificacao.AcaoListarBonificacao</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>SGeral</servlet-name>
-        <url-pattern>/FabricaGelo.Bonificacao.AcaoNovaBonificacao</url-pattern>
-    </servlet-mapping>     
-    <servlet-mapping>
-        <servlet-name>SGeral</servlet-name>
-        <url-pattern>/FabricaGelo.Bonificacao.AcaoPesquisaBonificacao</url-pattern>
-    </servlet-mapping>  
-    <servlet-mapping>
-        <servlet-name>SGeral</servlet-name>
-        <url-pattern>/FabricaGelo.Bonificacao.AcaoSelecionaBonificacao</url-pattern>
-    </servlet-mapping> 
-    <servlet-mapping>
-        <servlet-name>SGeral</servlet-name>
-        <url-pattern>/FabricaGelo.Bonificacao.AcaoSelecionaProduto</url-pattern>
-    </servlet-mapping>      
-    <servlet-mapping>
-        <servlet-name>SGeral</servlet-name>
-        <url-pattern>/FabricaGelo.Bonificacao.AcaoBuscarEmpresa</url-pattern>
-    </servlet-mapping>                                                                                                                         
-    <servlet-mapping>
-        <servlet-name>SGeral</servlet-name>
-        <url-pattern>/FabricaGelo.Bonificacao.AcaoBuscarProduto</url-pattern>
-    </servlet-mapping>             
     
-                        
    <!--Eventos do móduo Pagamento -->
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
@@ -676,6 +552,10 @@
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
         <url-pattern>/FabricaGelo.Entrega.AcaoAdicionaColaborador</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.Entrega.AcaoAdicionaCusto</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
@@ -715,15 +595,11 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
-        <url-pattern>/FabricaGelo.Entrega.AcaoCancelaCustoEntrega</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>SGeral</servlet-name>
         <url-pattern>/FabricaGelo.Entrega.AcaoEncerrarRota</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
-        <url-pattern>/FabricaGelo.Entrega.AcaoExcluirAbastecimento</url-pattern>
+        <url-pattern>/FabricaGelo.Entrega.AcaoExcluirCustoEntrega</url-pattern>
     </servlet-mapping>    
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
@@ -756,6 +632,10 @@
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
         <url-pattern>/FabricaGelo.Entrega.AcaoMarcaColaboradorVisita</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.Entrega.AcaoPesquisaColaboradorCusto</url-pattern>
     </servlet-mapping> 
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
@@ -771,7 +651,7 @@
     </servlet-mapping>    
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
-        <url-pattern>/FabricaGelo.Entrega.AcaoSelecionaAbastecimento</url-pattern>
+        <url-pattern>/FabricaGelo.Entrega.AcaoSelecionaCustoEntrega</url-pattern>
     </servlet-mapping>    
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
@@ -781,10 +661,6 @@
         <servlet-name>SGeral</servlet-name>
         <url-pattern>/FabricaGelo.Entrega.AcaoSelecionaColaboradorEntrega</url-pattern>
     </servlet-mapping>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
-    <servlet-mapping>
-        <servlet-name>SGeral</servlet-name>
-        <url-pattern>/FabricaGelo.Entrega.AcaoSelecionaCustoEntrega</url-pattern>
-    </servlet-mapping> 
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
         <url-pattern>/FabricaGelo.Entrega.AcaoSelecionaEntrega</url-pattern>
@@ -798,6 +674,10 @@
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
         <url-pattern>/FabricaGelo.Avaria.AcaoAbreAvaria</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.Avaria.AcaoDeleteAvaria</url-pattern>
     </servlet-mapping>    
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
@@ -809,12 +689,12 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
-        <url-pattern>/FabricaGelo.Avaria.AcaoPesquisaAvaria</url-pattern>
-    </servlet-mapping>  
+        <url-pattern>/FabricaGelo.Avaria.AcaoNovoAvaria</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
-        <url-pattern>/FabricaGelo.Avaria.AcaoRetornaPagina</url-pattern>
-    </servlet-mapping>   
+        <url-pattern>/FabricaGelo.Avaria.AcaoPesquisaAvaria</url-pattern>
+    </servlet-mapping>  
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
         <url-pattern>/FabricaGelo.Avaria.AcaoSelecionaAvaria</url-pattern>
@@ -827,19 +707,27 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
-        <url-pattern>/FabricaGelo.Producao.AcaoBuscarAvaria</url-pattern>
-    </servlet-mapping> 
+        <url-pattern>/FabricaGelo.Producao.AcaoAdicionaAvaria</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
-        <url-pattern>/FabricaGelo.Producao.AcaoBuscarEmbalagem</url-pattern>
-    </servlet-mapping>     
+        <url-pattern>/FabricaGelo.Producao.AcaoAdicionaMaquinaProducao</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
-        <url-pattern>/FabricaGelo.Producao.AcaoBuscarMaquina</url-pattern>
-    </servlet-mapping>  
+        <url-pattern>/FabricaGelo.Producao.AcaoAdicionaTransferencia</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
-        <url-pattern>/FabricaGelo.Producao.AcaoBuscarProduto</url-pattern>
+        <url-pattern>/FabricaGelo.Producao.AcaoBuscaSaldoAnterior</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.Producao.AcaoCalculaProducao</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.Producao.AcaoConcluiProducao</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
@@ -847,7 +735,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
-        <url-pattern>/FabricaGelo.Producao.AcaoDeletarAvariaProducao</url-pattern>
+        <url-pattern>/FabricaGelo.Producao.AcaoDeletaAvariaProducao</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
@@ -856,7 +744,11 @@
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
         <url-pattern>/FabricaGelo.Producao.AcaoGravaProducao</url-pattern>
-    </servlet-mapping>               
+    </servlet-mapping> 
+    <servlet-mapping>
+        <servlet-name>SGeral</servlet-name>
+        <url-pattern>/FabricaGelo.Producao.AcaoIniciarProducao</url-pattern>
+    </servlet-mapping>              
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
         <url-pattern>/FabricaGelo.Producao.AcaoListarProducao</url-pattern>
@@ -869,10 +761,6 @@
         <servlet-name>SGeral</servlet-name>
         <url-pattern>/FabricaGelo.Producao.AcaoPesquisaProducao</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>SGeral</servlet-name>
-        <url-pattern>/FabricaGelo.Producao.AcaoSelecionaAvariaProducao</url-pattern>
-    </servlet-mapping> 
     <servlet-mapping>
         <servlet-name>SGeral</servlet-name>
         <url-pattern>/FabricaGelo.Producao.AcaoSelecionaMaquinaProducao</url-pattern>

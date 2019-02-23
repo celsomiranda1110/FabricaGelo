@@ -28,7 +28,7 @@ public class AcaoListarProfissional extends Acao{
         List<Profissional> lstProfissional = new ArrayList<Profissional>();
         ProfissionalDAO profissionalDAO = new ProfissionalDAO(conexao);
         
-        lstProfissional = profissionalDAO.listaTodos();
+        lstProfissional = profissionalDAO.listaTodos(new Profissional());
         
         
         sessao.setAttribute("lstProfissional",lstProfissional);
